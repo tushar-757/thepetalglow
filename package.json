@@ -92,6 +92,7 @@
   },
   "devDependencies": {
     "@capacitor/cli": "3.2.0",
+    "@ionic/cli": "^6.17.1",
     "@types/qs": "^6.9.7"
   },
   "description": "An Ionic project"
