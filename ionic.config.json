@@ -1,0 +1,7 @@
+{
+  "name": "PlantApp",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react"
+}

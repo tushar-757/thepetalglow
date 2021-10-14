@@ -1,0 +1,61 @@
+.viewpage-buybox{
+    position: fixed;
+    bottom: 0px;
+    left: 0;
+    background-color: white;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+.descipt-box{
+    display: flex;
+    margin-top: 1rem;
+}
+.descipt-box h1{
+   font-size: 0.8rem;
+}
+.desc-box-cont-selected{
+    width: 33%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(68, 68, 228);
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+}
+.desc-box-cont{
+    width: 33%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #9e9e9e45;
+}
+.select-location-view{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #2196f3;
+    border-radius: 5px;
+    height: 42px;
+    font-size: 0.8rem;
+}
+.viewpage-Customization{
+    display: -webkit-inline-box;
+    width: 100%;
+    height: 300px;
+    justify-content: space-around;
+    overflow-x: scroll;
+    overflow-y: hidden;
+}
+.viewpage-custom-box{
+    width: 30%;
+    border: 2px solid #4caf50;
+}
+.viewpage-custom-box1{
+    width: 30%;
+}
+.viewpage-custom-box img{
+    width: 100%;
+    height: 80%;
+}

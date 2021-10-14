@@ -1,0 +1,119 @@
+.track-body{
+    border-radius: 5px;
+    box-shadow: 1px 1px 5px grey;
+    padding: 20px;
+    margin: 8px;
+    padding-left: 0px;
+    padding-right: 0px;
+    position: relative;
+}
+.packed-icon{
+    position: absolute;
+    z-index: 1;
+    top:3px;
+    left: 30%;
+    background: #3f51b5;
+    color: white;
+    border-radius: 50%;
+    width: 30px;
+}
+.depart-icon{
+    position: absolute;
+    z-index: 1;
+    top:3px;
+    left: 58%;
+    color:#2196f3;
+    border-radius: 50%;
+    width: 34px;
+}
+.arrive-icon{
+    position: absolute;
+    z-index: 1;
+    top:3px;
+    left: 96%;
+    background: #009688;
+    color: white;
+    border-radius: 55%;  
+}
+.start-icon{
+    position: absolute;
+    z-index: 1;
+    top:3px;
+    left: 1%;
+    background: #00bcd4;
+    color: white;
+    border-radius: 55%;  
+}
+.track-body-box{
+    padding: 2px;
+    margin: 8px;
+}
+.track-body-orderid{
+    border-bottom: 2px solid #8080807a;
+    padding: 2px;
+    margin-bottom: 21px;
+    color: #0000007a;
+}
+.track-body-orderid-h1{
+    font-size: 15px;
+    /* margin: 3px auto; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 7px;
+    margin-top: -12px;
+}
+.track-ship-to{
+    border-radius: 5px;
+    box-shadow: 1px 1px 5px grey;
+    padding: 20px;
+    margin: 8px;
+}
+.track-ship-to p{
+  margin: 0;
+}
+.product-table-track{
+    border: 1px solid #00000057;
+    padding: 10px; 
+    margin: 12px;
+}
+.tack-order-dates{
+    position:absolute;
+    left: -7px;
+    top: 40px;
+    width: 25%;
+}
+.tack-order-dates p{
+  margin: 0;
+  font-size: 0.8rem;
+}
+.tack-order-dates1 p{
+  margin: 0;
+  font-size: 0.8rem;
+}
+.tack-order-dates2 p{
+  margin: 0;
+  font-size: 0.8rem;
+}
+.tack-order-dates3 p{
+  margin: 0;
+  font-size: 0.8rem;
+}
+.tack-order-dates1{
+    position:absolute;
+    left: 28%;
+    top: 40px;
+    width: 25%;
+}
+.tack-order-dates2{
+    position:absolute;
+    left: 57%;
+    top: 40px;
+    width: 25%;
+}
+.tack-order-dates3{
+    position: absolute;
+    left: 88%;
+    top: 33px;
+    width: 17%;
+}

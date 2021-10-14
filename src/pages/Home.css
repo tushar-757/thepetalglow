@@ -1,0 +1,178 @@
+.item-native{
+    --padding:0px;
+}
+.select-location{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #009688;
+    height:42px;
+}
+.h1-home{
+    margin:0;
+    font-size:0.9rem;
+    color:white;
+    font-family: 'Salsa'
+}
+
+.icons-SBC{
+    color: #157e23;
+    position: absolute;
+    left:11px;
+    top:11px;
+}
+.best-selling-cont{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 0;
+    justify-content: center;
+    margin-top:50px;
+}
+.best-selling-cont-item{
+    width: 31%;
+    display: flex;
+    flex-direction: column;
+    height: 450px;
+}
+.input-wrapper{
+    --flex-direction: column;
+}
+.best-selling-cont-item img{
+    width: 100%;
+    height: 300px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+.best-selling-cont-item h1{
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Salsa';
+  font-weight: 400;
+}
+.best-selling-tag{
+    color: white;
+    position: absolute;
+    font-size: 10px;
+    left: 0px;
+    height: 25px;
+    top: 0px;
+    background: #009688;
+    width: 92px;
+}
+.footer-header-home{
+    display: flex;
+    justify-content: center;
+    height: 269px;
+    align-items: center;
+}
+.footer-header-image{
+    width: 35%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.Home-SlideBar{
+    height: 100%;
+    width: 100%;
+}
+.swiper-slide img{
+    width: 40%;
+    height: 100%;
+    object-position: center;
+    object-fit: fill;
+}
+.bestselling-head{
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+    align-items: center;
+}
+.footer-icon{
+    font-Size:40px;
+}
+.footer-icon-block{
+    display:flex;
+    justify-content:space-around;
+}
+.follow-us-title{
+    margin:2rem 12px;
+    display:flex;
+    font-size:1.1rem
+}
+.BestSellingTitle{
+    color:"#484848";
+    font-Size:"1rem";
+    font-Family:"Salsa"
+}
+@media screen and (max-width: 480px) {
+     .h1{
+        font-size: 0.8rem;
+    }
+    .best-selling-cont-item{
+        width: 46%;
+        display: flex;
+        flex-direction: column;
+        height: 405px;
+    }
+    .best-selling-cont-item h1{
+       font-size:0.8rem;
+      }
+      .best-selling-cont-item img{
+        height: 240px;
+    }
+  }
+  @media screen and (max-width: 700px) {
+    .Home-SlideBar{
+        height: 50%;
+    }
+  }
+  @media screen and (max-width: 380px) {
+    .h1-home{
+        font-size: 10px;
+    }
+    .div-shop-by-category-title{
+         font-size:10px;
+    }
+  }
+  @media screen and (max-width: 350px) {
+    .best-selling-cont-item{
+        width: 90%;
+        display: flex;
+        flex-direction: column;
+        height: 405px;
+    }
+  }
+  @media screen and (max-width: 1160px) {
+    .best-selling-cont-item{
+        width:30%;
+    }
+  }
+  @media screen and (max-width: 600px) {
+    .best-selling-cont-item{
+        width:46%;
+    }
+    .footer-header-image{
+        width:40%;
+    }
+  }
+  @media screen and (max-width: 500px) {
+    .best-selling-cont-item{
+        width:44%;
+    }
+    .footer-header-image{
+        width:50%;
+    }
+  }
+  @media screen and (max-width: 350px) {
+    .best-selling-cont-item{
+        width:90%;
+    }
+    .footer-header-image{
+        width:80%;
+    }
+  }

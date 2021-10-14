@@ -1,0 +1,62 @@
+.coupon-code{
+    padding: 12px;
+    background-color: antiquewhite;
+    margin: 15px;
+    font-size: 0.8rem;
+    height: 110px;
+    border-radius: 5px;
+    position: relative;
+}
+.coupon-code-h1{
+    font-size: 0.8rem;
+    position: absolute;
+    top: 56px;
+    left: 166px;
+    z-index: 1;
+    color: rgb(33, 150, 17);
+}
+.coupon-code-h2{
+    font-size: 0.8rem;
+    position: absolute;
+    top: 56px;
+    left: 166px;
+    z-index: 1;
+    color: red;
+}
+.cart-item-cont{
+    display:flex;
+    padding:8px;
+    border:1px solid #c7c7c7
+}
+.cart-item-img-cont{
+    width: 20%;
+    float:left
+}
+.cart-item-img{
+    height: 68px;
+    width: 68px;
+    border-radius:5px
+}
+.cart-item{
+    width:50%;
+    display:flex;
+    flex-direction:column;
+    margin-left:15px;
+    margin: 5px
+}
+.total-bar{
+    margin: 15px;
+    background-color: white;
+    padding: 10px;
+    box-shadow: 0px 0px 2px grey;
+}
+.total-bar h1{
+    font-size: 0.8rem;
+    margin:5;
+    font-weight:200;
+    color: rgb(78, 74, 74);
+}
+.total-bar-item{
+    display: flex;
+    justify-content: space-between;
+}
