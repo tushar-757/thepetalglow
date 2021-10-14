@@ -1,9 +1,9 @@
 import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'io.ionic.starter',
-  appName: 'PlantApp',
-  webDir: 'build',
+  appId: 'io.ThePetalGlow.starter',
+  appName: 'ThePetalGlow',
+  webDir: 'www',
   bundledWebRuntime: false,
   plugins: {
     SplashScreen: {
