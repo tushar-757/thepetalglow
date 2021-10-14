@@ -3,7 +3,7 @@ import { CapacitorConfig } from '@capacitor/cli';
 const config: CapacitorConfig = {
   appId: 'io.ThePetalGlow.starter',
   appName: 'ThePetalGlow',
-  webDir: 'www',
+  webDir: 'build',
   bundledWebRuntime: false,
   plugins: {
     SplashScreen: {

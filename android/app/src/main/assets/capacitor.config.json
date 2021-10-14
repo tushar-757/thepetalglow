@@ -1,6 +1,6 @@
 {
-	"appId": "io.ionic.starter",
-	"appName": "PlantApp",
+	"appId": "io.ThePetalGlow.starter",
+	"appName": "ThePetalGlow",
 	"webDir": "build",
 	"bundledWebRuntime": false,
 	"plugins": {
@@ -19,8 +19,5 @@
 			"layoutName": "launch_screen",
 			"useDialog": true
 		}
-	},
-	"server": {
-		"url": "http://192.168.29.2:8100"
 	}
 }
