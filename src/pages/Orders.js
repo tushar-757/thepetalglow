@@ -2,26 +2,45 @@ import { IonButton,IonChip ,IonLabel} from '@ionic/react';
 import React, { useState ,useEffect} from 'react';
 import { useSelector ,useDispatch} from "react-redux";
 import { useHistory } from 'react-router';
-import {UserOrders,UserSelectedOrder,addUser} from '../Actions/index'
-import IsLoggedIn from '../Hooks/isLoggedIn';
-import { LocalNotifications } from '@ionic-native/local-notifications'
+import {UserOrders,UserSelectedOrder,FetchIndoorProduct,FetchOutdoorProduct,FetchPlantersProduct,FetchSeasonalProduct,} from '../Actions/index'
 import './Order.css'
 import api from '../Services/urlApi';
 import moment from 'moment'
+import IsLoggedIn from '../Hooks/isLoggedIn';
+import { addUser} from "../Actions";
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
 
 export default function Orders(){
   const History = useHistory();
   const useraccesstoken=localStorage.getItem('useraccesstoken')
-    const Orders=useSelector((state)=>state.OrderReducer.Order)
+    const Orders=useSelector((state)=>state.OrderReducer.ActiveOrder)
     console.log(Orders)
     const [Order,setOrder]=useState('')
     const Loading=useSelector((state)=>state.OrderReducer.loading)
     const dispatch=useDispatch()
+    const [user, user_id] = IsLoggedIn();
+
+    useEffect(() => {
+      try{
+        if (user != null && user_id != null) {
+          // console.log(JSON.parse(JSON.stringify(user)))
+           const parserduser=JSON.parse(user)
+            dispatch(addUser({id:parserduser.id,username:parserduser.username,
+                mobile:parserduser.mobile,email:parserduser.email,Address:parserduser.Address}))
+        }
+      }catch(e){
+        console.log(e)
+      }
+    },[user,user_id])
 
 
 
     useEffect(() => {
-      // dispatch(UserOrders());
+      dispatch(UserOrders());
       setOrder(Orders)
       console.log('happy')
     },[]);
@@ -33,6 +52,10 @@ export default function Orders(){
         }
       })
       dispatch(UserOrders())
+      dispatch(FetchSeasonalProduct())
+      dispatch(FetchIndoorProduct())
+      dispatch(FetchOutdoorProduct())
+      dispatch(FetchPlantersProduct())
     }catch(e){
       console.log(e)
     }
@@ -41,6 +64,7 @@ export default function Orders(){
       <>
        {(Loading)?<>Loading...</>:
          <div style={{position:'relative'}}>
+           <h1 style={{margin:'1rem'}}>{(Orders?.length===0||Orders===undefined)?"No Orders To Show":null}</h1>
           {
             Orders?.map((data)=>(
               <div className="order-box">
@@ -65,23 +89,26 @@ export default function Orders(){
                 </div>
                 <div style={{margin:"8px 0"}}>Products List</div>
                 <div>
-                  <div className="product-table">
-                    <div className="product-table-head">
-                      <span>s.no.</span>
-                      <span>Product name</span>
-                      <span>Price</span>
-                      <span>Qty.</span>
-                      </div>
-                   {data?.productsdata.map((data,i)=>(
-                     <div className="product-table-item">
-                         <p>{i+1}</p>
-                          <div>{data?.name}</div>
-                          <div>{data?.price}</div>
-                          <div>{data?.quantity}</div>
-                    </div>
-                     ))}
-                     <div  className="order-box-total">Total:{data?.total}</div>
-                  </div>
+                <Table size="small">
+        <TableHead>
+          <TableRow>
+              <TableCell>S.No.</TableCell>
+              <TableCell>Products</TableCell>
+            <TableCell>Price</TableCell>
+            <TableCell>Qty.</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {data?.productsdata?.map((row,i) => (
+            <TableRow key={i}>
+              <TableCell>{i+1}</TableCell>
+              <TableCell>{row?.name}</TableCell>
+              <TableCell>{row?.price}</TableCell>
+              <TableCell>{row?.quantity}</TableCell>
+            </TableRow>))}
+            <div  className="order-box-total">Total:{data?.total}</div>
+            </TableBody>
+            </Table>
                 </div>
                <div style={{color:"black"}}>CreatedAt  {(data?.createdAt)
                ?moment(data.createdAt).format('MMMM Do YYYY, h:mm:ss a'):data.createdAt}</div>

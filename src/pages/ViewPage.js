@@ -7,19 +7,20 @@ import {useHistory} from 'react-router-dom'
 import {BiRupee} from 'react-icons/bi'
 import {AiFillInfoCircle} from 'react-icons/ai'
 import './ViewPage.css'
+import TPGLOGO from '../static/TPGLOGO.png';
 
 const slideOpts = {
   initialSlide: 1,
   speed: 400,
 };
 const ImageBar=(data)=>{
-  return(
-    <IonSlides pager={true} options={slideOpts} style={{height:400,zIndex:0}}>
+   return(
+      <IonSlides pager={true} options={slideOpts} style={{height:290,zIndex:0}}>
         {data?.data?.map((img)=>(
-    <IonSlide  style={{backgroundColor:"white"}}>
-       <img src={img} />
+         <IonSlide  style={{backgroundColor:"white"}}>
+     <img src={(img!=null)?img:TPGLOGO} className="view-page-img" />
     </IonSlide>
-        ))}
+))}
 </IonSlides>
   )}
   function PopoverList({ onHide }){
@@ -34,11 +35,11 @@ const ImageBar=(data)=>{
    return (
       <IonList>
         <IonListHeader>On Request Customization</IonListHeader>
-        <IonItem button>you could chose any pot of your choice
-        we will repot your selected plant into that on your request/permission</IonItem>
+        <IonItem button>you could choose either our pot customization or
+        any pot of your choice we will repot your selected plant into that on your request/permission</IonItem>
         <IonItem button>steps</IonItem>
         <IonItem button>1.)add pot in cart</IonItem>
-        <IonItem button>2.)grap and drop your plant inside pot container</IonItem>
+        <IonItem button>2.)grap and drop your selected plant inside pot container box</IonItem>
         <IonItem button>Congratulation you are all set</IonItem>
       </IonList>)
  }
@@ -57,17 +58,17 @@ export default function ViewPage(){
     const [toggleCustom2,settoggleCustom2]=useState(false)
     const [toggleCustom3,settoggleCustom3]=useState(false)
     const [toggleCustom4,settoggleCustom4]=useState(false)
-
+     const [price,setPrice]=useState()
 
     return (
         <div>
            <div onClick={()=>History.goBack()}>
           <IonIcon md={arrowBackCircle} style={{fontSize:44,color:"lightgreen",margin:5}}/>
          </div>
-            <IonCard style={{marginBottom:'10rem'}}>
+            <IonCard style={{marginBottom:'1rem'}}>
                       <IonCardHeader>
-                      <h1>{Item?.name} with decorative plastic pot </h1>
-                      <ImageBar data={Item?.images}/>
+                      <h1 style={{marginTop:0}}>{Item?.name}</h1>
+                      <ImageBar data={Item?.images} />
                       </IonCardHeader>
                     <div>
                     </div>
@@ -87,7 +88,9 @@ export default function ViewPage(){
                                  event: e.nativeEvent,
                                })
                              }/></h1>
-                             <p>Recommended Pot Customization</p>
+                             {(!Item?.varient)?
+                             <>
+                             <p>Our Recommended Pot Customization</p>
                              <div className="viewpage-Customization">
                                   <div className={(toggleCustom)?"viewpage-custom-box":"viewpage-custom-box1"} onClick={()=>{
                                      settoggleCustom(!toggleCustom)
@@ -138,7 +141,27 @@ export default function ViewPage(){
                                      <img src={"https://images.unsplash.com/photo-1509423350716-97f9360b4e09?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=675&q=80"}/>
                                      <p><BiRupee/>559.00</p>
                                   </div>
-                             </div>
+                             </div></>:
+                             <>
+                                {(Item?.varient?.s?.price)?<>
+                                   <h1>Size Chart</h1>
+                                    <div className="viewpage-size-chart">
+                                         <span className="viewpage-size-chart-span">S</span>
+                                         <span className="viewpage-size-chart-span">M</span>
+                                         <span className="viewpage-size-chart-span">L</span>
+                                    </div>
+                                    <div className="viewpage-size-chart">
+                                         <span>{Item?.varient?.s?.inches}</span>
+                                         <span>{Item?.varient?.m?.inches}</span>
+                                         <span>{Item?.varient?.l?.inches}</span>
+                                   </div>
+                                    <div className="viewpage-size-chart">
+                                         <span>{Item?.varient?.s?.price}</span>
+                                         <span>{Item?.varient?.m?.price}</span>
+                                         <span>{Item?.varient?.l?.price}</span>
+                                   </div>
+                                </>:null}
+                             </>}
                  <div style={{marginTop:'10px'}}>
                     <h1 style={{fontSize:12}}>Deliver To</h1>
                     <div className="select-location-view"  onClick={()=>History.push("/page/MapsPage")}>
@@ -171,9 +194,9 @@ export default function ViewPage(){
                     <div>
                        {(toggle)?
                       <div style={{padding:"10px"}}>
-                       <h1>*Product Details:</h1>
-                       <p>{Item?.type}</p>
-                       <p>{Item?.description}</p>
+                       <h1>Product Details:</h1>
+                       <p>TYPE:-{Item?.type}</p>
+                       <p dangerouslySetInnerHTML={{__html: Item?.description}}/>
                       </div>:(toggle1)?
                       <div style={{padding:'10px'}}>
                          <h1>Delievery</h1>
@@ -188,15 +211,21 @@ export default function ViewPage(){
                       </div>:<h1>dd</h1>
                        }
                     </div>
-                    {/* <div>
-                       <h1>You May Also Like</h1>
-                       <div>
-
-                       </div>
-                    </div> */}
                </div>
                   </IonCardContent>
                   </IonCard>
+                  <IonCard style={{marginBottom:'1rem'}} >
+                        <IonCardHeader>
+                           <h4>customer reviews</h4>
+                        </IonCardHeader>
+                   </IonCard>
+                  <IonCard style={{marginBottom:'10rem'}} >
+                  <IonCardContent>
+                            <div>
+                               <h1>12</h1>
+                            </div>
+                        </IonCardContent>
+                   </IonCard>
                   <div className="viewpage-buybox">
                   {(Items.find(item => Item?._id === item._id))?
                    <h1 style={{color:"black"}}>Added To Cart</h1>:
@@ -205,7 +234,7 @@ export default function ViewPage(){
                      style={{width:'50%',color:"white",height:"50px"}}>
                        Add To Cart
                       </IonButton>}
-                     <IonButton style={{width:'50%',color:"white",height:"50px"}}>Buy Now</IonButton>
+                     <IonButton style={{width:'50%',color:"white",height:"50px"}}>Add To WishList</IonButton>
                   </div>
      </div>
     )

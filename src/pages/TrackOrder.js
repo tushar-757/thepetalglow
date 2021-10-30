@@ -9,6 +9,11 @@ import './TrackOrder.css'
 import {  UserOrders, UserSelectedOrder } from "../Actions";
 import moment from 'moment'
 import {AiFillInfoCircle} from 'react-icons/ai'
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
 
 function PopoverList({ onHide }){
     return (
@@ -30,7 +35,7 @@ export default function TrackOrder(){
         <div>
             <div style={{padding:"10px"}}>
                 <IonInput placeholder="Search By OrderId" onIonChange={e =>setId(e.detail.value)}/>
-                <IonButton color="primary" onClick={()=>{
+                <IonButton style={{color:'white'}} onClick={()=>{
                 if(id!=""){
                     dispatch(UserSelectedOrder(id))
                 }}}>Submit</IonButton>
@@ -57,43 +62,50 @@ export default function TrackOrder(){
                         <div className="tack-order-dates1">
                             <p>Packed</p>
                             <p style={{fontSize:"0.6rem"}}>
-                                expectedAt: {(userOrder?.createdAt)?moment().format("MMM Do"):userOrder?.createdAt}
+                                expectedAt:<br></br> {(userOrder?.createdAt)?moment().format("MMM Do"):userOrder?.createdAt}
                                  (2-3)pm
                             </p>
                         </div>
                         <div className="tack-order-dates2">
                             <p>Dispatched</p>
                             <p style={{fontSize:"0.6rem"}}>
-                                expectedAt: {(userOrder?.createdAt)?moment().format("MMM Do"):userOrder?.createdAt}
+                                expectedAt:<br></br> {(userOrder?.createdAt)?moment().format("MMM Do"):userOrder?.createdAt}
                                  (3-4)pm
                             </p>
                         </div>
                         <div className="tack-order-dates3">
                             <p>Arrived</p>
                             <p style={{fontSize:"0.6rem"}}>
-                                expectedAt: {(userOrder?.createdAt)?moment().format("MMM Do"):userOrder?.createdAt}
+                                expectedAt:<br></br>{(userOrder?.createdAt)?moment().format("MMM Do"):userOrder?.createdAt}
                                  (4-6)pm
                             </p>
                         </div>
                         </div>
                         <div className="track-body-box" style={{marginTop:'55px'}}>Description:-{userOrder?.description}</div>
-                        <div className="product-table-track">
-                    <div className="product-table-head">
-                      <span>S.No.</span>
-                      <span>Product Name</span>
-                      <span>Price</span>
-                      <span>Qty.</span>
-                      </div>
-                        {userOrder?.productsdata?.map((data,i)=>(
-                     <div className="product-table-item">
-                         <p>{i+1}</p>
-                          <div>{data?.name}</div>
-                          <div>{data?.price}</div>
-                          <div>{data?.quantity}</div>
-                    </div>
-                     ))}
-                     </div>
-                        <div className="track-body-box">Total:-{userOrder?.total}</div>
+                        <div style={{overflowX:'auto'}}>
+                        <Table size="small" style={{width:'95%',margin:'16px'}}>
+        <TableHead>
+          <TableRow>
+              <TableCell>S.No.</TableCell>
+              <TableCell>SkU</TableCell>
+              <TableCell>Products</TableCell>
+            <TableCell>Price</TableCell>
+            <TableCell>Qty.</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {userOrder?.productsdata?.map((row,i) => (
+            <TableRow key={i}>
+              <TableCell>{i+1}</TableCell>
+              <TableCell>{row?.SKU}</TableCell>
+              <TableCell>{row?.name}</TableCell>
+              <TableCell>{row?.price}</TableCell>
+              <TableCell>{row?.quantity}</TableCell>
+            </TableRow>))}
+            <div  className="order-box-total">Total:{userOrder?.total}</div>
+            </TableBody>
+            </Table>
+            </div>
                         <IonButton color="danger" style={{margin:"10px"}}>Cancel Order</IonButton>
                         <AiFillInfoCircle style={{color:"grey"}}
                              fontSize={24}

@@ -1,14 +1,12 @@
-import { IonButtons, IonContent,useIonLoading,IonSearchbar,IonHeader, IonMenuButton, IonPage, IonTitle, IonToolbar, IonItem, IonButton, IonIcon } from '@ionic/react';
+import { IonButtons, IonContent,useIonLoading,IonSearchbar,IonHeader, IonMenuButton, IonPage, IonTitle, IonToolbar, IonItem, IonButton, IonIcon, IonList } from '@ionic/react';
 import React,{ useEffect, useState } from 'react';
 import { Route, Router, useParams } from 'react-router';
 import { useHistory ,useLocation} from 'react-router-dom';
 import SearchBar from './SearchBar';
 import './Page.css';
-// import {Geolocation} from '@ionic-native/geolocation'
-import { cart, notifications, notificationsOutline } from 'ionicons/icons';
+import { cart, notifications } from 'ionicons/icons';
 import Home from './Home';
 import {MapsPage} from './MapsPage';
-// import { Geolocation } from '@capacitor/geolocation';
 import ViewPage from './ViewPage';
 import Cart from './Cart';
 import { RootStateOrAny, useSelector ,useDispatch} from 'react-redux';
@@ -21,7 +19,11 @@ import TrackOrder from './TrackOrder';
 import IndoorPage from './IndoorPage';
 import OutdoorPage from './OutdoorPage';
 import SeasonalPage from './SeasonalPage';
-import {GetALLProducts, setFilterData} from '../Actions';
+import {GetALLProducts, getCurrentProduct, setFilterData} from '../Actions';
+import BuyAgain from './BuyAgain';
+import CustomerService from './CustomerService';
+import Setting from './Setting';
+import PlasticPots from './PlasticPots';
 
 
 const Page:React.FC =()=>{
@@ -34,8 +36,8 @@ const Page:React.FC =()=>{
   const [locationstate,setLocationState]=useState('')
   const Items=useSelector((state:RootStateOrAny)=>state.CartReducer.items)
   const NotificationLength=useSelector((state:RootStateOrAny)=>state.NotificationReducer.Notifications)
-  const [present, dismiss] = useIonLoading();
-  let {OrderId}:any =useParams()
+  const SearchedData=useSelector((state:RootStateOrAny)=>state.ProductReducer.FilterData)
+  const [search,setSearch]=useState(false)
 
   useEffect(()=>{
     setLocationState(Location.pathname)
@@ -49,18 +51,23 @@ const Page:React.FC =()=>{
   }
 
   const SearchHandler=()=>{
-    setSearchData(Data.filter((data:any)=>data.name.includes(searchText)))
+    const searchconvertibletext=searchText
+    setSearchData(Data.filter((data:any)=>data.name.toLowerCase().includes(searchText.toLowerCase())))
     dispatch(setFilterData(SearchData))
     // present({
     //   message: 'Loading...',
     //   duration:100
     // })
   }
-
+useEffect(()=>{
+  SearchHandler()
+},[searchText])
   return (
     <IonPage>
-      <IonHeader style={{backgroundColor:"#3ADF72"}}>
-        <IonToolbar className="toolbar-container">
+      <IonHeader style={{backgroundColor:"#28b156"}} >
+        <IonToolbar className="toolbar-container"  onClick={()=>{
+                  setSearch(false)
+                 }}>
           <IonButtons slot="start">
             <IonMenuButton style={{color:"white"}}/>
           </IonButtons>
@@ -84,16 +91,26 @@ const Page:React.FC =()=>{
           <IonSearchbar value={searchText}
           onIonChange={(e) =>{
           setSearchText(e.detail.value!)
-           SearchHandler()}}
+          }}
           color="light"
           inputMode='search'
           placeholder="search for plants,pots and gifts"
           onClick={()=>{
-             dispatch(GetALLProducts())
-             History.push("/page/searchbar")}}>
+            setSearch(true)
+            dispatch(GetALLProducts())
+            console.log("sssssss")}}>
           </IonSearchbar>
       </IonHeader>
-      <IonContent>
+      <IonContent  onClick={()=>setSearch(false)}>
+        {(search)?<div className="search-block" >
+          {SearchedData?.map((d:any)=>(
+              <IonItem onClick={()=>{
+                  dispatch(getCurrentProduct(d._id))
+                  setSearch(false)
+                  History.push("/page/ViewPage")}} style={{color:"black"}}>{d.name}</IonItem>
+            ))}
+            {(SearchedData.length===0)?"No Results Found":null}
+            </div>:null}
         {
           (locationstate==='/page/ThePetalGlow')?<Home/>:
           (locationstate==='/page/MapsPage')?<MapsPage/>:
@@ -103,11 +120,14 @@ const Page:React.FC =()=>{
           (locationstate==='/Register')?<Register/>:
           (locationstate==='/page/PaymentGateway')?<PaymentGategay/>:
           (locationstate==='/page/Orders')?<Orders/>:
-          (locationstate==='/page/BuyAgain')?<Orders/>:
+          (locationstate==='/page/BuyAgain')?<BuyAgain/>:
           (locationstate==='/page/Notifications')?<Notifications/>:
           (locationstate==='/page/IndoorPlants')?<IndoorPage/>:
           (locationstate==='/page/OutdoorPlants')?<OutdoorPage/>:
           (locationstate==='/page/SeasonalPlants')?<SeasonalPage/>:
+          (locationstate==='/page/PlasticPots')?<PlasticPots/>:
+          (locationstate==='/page/Customer Service')?<CustomerService/>:
+          (locationstate==='/page/Settings')?<Setting/>:
           (locationstate==='/page/searchbar')?<SearchBar/>:
           (locationstate==='/page/TrackOrder')?<TrackOrder/>:<TrackOrder/>
         }

@@ -114,10 +114,10 @@ const Menu: React.FC = () => {
           <div className="menuLoginbtn">
             {
               (User.username!="")?
-              <IonButton onClick={()=>LogoutHandler()}>logout</IonButton>:
-              <IonButton onClick={()=>LoginHandler()}>login</IonButton>
+              <IonButton onClick={()=>LogoutHandler()} style={{color:"white"}}>logout</IonButton>:
+              <IonButton onClick={()=>LoginHandler()} style={{color:"white"}}>login</IonButton>
             }
-            <IonButton onClick={()=>History.push('/page/TrackOrder')}>Tack Order</IonButton>
+            <IonButton onClick={()=>History.push('/page/TrackOrder')} style={{color:"white"}}>Tack Order</IonButton>
           </div>
           {appPages.map((appPage, index) => {
             return (
@@ -134,7 +134,7 @@ const Menu: React.FC = () => {
           })}
         </IonList>
         <IonFooter>
-          <IonButton onClick={()=>ShareHandler()}>Share</IonButton>
+          <IonButton onClick={()=>ShareHandler()} style={{color:"white"}}>Share</IonButton>
         </IonFooter>
       </IonContent>
     </IonMenu>

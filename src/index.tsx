@@ -12,7 +12,7 @@ declare let window: any;
 
 const store = createStore(
   reducers,
-  compose(applyMiddleware(thunk),composeWithDevTools())
+  compose(applyMiddleware(thunk))
 );
 // composeWithDevTools()
 ReactDOM.render(

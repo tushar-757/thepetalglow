@@ -11,7 +11,7 @@ import '@ionic/react/css/core.css';
 import '@ionic/react/css/normalize.css';
 import '@ionic/react/css/structure.css';
 import '@ionic/react/css/typography.css';
-import { FetchIndoorProduct,FetchOutdoorProduct,FetchSeasonalProduct, SETBESTSELLING } from './Actions';
+import { FetchIndoorProduct,FetchOutdoorProduct,FetchPlantersProduct,FetchSeasonalProduct, SETBESTSELLING } from './Actions';
 /* Optional CSS utils that can be commented out */
 import '@ionic/react/css/padding.css';
 import '@ionic/react/css/float-elements.css';
@@ -46,6 +46,7 @@ const App: React.FC = () => {
     dispatch(FetchSeasonalProduct())
     dispatch(FetchIndoorProduct())
     dispatch(FetchOutdoorProduct())
+    dispatch(FetchPlantersProduct())
   },[])
   return (
     <IonApp>
@@ -98,7 +99,19 @@ const App: React.FC = () => {
             <Route path="/page/SeasonalPlants" exact={true}>
               <Page />
             </Route>
+            <Route path="/page/PlasticPots" exact={true}>
+              <Page />
+            </Route>
             <Route path="/Register" exact={true}>
+              <Page />
+            </Route>
+            <Route path="/page/Customer Service" exact={true}>
+              <Page />
+            </Route>
+            <Route path="/page/Settings" exact={true}>
+              <Page />
+            </Route>
+            <Route path="/page/Account" exact={true}>
               <Page />
             </Route>
             <Route path="/"exact={true} >

@@ -1,6 +1,6 @@
 
 .toolbar-container{
-    --background: rgb(58, 223, 114);
+    --background: #28b156;
     align-items: flex-end;
 }
 .hydrated{
@@ -26,6 +26,19 @@
     display: flex;
     justify-Content: center;
     color:white
+}
+.search-block{
+    position: sticky;
+    width: 96%;
+    display: flex;
+    background-color: white;
+    overflow-y: scroll;
+    z-index: 102;
+    box-shadow: 0px 0px 5px lightblue;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    left: 7px;
 }
 /* @media screen and (max-width: 380px) {
     .hydrated{

@@ -1,5 +1,6 @@
 const initialState = {
   items: [],
+  customdescription:[],
   loading: false,
   error: true,
   total: 0,
@@ -10,7 +11,7 @@ const CartReducer = (state = initialState, action) => {
        case "ADD_TO_CART":
         let existed_item = state.items.find(item => action.payload._id === item._id)
         if (existed_item) {
-          action.payload.quantity += 1
+          action.payload.orderquantity += 1
           return {
             ...state,
             items: [...state.items],
@@ -19,12 +20,38 @@ const CartReducer = (state = initialState, action) => {
           }
         }
         else {
-          action.payload.quantity = 1;
+          action.payload.orderquantity = 1;
+          action.payload.customskuvalue=false
+          action.payload.customizationarray=[]
+          const addon={
+            whitepebbles:{
+              isAdded:false,
+              price:29,
+              quantity:0
+             },
+            blackpebbles:{
+             isAdded:false,
+             price:29,
+             quantity:0
+             },
+            BlackWhitepebbles:{
+             isAdded: false,
+             price:29,
+             quantity:0
+            },
+            colouredpebbles:{
+             isAdded: false,
+             price:29,
+             quantity:0
+            }
+          }
+          action.payload.customdescription=""
           let newTotal = state.total + action.payload.price
-
+          const item=action.payload
+          const newitem={...item,addon}
           return {
             ...state,
-            items: [...state.items, action.payload],
+            items: [...state.items,newitem],
             total: newTotal,
             grandtotal:newTotal
           }}
@@ -37,7 +64,7 @@ const CartReducer = (state = initialState, action) => {
         case 'SET_QUANTITY':
           let incrementingItem = state.items.find(item => action.payload === item._id);
 
-          incrementingItem.quantity += 1;
+          incrementingItem.orderquantity += 1;
           return {
             ...state,
             items: [...state.items],
@@ -46,8 +73,8 @@ const CartReducer = (state = initialState, action) => {
           }
         case 'UNSET_QUANTITY':
           let decrementingItem = state.items.find(item => action.payload === item._id);
-          if (decrementingItem.quantity > 1) {
-            decrementingItem.quantity -= 1;
+          if (decrementingItem.orderquantity > 1) {
+            decrementingItem.orderquantity -= 1;
             return {
               ...state,
               items: [...state.items],
@@ -75,6 +102,163 @@ const CartReducer = (state = initialState, action) => {
               return {
                 ...state,grandtotal:action.payload
               }
+            case 'SET_CUSTOM_SKU':
+              let Item = state.items.find(item => action.payload.id === item._id);
+                Item.customskuvalue=action.payload.value
+                return {
+                  ...state,items:[...state.items]
+              }
+              case "ADD_ADDON_ITEMS_TO_CART":
+                let findItem = state.items.find(item => action.payload.id === item._id);
+                const type=action.payload.type
+                if(findItem){
+                if(type==='whitepebble'){
+                  (findItem.addon.whitepebbles={
+                        quantity:findItem.addon.whitepebbles.quantity+=1,
+                         price:29,
+                        isAdded:true})
+                 }
+                  if(type==='blackpebbles'){
+                    (findItem.addon.blackpebbles={
+                      quantity:findItem.addon.blackpebbles.quantity+=1,
+                       price:29,
+                      isAdded:true})
+                  }
+
+                  if(type==='baclandwhitepebble'){
+                   ( findItem.addon.BlackWhitepebbles={
+                      quantity:findItem.addon.BlackWhitepebbles.quantity+=1,
+                       price:29,
+                      isAdded:true
+                    })
+                  }
+                  if(type==='colouredpebbles'){
+                   ( findItem.addon.colouredpebbles={
+                      quantity:findItem.addon.colouredpebbles.quantity+=1,
+                       price:29,
+                      isAdded:true})
+                  }
+
+                  return {
+                    ...state, items: [...state.items], total: state.total + 29
+                  }
+              }
+              return {
+                ...state, items: [...state.items]
+              }
+              case "REMOVE_ADDON_ITEMS_TO_CART":
+                let findItem1 = state.items.find(item => action.payload.id === item._id);
+                const type1=action.payload.type
+                if(findItem1){
+                if(type1==='whitepebble'){
+                  if(findItem1.addon.whitepebbles.quantity===1){
+                    (findItem1.addon.whitepebbles={
+                      quantity:findItem1.addon.whitepebbles.quantity=0,
+                       price:29,
+                      isAdded:false})
+                  }else{
+                    (findItem1.addon.whitepebbles={
+                        quantity:findItem1.addon.whitepebbles.quantity-=1,
+                         price:29,
+                        isAdded:true})}
+                 }
+                  if(type1==='blackpebbles'){
+                    if(findItem1.addon.blackpebbles.quantity===1){
+                      (findItem1.addon.blackpebbles={
+                        quantity:findItem1.addon.blackpebbles.quantity=0,
+                         price:29,
+                        isAdded:false})
+                    }else{
+                    (findItem1.addon.blackpebbles={
+                      quantity:findItem1.addon.blackpebbles.quantity-=1,
+                       price:29,
+                      isAdded:true})}
+                  }
+
+                  if(type1==='baclandwhitepebble'){
+                    if(findItem1.addon.BlackWhitepebbles.quantity===1){
+                      (findItem1.addon.BlackWhitepebbles={
+                        quantity:findItem1.addon.BlackWhitepebbles.quantity=0,
+                         price:29,
+                        isAdded:false})
+                    }else{
+                     (findItem1.addon.BlackWhitepebbles={
+                      quantity:findItem1.addon.BlackWhitepebbles.quantity-=1,
+                       price:29,
+                      isAdded:true
+                    })}
+                  }
+                  if(type1==='colouredpebbles'){
+                    if(findItem1.addon.colouredpebbles.quantity===1){
+                      (findItem1.addon.colouredpebbles={
+                        quantity:findItem1.addon.colouredpebbles.quantity=0,
+                         price:29,
+                        isAdded:false})
+                    }else{
+                   (findItem1.addon.colouredpebbles={
+                      quantity:findItem1.addon.colouredpebbles.quantity-=1,
+                       price:29,
+                      isAdded:true})}
+                  }
+
+                  return {
+                    ...state, items: [...state.items], total: state.total - 29
+                  }
+              }
+              return {
+                ...state, items: [...state.items]
+              }
+               case "SET_WHITE_PEBBLE":
+                  let setItem = state.items.find(item => action.payload.id === item._id);
+                   setItem.addon.whitepebbles={
+                    quantity:setItem.addon.whitepebbles.quantity=1,
+                     price:29,
+                    isAdded:true}
+                    return {
+                      ...state,items:[...state.items],
+                      total: state.total + 29
+                    }
+               case "SET_BLACK_PEBBLE":
+                  let setItem1 = state.items.find(item => action.payload.id === item._id);
+                  setItem1.addon.blackpebbles={
+                    quantity:setItem1.addon.blackpebbles.quantity=1,
+                     price:29,
+                    isAdded:true}
+                    return {
+                      ...state,items:[...state.items],
+                      total: state.total + 29
+                    }
+               case "SET_BLACK_WHITE_PEBBLE":
+                  let setItem2 = state.items.find(item => action.payload.id === item._id);
+                  setItem2.addon.BlackWhitepebbles={
+                    quantity:setItem2.addon.BlackWhitepebbles.quantity=1,
+                     price:29,
+                    isAdded:true}
+                    return {
+                      ...state,items:[...state.items],
+                      total: state.total + 29
+                    }
+               case "SET_COLOURED_PEBBLE":
+                  let setItem3 = state.items.find(item => action.payload.id === item._id);
+                  setItem3.addon.colouredpebbles={
+                    quantity:setItem3.addon.colouredpebbles.quantity=1,
+                     price:29,
+                    isAdded:true}
+                    return {
+                      ...state,items:[...state.items],
+                      total: state.total + 29
+                    }
+                  case 'REMOVE_ITEM_FROM_ADDON':
+                    let new_items1 = state.items.filter(item => action.payload.id !== item._id)
+                    return {
+                      ...state,
+                      items: new_items1
+                    }
+                    case 'ADD_TO_CUSTOMZATION':
+                      return {
+                        ...state,
+                        customdescription:action.payload
+                      }
         default:
             return{
               ...state
@@ -105,7 +289,40 @@ const CartReducer = (state = initialState, action) => {
 
 // export const getQuantity = (state, productId) =>
 // state.ProductId[productId] || 0
+    // }else{
+                //   if(type==='whitepebble'){
+                //     (findItem.addon.whitepebbles={
+                //           quantity:findItem.addon.whitepebbles.quantity=1,
+                //            price:29,
+                //           isAdded:true}
+                //     )
+                //    }
+                //     if(type==='blackpebbles'){
+                //       (findItem.addon.blackpebbles={
+                //         quantity:findItem.addon.blackpebbles.quantity=1,
+                //          price:29,
+                //         isAdded:true}
+                //     )}
 
+                //     if(type==='baclandwhitepebble'){
+                //     (
+                //       findItem.addon.BlackWhitepebbles={
+                //         quantity:findItem.addon.BlackWhitepebbles.quantity=1,
+                //          price:29,
+                //         isAdded:true
+                //       }
+                //     )
+                //     if(type==='colouredpebbles'){
+                //     (
+                //       findItem.addon.colouredpebbles={
+                //         quantity:findItem.addon.colouredpebbles.quantity=1,
+                //          price:29,
+                //         isAdded:true}
+                //     )}
+                //   return {
+                //     ...state, items: [...state.items]
+                //   }
+                // }
 
 
   export {CartReducer};

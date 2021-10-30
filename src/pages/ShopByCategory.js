@@ -12,7 +12,7 @@ function PlantModal({showPlantModal,setShowPlantModal}){
     return(
         <div>
         <IonModal isOpen={showPlantModal} cssClass='my-custom-class' classname="modal-head"  style={{padding:"15px"}}>
-               <IonButton onClick={() => setShowPlantModal(false)} style={{color:'white',padding:"10px"}}>Close </IonButton>
+               <IonButton onClick={() => setShowPlantModal(false)} style={{color:'white'}}>Close </IonButton>
                <div className="model-cont">
                    <div className="model-cont-item" onClick={()=>{
                        History.push("/page/SeasonalPlants")}}>
@@ -26,6 +26,10 @@ function PlantModal({showPlantModal,setShowPlantModal}){
                        History.push("/page/OutdoorPlants")}}>
                        <h1>Outdoor</h1>
                    </div>
+                   <div className="model-cont-item" onClick={()=>{
+                       History.push("/page/OutdoorPlants")}}>
+                       <h1>Succulent</h1>
+                   </div>
                </div>
              </IonModal>
               <div className="div-shop-by-category" onClick={() => setShowPlantModal(true)}>
@@ -36,12 +40,15 @@ function PlantModal({showPlantModal,setShowPlantModal}){
     )
 }
 function PotModal({showPotModal,setShowPotModal}){
+    const History = useHistory()
     return(
         <div>
         <IonModal isOpen={showPotModal} cssClass='my-custom-class' style={{padding:"15px"}}>
-               <IonButton onClick={() => setShowPotModal(false)} style={{color:'white',height:'200px'}}>Close </IonButton>
+               <IonButton onClick={() => setShowPotModal(false)} style={{color:'white'}}>Close </IonButton>
                <div  className="model-cont">
-                   <div className="model-cont-item">
+                   <div className="model-cont-item"
+                   onClick={()=>{
+                    History.push("/page/PlasticPots")}}>
                        <h1>Plastic</h1>
                    </div>
                    <div className="model-cont-item">

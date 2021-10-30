@@ -33,7 +33,7 @@
     left: 96%;
     background: #009688;
     color: white;
-    border-radius: 55%;  
+    border-radius: 55%;
 }
 .start-icon{
     position: absolute;
@@ -42,7 +42,7 @@
     left: 1%;
     background: #00bcd4;
     color: white;
-    border-radius: 55%;  
+    border-radius: 55%;
 }
 .track-body-box{
     padding: 2px;
@@ -74,7 +74,7 @@
 }
 .product-table-track{
     border: 1px solid #00000057;
-    padding: 10px; 
+    padding: 10px;
     margin: 12px;
 }
 .tack-order-dates{

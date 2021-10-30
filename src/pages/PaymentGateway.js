@@ -30,18 +30,13 @@ export default function PaymentGategay(){
     }
       const loadCheckout=async()=> {
         const options = {
-          key: 'rzp_live_ir3sDuGInwGl38',
+          key: 'rzp_test_0bM611iljsCqKa',
           amount:grandtotal*100,
           description: 'Credits towards consultation',
           image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTnbpr4WKVxpBwwvk2rI0dIx1cCFKnjDAPvFQ&usqp=CAU',
           currency: 'INR',
           name: 'ThePetalGlowStore',
           order_id: razorpayOrderID,
-          // prefill: {
-          //   email: 'void@razorpay.com',
-          //   contact: '9191919191',
-          //   name: 'Razorpay Software'
-          // },
           theme: {
             color: 'green'
           }
@@ -60,8 +55,8 @@ export default function PaymentGategay(){
           razorpay_payment_id,
           razorpay_signature
         })
-        localStorage.removeItem('razorpayOrderID')
-        localStorage.removeItem('ServerorderID')
+         localStorage.removeItem('razorpayOrderID')
+         localStorage.removeItem('ServerorderID')
          dispatch(EmptyCart())
          notificationHandler(`your order with OrderId${confirmorder?.data?.id} is confirmed succesfully.`)
          dispatch(RemovefromNotification(confirmorder?.data?.id))
@@ -72,15 +67,13 @@ export default function PaymentGategay(){
           present({
             cssClass: 'my-css',
             header: 'Alert',
-            message: `!!! Your ${error} Is Not Valid Now please recreate your order now !!!`,
+            message: `!!! Your ${error},please check your orders to pay again or creae your order again !!!`,
             buttons: [
               { text: 'Ok', handler: (d) => console.log('ok pressed') },
             ],
             onDidDismiss: (e) => console.log('did dismiss'),
           })
-          notificationHandler(`your order is pending for payment.`)
-          History.push('/page/PlantGiene')
-         console.log(error); //Doesn't appear at all
+          History.push('/page/ThePetalGlow')
         }
       }
     return(
@@ -96,20 +89,3 @@ export default function PaymentGategay(){
 
 
 
-
-    //    async function paymentSuccess(orderId, paymentMethod) {
-    //     const paymentStatus='success'
-    //     const description=`Payment successful Order Id ${orderId} payment method ${paymentMethod}`;
-    //      const paymentstatus=await api.post("/OrderConfirmation",{headers:{order_id:orderId,Authorization:`Bearer ${useraccesstoken}`},paymentStatus,description})
-    //      alert(paymentstatus.data)
-    //      dispatch(EmptyCart())
-    //      History.push('/page/PlantGiene')
-    //   }
-    //    async function paymentFailed(orderId, paymentMethod) {
-    //     const paymentStatus='failed'
-    //     const description=`Payment failed Order Id ${orderId} payment method ${paymentMethod}`;
-    //      const paymentstatus=await api.post("/OrderConfirmation",{headers:{order_id:orderId,Authorization:`Bearer ${useraccesstoken}`},paymentStatus,description})
-    //      alert(paymentstatus.data)
-    //      dispatch(EmptyCart())
-    //      History.push('/page/PlantGiene')
-    //   }

@@ -1,11 +1,11 @@
 .coupon-code{
     padding: 12px;
     background-color: antiquewhite;
-    margin: 15px;
     font-size: 0.8rem;
-    height: 110px;
+    height: 120px;
     border-radius: 5px;
     position: relative;
+    margin: 14px;
 }
 .coupon-code-h1{
     font-size: 0.8rem;
@@ -42,6 +42,8 @@
     display:flex;
     flex-direction:column;
     margin-left:15px;
+    align-items: baseline;
+    justify-content: center;
     margin: 5px
 }
 .total-bar{
@@ -59,4 +61,13 @@
 .total-bar-item{
     display: flex;
     justify-content: space-between;
+}
+.customaddonitem{
+    padding:0px;margin:0px
+}
+.example-chip{
+    padding:12px;
+ height: 62px;
+margin: 10px 0px;
+width: 100%;
 }

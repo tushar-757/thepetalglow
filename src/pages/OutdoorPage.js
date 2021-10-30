@@ -1,11 +1,12 @@
 import { IonCard,IonButton,IonCardContent,useIonLoading,IonIcon, IonCardHeader } from '@ionic/react';
 import {arrowBackCircle } from "ionicons/icons"
 import {  useDispatch,useSelector} from 'react-redux';
-import { Addtocart,getOutdoorProduct } from '../Actions';
+import { Addtocart,getOutdoorProduct,addToLikes,removefromLikes } from '../Actions';
 import {BiRupee} from 'react-icons/bi'
 import {useHistory} from 'react-router-dom'
 import {AiFillHeart,AiOutlineHeart} from 'react-icons/ai'
 import { useState } from 'react';
+import { Button ,Input} from "@material-ui/core"
 
 export default function OutdoorPage(){
     const dispatch=useDispatch();
@@ -41,12 +42,16 @@ return(
                           flexDirection:'column'
                     }}>
                     <div className="bestselling-head">
-                          <div style={{fontSize:"0.95rem",padding:"0px"}}>{(data?.name?.length>20)?data?.name?.substring(0, 20)+"...":data?.name}</div>
+                          <div style={{fontSize:"0.95rem",padding:"0px"}}>{(data?.name?.length>20)?data?.name?.substring(0, 15)+"...":data?.name}</div>
                           <div>|</div>
-                             <div onClick={()=>setLike(!like)}>
-                                {(!like)?
-                                <AiOutlineHeart style={{fontSize:"24px",color:"green"}}/>:
-                                <AiFillHeart style={{fontSize:"24px",color:"green"}}/>}
+                          <div  style={{
+                                   display: 'flex',
+                                   alignItems: 'center'
+                             }}>
+                                <span style={{margin:"4px"}}>{data?.likes}</span>
+                                {(!data?.isLiked)?
+                                <AiOutlineHeart style={{fontSize:"24px",color:"#e91e1e"}} onClick={()=>dispatch(addToLikes(data?._id))}/>:
+                                <AiFillHeart style={{fontSize:"24px",color:"#e91e1e"}} onClick={()=>dispatch(removefromLikes(data?._id))}/>}
                                 </div>
                            </div>
                           <h1 style={{fontSize:12}}>{data?.prize}</h1>

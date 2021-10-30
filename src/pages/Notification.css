@@ -1,0 +1,12 @@
+.notification-block{
+    padding: 12px;
+    height: 195px;
+    box-shadow: 0px 1px 5px;
+    margin: 1rem;
+    position: relative;
+}
+.remove-notification{
+    position: absolute;
+    top: 9px;
+    left: 90%;
+}

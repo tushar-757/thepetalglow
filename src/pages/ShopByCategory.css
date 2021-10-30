@@ -1,6 +1,7 @@
 .model-cont{
     height: fit-content;
     padding: 12px;
+    overflow-y: auto;
 }
 .model-cont-item{
     background: aquamarine;
@@ -16,8 +17,10 @@
 .modal-head{
     --height: 441px;
 }
+
 .modal-wrapper.sc-ion-modal-md{
-    --height: 420px;
+    height: 350px;
+    width: 300px;
 }
 .div-shop-by-category{
     width:40px;

@@ -3,12 +3,14 @@ const initalState={
     Indoor:[],
     Outdoor:[],
     Seasonal:[],
+    Planters:[],
     FilterData:[],
     BestSellingData:[],
     loading: false,
     error: null,
     selectedProduct:{}
  }
+
  const ProductReducer = (state = initalState, action) => {
      switch (action.type) {
        case "GET_ALL_PRODUCTS_DATA":
@@ -30,7 +32,11 @@ const initalState={
          case "GET_INDOOR_PRODUCT_REQUEST":
            return { ...state, loading: true };
          case "GET_INDOOR_PRODUCT_SUCCESS":
-           return { ...state,loading: false, Indoor: action.payload };
+          const data=action.payload
+          const data0=data.map((d)=>(
+            {...d,isLiked:false}
+          ))
+           return { ...state,loading: false, Indoor: data0 };
          case "GET_INDOOR_PRODUCT_FAILURE":
            return {...state, loading: false, error: action.payload };
          case "GET_INDOOR_USER_PRODUCT":
@@ -42,7 +48,11 @@ const initalState={
          case "GET_OUTDOOR_PRODUCT_REQUEST":
            return { ...state, loading: true };
          case "GET_OUTDOOR_PRODUCT_SUCCESS":
-           return { ...state,loading: false, Outdoor: action.payload };
+          const data1=action.payload
+          const data2=data1.map((d)=>(
+            {...d,isLiked:false}
+          ))
+           return { ...state,loading: false, Outdoor: data2 };
          case "GET_OUTDOOR_PRODUCT_FAILURE":
            return {...state, loading: false, error: action.payload };
          case "GET_OUTDOOR_USER_PRODUCT":
@@ -57,12 +67,18 @@ const initalState={
            return { ...state,loading: false, Seasonal: action.payload };
          case "GET_SEASONAL_PRODUCT_FAILURE":
            return {...state, loading: false, error: action.payload };
-         case "GET_SEASONAL_USER_PRODUCT":
-           const findseasonalProduct=state.Seasonal.find(item => action.payload === item._id)
-           if(findseasonalProduct===undefined){
+         case "GET_PLANTERS_PRODUCT_REQUEST":
+           return { ...state, loading: true };
+         case "GET_PLANTERS_PRODUCT_SUCCESS":
+           return { ...state,loading: false, Planters: action.payload };
+         case "GET_PLANTERS_PRODUCT_FAILURE":
+           return {...state, loading: false, error: action.payload };
+         case "GET_PLANTERS_USER_PRODUCT":
+           const findPlanterProduct=state.Planters.find(item => action.payload === item._id)
+           if(findPlanterProduct===undefined){
              return{...state,selectedProduct:{id:'not exist',description:'not exist'}}
            }
-           return {...state,selectedProduct:findseasonalProduct};
+           return {...state,selectedProduct:findPlanterProduct};
            case "GET_SELECTED_INDOOR":
             const finduserindoor=state.Indoor.find(item => action.payload === item._id)
             if(finduserindoor===undefined){
@@ -93,6 +109,12 @@ const initalState={
                 return{...state,selectedProduct:{_id:'not exist',description:'not exist'}}
               }
               return {...state,selectedProduct:finduserbestSelling};
+            case "GET_SELECTED_PLANTER":
+              const finduserPlanters=state.Planters.find(item => action.payload === item._id)
+              if(finduserPlanters===undefined){
+                return{...state,selectedProduct:{_id:'not exist',description:'not exist'}}
+              }
+              return {...state,selectedProduct:finduserPlanters};
           case "SET_FILTER_DATA":
               return{
                 ...state,FilterData:action.payload
@@ -102,6 +124,52 @@ const initalState={
                 ...state,BestSellingData:[...state.Indoor.filter((data)=>data?.BestSelling===true),
                 ...state.Outdoor.filter((data)=>data?.BestSelling===true)]
               }
+              case "ADD_TO_LIKES":
+                let item=state.BestSellingData.find(item => action.payload === item._id)
+                console.log(JSON.stringify(item)+"outside")
+                if(item===null||item===undefined){
+                  item=state.Indoor.find(item => action.payload === item._id)
+                  if(item===null||item===undefined){
+                    item=state.Outdoor.find(item => action.payload === item._id)
+                    console.log(item+"outdoor")
+                    if(item===null||item===undefined){
+                      item=state.Seasonal.find(item => action.payload === item._id)
+                      if(item===null||item===undefined){
+                        item=state.Planters.find(item => action.payload === item._id)
+                      }
+                    }
+                  }
+                }
+                item.isLiked=!item.isLiked
+                item.likes++
+                return {
+                  ...state,
+                  BestSellingData:[...state.BestSellingData],
+                  Indoor:[...state.Indoor],
+                  Outdoor:[...state.Outdoor],
+                  Planters:[...state.Planters]
+                }
+              case "REMOVE_FROM_LIKES":
+                let item1=state.BestSellingData.find(item => action.payload === item._id)
+                if(item1===null||item1===undefined){
+                  item1=state.Indoor.find(item => action.payload === item._id)
+                 if(item1===null||item1===undefined){
+                   item1=state.Outdoor.find(item => action.payload === item._id)
+                   if(item1===null||item1===undefined){
+                     item1=state.Seasonal.find(item => action.payload === item._id)
+                     if(item1===null||item1===undefined){
+                       item1=state.Planters.find(item => action.payload === item._id)
+                     }
+                   }
+                 }
+               }
+                item1.isLiked=!item1.isLiked
+                item1.likes--
+                return {
+                  ...state,BestSellingData:[...state.BestSellingData],Indoor:[...state.Indoor],
+                  Outdoor:[...state.Outdoor],
+                  Planters:[...state.Planters]
+                }
          default:
            return state
        }

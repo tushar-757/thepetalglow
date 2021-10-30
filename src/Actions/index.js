@@ -1,5 +1,6 @@
 import axios from "axios";
-
+const dev="http://localhost:5000"
+const aws="https://actzkesq20.execute-api.ap-south-1.amazonaws.com/dev"
 export const GetItem = (id) => {
     return {
       type: "GET_ITEM",
@@ -123,7 +124,7 @@ const getOrdersRequest = () => {
       payload: error,
     };
   };
-const url = "https://actzkesq20.execute-api.ap-south-1.amazonaws.com/dev/GetOrders";
+const url = `${aws}/GetOrders`;
 export const UserOrders=()=>{
     const useraccesstoken=localStorage.getItem('useraccesstoken')
     return (dispatch) => {
@@ -137,6 +138,8 @@ export const UserOrders=()=>{
                 console.log(data)
               const Orders = data.UserOrders.orders;
               dispatch(getOrdersSuccess(Orders));
+              dispatch(SET_ACTIVE_ORDERS())
+              dispatch(SET_NOT_ACTIVE_ORDERS())
             })
             .catch((error) => {
               const errorMessage = error.message;
@@ -179,7 +182,7 @@ export const getProduct = (id) => {
   };
 };
 
-const url1 = "https://actzkesq20.execute-api.ap-south-1.amazonaws.com/dev/PlantGieneIndoorProducts";
+const url1 = `${aws}/PlantGieneIndoorProducts`;
 export const FetchProduct=()=>{
   return (dispatch) => {
       dispatch(getProductRequest());
@@ -227,7 +230,7 @@ const getIndoorProductRequest = () => {
     };
   };
 
-const url2 = "https://actzkesq20.execute-api.ap-south-1.amazonaws.com/dev/PlantGiene/IndoorProducts";
+const url2 = `${aws}/PlantGiene/IndoorProducts`;
 export const FetchIndoorProduct=()=>{
     return (dispatch) => {
         dispatch(getIndoorProductRequest());
@@ -239,6 +242,7 @@ export const FetchIndoorProduct=()=>{
                 console.log(data)
               const Product = data;
               dispatch(getIndoorProductSuccess(Product));
+              dispatch(SETBESTSELLING())
             })
             .catch((error) => {
               const errorMessage = error.message;
@@ -272,7 +276,7 @@ const getOutdoorProductRequest = () => {
     };
   };
 
-const url3 = "https://actzkesq20.execute-api.ap-south-1.amazonaws.com/dev/PlantGiene/OutdoorProducts";
+const url3 = `${aws}/PlantGiene/OutdoorProducts`;
 export const FetchOutdoorProduct=()=>{
     return (dispatch) => {
         dispatch(getOutdoorProductRequest());
@@ -318,7 +322,7 @@ const getSeasonalProductRequest = () => {
     };
   };
 
-const url4 = "https://actzkesq20.execute-api.ap-south-1.amazonaws.com/dev/PlantGiene/IndoorProducts";
+const url4 = `${aws}/PlantGiene/IndoorProducts`;
 export const FetchSeasonalProduct=()=>{
     return (dispatch) => {
         dispatch(getSeasonalProductRequest());
@@ -334,6 +338,46 @@ export const FetchSeasonalProduct=()=>{
             .catch((error) => {
               const errorMessage = error.message;
               dispatch(getSeasonalProductFailure(errorMessage));
+            });
+      };
+}
+const getPlantersProductRequest = () => {
+    return {
+      type: "GET_PLANTERS_PRODUCT_REQUEST",
+    };
+  };
+
+  const getPlantersProductSuccess = (Product) => {
+    return {
+      type: "GET_PLANTERS_PRODUCT_SUCCESS",
+      payload: Product,
+    };
+  };
+
+  const getPlantersProductFailure = (error) => {
+    return {
+      type: "GET_PLANTERS_PRODUCT_FAILURE",
+      payload: error,
+    };
+  };
+
+
+const url5 = `${aws}/PlantGiene/PlanterProducts`;
+export const FetchPlantersProduct=()=>{
+    return (dispatch) => {
+        dispatch(getPlantersProductRequest());
+        // const Product=await axios.get('https://plantapp57.herokuapp.com/GetProduct',{headers:{Authorization:`Bearer ${useraccesstoken}`}})
+        // console.log(Product.data.UserProduct.Product)nm
+         axios.get(url5)
+            .then((response) => response.data)
+            .then((data) => {
+                console.log(data)
+              const Product = data;
+              dispatch(getPlantersProductSuccess(Product));
+            })
+            .catch((error) => {
+              const errorMessage = error.message;
+              dispatch(getPlantersProductFailure(errorMessage));
             });
       };
 }
@@ -353,6 +397,12 @@ export const GetSelectedOutdoor = (id) => {
 export const GetSelectedSeasonal = (id) => {
   return {
     type: "GET_SELECTED_SEASONAL",
+    payload:id
+  };
+};
+export const GetSelectedPlanter = (id) => {
+  return {
+    type: "GET_SELECTED_PLANTER",
     payload:id
   };
 };
@@ -385,6 +435,96 @@ export const GETSELECTEDBESTSELLING=(id)=>{
     payload:id
   };
 }
+export const SET_ACTIVE_ORDERS=()=>{
+  return {
+    type: "SET_ACTIVE_ORDERS"
+  };
+}
+export const SET_NOT_ACTIVE_ORDERS=()=>{
+  return {
+    type: "SET_NOT_ACTIVE_ORDERS"
+  };
+}
+export const addToLikes=(id)=>{
+  const add='https://us-east-1.aws.webhooks.mongodb-realm.com/api/client/v2.0/app/thepetalglow-nwqbb/service/ThePetalGlow/incoming_webhook/SetProductLike'
+  axios.put(add,{id:id})
+  .then((response) => response.data)
+  .catch((error) => {
+    const errorMessage = error.message;
+  });
+  return {
+    type: "ADD_TO_LIKES",
+    payload:id
+  };
+}
+export const removefromLikes=(id)=>{
+  const remove='https://us-east-1.aws.webhooks.mongodb-realm.com/api/client/v2.0/app/thepetalglow-nwqbb/service/ThePetalGlow/incoming_webhook/removeItemLike?secret=-=76*%23$xxctumy76(8)'
+  axios.put(remove,{id:id})
+  .then((response) => response.data)
+  .catch((error) => {
+    const errorMessage = error.message;
+  });
+  return {
+    type: "REMOVE_FROM_LIKES",
+    payload:id
+  };
+}
+export const SetCustomSku=(id,value)=>{
+  return {
+    type: "SET_CUSTOM_SKU",
+    payload:{id,value}
+  };
+}
+export const addAddonItemsToCartItem=(id,type)=>{
+  return {
+    type: "ADD_ADDON_ITEMS_TO_CART",
+    payload:{id,type}
+  };
+}
+export const removeAddonItemsToCartItem=(id,type)=>{
+  return {
+    type: "REMOVE_ADDON_ITEMS_TO_CART",
+    payload:{id,type}
+  };
+}
+export const removeitemfromaddon=(id,type)=>{
+  return {
+    type: "REMOVE_ITEM_FROM_ADDON",
+    payload:{id,type}
+  };
+}
+export const setWhitePebbles=(id,value)=>{
+  return {
+    type:"SET_WHITE_PEBBLE",
+    payload:{id,value}
+  }
+}
+export const setBlackPebbles=(id,value)=>{
+  return {
+    type:"SET_BLACK_PEBBLE",
+    payload:{id,value}
+  }
+}
+export const setBlackWhitePebbles=(id,value)=>{
+  return {
+    type:"SET_BLACK_WHITE_PEBBLE",
+    payload:{id,value}
+  }
+}
+export const setColouredPebble=(id,value)=>{
+  return {
+    type:"SET_COLOURED_PEBBLE",
+    payload:{id,value}
+  }
+}
+export const addtoCustomization=(value)=>{
+  return {
+    type:"ADD_TO_CUSTOMZATION",
+    payload:value
+  }
+}
+
+
 // export const AddtoIndoor=(item)=>{
 //   return {
 //       type:"ADD_INDOOR",

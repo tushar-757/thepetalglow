@@ -1,5 +1,7 @@
 const initalState={
    Order:[],
+   ActiveOrder:[],
+   NotActiveOrder:[],
    loading: false,
    error: null,
    selectedorder:{}
@@ -18,6 +20,10 @@ const OrderReducer = (state = initalState, action) => {
             return{...state,selectedorder:{id:'not exist',description:'not exist'}}
           }
           return {...state,selectedorder:finduserorder};
+          case "SET_ACTIVE_ORDERS":
+            return { ...state, ActiveOrder:state.Order.filter((or)=>or.Active!=false)};
+          case "SET_NOT_ACTIVE_ORDERS":
+            return { ...state,NotActiveOrder:state.Order.filter((or)=>or.Active===false) };
           case "EMPTY_ORDER":
               return {
                 Order:[],
