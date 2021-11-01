@@ -96,6 +96,7 @@ export default function Orders(){
               <TableCell>Products</TableCell>
             <TableCell>Price</TableCell>
             <TableCell>Qty.</TableCell>
+            <TableCell>Addons</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -105,6 +106,27 @@ export default function Orders(){
               <TableCell>{row?.name}</TableCell>
               <TableCell>{row?.price}</TableCell>
               <TableCell>{row?.quantity}</TableCell>
+              <TableCell>{row?.addons?.map((data)=>
+                 <>{(data?.whitepebbles?.isAdded)?<>
+                   <div>whitepebbles</div>
+                   <div>Qty. {data?.whitepebbles?.quantity}</div>
+                   <div>Price {data?.whitepebbles?.price}</div>
+                  </>:(data?.blackpebbles?.isAdded)?<>
+                    <div>blackpebbles</div>
+                   <span>Oty. {data?.blackpebbles?.quantity}</span>
+                   <span>Price {data?.blackpebbles?.price}</span>
+                  </>:(data?.BlackWhitepebbles?.isAdded)?<>
+                   <div>BlackWhitepebbles</div>
+                   <div>Qty. {data?.BlackWhitepebbles?.quantity}</div>
+                   <div>Price {data?.BlackWhitepebbles?.price}</div>
+                  </>:(data?.colouredpebbles?.isAdded)?<>
+                   <div>colouredpebbles</div>
+                   <div>Qty.{data?.colouredpebbles?.quantity}</div>
+                   <div>Price {data?.colouredpebbles?.price}</div>
+                  </>:null
+                   }
+                 </>
+              )}</TableCell>
             </TableRow>))}
             <div  className="order-box-total">Total:{data?.total}</div>
             </TableBody>

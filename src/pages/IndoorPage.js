@@ -6,6 +6,7 @@ import {BiRupee} from 'react-icons/bi'
 import {useHistory} from 'react-router-dom'
 import {AiFillHeart,AiOutlineHeart} from 'react-icons/ai'
 import { useState } from 'react';
+import LoadingBox from '../components/LoadingComponent';
 export default function IndoorPage(){
     const dispatch=useDispatch();
     const History = useHistory();
@@ -16,7 +17,7 @@ export default function IndoorPage(){
 return(
      (Loading)?
      <>
-    <h1>Loading...</h1>
+        <LoadingBox/>
      </>:
     <div className="best-selling-cont">
            <div onClick={()=>History.goBack()} style={{

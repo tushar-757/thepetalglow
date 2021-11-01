@@ -6,8 +6,10 @@ import { Addtocart } from '../Actions';
 import {useHistory} from 'react-router-dom'
 import {BiRupee} from 'react-icons/bi'
 import {AiFillInfoCircle} from 'react-icons/ai'
+import { FaCartArrowDown } from 'react-icons/fa';
 import './ViewPage.css'
 import TPGLOGO from '../static/TPGLOGO.png';
+import { CustomerRating } from '../components/CustomerRating';
 
 const slideOpts = {
   initialSlide: 1,
@@ -59,6 +61,7 @@ export default function ViewPage(){
     const [toggleCustom3,settoggleCustom3]=useState(false)
     const [toggleCustom4,settoggleCustom4]=useState(false)
      const [price,setPrice]=useState()
+   //   const customdata=useSelector((state)=>state.ProductReducer..Customizations)
 
     return (
         <div>
@@ -92,55 +95,20 @@ export default function ViewPage(){
                              <>
                              <p>Our Recommended Pot Customization</p>
                              <div className="viewpage-Customization">
-                                  <div className={(toggleCustom)?"viewpage-custom-box":"viewpage-custom-box1"} onClick={()=>{
-                                     settoggleCustom(!toggleCustom)
-                                     settoggleCustom1(false)
-                                     settoggleCustom2(false)
-                                     settoggleCustom3(false)
-                                     settoggleCustom4(false)
-                                     }}>
-                                     <img src={"https://images.unsplash.com/photo-1485955900006-10f4d324d411?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=752&q=80"}/>
-                                     <p><BiRupee/>559.00</p>
-                                  </div>
-                                  <div className={(toggleCustom1)?"viewpage-custom-box":"viewpage-custom-box1"} onClick={()=>{
-                                     settoggleCustom(false)
-                                     settoggleCustom1(!toggleCustom1)
-                                     settoggleCustom2(false)
-                                     settoggleCustom3(false)
-                                     settoggleCustom4(false)}}>
-                                     <img src={"https://images.unsplash.com/photo-1516048015710-7a3b4c86be43?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=625&q=80"}/>
-                                     <p><BiRupee/>600.00</p>
-                                  </div>
-                                  <div className={(toggleCustom2)?"viewpage-custom-box":"viewpage-custom-box1"} onClick={()=>
-                                 {
-                                    settoggleCustom(false)
-                                    settoggleCustom1(false)
-                                    settoggleCustom2(!toggleCustom2)
-                                    settoggleCustom3(false)
-                                    settoggleCustom4(false)}}>
-                                     <img src={"https://images.unsplash.com/photo-1509223197845-458d87318791?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=859&q=80"}/>
-                                     <p><BiRupee/>559.00</p>
-                                  </div>
-                                  <div className={(toggleCustom3)?"viewpage-custom-box":"viewpage-custom-box1"} onClick={()=>
-                                  {
-                                    settoggleCustom(false)
-                                    settoggleCustom1(false)
-                                    settoggleCustom2(false)
-                                    settoggleCustom3(!toggleCustom3)
-                                    settoggleCustom4(false)}}>
-                                  <img src={"https://images.unsplash.com/photo-1509223197845-458d87318791?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=859&q=80"}/>
-                                  <p><BiRupee/>559.00</p>
-                                  </div>
-                                  <div className={(toggleCustom4)?"viewpage-custom-box":"viewpage-custom-box1"} onClick={()=>
-                                  {
-                                    settoggleCustom(false)
-                                    settoggleCustom1(false)
-                                    settoggleCustom2(false)
-                                    settoggleCustom3(false)
-                                    settoggleCustom4(!toggleCustom4)}}>
-                                     <img src={"https://images.unsplash.com/photo-1509423350716-97f9360b4e09?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=675&q=80"}/>
-                                     <p><BiRupee/>559.00</p>
-                                  </div>
+                                {Item?.Customizations?.map((data)=>
+                                   <div style={{width:"20%"}}>
+                                      <img src={data?.images[0]} style={{width:"90%",height:"65%"}}/>
+                                      <p>{(data?.name?.length>20)?data?.name?.substring(0,20)+"...":data?.name}</p>
+                                      <div style={{display:"flex"}}>
+                                      <div style={{width:"70%"}}><BiRupee/>{data?.price}</div>
+                                      {(Items.find(item => data?._id === item._id))?
+                                       <h1 style={{color:"black",fontSize:"12px"}}>Added To Cart</h1>:
+                                      <div style={{width:"30%"}} onClick={()=>dispatch(Addtocart(data))}>
+                                         <FaCartArrowDown style={{fontSize:"18px"}}/>
+                                         </div>}
+                                      </div>
+                                   </div>
+                                )}
                              </div></>:
                              <>
                                 {(Item?.varient?.s?.price)?<>
@@ -216,15 +184,23 @@ export default function ViewPage(){
                   </IonCard>
                   <IonCard style={{marginBottom:'1rem'}} >
                         <IonCardHeader>
-                           <h4>customer reviews</h4>
+                           <h4>Customer Reviews</h4>
                         </IonCardHeader>
                    </IonCard>
-                  <IonCard style={{marginBottom:'10rem'}} >
+                  <IonCard style={{marginBottom:'1rem'}} >
                   <IonCardContent>
                             <div>
-                               <h1>12</h1>
+                            <CustomerRating/>
                             </div>
                         </IonCardContent>
+                   </IonCard>
+                   <IonCard style={{marginBottom:'10rem'}} >
+                        <IonCardHeader>
+                           <h4>Write a review</h4>
+                           <div>Stars</div>
+                           <div><textarea rows={8} cols={50}/></div>
+                           <IonButton color="secondary">Submit</IonButton>
+                        </IonCardHeader>
                    </IonCard>
                   <div className="viewpage-buybox">
                   {(Items.find(item => Item?._id === item._id))?

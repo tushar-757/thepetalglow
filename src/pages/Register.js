@@ -31,9 +31,8 @@ export default function Register(){
            try{
             const response=await api.post('/user/Register',{username:username1,email:email1,password:password1,
                 mobile:mobile1,hno:hno1,society:society1,pincode:pincode1})
-            console.log(response.data[0])
-            const {username,mobile,email,Address,token}=response.data[0];
-            const {id}=response.data[0]._id.$oid
+            console.log(response.data)
+            const { username,email,mobile,Address,id ,token} = response.data
             const user1={
                 id:id,
                 username:username,
@@ -68,15 +67,14 @@ export default function Register(){
                              <IonInput type='email' name='email' value={email1} onIonChange={e =>setEmail(e.detail.value)} placeholder="email" required/>
                              <IonButton onClick={()=>verifyHandler()} style={{color:"white"}}>verify</IonButton>
                              <IonInput type='password' name="password" value={password1} onIonChange={e =>setPassword(e.detail.value)} placeholder="password" required/>
-                             <IonInput type='number' name="mobile" min='10' value={mobile1} onIonChange={e =>setMobileno(e.detail.value)} placeholder="Mobile NO.*" required/>
+                             <IonInput type='number' name="mobile" maxlength={10} minlength={10} value={mobile1} onIonChange={e =>setMobileno(e.detail.value)} placeholder="Mobile NO.*" required/>
                              <h1>Address</h1>
                              <IonInput value={hno1} name="hno" onIonChange={e =>setHno(e.detail.value)} placeholder="H.no/Flat no."/>
                              <IonInput value={society1} name="society" onIonChange={e =>setStreet(e.detail.value)} placeholder="Street/Society"/>
                              <IonInput value={pincode1} name="pincode"onIonChange={e =>setPincode(e.detail.value)} placeholder="Pincode"/>
                              <IonInput value='Faridabad' readonly placeholder="Faridabad"/>
-                             {(verify)?
                                  <IonButton type="submit" style={{color:"white"}}>Register</IonButton>
-                              : <IonButton color="medium" onClick={()=>alert('you need to verify your emailId first')}>Register</IonButton>}
+
                              </form>
      </div>
     )

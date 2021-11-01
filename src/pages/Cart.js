@@ -61,7 +61,7 @@ const Item=({ index,id,title,sku,present,price,image,quantity,orderquantity,disp
     )
 }
 
-const CustomAddonAddRemove=({name,id,dispatch,quantity,type})=>{
+const CustomAddonAddRemove=({i,name,id,dispatch,quantity,type})=>{
   return (
     <TableCell>{ <div style={{
       display: 'flex',
@@ -94,6 +94,7 @@ export default function Cart(props){
     const [present] = useIonAlert();
     const total=useSelector((state)=>state.CartReducer.total)
     const grandtotal=useSelector((state)=>state.CartReducer.grandtotal)
+    const customdescription=useSelector((state)=>state.CartReducer.customdescription)
     const User=useSelector((state)=>state.UserReducer)
     const [coupon,setCoupon]=useState(0)
     const [couponvalue,setCouponValue]=useState('')
@@ -156,7 +157,8 @@ export default function Cart(props){
         products:productids,
         shippingAddress:User?.User?.Address,
         lat:User?.lat,
-        lng:User?.lng})
+        lng:User?.lng,
+         customization:customdescription})
         setLoading(false)
         localStorage.setItem('razorpayOrderID',createorder?.data?.OrderId)
         localStorage.setItem('ServerorderID',createorder?.data?.id)
@@ -289,48 +291,48 @@ e.preventDefault()
                              }}
                              />
                              </TableCell>
-                               <TableCell>{(item?.addon?.whitepebbles?.isAdded)?<>whitepebbles</>:null}</TableCell>
-                               <TableCell>{(item?.addon?.blackpebbles?.isAdded)?<>blackpebbles</>:null}</TableCell>
-                               <TableCell>{(item?.addon?.BlackWhitepebbles?.isAdded)?<>BlackWhitepebbles</>:null}</TableCell>
-                               <TableCell>{(item?.addon?.colouredpebbles?.isAdded)?<>colouredpebbles</>:null}</TableCell>
+                               <TableCell>{(item?.addon[0]?.whitepebbles?.isAdded)?<>whitepebbles</>:null}</TableCell>
+                               <TableCell>{(item?.addon[1]?.blackpebbles?.isAdded)?<>blackpebbles</>:null}</TableCell>
+                               <TableCell>{(item?.addon[2]?.BlackWhitepebbles?.isAdded)?<>BlackWhitepebbles</>:null}</TableCell>
+                               <TableCell>{(item?.addon[3]?.colouredpebbles?.isAdded)?<>colouredpebbles</>:null}</TableCell>
                                <TableCell>{(item?.addon?.whiteplate?.isAdded)?<>whiteplate</>:null}</TableCell>
                                <TableCell>{(item?.addon?.redplate?.isAdded)?<>redplate</>:null}</TableCell>
                         </TableRow>
                         {(item.customskuvalue)?
                          <TableRow>
-                              {(!item?.addon?.whitepebbles?.isAdded)? <TableCell>
+                              {(!item?.addon[0]?.whitepebbles?.isAdded)? <TableCell>
                                  <p className="customaddonitem">white Pebbles</p>
                                  <p className="customaddonitem">price:29</p>
-                                 <IonCheckbox style={{color:"white"}} checked={item?.addon?.whitepebbles?.isAdded} onClick={()=>{
-                             dispatch(setWhitePebbles(item?._id,!item?.addon?.whitepebbles?.isAdded))
+                                 <IonCheckbox style={{color:"white"}} checked={item?.addon[0]?.whitepebbles?.isAdded} onClick={()=>{
+                             dispatch(setWhitePebbles(item?._id,!item?.addon[0]?.whitepebbles?.isAdded))
                              }} />
                                 </TableCell>:
-                                 <CustomAddonAddRemove name={'white Pebbles'} type={"whitepebble"} id={item?._id} dispatch={dispatch} quantity={item?.addon?.whitepebbles?.quantity}/> }
-                               {(!item?.addon?.blackpebbles?.isAdded)?
+                                 <CustomAddonAddRemove name={'white Pebbles'} type={"whitepebble"} id={item?._id} dispatch={dispatch} quantity={item?.addon[0]?.whitepebbles?.quantity}/> }
+                               {(!item?.addon[1]?.blackpebbles?.isAdded)?
                                <TableCell>
                                  <p className="customaddonitem">Black Pebbles</p>
                                  <p className="customaddonitem">price:29</p>
-                                 <IonCheckbox style={{color:"white"}} checked={item?.addon?.blackpebbles?.isAdded} onClick={()=>{
+                                 <IonCheckbox style={{color:"white"}} checked={item?.addon[1]?.blackpebbles?.isAdded} onClick={()=>{
                                    console.log("inside black pebble")
-                             dispatch(setBlackPebbles(item?._id,!item?.addon?.blackpebbles?.isAdded))
+                             dispatch(setBlackPebbles(item?._id,!item?.addon[1]?.blackpebbles?.isAdded))
                              }} />
-                                </TableCell>:<CustomAddonAddRemove name={'Black Pebbles'} type={'blackpebbles'} dispatch={dispatch}  id={item?._id} quantity={item?.addon?.blackpebbles?.quantity}/>}
-                                {(!item?.addon?.BlackWhitepebbles?.isAdded)?
+                                </TableCell>:<CustomAddonAddRemove name={'Black Pebbles'} type={'blackpebbles'} dispatch={dispatch}  id={item?._id} quantity={item?.addon[1]?.blackpebbles?.quantity}/>}
+                                {(!item?.addon[2]?.BlackWhitepebbles?.isAdded)?
                                <TableCell>
                                  <p className="customaddonitem">Black and White Pebbles</p>
                                  <p className="customaddonitem">price:29</p>
-                                 <IonCheckbox style={{color:"white"}} checked={item?.addon?.BlackWhitepebbles?.isAdded} onClick={()=>{
-                             dispatch(setBlackWhitePebbles(item?._id,!item?.addon?.BlackWhitepebbles?.isAdded))
+                                 <IonCheckbox style={{color:"white"}} checked={item?.addon[2]?.BlackWhitepebbles?.isAdded} onClick={()=>{
+                             dispatch(setBlackWhitePebbles(item?._id,!item?.addon[2]?.BlackWhitepebbles?.isAdded))
                              }} />
-                                </TableCell>:<CustomAddonAddRemove name={"Black&White Pebbles"} dispatch={dispatch}  type={'baclandwhitepebble'}id={item._id} quantity={item?.addon?.BlackWhitepebbles?.quantity}/>}
+                                </TableCell>:<CustomAddonAddRemove name={"Black&White Pebbles"} dispatch={dispatch}  type={'baclandwhitepebble'}id={item._id} quantity={item?.addon[2]?.BlackWhitepebbles?.quantity}/>}
 
-                                {(!item?.addon?.colouredpebbles?.isAdded)?<TableCell>
+                                {(!item?.addon[3]?.colouredpebbles?.isAdded)?<TableCell>
                                  <p className="customaddonitem">Coloured Pebbles</p>
                                  <p className="customaddonitem">price:29</p>
-                                 <IonCheckbox style={{color:"white"}} checked={item?.addon?.colouredpebbles?.isAdded} onClick={()=>{
-                             dispatch(setColouredPebble(item?._id,!item?.addon?.colouredpebbles?.isAdded))
+                                 <IonCheckbox style={{color:"white"}} checked={item?.addon[3]?.colouredpebbles?.isAdded} onClick={()=>{
+                             dispatch(setColouredPebble(item?._id,!item?.addon[3]?.colouredpebbles?.isAdded))
                              }} />
-                                </TableCell>:<CustomAddonAddRemove name={"coloured pebbles"}  dispatch={dispatch}  type={'colouredpebbles'} id={item._id} quantity={item?.addon?.colouredpebbles?.quantity}/>}
+                                </TableCell>:<CustomAddonAddRemove name={"coloured pebbles"}  dispatch={dispatch}  type={'colouredpebbles'} id={item._id} quantity={item?.addon[3]?.colouredpebbles?.quantity}/>}
                            </TableRow>
                          :null}
                          </>

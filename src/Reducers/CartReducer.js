@@ -23,28 +23,28 @@ const CartReducer = (state = initialState, action) => {
           action.payload.orderquantity = 1;
           action.payload.customskuvalue=false
           action.payload.customizationarray=[]
-          const addon={
+          const addon=[{
             whitepebbles:{
               isAdded:false,
               price:29,
               quantity:0
-             },
+             }},{
             blackpebbles:{
              isAdded:false,
              price:29,
              quantity:0
-             },
+             }},{
             BlackWhitepebbles:{
              isAdded: false,
              price:29,
              quantity:0
-            },
+            }},{
             colouredpebbles:{
              isAdded: false,
              price:29,
              quantity:0
-            }
-          }
+            }}
+          ]
           action.payload.customdescription=""
           let newTotal = state.total + action.payload.price
           const item=action.payload
@@ -113,28 +113,28 @@ const CartReducer = (state = initialState, action) => {
                 const type=action.payload.type
                 if(findItem){
                 if(type==='whitepebble'){
-                  (findItem.addon.whitepebbles={
-                        quantity:findItem.addon.whitepebbles.quantity+=1,
+                  (findItem.addon[0].whitepebbles={
+                        quantity:findItem.addon[0].whitepebbles.quantity+=1,
                          price:29,
                         isAdded:true})
                  }
                   if(type==='blackpebbles'){
-                    (findItem.addon.blackpebbles={
-                      quantity:findItem.addon.blackpebbles.quantity+=1,
+                    (findItem.addon[1].blackpebbles={
+                      quantity:findItem.addon[1].blackpebbles.quantity+=1,
                        price:29,
                       isAdded:true})
                   }
 
                   if(type==='baclandwhitepebble'){
-                   ( findItem.addon.BlackWhitepebbles={
-                      quantity:findItem.addon.BlackWhitepebbles.quantity+=1,
+                   ( findItem.addon[2].BlackWhitepebbles={
+                      quantity:findItem.addon[2].BlackWhitepebbles.quantity+=1,
                        price:29,
                       isAdded:true
                     })
                   }
                   if(type==='colouredpebbles'){
-                   ( findItem.addon.colouredpebbles={
-                      quantity:findItem.addon.colouredpebbles.quantity+=1,
+                   ( findItem.addon[3].colouredpebbles={
+                      quantity:findItem.addon[3].colouredpebbles.quantity+=1,
                        price:29,
                       isAdded:true})
                   }
@@ -151,52 +151,52 @@ const CartReducer = (state = initialState, action) => {
                 const type1=action.payload.type
                 if(findItem1){
                 if(type1==='whitepebble'){
-                  if(findItem1.addon.whitepebbles.quantity===1){
-                    (findItem1.addon.whitepebbles={
-                      quantity:findItem1.addon.whitepebbles.quantity=0,
+                  if(findItem1.addon[0].whitepebbles.quantity===1){
+                    (findItem1.addon[0].whitepebbles={
+                      quantity:findItem1.addon[0].whitepebbles.quantity=0,
                        price:29,
                       isAdded:false})
                   }else{
-                    (findItem1.addon.whitepebbles={
-                        quantity:findItem1.addon.whitepebbles.quantity-=1,
+                    (findItem1.addon[0].whitepebbles={
+                        quantity:findItem1.addon[0].whitepebbles.quantity-=1,
                          price:29,
                         isAdded:true})}
                  }
                   if(type1==='blackpebbles'){
-                    if(findItem1.addon.blackpebbles.quantity===1){
-                      (findItem1.addon.blackpebbles={
-                        quantity:findItem1.addon.blackpebbles.quantity=0,
+                    if(findItem1.addon[1].blackpebbles.quantity===1){
+                      (findItem1.addon[1].blackpebbles={
+                        quantity:findItem1.addon[1].blackpebbles.quantity=0,
                          price:29,
                         isAdded:false})
                     }else{
-                    (findItem1.addon.blackpebbles={
-                      quantity:findItem1.addon.blackpebbles.quantity-=1,
+                    (findItem1.addon[1].blackpebbles={
+                      quantity:findItem1.addon[1].blackpebbles.quantity-=1,
                        price:29,
                       isAdded:true})}
                   }
 
                   if(type1==='baclandwhitepebble'){
-                    if(findItem1.addon.BlackWhitepebbles.quantity===1){
-                      (findItem1.addon.BlackWhitepebbles={
-                        quantity:findItem1.addon.BlackWhitepebbles.quantity=0,
+                    if(findItem1.addon[2].BlackWhitepebbles.quantity===1){
+                      (findItem1.addon[2].BlackWhitepebbles={
+                        quantity:findItem1.addon[2].BlackWhitepebbles.quantity=0,
                          price:29,
                         isAdded:false})
                     }else{
-                     (findItem1.addon.BlackWhitepebbles={
-                      quantity:findItem1.addon.BlackWhitepebbles.quantity-=1,
+                     (findItem1.addon[2].BlackWhitepebbles={
+                      quantity:findItem1.addon[2].BlackWhitepebbles.quantity-=1,
                        price:29,
                       isAdded:true
                     })}
                   }
                   if(type1==='colouredpebbles'){
-                    if(findItem1.addon.colouredpebbles.quantity===1){
-                      (findItem1.addon.colouredpebbles={
-                        quantity:findItem1.addon.colouredpebbles.quantity=0,
+                    if(findItem1.addon[3].colouredpebbles.quantity===1){
+                      (findItem1.addon[3].colouredpebbles={
+                        quantity:findItem1.addon[3].colouredpebbles.quantity=0,
                          price:29,
                         isAdded:false})
                     }else{
-                   (findItem1.addon.colouredpebbles={
-                      quantity:findItem1.addon.colouredpebbles.quantity-=1,
+                   (findItem1.addon[3].colouredpebbles={
+                      quantity:findItem1.addon[3].colouredpebbles.quantity-=1,
                        price:29,
                       isAdded:true})}
                   }
@@ -210,8 +210,8 @@ const CartReducer = (state = initialState, action) => {
               }
                case "SET_WHITE_PEBBLE":
                   let setItem = state.items.find(item => action.payload.id === item._id);
-                   setItem.addon.whitepebbles={
-                    quantity:setItem.addon.whitepebbles.quantity=1,
+                   setItem.addon[0].whitepebbles={
+                    quantity:setItem.addon[0].whitepebbles.quantity=1,
                      price:29,
                     isAdded:true}
                     return {
@@ -220,8 +220,8 @@ const CartReducer = (state = initialState, action) => {
                     }
                case "SET_BLACK_PEBBLE":
                   let setItem1 = state.items.find(item => action.payload.id === item._id);
-                  setItem1.addon.blackpebbles={
-                    quantity:setItem1.addon.blackpebbles.quantity=1,
+                  setItem1.addon[1].blackpebbles={
+                    quantity:setItem1.addon[1].blackpebbles.quantity=1,
                      price:29,
                     isAdded:true}
                     return {
@@ -230,8 +230,8 @@ const CartReducer = (state = initialState, action) => {
                     }
                case "SET_BLACK_WHITE_PEBBLE":
                   let setItem2 = state.items.find(item => action.payload.id === item._id);
-                  setItem2.addon.BlackWhitepebbles={
-                    quantity:setItem2.addon.BlackWhitepebbles.quantity=1,
+                  setItem2.addon[2].BlackWhitepebbles={
+                    quantity:setItem2.addon[2].BlackWhitepebbles.quantity=1,
                      price:29,
                     isAdded:true}
                     return {
@@ -240,8 +240,8 @@ const CartReducer = (state = initialState, action) => {
                     }
                case "SET_COLOURED_PEBBLE":
                   let setItem3 = state.items.find(item => action.payload.id === item._id);
-                  setItem3.addon.colouredpebbles={
-                    quantity:setItem3.addon.colouredpebbles.quantity=1,
+                  setItem3.addon[3].colouredpebbles={
+                    quantity:setItem3.addon[3].colouredpebbles.quantity=1,
                      price:29,
                     isAdded:true}
                     return {
