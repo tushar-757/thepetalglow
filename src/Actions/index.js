@@ -124,7 +124,7 @@ const getOrdersRequest = () => {
       payload: error,
     };
   };
-const url = `${dev}/GetOrders`;
+const url = `${aws}/GetOrders`;
 export const UserOrders=()=>{
     const useraccesstoken=localStorage.getItem('useraccesstoken')
     return (dispatch) => {
@@ -182,7 +182,7 @@ export const getProduct = (id) => {
   };
 };
 
-const url1 = `${dev}/PlantGieneIndoorProducts`;
+const url1 = `${aws}/PlantGieneIndoorProducts`;
 export const FetchProduct=()=>{
   return (dispatch) => {
       dispatch(getProductRequest());
@@ -230,7 +230,7 @@ const getIndoorProductRequest = () => {
     };
   };
 
-const url2 = `${dev}/PlantGiene/IndoorProducts`;
+const url2 = `${aws}/PlantGiene/IndoorProducts`;
 export const FetchIndoorProduct=()=>{
     return (dispatch) => {
         dispatch(getIndoorProductRequest());
@@ -276,7 +276,7 @@ const getOutdoorProductRequest = () => {
     };
   };
 
-const url3 = `${dev}/PlantGiene/OutdoorProducts`;
+const url3 = `${aws}/PlantGiene/OutdoorProducts`;
 export const FetchOutdoorProduct=()=>{
     return (dispatch) => {
         dispatch(getOutdoorProductRequest());
@@ -322,7 +322,7 @@ const getSeasonalProductRequest = () => {
     };
   };
 
-const url4 = `${dev}/PlantGiene/IndoorProducts`;
+const url4 = `${aws}/PlantGiene/IndoorProducts`;
 export const FetchSeasonalProduct=()=>{
     return (dispatch) => {
         dispatch(getSeasonalProductRequest());
@@ -362,7 +362,7 @@ const getPlantersProductRequest = () => {
   };
 
 
-const url5 = `${dev}/PlantGiene/PlanterProducts`;
+const url5 = `${aws}/PlantGiene/PlanterProducts`;
 export const FetchPlantersProduct=()=>{
     return (dispatch) => {
         dispatch(getPlantersProductRequest());
