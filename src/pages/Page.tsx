@@ -24,7 +24,8 @@ import BuyAgain from './BuyAgain';
 import CustomerService from './CustomerService';
 import Setting from './Setting';
 import PlasticPots from './PlasticPots';
-
+import Pebbles from './Pebbles';
+import { RiWhatsappFill } from 'react-icons/ri';
 
 const Page:React.FC =()=>{
   const History = useHistory();
@@ -50,6 +51,9 @@ const Page:React.FC =()=>{
           (Location.pathname==='/page/ViewPage')?"ViewPage":"ThePetalGlow"
   }
 
+  useEffect(()=>{
+    dispatch(GetALLProducts())
+  },[])
   const SearchHandler=()=>{
     const searchconvertibletext=searchText
     setSearchData(Data.filter((data:any)=>data.name.toLowerCase().includes(searchText.toLowerCase())))
@@ -96,9 +100,7 @@ useEffect(()=>{
           inputMode='search'
           placeholder="search for plants,pots and gifts"
           onClick={()=>{
-            setSearch(true)
-            dispatch(GetALLProducts())
-            console.log("sssssss")}}>
+            setSearch(true)}}>
           </IonSearchbar>
       </IonHeader>
       <IonContent  onClick={()=>setSearch(false)}>
@@ -126,11 +128,15 @@ useEffect(()=>{
           (locationstate==='/page/OutdoorPlants')?<OutdoorPage/>:
           (locationstate==='/page/SeasonalPlants')?<SeasonalPage/>:
           (locationstate==='/page/PlasticPots')?<PlasticPots/>:
+          (locationstate==='/page/Pebbles')?<Pebbles/>:
           (locationstate==='/page/Customer Service')?<CustomerService/>:
           (locationstate==='/page/Settings')?<Setting/>:
           (locationstate==='/page/searchbar')?<SearchBar/>:
           (locationstate==='/page/TrackOrder')?<TrackOrder/>:<TrackOrder/>
         }
+        <a className="floating-whatsapp" href="https://wa.me/+918700912996">
+         <RiWhatsappFill style={{fontSize:'59px',color:'#4ced69'}}/>
+        </a>
       </IonContent>
     </IonPage>
   );

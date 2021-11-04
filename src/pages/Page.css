@@ -40,6 +40,19 @@
     align-items: center;
     left: 7px;
 }
+.floating-whatsapp{
+    height: 72px;
+    background: white;
+    border-radius: 50%;
+    width: 72px;
+    z-index: 105;
+    position: fixed;
+    bottom: 5px;
+    right:20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 /* @media screen and (max-width: 380px) {
     .hydrated{
         font-size: 15px;

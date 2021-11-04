@@ -102,6 +102,9 @@ const App: React.FC = () => {
             <Route path="/page/PlasticPots" exact={true}>
               <Page />
             </Route>
+            <Route path="/page/Pebbles" exact={true}>
+              <Page />
+            </Route>
             <Route path="/Register" exact={true}>
               <Page />
             </Route>

@@ -77,8 +77,82 @@
 .viewpage-size-chart-span:hover{
     background-color: #4caf50;
 }
+.write-review-box{
+    margin-bottom:10rem;
+    width:50%
+}
+.viewpage-customization-box{
+    width:20%
+}
+.viewpage-review-box{
+    display: -webkit-inline-box;
+    width: 100%;
+    height: 280px;
+    justify-content: space-around;
+    overflow-x: auto;
+    overflow-y: hidden;
+    height: 220px;
+}
+.review-box-cont{
+    margin:10px 5px;
+    padding:5px;
+    border-radius: 5px;
+    width:30%;
+    height: 90%;
+    box-shadow:1px 1px 4px rgb(199, 199, 199)
+}
+.review-user{
+    font-size: 52px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin: 12px 0;
+    margin-bottom: 0;
+}
+.review-box-username{
+    display: flex;
+    justify-content: end;
+    margin: 0px;
+}
+.review-box-username p{
+    margin:0px;
+}
+.review-box-cont-desc{
+    overflow-y: auto;
+    height: 70px;
+}
+.review-box-cont-desc p{
+   margin-bottom: 0;
+}
+.review-box-star{
+    display: flex;
+    justify-content: center;
+    margin:3px;
+}
+.noreview-box{
+    width: 100%;
+    font-size: 20px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    font-family: cursive;
+}
 @media screen and (max-width: 550px) {
     .view-page-img{
        width: 100%;
    }
+ }
+@media screen and (max-width: 710px) {
+    .write-review-box{
+        width:94%
+    }
+    .viewpage-customization-box{
+        width: 40%;
+    }
+ }
+@media screen and (max-width: 350px) {
+    .viewpage-customization-box{
+        width: 45%;
+    }
  }

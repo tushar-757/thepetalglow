@@ -4,8 +4,10 @@ const initalState={
     Outdoor:[],
     Seasonal:[],
     Planters:[],
+    Pebbles:[],
     FilterData:[],
     BestSellingData:[],
+    review:[],
     loading: false,
     error: null,
     selectedProduct:{}
@@ -15,7 +17,7 @@ const initalState={
      switch (action.type) {
        case "GET_ALL_PRODUCTS_DATA":
          return{
-           ...state,Products:[...state.Indoor,...state.Outdoor]
+           ...state,Products:[...state.Indoor,...state.Outdoor,...state.Planters]
          };
       case "GET_PRODUCT_REQUEST":
         return { ...state, loading: true };
@@ -70,7 +72,7 @@ const initalState={
          case "GET_PLANTERS_PRODUCT_REQUEST":
            return { ...state, loading: true };
          case "GET_PLANTERS_PRODUCT_SUCCESS":
-           return { ...state,loading: false, Planters: action.payload };
+           return { ...state,loading: false, Planters:action.payload.filter((data)=>data.type==="Plastic"),Pebbles:action.payload.filter((data)=>data.type==="Pebble")};
          case "GET_PLANTERS_PRODUCT_FAILURE":
            return {...state, loading: false, error: action.payload };
          case "GET_PLANTERS_USER_PRODUCT":
@@ -115,6 +117,12 @@ const initalState={
                 return{...state,selectedProduct:{_id:'not exist',description:'not exist'}}
               }
               return {...state,selectedProduct:finduserPlanters};
+            case "GET_SELECTED_PEBBLE":
+              const findpebble=state.Pebbles.find(item => action.payload === item._id)
+              if(findpebble===undefined){
+                return{...state,selectedProduct:{_id:'not exist',description:'not exist'}}
+              }
+              return {...state,selectedProduct:findpebble};
           case "SET_FILTER_DATA":
               return{
                 ...state,FilterData:action.payload
@@ -170,6 +178,10 @@ const initalState={
                   Outdoor:[...state.Outdoor],
                   Planters:[...state.Planters]
                 }
+                case "SET_REVIEW":
+                  return {
+                    ...state,review:action.payload
+                  }
          default:
            return state
        }

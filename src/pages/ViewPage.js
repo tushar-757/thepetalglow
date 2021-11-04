@@ -1,19 +1,22 @@
-import { IonButton,IonSlide,IonSlides,IonCard ,IonList,IonListHeader,IonItem,IonCardHeader,IonCardContent, useIonPopover,IonIcon, IonImg } from '@ionic/react';
+import { IonButton,IonSlide,IonSlides,IonCard ,IonList,IonListHeader,IonItem,useIonAlert,IonCardHeader,IonCardContent, useIonPopover,IonIcon, IonImg } from '@ionic/react';
 import React, { useEffect, useState } from 'react';
 import {arrowBackCircle,location } from "ionicons/icons"
 import { useSelector ,useDispatch} from "react-redux";
-import { Addtocart } from '../Actions';
+import { Addtocart,setReview } from '../Actions';
 import {useHistory} from 'react-router-dom'
 import {BiRupee} from 'react-icons/bi'
-import {AiFillInfoCircle} from 'react-icons/ai'
-import { FaCartArrowDown } from 'react-icons/fa';
+import {AiFillInfoCircle, AiOutlineUser} from 'react-icons/ai'
+import { FaCartArrowDown ,FaStar} from 'react-icons/fa';
 import './ViewPage.css'
 import TPGLOGO from '../static/TPGLOGO.png';
+import ReactStars from 'react-stars'
 import { CustomerRating } from '../components/CustomerRating';
+import api from '../Services/urlApi';
+
 
 const slideOpts = {
-  initialSlide: 1,
-  speed: 400,
+  initialSlide:0,
+  speed:200,
 };
 const ImageBar=(data)=>{
    return(
@@ -46,23 +49,59 @@ const ImageBar=(data)=>{
       </IonList>)
  }
 export default function ViewPage(){
+   const [presentalert] = useIonAlert();
     const dispatch=useDispatch()
     const Item=useSelector((state)=>state.ProductReducer.selectedProduct)
     const Items=useSelector((state)=>state.CartReducer.items)
     const [toggle,settoggle]=useState(true)
     const [toggle1,settoggle1]=useState(false)
     const [toggle2,settoggle2]=useState(false)
+    const [description,setDescription]=useState("")
     const History=useHistory()
     const [present, dismiss] = useIonPopover(PopoverList, { onHide: () => dismiss() });
     const [present1, dismiss1] = useIonPopover(PopOverCustomisation, { onHide: () => dismiss1() });
-    const [toggleCustom,settoggleCustom]=useState(false)
-    const [toggleCustom1,settoggleCustom1]=useState(false)
-    const [toggleCustom2,settoggleCustom2]=useState(false)
-    const [toggleCustom3,settoggleCustom3]=useState(false)
-    const [toggleCustom4,settoggleCustom4]=useState(false)
-     const [price,setPrice]=useState()
+    const user_id=localStorage.getItem('user_id')
+    const useraccesstoken=localStorage.getItem('useraccesstoken')
+    const [rating,setRating]=useState(5)
    //   const customdata=useSelector((state)=>state.ProductReducer..Customizations)
 
+   const ratingChanged = (newRating) => {
+     setRating(newRating)
+    }
+    const submitHandler=async(e)=>{
+       e.preventDefault();
+       try{
+          const item={};
+         //  const itemobject=item.toObject()
+          if(Item.type.includes("Indoor")){
+            item.indoorid=Item?._id
+          }
+          if(Item.type.includes("Outdoor")){
+            item.outdoorid=Item?._id
+          }
+          if(Item.type.includes("PLASTIC")){
+            item.Planterid=Item?._id
+          }
+          const data=await api.post("/userreview",{headers:{user_id,Authorization:`Bearer ${useraccesstoken}`},
+         rating,description,item})
+         setDescription("")
+         presentalert({
+            cssClass: 'my-css',
+            header: 'Alert',
+            message: 'submitted succesfully,wait for the approval once its approved it will be on the site',
+            buttons: [
+              { text: 'Ok', handler: (d) => console.log('ok pressed') },
+            ],
+            onDidDismiss: (e) => console.log('did dismiss'),
+          })
+         console.log(data)
+       }catch(e){
+           alert("something is not right")
+       }
+    }
+    useEffect(()=>{
+         dispatch(setReview(Item?.reviews))
+    },[])
     return (
         <div>
            <div onClick={()=>History.goBack()}>
@@ -70,7 +109,7 @@ export default function ViewPage(){
          </div>
             <IonCard style={{marginBottom:'1rem'}}>
                       <IonCardHeader>
-                      <h1 style={{marginTop:0}}>{Item?.name}</h1>
+                      <h1 style={{marginTop:0,fontSize:"1.5rem",fontFamily:"fantasy"}}>{Item?.name}</h1>
                       <ImageBar data={Item?.images} />
                       </IonCardHeader>
                     <div>
@@ -91,12 +130,11 @@ export default function ViewPage(){
                                  event: e.nativeEvent,
                                })
                              }/></h1>
-                             {(!Item?.varient)?
-                             <>
                              <p>Our Recommended Pot Customization</p>
+                           {(Item?.Customizations?.length>0)?
                              <div className="viewpage-Customization">
                                 {Item?.Customizations?.map((data)=>
-                                   <div style={{width:"20%"}}>
+                                   <div className="viewpage-customization-box">
                                       <img src={data?.images[0]} style={{width:"90%",height:"65%"}}/>
                                       <p>{(data?.name?.length>20)?data?.name?.substring(0,20)+"...":data?.name}</p>
                                       <div style={{display:"flex"}}>
@@ -109,9 +147,13 @@ export default function ViewPage(){
                                       </div>
                                    </div>
                                 )}
-                             </div></>:
-                             <>
-                                {(Item?.varient?.s?.price)?<>
+                             </div>:<div>nothing to show currently</div>}
+
+
+                             {(Item?.varient)?
+                                 <>
+                                 {(Item?.varient?.s?.price)?
+                                 <>
                                    <h1>Size Chart</h1>
                                     <div className="viewpage-size-chart">
                                          <span className="viewpage-size-chart-span">S</span>
@@ -128,8 +170,8 @@ export default function ViewPage(){
                                          <span>{Item?.varient?.m?.price}</span>
                                          <span>{Item?.varient?.l?.price}</span>
                                    </div>
-                                </>:null}
-                             </>}
+                                   </>:null}
+                            </>:null}
                  <div style={{marginTop:'10px'}}>
                     <h1 style={{fontSize:12}}>Deliver To</h1>
                     <div className="select-location-view"  onClick={()=>History.push("/page/MapsPage")}>
@@ -186,20 +228,55 @@ export default function ViewPage(){
                         <IonCardHeader>
                            <h4>Customer Reviews</h4>
                         </IonCardHeader>
+                           <div className="viewpage-review-box">
+                              {(Item?.reviews?.length>0)?
+                              <>
+                             {Item?.reviews?.map((data)=>
+                                   <div className="review-box-cont">
+                                   <div><AiOutlineUser className="review-user"/></div>
+                                   <div className="review-box-star">{data?.stars}<FaStar style={{color:"orange"}}/></div>
+                                   <div className="review-box-cont-desc">
+                                     <p>"{data?.description}"</p>
+                                   </div>
+                                   <div className="review-box-username">
+                                      <p>~{data?.username}</p>
+                                      </div>
+                                   </div>
+                             )}</>:<div className="noreview-box">No reviews To Show</div>}
+                             </div>
                    </IonCard>
                   <IonCard style={{marginBottom:'1rem'}} >
                   <IonCardContent>
                             <div>
-                            <CustomerRating/>
+                            <CustomerRating review={Item?.reviews}/>
                             </div>
                         </IonCardContent>
                    </IonCard>
-                   <IonCard style={{marginBottom:'10rem'}} >
+                   <IonCard className="write-review-box">
                         <IonCardHeader>
-                           <h4>Write a review</h4>
-                           <div>Stars</div>
-                           <div><textarea rows={8} cols={50}/></div>
-                           <IonButton color="secondary">Submit</IonButton>
+                           <h4 style={{marginBottom:"5px"}}>Write a review</h4>
+                           <form onSubmit={(e)=>submitHandler(e)}>
+                           <div  style={{marginBottom:"5px"}}>
+                           <ReactStars
+                              count={5}
+                              onChange={ratingChanged}
+                              value={rating}
+                              size={30}
+                              color2={'orange'}
+                              required={true}/>
+                              </div>
+                           <div style={{marginBottom:"5px"}}>
+                              <textarea rows={8} cols={40}
+                              style={{border: 'none',
+                                 background: '#3a3a3a',
+                                 boder:"none",
+                                 borderRadius:"5px",
+                                 color: 'white'}}
+                                 value={description}
+                                 onChange={(e)=>setDescription(e.target.value)}
+                               placeholder="write your review..." required/></div>
+                           <IonButton color="secondary" type="submit">Submit</IonButton>
+                           </form>
                         </IonCardHeader>
                    </IonCard>
                   <div className="viewpage-buybox">

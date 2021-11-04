@@ -124,7 +124,7 @@ const getOrdersRequest = () => {
       payload: error,
     };
   };
-const url = `${aws}/GetOrders`;
+const url = `${dev}/GetOrders`;
 export const UserOrders=()=>{
     const useraccesstoken=localStorage.getItem('useraccesstoken')
     return (dispatch) => {
@@ -182,7 +182,7 @@ export const getProduct = (id) => {
   };
 };
 
-const url1 = `${aws}/PlantGieneIndoorProducts`;
+const url1 = `${dev}/PlantGieneIndoorProducts`;
 export const FetchProduct=()=>{
   return (dispatch) => {
       dispatch(getProductRequest());
@@ -230,7 +230,7 @@ const getIndoorProductRequest = () => {
     };
   };
 
-const url2 = `${aws}/PlantGiene/IndoorProducts`;
+const url2 = `${dev}/PlantGiene/IndoorProducts`;
 export const FetchIndoorProduct=()=>{
     return (dispatch) => {
         dispatch(getIndoorProductRequest());
@@ -276,7 +276,7 @@ const getOutdoorProductRequest = () => {
     };
   };
 
-const url3 = `${aws}/PlantGiene/OutdoorProducts`;
+const url3 = `${dev}/PlantGiene/OutdoorProducts`;
 export const FetchOutdoorProduct=()=>{
     return (dispatch) => {
         dispatch(getOutdoorProductRequest());
@@ -322,7 +322,7 @@ const getSeasonalProductRequest = () => {
     };
   };
 
-const url4 = `${aws}/PlantGiene/IndoorProducts`;
+const url4 = `${dev}/PlantGiene/IndoorProducts`;
 export const FetchSeasonalProduct=()=>{
     return (dispatch) => {
         dispatch(getSeasonalProductRequest());
@@ -362,7 +362,7 @@ const getPlantersProductRequest = () => {
   };
 
 
-const url5 = `${aws}/PlantGiene/PlanterProducts`;
+const url5 = `${dev}/PlantGiene/PlanterProducts`;
 export const FetchPlantersProduct=()=>{
     return (dispatch) => {
         dispatch(getPlantersProductRequest());
@@ -403,6 +403,12 @@ export const GetSelectedSeasonal = (id) => {
 export const GetSelectedPlanter = (id) => {
   return {
     type: "GET_SELECTED_PLANTER",
+    payload:id
+  };
+};
+export const GetSelectedPebble = (id) => {
+  return {
+    type: "GET_SELECTED_PEBBLE",
     payload:id
   };
 };
@@ -520,6 +526,12 @@ export const setColouredPebble=(id,value)=>{
 export const addtoCustomization=(value)=>{
   return {
     type:"ADD_TO_CUSTOMZATION",
+    payload:value
+  }
+}
+export const setReview=(value)=>{
+  return {
+    type:"SET_REVIEW",
     payload:value
   }
 }

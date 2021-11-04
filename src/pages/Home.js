@@ -10,13 +10,14 @@ import BestSelling from './BestSelling';
 import ShopByCategory from './ShopByCategory';
 import { useEffect, useState } from 'react';
 import { useDispatch } from "react-redux";
-import { addUser,SETBESTSELLING} from "../Actions";
+import { FetchIndoorProduct,FetchOutdoorProduct,FetchPlantersProduct,FetchSeasonalProduct,addUser,SETBESTSELLING} from "../Actions";
 import TPGLOGO from '../static/TPGLOGO.png';
 import {RiSecurePaymentFill} from 'react-icons/ri'
 import {FaTruck} from 'react-icons/fa'
 import {FiHelpCircle} from 'react-icons/fi'
 import { Input } from '@material-ui/core';
 import api from '../Services/urlApi';
+
 
 const slideOpts = {
   initialSlide: 1,
@@ -56,6 +57,10 @@ const Home=() => {
 
      function doRefresh(RefresherEventDetail) {
       console.log('Begin async operation');
+      dispatch(FetchSeasonalProduct())
+      dispatch(FetchIndoorProduct())
+      dispatch(FetchOutdoorProduct())
+      dispatch(FetchPlantersProduct())
       dispatch(SETBESTSELLING())
       setTimeout(() => {
         console.log('Async operation has ended');
@@ -125,11 +130,11 @@ const Home=() => {
                     <div className="footer-newsletter">
                          <p style={{marginLeft:"15px",padding:"35px",paddingBottom:"0px"}}>Subscribe to recieve news and coupons</p>
                          <div className="footer-newsletter-inner">
-                           <div style={{width:"100%"}}>
+                           <div style={{width:"80%"}}>
                            <input placeholder="email" style={{background:"white",color:'black',border:'none',
-                            width: '95%', padding: '10px'}} type="text" value={email} onChange={(e)=>setSubscribeEmail(e.target.value)}/>
+                        width:"99%", padding: '10px'}} type="text" value={email} onChange={(e)=>setSubscribeEmail(e.target.value)}/>
                            </div>
-                           <div>
+                           <div style={{width:"40%"}}>
                              <IonButton color="light" onClick={()=>SubscribeEmailHandler()}>Subscribe</IonButton>
                            </div>
                            </div>

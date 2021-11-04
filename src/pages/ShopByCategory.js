@@ -46,25 +46,26 @@ function PotModal({showPotModal,setShowPotModal}){
         <IonModal isOpen={showPotModal} cssClass='my-custom-class' style={{padding:"15px"}}>
                <IonButton onClick={() => setShowPotModal(false)} style={{color:'white'}}>Close </IonButton>
                <div  className="model-cont">
+                   <div className="model-cont-item" onClick={()=>{
+                    History.push("/page/Pebbles")}}>
+                       <h1>Pebbles</h1>
+                   </div>
                    <div className="model-cont-item"
                    onClick={()=>{
                     History.push("/page/PlasticPots")}}>
                        <h1>Plastic</h1>
                    </div>
                    <div className="model-cont-item">
-                       <h1>Mud</h1>
+                       <h1>Earthen</h1>
                    </div>
                    <div className="model-cont-item">
                        <h1>Ceramic</h1>
-                   </div>
-                   <div className="model-cont-item">
-                       <h1>Fibre</h1>
                    </div>
                </div>
              </IonModal>
                <div className="div-shop-by-category" onClick={() => setShowPotModal(true)}>
                <IonIcon md={beaker} className="icons-SBC"/>
-               <h1 className="div-shop-by-category-title">Planters</h1>
+               <h1 className="div-shop-by-category-title">Pebbles& Planters</h1>
                </div>
         </div>
     )
@@ -83,9 +84,6 @@ function CompostModal({showCompostModal,setShowCompostModal}){
                    </div>
                    <div className="model-cont-item">
                        <h1>Sarso Ki Khali</h1>
-                   </div>
-                   <div className="model-cont-item">
-                       <h1>Fibre</h1>
                    </div>
                </div>
              </IonModal>

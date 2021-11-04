@@ -145,8 +145,7 @@ export default function Cart(props){
                 const id=data._id
                 const quantity=data.orderquantity
                 const addons=data.addon
-                const customization=data.customizationarray
-                productids.push({id,quantity,addons,customization})
+                productids.push({id,quantity,addons})
         })
         setLoading(true)
         const user_id=localStorage.getItem('user_id')
@@ -364,7 +363,7 @@ e.preventDefault()
         cssClass='my-custom-class'
         isOpen={loading}
         // onDidDismiss={() => setShowLoading(false)}
-        duration={2000}
+        duration={15000}
         message={'Please wait...'}
       />
                  <div className="coupon-code">
