@@ -1,4 +1,4 @@
-import { IonButton ,IonInput} from "@ionic/react"
+import { IonButton ,IonInput,IonLoading} from "@ionic/react"
 import {useHistory} from 'react-router-dom'
 import { IonIcon } from "@ionic/react";
 import { useState } from "react";
@@ -22,6 +22,7 @@ export default function Register(){
     const [society1,setStreet]=useState('')
     const [pincode1,setPincode]=useState('')
     const [verify,setverify]=useState(false)
+    const [loading,setLoading]=useState(false)
 
     //  const AddUserToStore=()=>{
     //       const data={username,email,password,mobile,hno,society,pincode}
@@ -29,10 +30,11 @@ export default function Register(){
         const RegisterHandler=async(e)=>{
             e.preventDefault()
            try{
+            setLoading(true)
             const response=await api.post('/user/Register',{username:username1,email:email1,password:password1,
                 mobile:mobile1,hno:hno1,society:society1,pincode:pincode1})
             console.log(response.data)
-            const { username,email,mobile,Address,id ,token} = response.data
+            const { username,email,mobile,Address,id ,token} = response?.data?.user
             const user1={
                 id:id,
                 username:username,
@@ -40,32 +42,36 @@ export default function Register(){
                 mobile:mobile,
                 Address:Address
             }
+            setLoading(false)
             dispatch(addUser({id,username,mobile,email,Address}))
             localStorage.setItem('user',JSON.stringify(user1));
             localStorage.setItem('user_id',id);
             localStorage.setItem('useraccesstoken',token);
-            History.goBack();
+            History.push("/page/ThePetalGlow");
         }catch(e){
             console.log(e)
         }
      }
 
-     const verifyHandler=async()=>{
-           const response= await api.post("/user/verifyEmail",{email:email1})
-           console.log(response)
-     }
+
     return(
         <div style={{margin:50}}>
               {/* <IonButton onClick={() => setShowModal(false)}>Close</IonButton> */}
               <div onClick={()=>History.goBack()}>
           <IonIcon md={arrowBackCircle} style={{fontSize:44,color:"lightgreen",margin:5}}/>
             </div>
+            <IonLoading
+        cssClass='my-custom-class'
+        isOpen={loading}
+        // onDidDismiss={() => setShowLoading(false)}
+        duration={5000}
+        message={'Please wait...'}
+      />
                              <h1>Register</h1>
                              <form onSubmit={(e)=>{
                                  RegisterHandler(e)}}>
                              <IonInput name="username"value={username1} onIonChange={e =>setUsername(e.detail.value)} placeholder="username" required/>
                              <IonInput type='email' name='email' value={email1} onIonChange={e =>setEmail(e.detail.value)} placeholder="email" required/>
-                             <IonButton onClick={()=>verifyHandler()} style={{color:"white"}}>verify</IonButton>
                              <IonInput type='password' name="password" value={password1} onIonChange={e =>setPassword(e.detail.value)} placeholder="password" required/>
                              <IonInput type='number' name="mobile" maxlength={10} minlength={10} value={mobile1} onIonChange={e =>setMobileno(e.detail.value)} placeholder="Mobile NO.*" required/>
                              <h1>Address</h1>
