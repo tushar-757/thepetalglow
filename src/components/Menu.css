@@ -121,8 +121,12 @@ ion-item.selected {
     margin-bottom: 20px;
 }
 .ion-menu-bar{
-  width:285px
+  width:300px;
 }
+
+/* .show-menu {
+  display: block;
+} */
 @media screen and (max-width: 992px) {
   .ion-menu-bar{
     width:100%

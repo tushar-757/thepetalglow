@@ -19,7 +19,7 @@ import TrackOrder from './TrackOrder';
 import IndoorPage from './IndoorPage';
 import OutdoorPage from './OutdoorPage';
 import SeasonalPage from './SeasonalPage';
-import {GetALLProducts, getCurrentProduct, setFilterData} from '../Actions';
+import {GetALLProducts, getCurrentProduct, setFilterData,setMenuIndex} from '../Actions';
 import BuyAgain from './BuyAgain';
 import CustomerService from './CustomerService';
 import Setting from './Setting';

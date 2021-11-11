@@ -1,19 +1,18 @@
-import { IonButton,IonIcon ,IonModal, IonTitle,useIonAlert,IonInput,IonLoading} from "@ionic/react"
+import { IonButton,IonIcon ,IonModal, IonTitle,useIonAlert,IonInput,useIonToast,IonLoading} from "@ionic/react"
 import {useHistory} from 'react-router-dom'
 import { arrowBackCircle } from "ionicons/icons";
-import { createProxyMiddleware } from "http-proxy";
 import { useState,useEffect } from "react";
 import api from "../Services/urlApi";
 import './cart.css'
 import IsLoggedIn from '../Hooks/isLoggedIn';
 import { useDispatch } from "react-redux";
 import { addUser } from "../Actions";
-import { TiSocialPinterest } from "react-icons/ti";
 
 
 
 export default function Login(){
     const [present] = useIonAlert();
+    const [present1, dismiss] = useIonToast();
     const History=useHistory()
     const dispatch=useDispatch()
     const [email1,setEmail]=useState('')
@@ -40,6 +39,12 @@ export default function Login(){
           setLoading(true)
           const response=await api.post('/user/login',{email:email1,password})
           setLoading(false)
+          present1(
+            {
+                color: 'success',
+                duration: 2000,
+                message: `You Are LoggedIn`
+              })
           const { username,email,mobile,Address,id ,token} = response.data
           const user1={
               id:id,
@@ -58,70 +63,60 @@ export default function Login(){
             History.goBack();
           }
     }catch(error){
-       present({
-        cssClass: 'my-css',
-        header: 'Alert',
-        message: 'Check Your Credentials',
-        buttons: [
-          { text: 'Ok', handler: (d) => console.log('ok pressed') },
-        ],
-        onDidDismiss: (e) => console.log('did dismiss'),
-      })
+      console.log(error.message)
+      console.log(error?.response?.data?.message)
       setLoading(false)
       setReset(true)
+      if(error.message==='Request failed with status code 429'){
+        present1(
+          {
+              color: 'danger',
+              duration: 2000,
+              message: `"Too many Login requests created from this IP, please try again after 5 minutes`
+            })
+            return
+      }
+      present1(
+        {
+            color: 'danger',
+            duration: 2000,
+            message: `${error?.response?.data?.message}`
+          })
     }
      }
 const ResetHandler=async(e)=>{
   e.preventDefault()
   try{
-    if(newpassword===confirmPassword){
       setLoading(true)
       const response=await api.put("/user/ResetPassword",{
-        email:email1,password:confirmPassword
+        email:email1
       })
       setLoading(false)
-      present({
-        cssClass: 'my-css',
-        header: 'Alert',
-        message: `${response?.data?.message}`,
-        buttons: [
-          { text: 'Ok', handler: (d) => console.log('ok pressed') },
-        ],
-        onDidDismiss: (e) => console.log('did dismiss'),
-      })
-    }else{
-      present({
-        cssClass: 'my-css',
-        header: 'Alert',
-        message: 'password not matched',
-        buttons: [
-          { text: 'Ok', handler: (d) => console.log('ok pressed') },
-        ],
-        onDidDismiss: (e) => console.log('did dismiss'),
-      })
-    }
+      present1(
+        {
+            color: 'success',
+            duration: 2000,
+            message: `Email is sent to your registered account`
+          })
   }catch(e){
-    present({
-      cssClass: 'my-css',
-      header: 'Alert',
-      message: 'Failed To Update ChecK Your Credentials,register instead',
-      buttons: [
-        { text: 'Ok', handler: (d) => console.log('ok pressed') },
-      ],
-      onDidDismiss: (e) => console.log('did dismiss'),
-    })
-    setLoading(false)
+   setLoading(false)
+   present1(
+    {
+        color: 'danger',
+        duration: 5000,
+        message: `something went wrong:${e?.response?.data}`
+      })
   }
 }
 
     return(
-        <div style={{margin:50}}>
+        <div style={{margin:25}}>
               <div onClick={()=>History.goBack()}>
-          <IonIcon md={arrowBackCircle} style={{fontSize:44,color:"lightgreen",margin:5}}/>
+          <IonIcon md={arrowBackCircle} style={{fontSize:44,color:"lightgreen"}}/>
             </div>
-            <IonModal isOpen={showModal} cssClass='my-custom-class'>
-              <IonInput value={newpassword} type="password" onIonChange={(e)=>setNewPassword(e.target.value)} placeholder="New password"/>
-              <IonInput value={confirmPassword} type="password" onIonChange={(e)=>setConfirmPassword(e.target.value)} placeholder="Confirm password"/>
+            <IonModal isOpen={showModal} cssClass='my-custom-class'  backdropDismiss={false}>
+              {/* <IonInput value={newpassword} type="password" onIonChange={(e)=>setNewPassword(e.target.value)} placeholder="New password"/>
+              <IonInput value={confirmPassword} type="password" onIonChange={(e)=>setConfirmPassword(e.target.value)} placeholder="Confirm password"/> */}
         <IonLoading
         cssClass='my-custom-class'
         isOpen={loading}
@@ -129,8 +124,13 @@ const ResetHandler=async(e)=>{
         duration={5000}
         message={'Please wait...'}
       />
-        <IonButton color="tertiary" onClick={(e)=>ResetHandler(e)}>reset password</IonButton>
+      <div style={{padding:"10px"}}>
+        <IonInput type='email'name="email" value={email1} onIonChange={e =>setEmail(e.detail.value)} placeholder="email"  autocomplete={true} required/>
+        <IonButton color="tertiary" onClick={(e)=>ResetHandler(e)}>Send Reset Password Email</IonButton>
+         {/* <div  style={{paddingLeft:"10px"}}><h3>or</h3></div>
+         <IonButton color="tertiary">Use Security Questions?</IonButton> */}
         <IonButton onClick={() => setShowModal(false)} style={{color:"white"}}>Close</IonButton>
+        </div>
       </IonModal>
             <IonLoading
         cssClass='my-custom-class'
@@ -142,8 +142,8 @@ const ResetHandler=async(e)=>{
                              <h1>Login</h1>
                              <form onSubmit={(e)=>{
                                  LoginHandler(e)}}>
-                             <IonInput type='email'name="email" value={email1} onIonChange={e =>setEmail(e.detail.value)} placeholder="email/mobile no." required/>
-                             <IonInput type='password' name="password"value={password} onIonChange={e =>setPassword(e.detail.value)} placeholder="password" required/>
+                             <IonInput type='email'name="email" value={email1} onIonChange={e =>setEmail(e.detail.value)} placeholder="email"  autocomplete={true} required/>
+                             <IonInput type='password' name="password"value={password} onIonChange={e =>setPassword(e.detail.value)} placeholder="password"  autocomplete={true} required/>
 
          <IonButton type="submit" style={{color:"white"}}>
             Login

@@ -12,15 +12,15 @@ const containerStyle = {
   width: "100%",
   height: "70%",
 };
-function MapContainer({onMarkerDragEnd,map,windowHasClosed,windowHasOpened,google}){
+function MapContainer({onMarkerDragEnd,map,lat1,long1,windowHasClosed,windowHasOpened,google}){
     const dispatch=useDispatch()
     const latitude=useSelector((state)=>state.UserReducer.lat)
     const longitude=useSelector((state)=>state.UserReducer.lng)
     const [isTracking,setIsTracking]=useState(false)
     let [watch,SetWatch]=useState("")
     const [LocationCollection,setLocationCollection]=useState([])
-    const [lat,setLat]=useState(28.4089)
-    const [long,setLng]=useState(77.3178)
+    const [lat,setLat]=useState(lat1)
+    const [long,setLng]=useState(long1)
 
     const History=useHistory()
       const [state,setState]=useState(

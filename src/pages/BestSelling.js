@@ -17,7 +17,14 @@ return(
                 {data?.map((data,i)=>(
                     <IonCard className="best-selling-cont-item" key={i}>
                       <IonCardHeader style={{padding:'0px'}}>
-                         <img src={data?.images?.[0]}/>
+                         <img src={data?.images?.[0]}
+                          onClick={()=>{
+                              present({
+                                    message: 'Loading...',
+                                    duration:1000
+                                  })
+                                dispatch(GETSELECTEDBESTSELLING(data._id))
+                                History.push("/page/ViewPage")}}/>
                       </IonCardHeader>
                     <div style={{
                           display: 'flex',
@@ -28,7 +35,7 @@ return(
                     <h1 className="best-selling-tag">Best Selling</h1>
 
                       <div className="bestselling-head">
-                          <div style={{fontSize:"0.95rem",padding:"0px"}}>{(data?.name?.length>15)?data?.name?.substring(0, 15)+"...":data?.name}</div>
+                          <div style={{fontSize:"0.95rem",padding:"0px"}}>{(data?.name?.length>12)?data?.name?.substring(0, 12)+"...":data?.name}</div>
                           <div>|</div>
                              <div  style={{
                                    display: 'flex',
@@ -43,14 +50,13 @@ return(
                           <p style={{alignItems:'center',padding:"0px",fontWeight:"bold",display:'flex'}}><BiRupee/>{data?.price}</p>
                     </div>
                     <IonCardContent style={{padding:"0"}}>
-                          <div style={{
+                    <div style={{
                           display: 'flex',
                           alignItems: 'center',
                           justifyContent: 'center',
                           flexDirection:'column'
                     }}>
-                          {(data?.quantity>0)?<>
-                              <IonButton fill="solid" slot="end" style={{color:"white", width: '126px',
+                    <IonButton fill="solid" slot="end" style={{color:"white", width: '126px',
     height: '25px',fontSize:"0.8rem"}}
                        onClick={()=>{
                         present({
@@ -59,6 +65,7 @@ return(
                             })
                           dispatch(GETSELECTEDBESTSELLING(data._id))
                           History.push("/page/ViewPage")}}>View</IonButton>
+                           {(data?.quantity>0)?<>
                     <IonButton fill="solid" slot="end" style={{color:"white", width: '126px',
     height: '25px',fontSize:"0.8rem"}}
                        onClick={()=>{
@@ -66,7 +73,8 @@ return(
                               message: 'Loading...',
                               duration: 1000
                             })
-                          dispatch(Addtocart(data))}}>Add To Cart</IonButton>
+                          dispatch(Addtocart(data))
+                         }}>Add To Cart</IonButton>
                           </>:<>Out of Stock</>}
                     </div>
                 </IonCardContent>

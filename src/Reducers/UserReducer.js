@@ -25,7 +25,7 @@ const UserReducer = (state = initalState, action) => {
           User:{Address:{
               hno,society,streetname,pincode
           }}
-        } 
+        }
          case 'REMOVE_USER':
         return {
           User:{
@@ -35,7 +35,7 @@ const UserReducer = (state = initalState, action) => {
               mobile:'',
               Address:{},
           }
-        } 
+        }
         case 'SET_LAT_LNG':{
            return {...state,
           lat:action.payload.lat,
@@ -45,7 +45,7 @@ const UserReducer = (state = initalState, action) => {
         default:
             return{
               ...state
-            }  
+            }
 }
 }
 export {UserReducer};

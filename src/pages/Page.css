@@ -28,17 +28,22 @@
     color:white
 }
 .search-block{
-    position: sticky;
+        position: fixed;
     width: 96%;
-    display: flex;
+    display: block;
     background-color: white;
+    height: 60%;
     overflow-y: scroll;
     z-index: 102;
     box-shadow: 0px 0px 5px lightblue;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
     left: 7px;
+}
+.search-block-item{
+    color: rgb(48, 48, 48);
+    display: flex;
+    justify-content: center;
+    height: 32px;
+    align-items: center;
 }
 .floating-whatsapp{
     height: 72px;
@@ -47,8 +52,8 @@
     width: 72px;
     z-index: 105;
     position: fixed;
-    bottom: 5px;
-    right:20px;
+    bottom: 40px;
+    right:15px;
     display: flex;
     justify-content: center;
     align-items: center;

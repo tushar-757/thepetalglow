@@ -3,8 +3,6 @@ const initalState={
     "https://plant-giene-stack-images.s3.ap-south-1.amazonaws.com/image5.jpg",
     "https://plant-giene-stack-images.s3.ap-south-1.amazonaws.com/FINALIMAGE2.jpg",
     "https://plant-giene-stack-images.s3.ap-south-1.amazonaws.com/kokedama.jpg",
-    "https://plant-giene-stack-images.s3.ap-south-1.amazonaws.com/minh-pham-OtXADkUh3-I-unsplash.jpg",
-    "https://plant-giene-stack-images.s3.ap-south-1.amazonaws.com/spacejoy-TKFskJy8PQ8-unsplash.jpg",
     "https://plant-giene-stack-images.s3.ap-south-1.amazonaws.com/luckybamboo.jpg"
   ],
   BestSellingData:[

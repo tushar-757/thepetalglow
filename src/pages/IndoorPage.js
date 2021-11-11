@@ -1,4 +1,4 @@
-import { IonCard,IonButton,IonCardContent,useIonLoading,IonIcon, IonCardHeader } from '@ionic/react';
+import { IonCard,IonButton,IonCardContent,IonContent,IonPage,useIonLoading,IonIcon, IonCardHeader } from '@ionic/react';
 import {  useDispatch, useSelector} from 'react-redux';
 import {arrowBackCircle } from "ionicons/icons"
 import { Addtocart,getIndoorProduct ,addToLikes,removefromLikes} from '../Actions';
@@ -19,19 +19,29 @@ return(
      <>
         <LoadingBox/>
      </>:
-    <div className="best-selling-cont">
+    <div>
            <div onClick={()=>History.goBack()} style={{
-    position: 'absolute',
-    width: '0px',
-    top: '-3px'
+                 position: 'absolute',
+                 width: '0px',
+                 top: '0px',
+                 zIndex:"1",
+                  left:"8px"
 }}>
           <IonIcon md={arrowBackCircle} style={{fontSize:44,color:"lightgreen",margin:5}}/>
          </div>
+           <div>
+                       <div  className="best-selling-cont">
                 {Data?.map((data,i)=>(
                     <IonCard className="best-selling-cont-item">
                       <IonCardHeader style={{padding:'0px'}}>
                             {console.log(data?.images?.[0])}
-                         <img src={data?.images?.[0]}/>
+                         <img src={data?.images?.[0]}  onClick={()=>{
+                        present({
+                              message: 'Loading...',
+                              duration:1000
+                            })
+                          dispatch(getIndoorProduct(data._id))
+                          History.push("/page/ViewPage")}}/>
                       </IonCardHeader>
                     <div style={{
                           display: 'flex',
@@ -40,7 +50,7 @@ return(
                           flexDirection:'column'
                     }}>
                           <div className="bestselling-head">
-                          <div style={{fontSize:"0.95rem",padding:"0px"}}>{(data?.name?.length>20)?data?.name?.substring(0, 15)+"...":data?.name}</div>
+                          <div style={{fontSize:"0.95rem",padding:"0px"}}>{(data?.name?.length>12)?data?.name?.substring(0, 12)+"...":data?.name}</div>
                           <div>|</div>
                           <div  style={{
                                    display: 'flex',
@@ -62,7 +72,6 @@ return(
                           flexDirection:'column'
                     }}>
                           <p style={{alignItems:'center',fontWeight:"bold",display:'flex'}}><BiRupee/>{data?.price}</p>
-                          {(data?.quantity>0)?<>
                     <IonButton fill="solid" slot="end" style={{color:"white", width: '126px',
     height: '25px',fontSize:"0.8rem"}}
                        onClick={()=>{
@@ -72,6 +81,7 @@ return(
                             })
                           dispatch(getIndoorProduct(data._id))
                           History.push("/page/ViewPage")}}>View</IonButton>
+                           {(data?.quantity>0)?<>
                     <IonButton fill="solid" slot="end" style={{color:"white", width: '126px',
     height: '25px',fontSize:"0.8rem"}}
                        onClick={()=>{
@@ -87,6 +97,8 @@ return(
                   </IonCard>
                 )
                ) }
+               </div>
+               </div>
            </div>
 )
 }

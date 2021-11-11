@@ -1,6 +1,6 @@
 import axios from "axios";
 const dev="http://localhost:5000"
-const aws="https://actzkesq20.execute-api.ap-south-1.amazonaws.com/dev"
+const aws="http://thepetalglow-env.eba-vqrfgiyr.ap-south-1.elasticbeanstalk.com"
 export const GetItem = (id) => {
     return {
       type: "GET_ITEM",
@@ -243,6 +243,7 @@ export const FetchIndoorProduct=()=>{
               const Product = data;
               dispatch(getIndoorProductSuccess(Product));
               dispatch(SETBESTSELLING())
+              dispatch(GetALLProducts())
             })
             .catch((error) => {
               const errorMessage = error.message;
@@ -289,6 +290,7 @@ export const FetchOutdoorProduct=()=>{
               const Product = data;
               dispatch(getOutdoorProductSuccess(Product));
               dispatch(SETBESTSELLING())
+              dispatch(GetALLProducts())
             })
             .catch((error) => {
               const errorMessage = error.message;
@@ -536,7 +538,37 @@ export const setReview=(value)=>{
   }
 }
 
-
+export const setMenuIndex=(value)=>{
+  return {
+    type:"SET_MENU_INDEX",
+    payload:value
+  }
+}
+////customization actions
+export const EditCustomDescription=(value)=>{
+  return {
+    type:"EDIT_CUSTOM_DESCRIPTION",
+    payload:value
+  }
+}
+export const RemoveCustomDescription=(value)=>{
+  return {
+    type:"REMOVE_CUSTOM_DESCRIPTION",
+    payload:value
+  }
+}
+export const setEditToFalse=(value)=>{
+  return {
+    type:"SET_CUSTOM_EDIT_FALSE",
+    payload:value
+  }
+}
+export const EditCustomization=(value,id)=>{
+  return {
+    type:"EDIT_CUSTOMIZATION",
+    payload:{value,id}
+  }
+}
 // export const AddtoIndoor=(item)=>{
 //   return {
 //       type:"ADD_INDOOR",

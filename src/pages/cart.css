@@ -71,3 +71,17 @@
 margin: 10px 0px;
 width: 100%;
 }
+.cart-sku{
+    border: none;
+    outline: none;
+    resize: none;
+    width: 100%;
+}
+.cart-id-copy{
+    position: absolute;
+    left: 60px;
+}
+.cart-id-copy-icon{
+    position: absolute;
+    left: 1px;
+}

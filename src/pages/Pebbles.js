@@ -22,9 +22,10 @@ return(
       </>:
     <div className="best-selling-cont">
            <div onClick={()=>History.goBack()} style={{
-    position: 'absolute',
-    width: '0px',
-    top: '-3px'
+ position: 'absolute',
+ width: '0px',
+ top: '-45px',
+  left:" 12px"
 }}>
           <IonIcon md={arrowBackCircle} style={{fontSize:44,color:"lightgreen",margin:5}}/>
          </div>

@@ -1,4 +1,4 @@
-import { IonPage, IonContent,IonModal, IonTitle,IonLoading,IonIcon, IonHeader, IonButton, IonInput} from '@ionic/react';
+import { IonPage, IonContent,IonModal,useIonToast, IonTitle,IonLoading,IonIcon, IonHeader, IonButton, IonInput} from '@ionic/react';
  import { withRouter,useHistory  } from 'react-router';
 import { arrowBackCircle } from 'ionicons/icons';
 import { useState } from 'react';
@@ -11,6 +11,7 @@ import './Accountpage.css'
 
 const AccountPage=(props) => {
     const [checked, setChecked] = useState(true);
+    const [present1, dismiss] = useIonToast();
     const History=useHistory();
     const dispatch=useDispatch();
     const user=useSelector((state)=>state.UserReducer.User)
@@ -44,6 +45,12 @@ const AccountPage=(props) => {
             mobile1,
             email1
         })
+        present1(
+          {
+              color: 'success',
+              duration: 2000,
+              message: `Updated Successfully`
+            })
         const { username,email,mobile,Address,id ,token} = response.data
         const user1={
             id:id,
@@ -59,7 +66,12 @@ const AccountPage=(props) => {
         setLoading(false)
         setShowModal(false)
     }catch(e){
-        alert(e)
+        present1(
+          {
+              color: 'danger',
+              duration: 2000,
+              message: `${e?.response?.data?.message}`
+            })
     }
     }
     const UpdateAddressHandler=async()=>{
@@ -88,8 +100,19 @@ const AccountPage=(props) => {
         localStorage.setItem('useraccesstoken',token);
         setLoading(false)
         setShowModal1(false)
+        present1(
+          {
+              color: 'success',
+              duration: 2000,
+              message: `Address Successfully Updated`
+            })
         }catch(e){
-            alert(e)
+            present1(
+              {
+                  color: 'danger',
+                  duration: 2000,
+                  message: `${e?.response?.data?.message}`
+                })
         }
     }
     const DeleteHandler=async()=>{
@@ -108,8 +131,19 @@ const AccountPage=(props) => {
         localStorage.removeItem('user_id');
         localStorage.removeItem('useraccesstoken');
         localStorage.removeItem('orderID');
+        present1(
+          {
+              color: 'success',
+              duration: 2000,
+              message: `Accout Deleted Successfully`
+            })
     }catch(e){
-      alert(e)
+      present1(
+        {
+            color: 'danger',
+            duration: 2000,
+            message: `${e?.response?.data?.message}`
+          })
     }
     }
   return (

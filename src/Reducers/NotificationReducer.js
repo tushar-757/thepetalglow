@@ -1,5 +1,6 @@
 const initialState = {
     Notifications: [],
+    menuindex:false,
     loading: false,
     error: true,
     user:{}
@@ -23,10 +24,15 @@ const initialState = {
         return {
           ...state,
           Notifications: new_Notifications
-        } 
+        }
+        case 'SET_MENU_INDEX':
+          return {
+            ...state,
+            menuindex:action.payload
+          }
         default:
           return{
             ...state
-          }    
+          }
     }
   };

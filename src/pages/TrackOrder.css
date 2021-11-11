@@ -117,3 +117,11 @@
     top: 33px;
     width: 17%;
 }
+.track-order-custom{
+    font-size: 0.8rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    margin-bottom: 5px;
+}

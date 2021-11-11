@@ -1,4 +1,4 @@
-import { IonButton ,IonInput,IonLoading} from "@ionic/react"
+import { IonButton ,IonInput,IonLoading,IonSelect,IonLabel,IonSelectOption,useIonToast ,IonChip} from "@ionic/react"
 import {useHistory} from 'react-router-dom'
 import { IonIcon } from "@ionic/react";
 import { useState } from "react";
@@ -23,6 +23,8 @@ export default function Register(){
     const [pincode1,setPincode]=useState('')
     const [verify,setverify]=useState(false)
     const [loading,setLoading]=useState(false)
+    const [present, dismiss] = useIonToast();
+    const [city,setCity]=useState("Faridabad")
 
     //  const AddUserToStore=()=>{
     //       const data={username,email,password,mobile,hno,society,pincode}
@@ -33,7 +35,21 @@ export default function Register(){
             setLoading(true)
             const response=await api.post('/user/Register',{username:username1,email:email1,password:password1,
                 mobile:mobile1,hno:hno1,society:society1,pincode:pincode1})
-            console.log(response.data)
+                present(
+                    {
+                        color: 'success',
+                        duration: 2000,
+                        message: 'Registered Successfully'
+                      })
+                      if(response?.data?.message==="user already exist"){
+                        present(
+                            {
+                                color: 'danger',
+                                duration: 2000,
+                                message: `check your Credentials`
+                              })
+                              return
+                      }
             const { username,email,mobile,Address,id ,token} = response?.data?.user
             const user1={
                 id:id,
@@ -49,17 +65,28 @@ export default function Register(){
             localStorage.setItem('useraccesstoken',token);
             History.push("/page/ThePetalGlow");
         }catch(e){
-            console.log(e)
+           console.log(e?.response?.data?.message?.message)
+            present(
+                {
+                    color: 'danger',
+                    duration: 3000,
+                    message: `something went worng:${e?.response?.data?.message?.message}`
+                  })
         }
      }
 
-
+     const options = {
+        cssClass: 'my-custom-interface'
+      };
     return(
-        <div style={{margin:50}}>
+        <div style={{margin:25}}>
               {/* <IonButton onClick={() => setShowModal(false)}>Close</IonButton> */}
               <div onClick={()=>History.goBack()}>
-          <IonIcon md={arrowBackCircle} style={{fontSize:44,color:"lightgreen",margin:5}}/>
+          <IonIcon md={arrowBackCircle} style={{fontSize:44,color:"lightgreen",margin:-5}}/>
             </div>
+              <IonChip color="warning" style={{height:"60px"}}>
+          <IonLabel>Dear Customers Please provide us your best info it Would help in providing invoices and Shipping status</IonLabel>
+        </IonChip>
             <IonLoading
         cssClass='my-custom-class'
         isOpen={loading}
@@ -70,15 +97,38 @@ export default function Register(){
                              <h1>Register</h1>
                              <form onSubmit={(e)=>{
                                  RegisterHandler(e)}}>
-                             <IonInput name="username"value={username1} onIonChange={e =>setUsername(e.detail.value)} placeholder="username" required/>
-                             <IonInput type='email' name='email' value={email1} onIonChange={e =>setEmail(e.detail.value)} placeholder="email" required/>
-                             <IonInput type='password' name="password" value={password1} onIonChange={e =>setPassword(e.detail.value)} placeholder="password" required/>
-                             <IonInput type='number' name="mobile" maxlength={10} minlength={10} value={mobile1} onIonChange={e =>setMobileno(e.detail.value)} placeholder="Mobile NO.*" required/>
+                             <IonInput name="username"value={username1}
+                             autocomplete={true}
+                              onIonChange={e =>setUsername(e.detail.value)} placeholder="username" required/>
+                             <IonInput type='email' name='email'
+                              autocomplete={true}
+                             value={email1} onIonChange={e =>setEmail(e.detail.value)} placeholder="email" required/>
+                             <IonInput type='password' name="password"
+                              autocomplete={true}
+                             value={password1} onIonChange={e =>setPassword(e.detail.value)} placeholder="password" required/>
+                             <IonInput type='number' name="mobile"
+                              autocomplete={true}
+                             maxlength={10} minlength={10} value={mobile1} onIonChange={e =>setMobileno(e.detail.value)} placeholder="Mobile NO.*" required/>
                              <h1>Address</h1>
-                             <IonInput value={hno1} name="hno" onIonChange={e =>setHno(e.detail.value)} placeholder="H.no/Flat no."/>
-                             <IonInput value={society1} name="society" onIonChange={e =>setStreet(e.detail.value)} placeholder="Street/Society"/>
-                             <IonInput value={pincode1} name="pincode"onIonChange={e =>setPincode(e.detail.value)} placeholder="Pincode"/>
-                             <IonInput value='Faridabad' readonly placeholder="Faridabad"/>
+                             <IonInput value={hno1} name="hno"
+                              autocomplete={true}
+                             onIonChange={e =>setHno(e.detail.value)} placeholder="H.no/Flat no." required/>
+                             <IonInput value={society1} name="society"
+                              autocomplete={true}
+                             onIonChange={e =>setStreet(e.detail.value)} placeholder="Street/Society" required/>
+                             <IonInput value={pincode1} name="pincode"
+                              autocomplete={true}
+                             onIonChange={e =>setPincode(e.detail.value)} placeholder="Pincode" required/>
+                             {/* <IonInput value='Faridabad' readonly placeholder="Faridabad"/> */}
+                             <IonSelect interface="popover" interfaceOptions={options}
+                             placeholder="Select City" value={city}
+                             onIonChange={(e)=>setCity(e.detail.value)} required>
+                                      <IonSelectOption value="Faridabad" class="brown-option">Faridabad</IonSelectOption>
+                                      <IonSelectOption value="Gurugram" disabled={true}>Gurugram  coming soon...</IonSelectOption>
+                                      <IonSelectOption value="Delhi" disabled={true}>Delhi coming soon...</IonSelectOption>
+                                      <IonSelectOption value="Noida" disabled={true}>Noida coming soon...</IonSelectOption>
+                                      <IonSelectOption value="Palwal" disabled={true}>Palwal coming soon...</IonSelectOption>
+                             </IonSelect>
                                  <IonButton type="submit" style={{color:"white"}}>Register</IonButton>
 
                              </form>

@@ -97,7 +97,7 @@
     margin:10px 5px;
     padding:5px;
     border-radius: 5px;
-    width:30%;
+    width:40%;
     height: 90%;
     box-shadow:1px 1px 4px rgb(199, 199, 199)
 }
@@ -137,6 +137,13 @@
     align-items: center;
     display: flex;
     font-family: cursive;
+}
+.viewpage-outofstock{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    width: 50%;
 }
 @media screen and (max-width: 550px) {
     .view-page-img{

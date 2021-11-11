@@ -24,6 +24,7 @@ import '@ionic/react/css/display.css';
 import './theme/variables.css';
 import "./App.css"
 import { useEffect } from 'react';
+import PasswordReset from './pages/PasswordReset';
 
 const App: React.FC = () => {
   const dispatch=useDispatch()
@@ -43,7 +44,7 @@ const App: React.FC = () => {
       ],
       onDidDismiss: (e) => console.log('did dismiss'),
     })
-    dispatch(FetchSeasonalProduct())
+    // dispatch(FetchSeasonalProduct())
     dispatch(FetchIndoorProduct())
     dispatch(FetchOutdoorProduct())
     dispatch(FetchPlantersProduct())
@@ -116,6 +117,9 @@ const App: React.FC = () => {
             </Route>
             <Route path="/page/Account" exact={true}>
               <Page />
+            </Route>
+            <Route path="/password-reset/:userId/:token" exact={true}>
+              <PasswordReset />
             </Route>
             <Route path="/"exact={true} >
               <Redirect to="/page/ThePetalGlow" />

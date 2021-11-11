@@ -56,27 +56,31 @@ export default function TrackOrder(){
                         <div className="tack-order-dates">
                             <p>OrderPlaced</p>
                             <p>
-                                {(userOrder?.createdAt)?moment().format("MMM Do"):userOrder?.createdAt}
+                                {(userOrder?.createdAt)?moment(userOrder?.createdAt).format("MMM Do"):userOrder?.createdAt}
                             </p>
                         </div>
                         <div className="tack-order-dates1">
                             <p>Packed</p>
                             <p style={{fontSize:"0.6rem"}}>
-                                expectedAt:<br></br> {(userOrder?.createdAt)?moment().format("MMM Do"):userOrder?.createdAt}
+                                expectedAt:<br></br> {(userOrder?.createdAt)?moment(userOrder?.createdAt).format("MMM Do"):userOrder?.createdAt}
                                  (2-3)pm
                             </p>
                         </div>
                         <div className="tack-order-dates2">
                             <p>Dispatched</p>
                             <p style={{fontSize:"0.6rem"}}>
-                                expectedAt:<br></br> {(userOrder?.createdAt)?moment().format("MMM Do"):userOrder?.createdAt}
+                                expectedAt:<br></br>
+                                {(userOrder?.userRequestedDate)?moment(userOrder?.userRequestedDate).format("MMM Do"):
+                                (userOrder?.createdAt)?moment(userOrder?.createdAt).format("MMM Do"):userOrder?.createdAt}
                                  (3-4)pm
                             </p>
                         </div>
                         <div className="tack-order-dates3">
                             <p>Arrived</p>
                             <p style={{fontSize:"0.6rem"}}>
-                                expectedAt:<br></br>{(userOrder?.createdAt)?moment().format("MMM Do"):userOrder?.createdAt}
+                                expectedAt:<br></br>
+                                {(userOrder?.userRequestedDate)?moment(userOrder?.userRequestedDate).format("MMM Do"):
+                                (userOrder?.createdAt)?moment(userOrder?.createdAt).format("MMM Do"):userOrder?.createdAt}
                                  (4-6)pm
                             </p>
                         </div>
@@ -105,7 +109,12 @@ export default function TrackOrder(){
             <div  className="order-box-total">Total:{userOrder?.total}</div>
             </TableBody>
             </Table>
+            <div>
             </div>
+            </div>
+                {userOrder?.customization?.map((data)=>
+                   <p className="track-order-custom">{data}</p>
+                )}
                         <IonButton color="danger" style={{margin:"10px"}}>Cancel Order</IonButton>
                         <AiFillInfoCircle style={{color:"grey"}}
                              fontSize={24}

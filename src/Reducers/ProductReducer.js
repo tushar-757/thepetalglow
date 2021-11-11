@@ -17,7 +17,7 @@ const initalState={
      switch (action.type) {
        case "GET_ALL_PRODUCTS_DATA":
          return{
-           ...state,Products:[...state.Indoor,...state.Outdoor,...state.Planters]
+           ...state,Products:[...state.Indoor,...state.Outdoor,...state.Planters,...state.Pebbles]
          };
       case "GET_PRODUCT_REQUEST":
         return { ...state, loading: true };

@@ -28,6 +28,7 @@ width: 95%
 .order-box-1stdiv-head{
     color:black;
     width: 45%;
+    position: relative;
 }
 
 .order-box-1stdiv-head p{
@@ -65,4 +66,16 @@ width: 95%
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+.order-id{
+    border: none;
+    outline: none;
+    resize: none;
+    width: 100%;
+}
+.order-id-copy{
+    position: absolute;
+    position: absolute;
+    top: 0;
+    left: 63px;
 }

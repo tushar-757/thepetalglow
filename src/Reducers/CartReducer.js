@@ -1,3 +1,4 @@
+const { v4: uuidv4 } = require('uuid');
 const initialState = {
   items: [],
   customdescription:[],
@@ -255,9 +256,44 @@ const CartReducer = (state = initialState, action) => {
                       items: new_items1
                     }
                     case 'ADD_TO_CUSTOMZATION':
+                      const id=uuidv4();
                       return {
                         ...state,
-                        customdescription:action.payload
+                        customdescription:[...state.customdescription,{id:id,description:action.payload,isedit:false}]
+                      }
+                    case 'EDIT_CUSTOM_DESCRIPTION':
+                       state.customdescription.forEach((data,i)=>{
+                            if(action.payload===i){
+                             data.isedit=true
+                            }
+                        })
+                      return {
+                        ...state
+                      }
+                    case 'REMOVE_CUSTOM_DESCRIPTION':
+                      const custom1=state.customdescription.filter(item=>action.payload!=item.id )
+                      return {
+                        ...state,
+                        customdescription:custom1
+                      }
+                    case 'SET_CUSTOM_EDIT_FALSE':
+                      state.customdescription.forEach((data)=>{
+                        if(action.payload===data.id){
+                         data.isedit=false
+                        }
+                    })
+                      return {
+                        ...state
+                      }
+                      case 'EDIT_CUSTOMIZATION':
+                        state.customdescription.forEach((data)=>{
+                          if(action.payload.id===data.id){
+                               data.isedit=false
+                               data.description=action.payload.value
+                           }
+                      })
+                      return {
+                        ...state
                       }
         default:
             return{

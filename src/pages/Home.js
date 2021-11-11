@@ -56,7 +56,6 @@ const Home=() => {
     },[user,user_id])
 
      function doRefresh(RefresherEventDetail) {
-      console.log('Begin async operation');
       dispatch(FetchSeasonalProduct())
       dispatch(FetchIndoorProduct())
       dispatch(FetchOutdoorProduct())
@@ -71,7 +70,6 @@ const Home=() => {
     const SubscribeEmailHandler=async()=>{
       try{
          const response=await api.post("/subscribeme",{email:email})
-         console.log(response.data.message)
       }catch(e){
          alert(e)
       }

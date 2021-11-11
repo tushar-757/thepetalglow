@@ -1,17 +1,20 @@
-import { IonButton,IonIcon, useIonAlert,IonInput} from "@ionic/react"
+import { IonButton,IonIcon, useIonAlert,IonLoading,useIonToast} from "@ionic/react"
 import {useHistory} from 'react-router-dom'
 import { arrowBackCircle } from "ionicons/icons";
 import api from "../Services/urlApi";
 import { LocalNotifications } from '@ionic-native/local-notifications'
 import './cart.css'
 import { useDispatch,useSelector } from "react-redux";
-import {EmptyCart,AddtoNotification, RemovefromNotification} from '../Actions';
+import {EmptyCart,AddtoNotification, RemovefromNotification, UserOrders} from '../Actions';
 import { Checkout } from 'capacitor-razorpay';
+import { useState } from "react";
 
 export default function PaymentGategay(){
     const History=useHistory()
     const [present] = useIonAlert();
     const dispatch=useDispatch()
+    const [loading,setLoading]=useState(false)
+    const [present1, dismiss] = useIonToast();
     const grandtotal=useSelector((state)=>state.CartReducer.grandtotal)
     const useraccesstoken=localStorage.getItem('useraccesstoken')
     const razorpayOrderID=localStorage.getItem('razorpayOrderID')
@@ -25,7 +28,12 @@ export default function PaymentGategay(){
         icon:"https://cdn.pixabay.com/photo/2018/10/30/16/06/water-lily-3784022__480.jpg"
       });
     }catch(e){
-        alert(e)
+       present1(
+        {
+            color: 'danger',
+            duration: 5000,
+            message: `something went wrong:${e?.response?.data?.message}`
+          })
       }
     }
       const loadCheckout=async()=> {
@@ -43,8 +51,8 @@ export default function PaymentGategay(){
         }
         try {
         let data = (await Checkout.open(options));
-        console.log(data)
         const {razorpay_order_id,razorpay_payment_id,razorpay_signature}=data?.response
+        setLoading(true)
         const confirmorder=await api.put("/OrderConfirmation",
         {
           headers:{
@@ -61,24 +69,36 @@ export default function PaymentGategay(){
          notificationHandler(`your order with OrderId${confirmorder?.data?.id} is confirmed succesfully.`)
          dispatch(RemovefromNotification(confirmorder?.data?.id))
          dispatch(AddtoNotification(confirmorder.data))
+         dispatch(UserOrders())
          History.push('/page/Orders')
-        } catch (error) {
+         setLoading(false)
+         present1(
+          {
+              color: 'success',
+              duration: 2000,
+              message: `Order Placed`
+            })
+        } catch (e) {
           dispatch(EmptyCart())
-          present({
-            cssClass: 'my-css',
-            header: 'Alert',
-            message: `!!! Your ${error},please check your orders to pay again or creae your order again !!!`,
-            buttons: [
-              { text: 'Ok', handler: (d) => console.log('ok pressed') },
-            ],
-            onDidDismiss: (e) => console.log('did dismiss'),
-          })
+          setLoading(false)
+          present1(
+            {
+                color: 'danger',
+                duration: 5000,
+                message: `something went wrong:${e?.response?.data?.message}`
+              })
           History.push('/page/ThePetalGlow')
         }
       }
     return(
         <div style={{margin:50}}>
               <div onClick={()=>History.goBack()}>
+              <IonLoading
+        cssClass='my-custom-class'
+        isOpen={loading}
+        duration={15000}
+        message={'Please wait...'}
+      />
           <IonIcon md={arrowBackCircle} style={{fontSize:44,color:"lightgreen",margin:5}}/>
             </div>
               <IonButton onClick={() => loadCheckout()}>Go for payment</IonButton>

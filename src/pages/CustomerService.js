@@ -1,4 +1,4 @@
-import { IonPage, IonContent, IonHeader,IonItem,IonModal,IonLabel, IonDatetime,IonInput, IonButton } from '@ionic/react';
+import { IonPage, IonContent, IonHeader,useIonToast,IonItem,IonModal,IonLabel, IonDatetime,IonInput, IonButton } from '@ionic/react';
  import { withRouter,useHistory  } from 'react-router';
  import Faq from "react-faq-component";
  import { useState } from 'react';
@@ -55,6 +55,11 @@ const data = {
             <br/>3.) Fill in the information for your new address
             <br/>4.) Select 'Save Changes'
             </p>,
+        },
+        {
+            title: "Where is my Pending order?",
+            content: <p>Your orders in a pending state would get delete after 24 hours
+            </p>,
         }
     ],
 };
@@ -87,6 +92,7 @@ const CustomerService=() => {
   const useraccesstoken=localStorage.getItem('useraccesstoken')
   const History=useHistory()
   const [loading,setLoading]=useState(false)
+  const [present1, dismiss] = useIonToast();
 
 
   useEffect(() => {
@@ -118,31 +124,38 @@ const CustomerService=() => {
            },
         )
            setLoading(false)
-           alert(response?.data?.message)
+
+           present1(
+            {
+                color: 'success',
+                duration: 5000,
+                message: `${response?.data?.message}`
+              })
            setShowModal(false)
       }catch(e){
           setLoading(false)
-           alert(e)
-           setShowModal(false)
+          setShowModal(false)
+          present1(
+            {
+                color: 'danger',
+                duration: 5000,
+                message: `something went wrong:${e?.response?.data?.message}`
+              })
       }
   }
   return (
     <IonPage>
       <IonContent>
-      <IonModal isOpen={showModal} cssClass='my-custom-class'>
-        <p>This is modal content</p>
-        <IonButton onClick={() => setShowModal(false)}>Close Modal</IonButton>
-      </IonModal>
-      <IonModal isOpen={showModal1} cssClass='my-custom-class'>
+      <IonModal isOpen={showModal1} cssClass='my-custom-class' backdropDismiss={false}>
           <form onSubmit={(e)=>UpdateDateHandler(e)}>
-                             <IonInput placeholder="enter orderid here.." onIonChange={(e)=>setOrderid(e.target.value)} style={{marginBottom:"5px"}} required/>
+                             <IonInput placeholder="enter orderid here.." value={orderid} onIonChange={(e)=>setOrderid(e.target.value)} style={{marginBottom:"5px"}} required/>
                              <IonItem>
                              <IonLabel>MM DD</IonLabel>
                                  <IonDatetime displayFormat="MM DD" placeholder="Select Date" value={selectedDate}
                                          min={new Date().toISOString()} onIonChange={e => setSelectedDate(e.target.value)}></IonDatetime>
                              </IonItem>
-                            <IonButton type="submit" >Update</IonButton>
-                            <IonButton onClick={()=>setShowModal1(false)} >Close Modal</IonButton>
+                            <IonButton type="submit" style={{color:"white"}}>Update</IonButton>
+                            <IonButton onClick={()=>setShowModal1(false)} style={{color:"white"}}>Close Modal</IonButton>
                             </form>
       </IonModal>
           <div style={{padding:'10px'}}>
@@ -162,7 +175,12 @@ const CustomerService=() => {
                     <form>
                         <IonInput placeholder="registerd email" value={email} onIonChange={(e)=>setEmail(e.target.value)} style={{marginBottom:"5px"}} required/>
                         <IonInput placeholder="Mobile no." type="number" value={mobile} onIonChange={(e)=>setMobile(e.target.value)} style={{marginBottom:"15px"}} required/>
-                        <textarea placeholder="write your message here..."value={message}  onChange={(e)=>setMessage(e.target.value)} rows="8" cols="35" required/>
+                        <textarea placeholder="write your message here..."
+                        style={{    border: 'none',
+                            background: '#313433',
+                        borderRradius: '5px',
+                               color: '#ffffff'}}
+                        value={message}  onChange={(e)=>setMessage(e.target.value)} rows="8" cols="35" required/>
                         <div>
                         <IonButton type="submit" style={{color:"white"}}
                        onClick={()=>submitHandler()} >Submit</IonButton>

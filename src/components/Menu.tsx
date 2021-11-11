@@ -18,7 +18,8 @@ import './Menu.css';
 import {RootStateOrAny, useDispatch,useSelector} from 'react-redux';
 import IsLoggedIn from '../Hooks/isLoggedIn';
 import {useHistory} from 'react-router-dom'
-import { EmptyCart, EmptyOrders, RemoveUser, UserOrders } from '../Actions';
+import { EmptyCart, EmptyOrders, RemoveUser, UserOrders,setMenuIndex } from '../Actions';
+import { useState } from 'react';
 
 interface AppPage {
   url: string;
@@ -73,7 +74,7 @@ const appPages: AppPage[] = [
 
 ];
 
-const labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
+
 
 const Menu: React.FC = () => {
   const location = useLocation();
@@ -81,13 +82,14 @@ const Menu: React.FC = () => {
   const [user, user_id] = IsLoggedIn();
   const History=useHistory()
   const dispatch=useDispatch()
+  const [zindex,setZindex]=useState(false)
 
   const LoginHandler=()=>{
       History.push("/page/Login")
   }
   const LogoutHandler=()=>{
+    console.log("dsdsds")
     if (user !== null && user_id !== null){
-      console.log("dsdsds")
       dispatch(EmptyCart())
       dispatch(EmptyOrders())
       dispatch(RemoveUser())
@@ -99,26 +101,31 @@ const Menu: React.FC = () => {
   }
   const ShareHandler=async()=>{
     await Share.share({
-      title: 'PlantGiene Mobile App',
+      title: 'THEPETALGLOW Mobile App',
       text: 'Really awesome app',
-      url: 'http://ionicframework.com/',
+      url: 'https://www.thepetalglow.com/',
       dialogTitle: 'Share with buddies',
     });
   }
   return (
-    <IonMenu contentId="main" type="overlay" className="ion-menu-bar" >
+    <IonMenu contentId="main" type="overlay" className="ion-menu-bar">
       <IonContent>
         <IonList id="inbox-list">
           <IonListHeader style={{color:"#686868"}}>{(User.username!="")?User?.username:"Unknown"}</IonListHeader>
           <IonNote>{(User.username!="")?User?.email:"Unknown@gmail.com"}</IonNote>
+          <IonMenuToggle autoHide={false}>
           <div className="menuLoginbtn">
             {
               (User.username!="")?
-              <IonButton onClick={()=>LogoutHandler()} style={{color:"white"}}>logout</IonButton>:
-              <IonButton onClick={()=>LoginHandler()} style={{color:"white"}}>login</IonButton>
+              <IonButton onClick={()=>{
+                LogoutHandler()
+              }} style={{color:"white"}} >logout</IonButton>:
+              <IonButton onClick={()=>{LoginHandler()}} style={{color:"white"}}
+              >login</IonButton>
             }
             <IonButton onClick={()=>History.push('/page/TrackOrder')} style={{color:"white"}}>Tack Order</IonButton>
           </div>
+          </IonMenuToggle>
           {appPages.map((appPage, index) => {
             return (
               <IonMenuToggle key={index} autoHide={false}>

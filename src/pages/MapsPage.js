@@ -7,18 +7,18 @@ const AnyReactComponent = ({ text }) => <div>{text}</div>;
 export function MapsPage(){
   const [lat,setLat]=useState('')
   const [long,setLong]=useState('')
-  // useEffect(()=>{
-  //    Geolocation.getCurrentPosition().then((resp) => {
-  //      console.log( resp.coords.latitude, resp.coords.longitude)
-  //      setLat(resp.coords.latitude)
-  //      setLong(resp.coords.longitude)
-  //     }).catch((error) => {
-  //       console.log('Error getting location', error);
-  //     });
-  //  },[])
+  useEffect(()=>{
+     Geolocation.getCurrentPosition().then((resp) => {
+       console.log( resp.coords.latitude, resp.coords.longitude)
+       setLat(resp.coords.latitude)
+       setLong(resp.coords.longitude)
+      }).catch((error) => {
+        console.log('Error getting location', error);
+      });
+   },[])
     return (
            <div style={{ height: '50vh', width: '100%' }}>
-              <GoogleMap lat={lat} long={long}/>
+              <GoogleMap lat1={lat} long1={long}/>
            </div>
 )}
 
@@ -84,10 +84,10 @@ export function MapsPage(){
 //   // Remove all current marker
 //   this.markers.map(marker => marker.setMap(null));
 //   this.markers = [];
- 
+
 //   for (let loc of locations) {
 //     let latLng = new google.maps.LatLng(loc.lat, loc.lng);
- 
+
 //     let marker = new google.maps.Marker({
 //       map: this.map,
 //       animation: google.maps.Animation.DROP,

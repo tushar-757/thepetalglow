@@ -211,8 +211,8 @@ export default function ViewPage(){
                       <div style={{padding:'10px'}}>
                          <h1>Delievery</h1>
                          <p>
-                            Gauranteed same day Delievery Services is offered only in
-                            Hometown
+                            Same day Delievery Services is offered only in
+                            Hometown(Faridabad).Make sure you have ordered before 4pm otherwise your order would count in next day delievery
                          </p>
                       </div>
                       :(toggle2)?
@@ -281,12 +281,19 @@ export default function ViewPage(){
                    </IonCard>
                   <div className="viewpage-buybox">
                   {(Items.find(item => Item?._id === item._id))?
-                   <h1 style={{color:"black"}}>Added To Cart</h1>:
-                   <IonButton onClick={()=>
-                    {dispatch(Addtocart(Item))}}
-                     style={{width:'50%',color:"white",height:"50px"}}>
-                       Add To Cart
-                      </IonButton>}
+                   <h1 style={{color:"black",
+                   display:'flex',
+                   width: '50%',
+                   justifyContent: 'center',
+                   alignItems: 'center',
+                   fontSize: '0.8rem'}}>Added To Cart</h1>:
+
+                     (Item?.quantity>0)?<IonButton onClick={()=>{dispatch(Addtocart(Item))}}
+                            style={{width:'50%',color:"white",height:"50px"}}>
+                              Add To Cart
+                      </IonButton>:<div className="viewpage-outofstock"><p>Out of Stock</p></div>
+
+                      }
                      <IonButton style={{width:'50%',color:"white",height:"50px"}}>Add To WishList</IonButton>
                   </div>
      </div>
