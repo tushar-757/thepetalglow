@@ -1,6 +1,6 @@
 import axios from "axios";
 const dev="http://localhost:5000"
-const aws="http://thepetalglow-env.eba-vqrfgiyr.ap-south-1.elasticbeanstalk.com"
+const aws="https://api.thepetalglow.com"
 export const GetItem = (id) => {
     return {
       type: "GET_ITEM",
