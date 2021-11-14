@@ -14,13 +14,13 @@ const AccountPage=(props) => {
     const [present1, dismiss] = useIonToast();
     const History=useHistory();
     const dispatch=useDispatch();
-    const user=useSelector((state)=>state.UserReducer.User)
-    const [username1,setUsername]=useState(user.username);
-    const [mobile1,setMobile]=useState(user.mobile);
-    const [email1,setEmail]=useState(user.email);
-    const [hno,sethno]=useState(user.Address.hno);
-    const [society,setsociety]=useState(user.Address.society);
-    const [pincode,setpincode]=useState(user.Address.pincode);
+    const user=useSelector((state)=>state?.UserReducer?.User)
+    const [username1,setUsername]=useState(user?.username);
+    const [mobile1,setMobile]=useState(user?.mobile);
+    const [email1,setEmail]=useState(user?.email);
+    const [hno,sethno]=useState(user?.Address?.hno);
+    const [society,setsociety]=useState(user?.Address?.society);
+    const [pincode,setpincode]=useState(user?.Address?.pincode);
     const [showModal, setShowModal] = useState(false);
     const [showModal1, setShowModal1] = useState(false);
     const [showModal2, setShowModal2] = useState(false);
@@ -205,9 +205,9 @@ const AccountPage=(props) => {
                         Saved Address
                    </h1>
                    <div style={{padding:"20px",paddingTop:"0"}} className="white-background">
-                       <p>{user.Address.hno}</p>
-                       <p>{user.Address.society}</p>
-                       <p>{user.Address.pincode}</p>
+                       <p>{user?.Address?.hno}</p>
+                       <p>{user?.Address?.society}</p>
+                       <p>{user?.Address?.pincode}</p>
                    </div>
                    <div>
                        <IonButton color="tertiary" style={{margin:"1rem"}}

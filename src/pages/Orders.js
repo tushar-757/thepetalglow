@@ -53,7 +53,7 @@ export default function Orders(){
 
    const DeleteHandler=async (id)=>{
      try{
-       const response=await api.delete('/DeleteOrder',{headers:{order_id:id,Authorization:`Bearer ${useraccesstoken}`
+       const response=await api.put('/DeleteOrder',{headers:{order_id:id,Authorization:`Bearer ${useraccesstoken}`
         }
       })
       present1(
