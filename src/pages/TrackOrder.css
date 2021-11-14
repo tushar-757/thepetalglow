@@ -6,6 +6,7 @@
     padding-left: 0px;
     padding-right: 0px;
     position: relative;
+    background: white;
 }
 .packed-icon{
     position: absolute;
@@ -68,6 +69,7 @@
     box-shadow: 1px 1px 5px grey;
     padding: 20px;
     margin: 8px;
+    background: white;
 }
 .track-ship-to p{
   margin: 0;

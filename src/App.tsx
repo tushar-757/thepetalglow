@@ -22,6 +22,7 @@ import '@ionic/react/css/display.css';
 // import { SplashScreen } from '@capacitor/splash-screen';
 /* Theme variables */
 import './theme/variables.css';
+import 'animate.css';
 import "./App.css"
 import { useEffect } from 'react';
 import PasswordReset from './pages/PasswordReset';
@@ -82,13 +83,10 @@ const App: React.FC = () => {
             <Route path="/page/Notifications" exact={true}>
               <Page />
             </Route>
+            <Route path="/page/MyWishList" exact={true}>
+              <Page />
+            </Route>
             <Route path="/page/MapsPage" exact={true}>
-              <Page />
-            </Route>
-            <Route path="/page/TrackOrder" exact={true}>
-              <Page />
-            </Route>
-            <Route path="/page/TrackOrder/:OrderId" exact={true}>
               <Page />
             </Route>
             <Route path="/page/IndoorPlants" exact={true}>
@@ -116,6 +114,12 @@ const App: React.FC = () => {
               <Page />
             </Route>
             <Route path="/page/Account" exact={true}>
+              <Page />
+            </Route>
+            <Route path="/TrackOrder/:TrackId" >
+              <Page />
+            </Route>
+            <Route path="/BuyAgainOrder/:OrderId" >
               <Page />
             </Route>
             <Route path="/password-reset/:userId/:token" exact={true}>

@@ -60,7 +60,7 @@ const CartReducer = (state = initialState, action) => {
         let new_items = state.items.filter(item => action.payload !== item._id)
         return {
           ...state,
-          items: new_items
+          items: new_items,
         }
         case 'SET_QUANTITY':
           let incrementingItem = state.items.find(item => action.payload === item._id);
@@ -84,6 +84,33 @@ const CartReducer = (state = initialState, action) => {
             }
           } else {
             let deletingItem = state.items.filter(item => action.payload !== item._id)
+            let finddeletingitem = state.items.find(item => action.payload === item._id)
+             finddeletingitem?.addon?.forEach((data)=>{
+                if(data?.whitepebbles?.isAdded===true){
+                     data.isAdded=false
+                     data.quantity=0
+                     state.total=state.total-(data.whitepebbles.price*data.whitepebbles.quantity)
+                     state.grandtotal=state.total-(data.whitepebbles.price*data.whitepebbles.quantity)
+                }
+                if(data?.blackpebbles?.isAdded===true){
+                     data.isAdded=false
+                     data.quantity=0
+                     state.total=state.total-(data.blackpebbles.price*data.blackpebbles.quantity)
+                     state.grandtotal=state.total-(data.blackpebbles.price*data.blackpebbles.quantity)
+                }
+                if(data?.BlackWhitepebbles?.isAdded===true){
+                     data.isAdded=false
+                     data.quantity=0
+                     state.total=state.total-(data.BlackWhitepebbles.price*data.BlackWhitepebbles.quantity)
+                     state.grandtotal=state.total-(data.BlackWhitepebbles.price*data.BlackWhitepebbles.quantity)
+                }
+                if(data?.colouredpebbles?.isAdded===true){
+                     data.isAdded=false
+                     data.quantity=0
+                     state.total=state.total-(data.colouredpebbles.price*data.colouredpebbles.quantity)
+                     state.grandtotal=state.total-(data.colouredpebbles.price*data.colouredpebbles.quantity)
+                }
+            })
             return {
               ...state,
               items: deletingItem,

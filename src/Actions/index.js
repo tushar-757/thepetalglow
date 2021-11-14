@@ -569,6 +569,16 @@ export const EditCustomization=(value,id)=>{
     payload:{value,id}
   }
 }
+export const setLoading=()=>{
+return {
+  type:"SET_LOADING"
+}
+}
+export const setUnLoading=()=>{
+return {
+  type:"SET_UN_LOADING"
+}
+}
 // export const AddtoIndoor=(item)=>{
 //   return {
 //       type:"ADD_INDOOR",

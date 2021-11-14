@@ -32,7 +32,7 @@ export default function Notifications(){
         <div>
            <h1 style={{margin:'1rem'}}>{(Notify?.length===0)?"No Notifications To Show":null}</h1>
             {Notify.map((data,i)=>(
-               <div style={{position:"relative"}}>
+               <div style={{position:"relative"}} className="white-background">
                   <div className="notification-block">
                       <h3>Notification:{i+1}</h3>
                       <span>PaymentStatus:-{data?.Paymentstatus}</span><br/>

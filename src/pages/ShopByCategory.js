@@ -2,31 +2,37 @@ import { bag, beaker, gift, home, leaf} from 'ionicons/icons';
 import { IonModal, IonIcon,IonButton,useIonAlert} from '@ionic/react';
 import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { FetchIndoorProduct,FetchOutdoorProduct,FetchSeasonalProduct } from '../Actions';
-import { useDispatch } from "react-redux";
+import { setLoading,setUnLoading } from '../Actions';
+import { useDispatch, useSelector } from "react-redux";
+import LoadingBox from '../components/LoadingComponent';
 import './ShopByCategory.css';
 
-function PlantModal({showPlantModal,setShowPlantModal}){
+function PlantModal({showPlantModal,setShowPlantModal,setLoading,startLoading}){
     const History = useHistory();
     const dispatch=useDispatch()
+
     return(
         <div>
-        <IonModal isOpen={showPlantModal} cssClass='my-custom-class' classname="modal-head"  style={{padding:"15px"}}>
+        <IonModal isOpen={showPlantModal} cssClass='my-custom-class' backdropDismiss={false} classname="modal-head"  style={{padding:"15px"}}>
                <IonButton onClick={() => setShowPlantModal(false)} style={{color:'white'}}>Close </IonButton>
                <div className="model-cont">
                    <div className="model-cont-item" onClick={()=>{
+                       startLoading()
                        History.push("/page/SeasonalPlants")}}>
                        <h1>Seasonal</h1>
                    </div>
                    <div className="model-cont-item" onClick={()=>{
+                       startLoading()
                        History.push("/page/IndoorPlants")}}>
                        <h1>Indoor</h1>
                    </div>
                    <div className="model-cont-item" onClick={()=>{
+                       startLoading()
                        History.push("/page/OutdoorPlants")}}>
                        <h1>Outdoor</h1>
                    </div>
                    <div className="model-cont-item" onClick={()=>{
+                       startLoading()
                        History.push("/page/OutdoorPlants")}}>
                        <h1>Succulent</h1>
                    </div>
@@ -43,7 +49,7 @@ function PotModal({showPotModal,setShowPotModal}){
     const History = useHistory()
     return(
         <div>
-        <IonModal isOpen={showPotModal} cssClass='my-custom-class' style={{padding:"15px"}}>
+        <IonModal isOpen={showPotModal} cssClass='my-custom-class' backdropDismiss={false} style={{padding:"15px"}}>
                <IonButton onClick={() => setShowPotModal(false)} style={{color:'white'}}>Close </IonButton>
                <div  className="model-cont">
                    <div className="model-cont-item" onClick={()=>{
@@ -73,7 +79,7 @@ function PotModal({showPotModal,setShowPotModal}){
 function CompostModal({showCompostModal,setShowCompostModal}){
     return(
         <div>
-        <IonModal isOpen={showCompostModal} cssClass='my-custom-class'  style={{padding:"15px"}}>
+        <IonModal isOpen={showCompostModal} cssClass='my-custom-class' backdropDismiss={false} style={{padding:"15px"}}>
                <IonButton onClick={() => setShowCompostModal(false)} style={{color:'white'}}>Close </IonButton>
                <div  className="model-cont">
                    <div className="model-cont-item">
@@ -100,12 +106,20 @@ export default function ShopByCategory(){
     const [showPlantModal, setShowPlantModal] = useState(false);
     const [showPotModal, setShowPotModal] = useState(false);
     const [showCompostModal, setShowCompostModal] = useState(false);
+    const Loading=useSelector((state)=>state.NotificationReducer.Loading)
+    const dispatch=useDispatch()
+    const startLoading=()=>{
+        dispatch(setLoading(true))
+        setTimeout(()=>{
+           dispatch(setUnLoading(false))
+        },[1000])
+    }
     const [present] = useIonAlert();
 return (
-    <div style={{width:"100%",height:100,backgroundColor:"white",marginBottom:40}}>
+    <div style={{width:"100%",height:150}} className="white-background">
     <h1 style={{display:"flex",fontFamily:"Salsa",color:"#484848",fontSize:18,margin:0,justifyContent:"center",alignItems:"center",height:50}}>Shop By Category</h1>
   <div style={{display:"flex",justifyContent:"space-around",position:"relative"}}>
-           <PlantModal showPlantModal={showPlantModal} setShowPlantModal={setShowPlantModal}/>
+           <PlantModal showPlantModal={showPlantModal} setShowPlantModal={setShowPlantModal} startLoading={startLoading}/>
            <PotModal showPotModal={showPotModal} setShowPotModal={setShowPotModal}/>
            <CompostModal showCompostModal={showCompostModal} setShowCompostModal={setShowCompostModal}/>
        <div className="div-shop-by-category" onClick={() =>

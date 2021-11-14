@@ -1,4 +1,4 @@
-import { IonButton,IonSlide,IonSlides,IonCard ,IonList,IonListHeader,IonItem,useIonAlert,IonCardHeader,IonCardContent, useIonPopover,IonIcon, IonImg } from '@ionic/react';
+import { IonButton,IonSlide,IonSlides,IonCard,useIonToast ,useIonLoading,IonList,IonListHeader,IonItem,useIonAlert,IonCardHeader,IonCardContent, useIonPopover,IonIcon, IonImg } from '@ionic/react';
 import React, { useEffect, useState } from 'react';
 import {arrowBackCircle,location } from "ionicons/icons"
 import { useSelector ,useDispatch} from "react-redux";
@@ -63,6 +63,8 @@ export default function ViewPage(){
     const user_id=localStorage.getItem('user_id')
     const useraccesstoken=localStorage.getItem('useraccesstoken')
     const [rating,setRating]=useState(5)
+    const [present2, dismiss2] = useIonLoading();
+    const [present3, dismiss3] = useIonToast();
    //   const customdata=useSelector((state)=>state.ProductReducer..Customizations)
 
    const ratingChanged = (newRating) => {
@@ -104,10 +106,17 @@ export default function ViewPage(){
     },[])
     return (
         <div>
-           <div onClick={()=>History.goBack()}>
-          <IonIcon md={arrowBackCircle} style={{fontSize:44,color:"lightgreen",margin:5}}/>
+           <div onClick={()=>{
+              History.goBack()
+              present2({
+                message: 'Loading...',
+                 duration:1000
+              })
+           }} className="back-btn-css">
+          <IonIcon md={arrowBackCircle} style={{fontSize:44,color:"lightgreen",margin:2}}/>
          </div>
-            <IonCard style={{marginBottom:'1rem'}}>
+         <div className="animate__animated animate__slideInUp">
+            <IonCard style={{marginBottom:'1rem',marginTop:"3rem",padding:"10px"}} className="white-background">
                       <IonCardHeader>
                       <h1 style={{marginTop:0,fontSize:"1.5rem",fontFamily:"fantasy"}}>{Item?.name}</h1>
                       <ImageBar data={Item?.images} />
@@ -224,7 +233,7 @@ export default function ViewPage(){
                </div>
                   </IonCardContent>
                   </IonCard>
-                  <IonCard style={{marginBottom:'1rem'}} >
+                  <IonCard style={{marginBottom:'1rem'}} className="white-background" >
                         <IonCardHeader>
                            <h4>Customer Reviews</h4>
                         </IonCardHeader>
@@ -245,14 +254,14 @@ export default function ViewPage(){
                              )}</>:<div className="noreview-box">No reviews To Show</div>}
                              </div>
                    </IonCard>
-                  <IonCard style={{marginBottom:'1rem'}} >
+                  <IonCard style={{marginBottom:'1rem'}} className="white-background" >
                   <IonCardContent>
                             <div>
                             <CustomerRating review={Item?.reviews}/>
                             </div>
                         </IonCardContent>
                    </IonCard>
-                   <IonCard className="write-review-box">
+                   <IonCard className="write-review-box white-background" >
                         <IonCardHeader>
                            <h4 style={{marginBottom:"5px"}}>Write a review</h4>
                            <form onSubmit={(e)=>submitHandler(e)}>
@@ -279,6 +288,7 @@ export default function ViewPage(){
                            </form>
                         </IonCardHeader>
                    </IonCard>
+                   </div>
                   <div className="viewpage-buybox">
                   {(Items.find(item => Item?._id === item._id))?
                    <h1 style={{color:"black",
@@ -288,7 +298,14 @@ export default function ViewPage(){
                    alignItems: 'center',
                    fontSize: '0.8rem'}}>Added To Cart</h1>:
 
-                     (Item?.quantity>0)?<IonButton onClick={()=>{dispatch(Addtocart(Item))}}
+                     (Item?.quantity>0)?<IonButton onClick={()=>{
+                        dispatch(Addtocart(Item))
+                        present3(
+                           {
+                               color: 'secondary',
+                               duration: 2000,
+                               message: `Item added to cart`
+                             })}}
                             style={{width:'50%',color:"white",height:"50px"}}>
                               Add To Cart
                       </IonButton>:<div className="viewpage-outofstock"><p>Out of Stock</p></div>

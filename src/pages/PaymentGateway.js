@@ -38,7 +38,7 @@ export default function PaymentGategay(){
     }
       const loadCheckout=async()=> {
         const options = {
-          key: 'rzp_test_0bM611iljsCqKa',
+          key: process.env.REACT_APP_RAZORPAY_KEY,
           amount:grandtotal*100,
           description: 'Credits towards consultation',
           image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTnbpr4WKVxpBwwvk2rI0dIx1cCFKnjDAPvFQ&usqp=CAU',

@@ -35,7 +35,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #175675;
+    background-color: #f44336;
     border-radius: 5px;
     height: 42px;
     font-size: 0.8rem;
@@ -149,6 +149,9 @@
     .view-page-img{
        width: 100%;
    }
+   .review-box-cont{
+       width: 100%;
+   }
  }
 @media screen and (max-width: 710px) {
     .write-review-box{
@@ -157,9 +160,15 @@
     .viewpage-customization-box{
         width: 40%;
     }
+    .review-box-cont{
+        width: 70%;
+    }
  }
 @media screen and (max-width: 350px) {
     .viewpage-customization-box{
         width: 45%;
+    }
+    .review-box-cont{
+        width: 100%;
     }
  }

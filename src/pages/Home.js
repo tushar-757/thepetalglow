@@ -15,18 +15,22 @@ import TPGLOGO from '../static/TPGLOGO.png';
 import {RiSecurePaymentFill} from 'react-icons/ri'
 import {FaTruck} from 'react-icons/fa'
 import {FiHelpCircle} from 'react-icons/fi'
+import LoadingBox from '../components/LoadingComponent';
 import { Input } from '@material-ui/core';
 import api from '../Services/urlApi';
 
 
 const slideOpts = {
-  initialSlide: 1,
+  initialSlide: 0,
   speed: 400,
 };
 
 const ImageBar=({images})=>{
   return(
     <IonSlides pager={true} options={slideOpts}  className="Home-SlideBar">
+      <IonSlide>
+      <iframe width="100%" height="450px" src="https://www.youtube.com/embed/_EB-qSLTCXQ?autoplay=0" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
+        </IonSlide>
     {images.map((data,i)=>(
       <IonSlide  style={{backgroundColor:"white"}}>
          <img src={data} style={{width:"100%"}}className="Home-SlideBar-Img" />
@@ -41,7 +45,7 @@ const Home=() => {
   const images=useSelector((state)=>state.HomeReducer.images)
   const [user, user_id] = IsLoggedIn();
   const [email,setSubscribeEmail]=useState("")
-
+  const Loading=useSelector((state)=>state.NotificationReducer.Loading)
     useEffect(() => {
       try{
         if (user != null && user_id != null) {
@@ -75,6 +79,10 @@ const Home=() => {
       }
     }
   return (
+    (Loading)?
+    <>
+       <LoadingBox/>
+    </>:
     <IonPage>
       <IonContent>
       <IonRefresher slot="fixed" onIonRefresh={doRefresh}>
@@ -90,11 +98,11 @@ const Home=() => {
           </div>
           <ShopByCategory/>
            <ImageBar images={images}/>
-           <div>
+           <div className="white-background">
              <h1 className="BestSellingTitle">Best Selling Items</h1>
            </div>
             <BestSelling/>
-           <IonFooter>
+           <IonFooter className="white-background">
                   <div className="policy-div">
                       <div className="policy-divs">
                         <div>
@@ -120,7 +128,7 @@ const Home=() => {
                   <div className="footer-icon-block">
                   <IonIcon slot="start"  md={logoFacebook}  className="footer-icon" style={{color:'cornflowerblue'}}/>
                   <a href="https://www.instagram.com/thepetalglow/"><IonIcon slot="start"  md={logoInstagram} style={{color:'rgb(58, 223, 114);'}} className="footer-icon"/></a>
-                  <IonIcon slot="start"  md={logoYoutube} className="footer-icon" style={{color:'red'}}/>
+                  <a href="https://www.youtube.com/watch?v=_EB-qSLTCXQ"><IonIcon slot="start"  md={logoYoutube} className="footer-icon" style={{color:'red'}}/></a>
                   <IonIcon slot="start"  md={logoLinkedin} className="footer-icon" style={{color:'blue'}}/>
                     </div>
                 </div>
@@ -136,6 +144,11 @@ const Home=() => {
                              <IonButton color="light" onClick={()=>SubscribeEmailHandler()}>Subscribe</IonButton>
                            </div>
                            </div>
+                           <div style={{margin:"2rem",marginTop:"0",padding:"20px"}}>
+                                Contact us:<br></br>
+                                email:services@thepetalglow.com<br></br>
+                                Phone:+17278771267 (`whatsapp chat available only`)
+                             </div>
                     </div>
            </IonContent>
         </IonPage>

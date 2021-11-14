@@ -1,8 +1,9 @@
 
 .loader {
-  display: grid;
   display: flex;
-  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  height: 75%;
   grid-template-columns: 0fr 0fr 0fr;
   grid-gap: 24px;
 }

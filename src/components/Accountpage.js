@@ -193,18 +193,18 @@ const AccountPage=(props) => {
         <IonContent>
         <IonIcon md={arrowBackCircle} style={{fontSize:44,color:"lightgreen",margin:5}}
             onClick={()=>props.setAccount(true)}/>
-            <IonHeader style={{ padding:"25px 0"}}>
+            <IonHeader style={{ padding:"25px 0"}} className="white-background">
                 <IonTitle>{username1}</IonTitle>
                 <IonTitle>+91 {mobile1}</IonTitle>
                 <IonTitle>{email1}</IonTitle>
                 <IonButton color="tertiary"style={{margin:"1rem"}}
                 onClick={()=>updateModel1()}>Edit details</IonButton>
                 </IonHeader>
-                <IonContent style={{padding:"20px"}}>
-                    <h1 style={{padding:"20px"}}>
+                <IonContent style={{padding:"20px"}} className="white-background">
+                    <h1 style={{padding:"20px"}} className="white-background">
                         Saved Address
                    </h1>
-                   <div style={{padding:"20px",paddingTop:"0"}}>
+                   <div style={{padding:"20px",paddingTop:"0"}} className="white-background">
                        <p>{user.Address.hno}</p>
                        <p>{user.Address.society}</p>
                        <p>{user.Address.pincode}</p>

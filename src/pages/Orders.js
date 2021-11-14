@@ -19,7 +19,6 @@ export default function Orders(){
   const History = useHistory();
   const useraccesstoken=localStorage.getItem('useraccesstoken')
     const Orders=useSelector((state)=>state.OrderReducer.ActiveOrder)
-    console.log(Orders)
     const [Order,setOrder]=useState('')
     const Loading=useSelector((state)=>state.OrderReducer.loading)
     const dispatch=useDispatch()
@@ -79,11 +78,7 @@ export default function Orders(){
     }
    }
    function copyToClipboard(e,i) {
-    // textAreaRef.current.select();
-    console.log(textAreaRef.current)
     navigator.clipboard.writeText(textAreaRef.current[i].value)
-    // This is just personal preference.
-    // I prefer to not show the whole text area selected.
     e.target.focus();
     setCopySuccess('Copied!');
     present1(
@@ -183,7 +178,7 @@ export default function Orders(){
                 <IonButton className="order-pay-btn"
                 onClick={()=>{
                   dispatch(UserSelectedOrder(data?.id))
-                  History.push(`/page/TrackOrder/${data?.id}`)}}>Track Order</IonButton>
+                  History.push(`/TrackOrder/${data?.id}`)}}>Track Order</IonButton>
                   <h2 className="order-code">{data?.code}</h2>
                  </div>
                 </>:

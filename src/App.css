@@ -5,3 +5,13 @@
   .body{
     background: white;
   }
+  .white-background{
+    background: white;
+}
+.back-btn-css{
+  position: absolute;
+  width: 0px;
+  top: 0px;
+  z-index:1;
+   left:26px;
+}

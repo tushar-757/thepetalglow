@@ -111,7 +111,7 @@ function MapContainer({onMarkerDragEnd,map,lat1,long1,windowHasClosed,windowHasO
 const LoadingContainer = (props) => <div>Fancy loading container!</div>;
 
 const GoogleMap = GoogleApiWrapper({
-    apiKey: ('AIzaSyCJwS5dQ6W2EVo_pGDwMCCyCrtxFZ1-LXk'),
+    apiKey: (process.env.REACT_APP_BASIC_API_KEY),
   LoadingContainer: LoadingContainer,
 })(MapContainer);
 

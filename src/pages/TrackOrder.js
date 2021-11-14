@@ -14,6 +14,7 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
+import BuyAgainViewPage from "./BuyAgainViewPage";
 
 function PopoverList({ onHide }){
     return (
@@ -32,9 +33,10 @@ export default function TrackOrder(){
     const [id,setId]=useState('')
 
     return(
+    (userOrder.Active===true)?
         <div>
             <div style={{padding:"10px"}}>
-                <IonInput placeholder="Search By OrderId" onIonChange={e =>setId(e.detail.value)}/>
+                <IonInput placeholder="Search By OrderId" onIonChange={e =>setId(e.detail.value)} className="white-background"/>
                 <IonButton style={{color:'white'}} onClick={()=>{
                 if(id!=""){
                     dispatch(UserSelectedOrder(id))
@@ -126,7 +128,7 @@ export default function TrackOrder(){
                     </div>
                     <div>
                         <div>
-                            <p style={{marginLeft:'10px'}}>Shipping Address</p>
+                            <p style={{marginLeft:'10px',backgroundColor:"white"}}>Shipping Address</p>
                         </div>
                         <div className="track-ship-to">
                         <p>Ship to</p>
@@ -141,6 +143,7 @@ export default function TrackOrder(){
                         </IonButton>
                     </div>
                 </div>
-        </div>
+        </div>:
+        <BuyAgainViewPage/>
     )
 }

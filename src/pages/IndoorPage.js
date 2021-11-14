@@ -1,7 +1,7 @@
 import { IonCard,IonButton,IonCardContent,IonContent,IonPage,useIonLoading,IonIcon, IonCardHeader } from '@ionic/react';
 import {  useDispatch, useSelector} from 'react-redux';
 import {arrowBackCircle } from "ionicons/icons"
-import { Addtocart,getIndoorProduct ,addToLikes,removefromLikes} from '../Actions';
+import { Addtocart,getIndoorProduct ,addToLikes,removefromLikes,setLoading,setUnLoading} from '../Actions';
 import {BiRupee} from 'react-icons/bi'
 import {useHistory} from 'react-router-dom'
 import {AiFillHeart,AiOutlineHeart} from 'react-icons/ai'
@@ -11,23 +11,30 @@ export default function IndoorPage(){
     const dispatch=useDispatch();
     const History = useHistory();
     const Data=useSelector((state)=>state.ProductReducer.Indoor)
-    const Loading=useSelector((state)=>state.ProductReducer.loading)
+//     const Loading=useSelector((state)=>state.ProductReducer.loading)
+    const Loading=useSelector((state)=>state.NotificationReducer.Loading)
     const [present, dismiss] = useIonLoading();
     const [like,setLike]=useState(false)
+    const startLoading=()=>{
+      dispatch(setLoading(true))
+      setTimeout(()=>{
+         dispatch(setUnLoading(false))
+      },[2000])
+  }
 return(
-     (Loading)?
-     <>
-        <LoadingBox/>
-     </>:
+      (Loading)?
+      <>
+      <LoadingBox/>
+      </>:
     <div>
-           <div onClick={()=>History.goBack()} style={{
-                 position: 'absolute',
-                 width: '0px',
-                 top: '0px',
-                 zIndex:"1",
-                  left:"8px"
-}}>
-          <IonIcon md={arrowBackCircle} style={{fontSize:44,color:"lightgreen",margin:5}}/>
+           <div onClick={()=>{
+                 History.goBack()
+                 present({
+                  message: 'Loading...',
+                   duration:1000
+                })
+            }} className="back-btn-css">
+          <IonIcon md={arrowBackCircle} style={{fontSize:44,color:"lightgreen",margin:2}}/>
          </div>
            <div>
                        <div  className="best-selling-cont">

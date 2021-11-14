@@ -7,29 +7,25 @@ import {useHistory} from 'react-router-dom'
 import {AiFillHeart,AiOutlineHeart} from 'react-icons/ai'
 import { useState } from 'react';
 import { Button ,Input} from "@material-ui/core"
+import LoadingBox from '../components/LoadingComponent';
 
 export default function OutdoorPage(){
     const dispatch=useDispatch();
     const History = useHistory();
     const [present, dismiss] = useIonLoading();
-    const Loading=useSelector((state)=>state.ProductReducer.loading)
+    // const Loading=useSelector((state)=>state.ProductReducer.loading)
+    const Loading=useSelector((state)=>state.NotificationReducer.Loading)
     const Data=useSelector((state)=>state.ProductReducer.Outdoor)
     const [like,setLike]=useState(false)
 
 return(
       (Loading)?
       <>
-     <h1>Loading...</h1>
+      <LoadingBox/>
       </>:
         <div>
-           <div onClick={()=>History.goBack()} style={{
-  position: 'absolute',
-  width: '0px',
-  top: '0px',
-  zIndex:"1",
-   left:"8px"
-}}>
-          <IonIcon md={arrowBackCircle} style={{fontSize:44,color:"lightgreen",margin:5}}/>
+           <div onClick={()=>History.goBack()} className="back-btn-css">
+          <IonIcon md={arrowBackCircle} style={{fontSize:44,color:"lightgreen",margin:2}}/>
          </div>
          <div>
                        <div  className="best-selling-cont">

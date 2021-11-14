@@ -34,11 +34,13 @@ const Setting=() => {
     <IonPage>
       <IonContent>
          {(Account)?<IonList style={{paddingTop:'14px'}}>
+           <div className="white-background">
               <IonItem onClick={()=>setAccount(false)}>
                   <IonTitle>Account
                   </IonTitle>
                       <IonIcon md={arrowForwardOutline}/>
               </IonItem>
+              </div>
               <IonItem>
                 <IonTitle>Notification</IonTitle>
                 <IonItem>

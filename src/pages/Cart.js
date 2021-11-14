@@ -1,4 +1,4 @@
-import { IonButton,IonLabel, IonIcon,IonItem,IonToggle,useIonToast,IonList,IonCheckbox,IonListHeader, useIonAlert ,IonLoading,IonInput,useIonPopover,IonFooter,IonToolbar } from "@ionic/react"
+import { IonButton,IonLabel, IonIcon,IonItem,useIonLoading,useIonToast,IonList,IonCheckbox,IonListHeader, useIonAlert ,IonLoading,IonInput,useIonPopover,IonFooter,IonToolbar } from "@ionic/react"
 import { addCircle, arrowBackCircle, removeCircle,location } from "ionicons/icons"
 import { Removefromcart, setQuantity,unsetQuantity,GrandTotal
   ,addAddonItemsToCartItem, AddtoNotification, SetCustomSku
@@ -119,6 +119,7 @@ export default function Cart(props){
     const [sku1,setSku1]=useState("")
     const [sku2,setSku2]=useState("")
     const [present, dismiss] = useIonToast();
+    const [present2, dismiss2] = useIonLoading();
     const textAreaRef = useRef([]);
     const [copySuccess, setCopySuccess] = useState('');
 
@@ -305,15 +306,21 @@ function copyToClipboard(e,i) {
 };
     return(
           <>
-        <div>
-        <div onClick={()=>History.goBack()}>
+        <div className="white-background">
+        <div onClick={()=>{
+           present2({
+            message: 'Loading...',
+             duration:1000
+          })
+          History.goBack()
+          }}>
           <IonIcon md={arrowBackCircle} style={{fontSize:44,color:"lightgreen",margin:5}}/>
         </div>
         <div>
          <h1 style={{fontSize:20,padding:'0 18px'}}>SubTotal:{total}</h1>
         </div>
         </div>
-            <div style={{overflowX:"auto"}}>
+            <div style={{overflowX:"auto"}} className="white-background">
             <Table size="small">
         <TableHead>
           <TableRow>
@@ -398,9 +405,9 @@ function copyToClipboard(e,i) {
              </TableBody>
         </Table>
         </div>
-        <div style={{margin:"0.5rem"}}>
+        <div style={{margin:"0.5rem"}} className="white-background">
           <IonItem>
-            <IonLabel>I want Customization</IonLabel>
+            <IonLabel className="white-background">I want Customization</IonLabel>
             <IonCheckbox style={{color:"white"}} checked={checked} onIonChange={e => setChecked(e.detail.checked)} />
           </IonItem>
           {(checked)?

@@ -81,12 +81,16 @@ const CustomerService=() => {
     const dispatch=useDispatch()
     const user1=useSelector((state)=>state.UserReducer.User)
   const [email,setEmail]=useState("")
+  const [email1,setEmail1]=useState("")
   const [mobile,setMobile]=useState('')
+  const [mobile1,setMobile1]=useState('')
   const [message,setMessage]=useState('')
+  const [message1,setMessage1]=useState('')
   const [orderid,setOrderid]=useState('')
   const [selectedDate, setSelectedDate] = useState(new Date().toISOString());
   const [showModal, setShowModal] = useState(false);
   const [showModal1, setShowModal1] = useState(false);
+  const [showModal2, setShowModal2] = useState(false);
   const [user, user_id] = IsLoggedIn();
   const user_id1=localStorage.getItem('user_id')
   const useraccesstoken=localStorage.getItem('useraccesstoken')
@@ -106,10 +110,76 @@ const CustomerService=() => {
       console.log(e)
     }
   },[user,user_id])
-  const submitHandler=()=>{
-     if(user1.username===''){
-        return History.push('/page/Login')
-        }
+  const submitHandler=async(e)=>{
+    e.preventDefault()
+    try{
+        if(user1.username===''){
+           return History.push('/page/Login')
+           }
+           setLoading(true)
+           const response=await api.post('/user/CustomerQueries',{
+            headers:{user_id:user_id1,
+                Authorization:`Bearer ${useraccesstoken}`
+            },
+            email:email,
+            mobile:mobile,
+            description:message
+           },
+           )
+           setLoading(false)
+           present1(
+            {
+                color: 'success',
+                duration: 5000,
+                message: `${response?.data?.message}`
+              })
+              setEmail("")
+              setMessage("")
+              setMobile("")
+    }catch(e){
+        present1(
+            {
+                color: 'danger',
+                duration: 5000,
+                message: `something went wrong:${e?.response?.data?.message}`
+              })
+    }
+  }
+  const submitBugHandler=async(e)=>{
+    e.preventDefault()
+    try{
+        if(user1.username===''){
+           return History.push('/page/Login')
+           }
+           setLoading(true)
+           const response=await api.post('/user/ReportBug',{
+            headers:{user_id:user_id1,
+                Authorization:`Bearer ${useraccesstoken}`
+            },
+            email:email1,
+            mobile:mobile1,
+            description:message1
+           },
+           )
+           setLoading(false)
+           present1(
+            {
+                color: 'success',
+                duration: 5000,
+                message: `${response?.data?.message}`
+              })
+              setEmail("")
+              setMessage("")
+              setMobile("")
+              setShowModal2(false)
+    }catch(e){
+        present1(
+            {
+                color: 'danger',
+                duration: 5000,
+                message: `something went wrong:${e?.response?.data?.message}`
+              })
+    }
   }
   const UpdateDateHandler=async (e)=>{
     e.preventDefault()
@@ -155,10 +225,26 @@ const CustomerService=() => {
                                          min={new Date().toISOString()} onIonChange={e => setSelectedDate(e.target.value)}></IonDatetime>
                              </IonItem>
                             <IonButton type="submit" style={{color:"white"}}>Update</IonButton>
-                            <IonButton onClick={()=>setShowModal1(false)} style={{color:"white"}}>Close Modal</IonButton>
+                            <IonButton onClick={()=>setShowModal1(false)} style={{color:"white"}}>Close</IonButton>
                             </form>
       </IonModal>
-          <div style={{padding:'10px'}}>
+      <IonModal isOpen={showModal2} cssClass='my-custom-class' backdropDismiss={false}>
+             <form onSubmit={(e)=>submitBugHandler(e)}>
+                <IonInput placeholder="registerd email" value={email1} onIonChange={(e)=>setEmail1(e.target.value)} style={{marginBottom:"5px"}} required/>
+                        <IonInput placeholder="Mobile no." type="number" value={mobile1} onIonChange={(e)=>setMobile1(e.target.value)} style={{marginBottom:"15px"}} required/>
+                        <textarea placeholder="write your message here..."
+                        style={{    border: 'none',
+                        outline:"none",
+                        resize:"none",
+                            background: '#313433',
+                        borderRradius: '5px',
+                               color: '#ffffff'}}
+                        value={message1}  onChange={(e)=>setMessage1(e.target.value)} rows="8" cols="40" required/>
+                        <IonButton type="submit" style={{color:"white"}}>Submit</IonButton>
+                        <IonButton onClick={()=>setShowModal2(false)} style={{color:"white"}}>Close</IonButton>
+                            </form>
+      </IonModal>
+          <div style={{padding:'10px'}} className="white-background">
               <div style={{marginBottom:"3rem"}}>
                   <h1>Change Delivery Date/time</h1>
                                <IonButton style={{color:"white"}}
@@ -172,25 +258,32 @@ const CustomerService=() => {
             <div>
                 <h1>Still Need Help?</h1>
                 <div>
-                    <form>
-                        <IonInput placeholder="registerd email" value={email} onIonChange={(e)=>setEmail(e.target.value)} style={{marginBottom:"5px"}} required/>
-                        <IonInput placeholder="Mobile no." type="number" value={mobile} onIonChange={(e)=>setMobile(e.target.value)} style={{marginBottom:"15px"}} required/>
+                    <form onSubmit={(e)=>submitHandler(e)}>
+                        <IonInput placeholder="registerd email" value={email} onIonChange={(e)=>setEmail(e.target.value)}
+                         style={{marginBottom:"5px"}}
+                         autocomplete={true}
+                          required/>
+                        <IonInput placeholder="Mobile no." type="number" value={mobile} onIonChange={(e)=>setMobile(e.target.value)}
+                        style={{marginBottom:"15px"}}
+                        autocomplete={true}
+                        required/>
                         <textarea placeholder="write your message here..."
                         style={{    border: 'none',
+                        outline:"none",
+                        resize:"none",
                             background: '#313433',
                         borderRradius: '5px',
                                color: '#ffffff'}}
                         value={message}  onChange={(e)=>setMessage(e.target.value)} rows="8" cols="35" required/>
                         <div>
                         <IonButton type="submit" style={{color:"white"}}
-                       onClick={()=>submitHandler()} >Submit</IonButton>
+                       >Submit</IonButton>
                         </div>
                     </form>
                 </div>
             </div>
             <div>
-                <h1>Report A Bug</h1>
-                <p></p>
+                <IonButton color="warning" onClick={()=>setShowModal2(true)}>Report A Bug</IonButton>
             </div>
         </div>
            </IonContent>

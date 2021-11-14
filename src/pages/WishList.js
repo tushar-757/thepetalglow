@@ -5,7 +5,7 @@ import {useHistory} from 'react-router-dom'
 import {BiRupee} from 'react-icons/bi'
 import {AiFillHeart,AiOutlineHeart} from 'react-icons/ai'
 import { useEffect, useState } from 'react';
-export default function BestSelling(){
+export default function WishList(){
       const data=useSelector((state)=>state.ProductReducer.BestSellingData)
     const dispatch=useDispatch();
     const History = useHistory();
@@ -32,8 +32,6 @@ return(
                           justifyContent: 'center',
                           flexDirection:'column'
                     }}>
-                    <h1 className="best-selling-tag">Best Selling</h1>
-
                       <div className="bestselling-head">
                           <div style={{fontSize:"0.95rem",padding:"0px"}}>{(data?.name?.length>12)?data?.name?.substring(0, 12)+"...":data?.name}</div>
                           <div>|</div>
