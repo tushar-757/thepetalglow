@@ -43,8 +43,10 @@ const ImageBar=(data)=>{
         <IonItem button>you could choose either our pot customization or
         any pot of your choice we will repot your selected plant into that on your request/permission</IonItem>
         <IonItem button>steps</IonItem>
-        <IonItem button>1.)add pot in cart</IonItem>
-        <IonItem button>2.)grap and drop your selected plant inside pot container box</IonItem>
+        <IonItem button>1.)add your selected plant in cart</IonItem>
+        <IonItem button>2.)add your selected planter in cart</IonItem>
+        <IonItem button>3.)Choose i want customization</IonItem>
+        <IonItem button>4.)fill in required form</IonItem>
         <IonItem button>Congratulation you are all set</IonItem>
       </IonList>)
  }
@@ -105,7 +107,7 @@ export default function ViewPage(){
          dispatch(setReview(Item?.reviews))
     },[])
     return (
-        <div>
+        <div style={{position:"relative"}}>
            <div onClick={()=>{
               History.goBack()
               present2({
@@ -113,11 +115,17 @@ export default function ViewPage(){
                  duration:1000
               })
            }} className="back-btn-css">
-          <IonIcon md={arrowBackCircle} style={{fontSize:44,color:"lightgreen",margin:2}}/>
+          <IonIcon md={arrowBackCircle} style={{fontSize:44,color:"#2196f3",margin:5}}/>
          </div>
          <div className="animate__animated animate__slideInUp">
-            <IonCard style={{marginBottom:'1rem',marginTop:"3rem",padding:"10px"}} className="white-background">
+            <IonCard style={{marginBottom:'1rem',marginTop:"5rem",padding:"10px"}} className="white-background">
                       <IonCardHeader>
+                         <div>
+                            {Item.type}/
+                            </div>
+                         <div className="viewpage-typevalue">
+                             {Item?.type}
+                            </div>
                       <h1 style={{marginTop:0,fontSize:"1.5rem",fontFamily:"fantasy"}}>{Item?.name}</h1>
                       <ImageBar data={Item?.images} />
                       </IonCardHeader>
@@ -298,7 +306,9 @@ export default function ViewPage(){
                    alignItems: 'center',
                    fontSize: '0.8rem'}}>Added To Cart</h1>:
 
-                     (Item?.quantity>0)?<IonButton onClick={()=>{
+                     (Item?.quantity>0)?<IonButton
+                     color="tertiary"
+                     onClick={()=>{
                         dispatch(Addtocart(Item))
                         present3(
                            {
@@ -306,12 +316,12 @@ export default function ViewPage(){
                                duration: 2000,
                                message: `Item added to cart`
                              })}}
-                            style={{width:'50%',color:"white",height:"50px"}}>
+                            style={{width:'45%',color:"white",height:"50px",display:"flex",justifyContent:"centre",alignItems:"centre"}}>
                               Add To Cart
                       </IonButton>:<div className="viewpage-outofstock"><p>Out of Stock</p></div>
 
                       }
-                     <IonButton style={{width:'50%',color:"white",height:"50px"}}>Add To WishList</IonButton>
+                     <IonButton color="light" style={{width:'50%',color:"white",height:"50px"}}>Add To WishList</IonButton>
                   </div>
      </div>
     )

@@ -5,7 +5,7 @@
     background-color: white;
     width: 100%;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
 }
 .descipt-box{
     display: flex;
@@ -35,7 +35,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #f44336;
+    background-color: #44eb9b;
     border-radius: 5px;
     height: 42px;
     font-size: 0.8rem;
@@ -144,6 +144,19 @@
     align-items: center;
     font-size: 18px;
     width: 50%;
+}
+.viewpage-typevalue{
+    width: 83px;
+    background: #3f51b5;
+    position: absolute;
+    top: -11px;
+    left: 75%;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    border-bottom-left-radius: 10px;
 }
 @media screen and (max-width: 550px) {
     .view-page-img{

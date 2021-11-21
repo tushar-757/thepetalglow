@@ -15,12 +15,14 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import BuyAgainViewPage from "./BuyAgainViewPage";
+import CreateINvoice from "../components/CreateInvoice";
+import { useHistory } from "react-router";
 
 function PopoverList({ onHide }){
     return (
    <IonList>
      <IonListHeader>Terms & Conditions</IonListHeader>
-     <IonItem button>Once Order is Packed you Cannot Cancel It</IonItem>
+     <IonItem button>Once Order is Placed you Cannot Cancel It</IonItem>
      <IonItem button>if you want to change Delievery date or timing then put your orderid in customer service
      and change your Delievery timing</IonItem>
    </IonList>
@@ -31,6 +33,7 @@ export default function TrackOrder(){
     const [present, dismiss] = useIonPopover(PopoverList, { onHide: () => dismiss() });
     const dispatch=useDispatch();
     const [id,setId]=useState('')
+    const History=useHistory()
 
     return(
     (userOrder.Active===true)?
@@ -117,7 +120,8 @@ export default function TrackOrder(){
                 {userOrder?.customization?.map((data)=>
                    <p className="track-order-custom">{data}</p>
                 )}
-                        <IonButton color="danger" style={{margin:"10px"}}>Cancel Order</IonButton>
+                        <IonButton color="danger" style={{margin:"10px"}}
+                        onClick={()=>History.push("/page/Customer%20Service")}>Change Order Delievery date</IonButton>
                         <AiFillInfoCircle style={{color:"grey"}}
                              fontSize={24}
                              onClick={(e) =>
@@ -138,9 +142,7 @@ export default function TrackOrder(){
                         </div>
                     </div>
                     <div style={{margin:"7px"}}>
-                        <IonButton color="medium" style={{width:'100%'}}>
-                        Download Invoice
-                        </IonButton>
+                    <CreateINvoice/>
                     </div>
                 </div>
         </div>:

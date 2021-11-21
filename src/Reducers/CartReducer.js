@@ -23,7 +23,6 @@ const CartReducer = (state = initialState, action) => {
         else {
           action.payload.orderquantity = 1;
           action.payload.customskuvalue=false
-          action.payload.customizationarray=[]
           const addon=[{
             whitepebbles:{
               isAdded:false,
@@ -46,7 +45,6 @@ const CartReducer = (state = initialState, action) => {
              quantity:0
             }}
           ]
-          action.payload.customdescription=""
           let newTotal = state.total + action.payload.price
           const item=action.payload
           const newitem={...item,addon}
@@ -89,26 +87,26 @@ const CartReducer = (state = initialState, action) => {
                 if(data?.whitepebbles?.isAdded===true){
                      data.isAdded=false
                      data.quantity=0
-                     state.total=state.total-(data.whitepebbles.price*data.whitepebbles.quantity)
-                     state.grandtotal=state.total-(data.whitepebbles.price*data.whitepebbles.quantity)
+                     state.total=state.total
+                     state.grandtotal=state.total
                 }
                 if(data?.blackpebbles?.isAdded===true){
                      data.isAdded=false
                      data.quantity=0
-                     state.total=state.total-(data.blackpebbles.price*data.blackpebbles.quantity)
-                     state.grandtotal=state.total-(data.blackpebbles.price*data.blackpebbles.quantity)
+                     state.total=state.total
+                     state.grandtotal=state.total
                 }
                 if(data?.BlackWhitepebbles?.isAdded===true){
                      data.isAdded=false
                      data.quantity=0
-                     state.total=state.total-(data.BlackWhitepebbles.price*data.BlackWhitepebbles.quantity)
-                     state.grandtotal=state.total-(data.BlackWhitepebbles.price*data.BlackWhitepebbles.quantity)
+                     state.total=state.total
+                     state.grandtotal=state.total
                 }
                 if(data?.colouredpebbles?.isAdded===true){
                      data.isAdded=false
                      data.quantity=0
-                     state.total=state.total-(data.colouredpebbles.price*data.colouredpebbles.quantity)
-                     state.grandtotal=state.total-(data.colouredpebbles.price*data.colouredpebbles.quantity)
+                     state.total=state.total
+                     state.grandtotal=state.total
                 }
             })
             return {
@@ -136,145 +134,136 @@ const CartReducer = (state = initialState, action) => {
                 return {
                   ...state,items:[...state.items]
               }
-              case "ADD_ADDON_ITEMS_TO_CART":
-                let findItem = state.items.find(item => action.payload.id === item._id);
-                const type=action.payload.type
-                if(findItem){
-                if(type==='whitepebble'){
-                  (findItem.addon[0].whitepebbles={
-                        quantity:findItem.addon[0].whitepebbles.quantity+=1,
-                         price:29,
-                        isAdded:true})
-                 }
-                  if(type==='blackpebbles'){
-                    (findItem.addon[1].blackpebbles={
-                      quantity:findItem.addon[1].blackpebbles.quantity+=1,
-                       price:29,
-                      isAdded:true})
-                  }
 
-                  if(type==='baclandwhitepebble'){
-                   ( findItem.addon[2].BlackWhitepebbles={
-                      quantity:findItem.addon[2].BlackWhitepebbles.quantity+=1,
-                       price:29,
-                      isAdded:true
-                    })
-                  }
-                  if(type==='colouredpebbles'){
-                   ( findItem.addon[3].colouredpebbles={
-                      quantity:findItem.addon[3].colouredpebbles.quantity+=1,
-                       price:29,
-                      isAdded:true})
-                  }
-
-                  return {
-                    ...state, items: [...state.items], total: state.total + 29
-                  }
-              }
-              return {
-                ...state, items: [...state.items]
-              }
-              case "REMOVE_ADDON_ITEMS_TO_CART":
-                let findItem1 = state.items.find(item => action.payload.id === item._id);
-                const type1=action.payload.type
-                if(findItem1){
-                if(type1==='whitepebble'){
-                  if(findItem1.addon[0].whitepebbles.quantity===1){
-                    (findItem1.addon[0].whitepebbles={
-                      quantity:findItem1.addon[0].whitepebbles.quantity=0,
-                       price:29,
-                      isAdded:false})
-                  }else{
-                    (findItem1.addon[0].whitepebbles={
-                        quantity:findItem1.addon[0].whitepebbles.quantity-=1,
-                         price:29,
-                        isAdded:true})}
-                 }
-                  if(type1==='blackpebbles'){
-                    if(findItem1.addon[1].blackpebbles.quantity===1){
-                      (findItem1.addon[1].blackpebbles={
-                        quantity:findItem1.addon[1].blackpebbles.quantity=0,
-                         price:29,
-                        isAdded:false})
-                    }else{
-                    (findItem1.addon[1].blackpebbles={
-                      quantity:findItem1.addon[1].blackpebbles.quantity-=1,
-                       price:29,
-                      isAdded:true})}
-                  }
-
-                  if(type1==='baclandwhitepebble'){
-                    if(findItem1.addon[2].BlackWhitepebbles.quantity===1){
-                      (findItem1.addon[2].BlackWhitepebbles={
-                        quantity:findItem1.addon[2].BlackWhitepebbles.quantity=0,
-                         price:29,
-                        isAdded:false})
-                    }else{
-                     (findItem1.addon[2].BlackWhitepebbles={
-                      quantity:findItem1.addon[2].BlackWhitepebbles.quantity-=1,
-                       price:29,
-                      isAdded:true
-                    })}
-                  }
-                  if(type1==='colouredpebbles'){
-                    if(findItem1.addon[3].colouredpebbles.quantity===1){
-                      (findItem1.addon[3].colouredpebbles={
-                        quantity:findItem1.addon[3].colouredpebbles.quantity=0,
-                         price:29,
-                        isAdded:false})
-                    }else{
-                   (findItem1.addon[3].colouredpebbles={
-                      quantity:findItem1.addon[3].colouredpebbles.quantity-=1,
-                       price:29,
-                      isAdded:true})}
-                  }
-
-                  return {
-                    ...state, items: [...state.items], total: state.total - 29
-                  }
-              }
-              return {
-                ...state, items: [...state.items]
-              }
                case "SET_WHITE_PEBBLE":
                   let setItem = state.items.find(item => action.payload.id === item._id);
                    setItem.addon[0].whitepebbles={
                     quantity:setItem.addon[0].whitepebbles.quantity=1,
                      price:29,
-                    isAdded:true}
+                    isAdded:action.payload.value}
+                    // setItem.addon[1].blackpebbles={
+                    //   quantity:0,
+                    //   price:29,
+                    //   isAdded:false
+                    // }
+                    // setItem.addon[2].BlackWhitepebbles={
+                    //   quantity:0,
+                    //   price:29,
+                    //   isAdded:false
+                    // }
+                    // setItem.addon[3].colouredpebbles={
+                    //   quantity:0,
+                    //   price:29,
+                    //   isAdded:false
+                    // }
+                    if(action.payload.value){
+                      setItem.price=setItem.price+29
+                      state.total+=(29*setItem.orderquantity)
+                    }else{
+                      console.log(setItem.orderquantity)
+                      setItem.price=setItem.price-29
+                      state.total-=(29*setItem.orderquantity)
+                    }
                     return {
-                      ...state,items:[...state.items],
-                      total: state.total + 29
+                      ...state,items:[...state.items]
                     }
                case "SET_BLACK_PEBBLE":
                   let setItem1 = state.items.find(item => action.payload.id === item._id);
                   setItem1.addon[1].blackpebbles={
                     quantity:setItem1.addon[1].blackpebbles.quantity=1,
                      price:29,
-                    isAdded:true}
+                     isAdded:action.payload.value
+                    }
+                    // setItem1.addon[0].whitepebbles={
+                    //   quantity:0,
+                    //   price:29,
+                    //   isAdded:false
+                    // }
+                    // setItem1.addon[2].BlackWhitepebbles={
+                    //   quantity:0,
+                    //   price:29,
+                    //   isAdded:false
+                    // }
+                    // setItem1.addon[3].colouredpebbles={
+                    //   quantity:0,
+                    //   price:29,
+                    //   isAdded:false
+                    // }
+                     if(action.payload.value){
+                       setItem1.price=setItem1.price+29
+                       state.total+=(29*setItem1.orderquantity)
+                     }else{
+                       console.log(setItem1.orderquantity)
+                       setItem1.price=setItem1.price-29
+                       state.total-=(29*setItem1.orderquantity)
+                     }
                     return {
-                      ...state,items:[...state.items],
-                      total: state.total + 29
+                      ...state,items:[...state.items]
                     }
                case "SET_BLACK_WHITE_PEBBLE":
                   let setItem2 = state.items.find(item => action.payload.id === item._id);
                   setItem2.addon[2].BlackWhitepebbles={
                     quantity:setItem2.addon[2].BlackWhitepebbles.quantity=1,
                      price:29,
-                    isAdded:true}
+                     isAdded:action.payload.value
+                    }
+                    // setItem2.addon[1].blackpebbles={
+                    //   quantity:0,
+                    //   price:29,
+                    //   isAdded:false
+                    // }
+                    // setItem2.addon[0].whitepebbles={
+                    //   quantity:0,
+                    //   price:29,
+                    //   isAdded:false
+                    // }
+                    // setItem2.addon[3].colouredpebbles={
+                    //   quantity:0,
+                    //   price:29,
+                    //   isAdded:false
+                    // }
+                    if(action.payload.value){
+                      setItem2.price=setItem2.price+29
+                      state.total+=(29*setItem2.orderquantity)
+                    }else{
+                      console.log(setItem2.orderquantity)
+                      setItem2.price=setItem2.price-29
+                      state.total-=(29*setItem2.orderquantity)
+                    }
                     return {
-                      ...state,items:[...state.items],
-                      total: state.total + 29
+                      ...state,items:[...state.items]
                     }
                case "SET_COLOURED_PEBBLE":
                   let setItem3 = state.items.find(item => action.payload.id === item._id);
                   setItem3.addon[3].colouredpebbles={
                     quantity:setItem3.addon[3].colouredpebbles.quantity=1,
                      price:29,
-                    isAdded:true}
+                     isAdded:action.payload.value
+                    }
+                    // setItem3.addon[0].whitepebbles={
+                    //   quantity:0,
+                    //   price:29,
+                    //   isAdded:false
+                    // }
+                    // setItem3.addon[1].blackpebbles={
+                    //   quantity:0,
+                    //   price:29,
+                    //   isAdded:false
+                    // }
+                    // setItem3.addon[2].BlackWhitepebbles={
+                    //   quantity:0,
+                    //   price:29,
+                    //   isAdded:false
+                    // }
+                     if(action.payload.value){
+                       setItem3.price=setItem3.price+29
+                       state.total+=(29*setItem3.orderquantity)
+                     }else{
+                       setItem3.price=setItem3.price-29
+                       state.total-=(29*setItem3.orderquantity)
+                     }
                     return {
-                      ...state,items:[...state.items],
-                      total: state.total + 29
+                      ...state,items:[...state.items]
                     }
                   case 'REMOVE_ITEM_FROM_ADDON':
                     let new_items1 = state.items.filter(item => action.payload.id !== item._id)
@@ -286,7 +275,7 @@ const CartReducer = (state = initialState, action) => {
                       const id=uuidv4();
                       return {
                         ...state,
-                        customdescription:[...state.customdescription,{id:id,description:action.payload,isedit:false}]
+                        customdescription:[...state?.customdescription,{id:id,description:action.payload,isedit:false}]
                       }
                     case 'EDIT_CUSTOM_DESCRIPTION':
                        state.customdescription.forEach((data,i)=>{

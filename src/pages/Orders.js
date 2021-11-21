@@ -89,7 +89,7 @@ export default function Orders(){
         })
   };
   useEffect(() => {
-    textAreaRef.current = textAreaRef.current.slice(0, Orders.length);
+    textAreaRef.current = textAreaRef.current.slice(0, Orders?.length);
  }, [Orders]);
     return (
       <>

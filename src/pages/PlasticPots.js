@@ -6,11 +6,13 @@ import {BiRupee} from 'react-icons/bi'
 import {useHistory} from 'react-router-dom'
 import {AiFillHeart,AiOutlineHeart} from 'react-icons/ai'
 import { useState } from 'react';
+import LoadingBox from '../components/LoadingComponent';
 
 export default function PlantersPage(){
     const dispatch=useDispatch();
     const History = useHistory();
     const [present, dismiss] = useIonLoading();
+
     const Loading=useSelector((state)=>state.ProductReducer.loading)
     const Data=useSelector((state)=>state.ProductReducer.Planters)
     const [like,setLike]=useState(false)
@@ -18,17 +20,13 @@ export default function PlantersPage(){
 return(
       (Loading)?
       <>
-     <h1>Loading...</h1>
+      <LoadingBox/>
       </>:
-    <div className="best-selling-cont">
-           <div onClick={()=>History.goBack()} style={{
-   position: 'absolute',
-   width: '0px',
-   top: '-45px',
-    left:" 12px"
-}}>
+      <div style={{position:"relative"}}>
+           <div onClick={()=>History.goBack()} className="back-btn-css">
           <IonIcon md={arrowBackCircle} style={{fontSize:44,color:"lightgreen",margin:5}}/>
          </div>
+      <div className="best-selling-cont">
                 {Data?.map((data,i)=>(
                     <IonCard className="best-selling-cont-item">
                       <IonCardHeader style={{padding:'0px'}}>
@@ -88,6 +86,7 @@ return(
                   </IonCard>
                 )
                ) }
+           </div>
            </div>
 )
 }

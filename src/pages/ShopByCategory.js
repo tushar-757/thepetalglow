@@ -13,7 +13,7 @@ function PlantModal({showPlantModal,setShowPlantModal,setLoading,startLoading}){
 
     return(
         <div>
-        <IonModal isOpen={showPlantModal} cssClass='my-custom-class' backdropDismiss={false} classname="modal-head"  style={{padding:"15px"}}>
+        <IonModal isOpen={showPlantModal} cssClass='my-custom-class' backdropDismiss={false} class="animate__animated animate__pulse" classname="modal-head"  style={{padding:"15px"}}>
                <IonButton onClick={() => setShowPlantModal(false)} style={{color:'white'}}>Close </IonButton>
                <div className="model-cont">
                    <div className="model-cont-item" onClick={()=>{
@@ -49,7 +49,7 @@ function PotModal({showPotModal,setShowPotModal}){
     const History = useHistory()
     return(
         <div>
-        <IonModal isOpen={showPotModal} cssClass='my-custom-class' backdropDismiss={false} style={{padding:"15px"}}>
+        <IonModal isOpen={showPotModal} cssClass='my-custom-class' class="animate__animated animate__pulse" backdropDismiss={false} style={{padding:"15px"}}>
                <IonButton onClick={() => setShowPotModal(false)} style={{color:'white'}}>Close </IonButton>
                <div  className="model-cont">
                    <div className="model-cont-item" onClick={()=>{
@@ -79,7 +79,7 @@ function PotModal({showPotModal,setShowPotModal}){
 function CompostModal({showCompostModal,setShowCompostModal}){
     return(
         <div>
-        <IonModal isOpen={showCompostModal} cssClass='my-custom-class' backdropDismiss={false} style={{padding:"15px"}}>
+        <IonModal isOpen={showCompostModal} cssClass='my-custom-class' class="animate__animated animate__pulse" backdropDismiss={false} style={{padding:"15px"}}>
                <IonButton onClick={() => setShowCompostModal(false)} style={{color:'white'}}>Close </IonButton>
                <div  className="model-cont">
                    <div className="model-cont-item">
@@ -119,7 +119,7 @@ return (
     <div style={{width:"100%",height:150}} className="white-background">
     <h1 style={{display:"flex",fontFamily:"Salsa",color:"#484848",fontSize:18,margin:0,justifyContent:"center",alignItems:"center",height:50}}>Shop By Category</h1>
   <div style={{display:"flex",justifyContent:"space-around",position:"relative"}}>
-           <PlantModal showPlantModal={showPlantModal} setShowPlantModal={setShowPlantModal} startLoading={startLoading}/>
+           <PlantModal showPlantModal={showPlantModal} setShowPlantModal={setShowPlantModal} startLoading={startLoading} />
            <PotModal showPotModal={showPotModal} setShowPotModal={setShowPotModal}/>
            <CompostModal showCompostModal={showCompostModal} setShowCompostModal={setShowCompostModal}/>
        <div className="div-shop-by-category" onClick={() =>

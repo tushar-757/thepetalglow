@@ -59,6 +59,15 @@
         align-items: center;
 }
 
+.top-message{
+    background: #ffffff;
+    /* background: black; */
+    color: rgb(70, 138, 240);
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 /* @media screen and (max-width: 380px) {
     .hydrated{
         font-size: 15px;

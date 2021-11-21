@@ -80,6 +80,7 @@ function MapContainer({onMarkerDragEnd,map,lat1,long1,windowHasClosed,windowHasO
           lng:long
         }}
         zoom={15}
+       latLngBounds={{north: 83.8, south: -57, west: -180, east: 180}}
         onClick={()=>onMapClicked()}
       >
      {state.markers.map((marker, index) => (
@@ -102,8 +103,14 @@ function MapContainer({onMarkerDragEnd,map,lat1,long1,windowHasClosed,windowHasO
           </Marker>
         ))}
       </Map>
-      <IonButton style={{    position: 'absolute', top:' 72%',
-    width: '100%'}} onClick={()=>setLocationHandler()}>Set Location</IonButton>
+      <div style={{display:"flex",justifyContent:"center",alignItems:"center ",position: 'absolute',
+         top:' 72%',width:"100%"}}>
+      <IonButton
+      color="dark"
+      style={{
+         width: '50%',color:"white"
+         }} onClick={()=>setLocationHandler()}>Set Location</IonButton>
+      </div>
       </>
     );
 }

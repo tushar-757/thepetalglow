@@ -29,11 +29,13 @@
     position: relative;
     padding: 0;
     justify-content: center;
-    margin-top:50px;
+    margin-top: 4rem;
+    margin-bottom: 40px;
 }
 .best-selling-cont-item{
     width: 31%;
     margin: 1px;
+    margin-top: 12px;
     display: flex;
     flex-direction: column;
     height: 450px;
@@ -63,7 +65,7 @@
     left: 0px;
     height: 25px;
     top: 0px;
-    background: #009688;
+    background: #ff3939cc;
     width: 92px;
 }
 .footer-header-home{
@@ -131,14 +133,16 @@
     font-size:1.1rem
 }
 .BestSellingTitle{
-    color:"#484848";
     font-Size:"1rem";
-    font-Family:"Salsa"
+    font-Family:"Salsa";
+    display: flex;
+    justify-content: center;
+    color: #03a9f4;
 }
 .footer-newsletter{
     background: rgb(76, 175, 80);
     color: white;
-    height: 308px;
+    height: 450px;
     margin-top: 42px
 }
 .footer-newsletter-inner{
@@ -149,6 +153,10 @@
     float: left;
     width: 100%;
 }
+.Home-Player{
+    width:90%;
+     height:400px
+}
 @media screen and (max-width: 480px) {
      .h1{
         font-size: 0.8rem;
@@ -157,7 +165,7 @@
         width: 49%;
         display: flex;
         flex-direction: column;
-        height: 405px;
+        height: 392px;
     }
     .best-selling-cont-item h1{
        font-size:0.8rem;
@@ -166,14 +174,18 @@
         height: 240px;
     }
   }
-  @media screen and (max-width: 700px) {
+  @media screen and (max-width: 701px) {
     .Home-SlideBar{
         height: 50%;
+    }
+    .Home-Player{
+        width:95%;
+         height:250px
     }
   }
   @media screen and (max-width: 380px) {
     .h1-home{
-        font-size: 10px;
+        font-size: 13px;
     }
     .div-shop-by-category-title{
          font-size:10px;
@@ -184,7 +196,7 @@
         width: 90%;
         display: flex;
         flex-direction: column;
-        height: 405px;
+        height: 392px;
     }
   }
   @media screen and (max-width: 1160px) {

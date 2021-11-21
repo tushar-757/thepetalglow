@@ -23,9 +23,9 @@ return(
       <>
       <LoadingBox/>
       </>:
-        <div>
+        <div style={{position:"relative"}}>
            <div onClick={()=>History.goBack()} className="back-btn-css">
-          <IonIcon md={arrowBackCircle} style={{fontSize:44,color:"lightgreen",margin:2}}/>
+          <IonIcon md={arrowBackCircle} style={{fontSize:44,color:"#eb445a",margin:2}}/>
          </div>
          <div>
                        <div  className="best-selling-cont">

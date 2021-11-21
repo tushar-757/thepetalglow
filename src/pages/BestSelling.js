@@ -4,16 +4,22 @@ import { Addtocart,GETSELECTEDBESTSELLING ,addToLikes,removefromLikes} from '../
 import {useHistory} from 'react-router-dom'
 import {BiRupee} from 'react-icons/bi'
 import {AiFillHeart,AiOutlineHeart} from 'react-icons/ai'
+import LoadingBox from '../components/LoadingComponent';
 import { useEffect, useState } from 'react';
 export default function BestSelling(){
       const data=useSelector((state)=>state.ProductReducer.BestSellingData)
+      const Loading=useSelector((state)=>state.ProductReducer.loading)
     const dispatch=useDispatch();
     const History = useHistory();
     const [present, dismiss] = useIonLoading();
     const [like,setLike]=useState(false)
 
 return(
-    <div className="best-selling-cont">
+  (Loading)?
+  <>
+  <LoadingBox/>
+  </>:
+    <div className="best-selling-cont" style={{marginTop:"50"}}>
                 {data?.map((data,i)=>(
                     <IonCard className="best-selling-cont-item" key={i}>
                       <IonCardHeader style={{padding:'0px'}}>
@@ -32,7 +38,7 @@ return(
                           justifyContent: 'center',
                           flexDirection:'column'
                     }}>
-                    <h1 className="best-selling-tag">Best Selling</h1>
+                    <h1 className="animate__animated animate__pulse animate__infinite animate-faster best-selling-tag">Best Selling</h1>
 
                       <div className="bestselling-head">
                           <div style={{fontSize:"0.95rem",padding:"0px"}}>{(data?.name?.length>12)?data?.name?.substring(0, 12)+"...":data?.name}</div>

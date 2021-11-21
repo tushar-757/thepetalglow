@@ -29,7 +29,7 @@ const ImageBar=({images})=>{
   return(
     <IonSlides pager={true} options={slideOpts}  className="Home-SlideBar">
       <IonSlide>
-      <iframe width="100%" height="450px" src="https://www.youtube.com/embed/_EB-qSLTCXQ?autoplay=0" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
+      <iframe  className="Home-Player"  autoplay="autoplay" src="https://www.youtube.com/embed/_EB-qSLTCXQ" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
         </IonSlide>
     {images.map((data,i)=>(
       <IonSlide  style={{backgroundColor:"white"}}>
@@ -98,8 +98,16 @@ const Home=() => {
           </div>
           <ShopByCategory/>
            <ImageBar images={images}/>
+           {/* <div className="white-background">
+             <h1 className="BestSellingTitle">Best Seasonals</h1>
+           </div>
+           <BestSelling/>
            <div className="white-background">
-             <h1 className="BestSellingTitle">Best Selling Items</h1>
+             <h1 className="BestSellingTitle">Festival Sale</h1>
+           </div>
+           <FestivalSale/> */}
+           <div className="white-background">
+             <h1 className="animate__animated animate__wobble animate_infinite BestSellingTitle">Best Selling Items</h1>
            </div>
             <BestSelling/>
            <IonFooter className="white-background">
@@ -144,10 +152,18 @@ const Home=() => {
                              <IonButton color="light" onClick={()=>SubscribeEmailHandler()}>Subscribe</IonButton>
                            </div>
                            </div>
-                           <div style={{margin:"2rem",marginTop:"0",padding:"20px"}}>
+                           <div style={{margin:"2rem",marginTop:"0",marginBottom:"0",paddingBottom:"0",padding:"20px"}}>
                                 Contact us:<br></br>
                                 email:services@thepetalglow.com<br></br>
                                 Phone:+17278771267 (`whatsapp chat available only`)
+                             </div>
+                             <div style={{margin:"2rem",marginTop:"0px",padding:"20px"}}>
+                                  <h3>Our Policies</h3>
+                                  <div style={{display:"flex",flexDirection:"column"}}>
+                                    <a style={{color:"black"}} onClick={()=>History.push("/page/ThePetalGlow/PrivacyPolicy")}>Privacy Policy</a>
+                                    <a style={{color:"black"}}>Shipping and Return Policy</a>
+                                    <a style={{color:"black"}} onClick={()=>History.push("/page/ThePetalGlow/TermsandCondition")}>Terms and conditions</a>
+                                    </div>
                              </div>
                     </div>
            </IonContent>

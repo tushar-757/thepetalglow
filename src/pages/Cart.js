@@ -1,8 +1,8 @@
-import { IonButton,IonLabel, IonIcon,IonItem,useIonLoading,useIonToast,IonList,IonCheckbox,IonListHeader, useIonAlert ,IonLoading,IonInput,useIonPopover,IonFooter,IonToolbar } from "@ionic/react"
+import { IonButton,IonLabel, IonIcon,IonItem,useIonLoading,useIonToast,IonCheckbox,IonLoading,IonInput,IonFooter,IonToolbar } from "@ionic/react"
 import { addCircle, arrowBackCircle, removeCircle,location } from "ionicons/icons"
 import { Removefromcart, setQuantity,unsetQuantity,GrandTotal
-  ,addAddonItemsToCartItem, AddtoNotification, SetCustomSku
-,setBlackPebbles,setBlackWhitePebbles,EditCustomization,RemoveUser,setColouredPebble,setWhitePebbles,addtoCustomization, EmptyCart,FetchIndoorProduct,FetchOutdoorProduct,FetchPlantersProduct,FetchSeasonalProduct, removeAddonItemsToCartItem} from '../Actions';
+  , AddtoNotification, SetCustomSku
+,setBlackPebbles,setBlackWhitePebbles,EditCustomization,RemoveUser,setColouredPebble,setWhitePebbles,addtoCustomization, EmptyCart,FetchIndoorProduct,FetchOutdoorProduct,FetchPlantersProduct,FetchSeasonalProduct} from '../Actions';
 import { useDispatch,useSelector } from "react-redux";
 import { LocalNotifications } from '@ionic-native/local-notifications'
 import {useHistory} from 'react-router-dom'
@@ -68,33 +68,7 @@ const Item=({ index,id,type,textAreaRef,title,sku,copyToClipboard,present,price,
     )
 }
 
-const CustomAddonAddRemove=({i,name,id,dispatch,quantity,type})=>{
-  return (
-    <TableCell>{ <div style={{
-      display: 'flex',
-      alignItems: 'center',
-      height: '45px'
-  }}>
-    <div>
-      <p className="customaddonitem">{name}</p>
-      <p className="customaddonitem">price:29</p>
-      </div>
-             <div style={{backgroundColor:"white"}}  style={{backgroundColor:"white"}}>
-                  <IonIcon md={removeCircle} style={{fontSize:24,color:"#ff00009e"}}
-                onClick={()=>{
-                    dispatch(removeAddonItemsToCartItem(id,type))
-                }}
-                  />
-              </div>
-             <div><h1 style={{margin:'0 8px',fontSize:18,fontWeight:300}}>{quantity}</h1></div>
-             <div>
-                   <IonIcon md={addCircle} style={{fontSize:24,color:"#4caf50"}} onClick={()=>{
-                    dispatch(addAddonItemsToCartItem(id,type))
-                   }}/>
-             </div>
-           </div>}</TableCell>
-  )
-}
+
 
 export default function Cart(props){
     const Items=useSelector((state)=>state.CartReducer.items)
@@ -166,8 +140,9 @@ export default function Cart(props){
           Items.map((data)=>{
                 const id=data._id
                 const quantity=data.orderquantity
+                const price=data.price
                 const addons=data.addon
-                productids.push({id,quantity,addons})
+                productids.push({id,quantity,addons,price})
         })
         setLoading(true)
         const user_id=localStorage.getItem('user_id')
@@ -314,7 +289,7 @@ function copyToClipboard(e,i) {
           })
           History.goBack()
           }}>
-          <IonIcon md={arrowBackCircle} style={{fontSize:44,color:"lightgreen",margin:5}}/>
+          <IonIcon md={arrowBackCircle} style={{fontSize:44,color:"#eb445a",margin:5}}/>
         </div>
         <div>
          <h1 style={{fontSize:20,padding:'0 18px'}}>SubTotal:{total}</h1>
@@ -364,15 +339,13 @@ function copyToClipboard(e,i) {
                         </TableRow>:null}
                         {(item.customskuvalue)?
                          <TableRow>
-                              {(!item?.addon[0]?.whitepebbles?.isAdded)? <TableCell>
+                               <TableCell>
                                  <p className="customaddonitem">white Pebbles</p>
                                  <p className="customaddonitem">price:29</p>
                                  <IonCheckbox style={{color:"white"}} checked={item?.addon[0]?.whitepebbles?.isAdded} onClick={()=>{
-                             dispatch(setWhitePebbles(item?._id,!item?.addon[0]?.whitepebbles?.isAdded))
+                                dispatch(setWhitePebbles(item?._id,!item?.addon[0]?.whitepebbles?.isAdded))
                              }} />
-                                </TableCell>:
-                                 <CustomAddonAddRemove name={'white Pebbles'} type={"whitepebble"} id={item?._id} dispatch={dispatch} quantity={item?.addon[0]?.whitepebbles?.quantity}/> }
-                               {(!item?.addon[1]?.blackpebbles?.isAdded)?
+                                </TableCell>
                                <TableCell>
                                  <p className="customaddonitem">Black Pebbles</p>
                                  <p className="customaddonitem">price:29</p>
@@ -380,23 +353,23 @@ function copyToClipboard(e,i) {
                                    console.log("inside black pebble")
                              dispatch(setBlackPebbles(item?._id,!item?.addon[1]?.blackpebbles?.isAdded))
                              }} />
-                                </TableCell>:<CustomAddonAddRemove name={'Black Pebbles'} type={'blackpebbles'} dispatch={dispatch}  id={item?._id} quantity={item?.addon[1]?.blackpebbles?.quantity}/>}
-                                {(!item?.addon[2]?.BlackWhitepebbles?.isAdded)?
+                                </TableCell>
+
                                <TableCell>
                                  <p className="customaddonitem">Black and White Pebbles</p>
                                  <p className="customaddonitem">price:29</p>
                                  <IonCheckbox style={{color:"white"}} checked={item?.addon[2]?.BlackWhitepebbles?.isAdded} onClick={()=>{
                              dispatch(setBlackWhitePebbles(item?._id,!item?.addon[2]?.BlackWhitepebbles?.isAdded))
                              }} />
-                                </TableCell>:<CustomAddonAddRemove name={"Black&White Pebbles"} dispatch={dispatch}  type={'baclandwhitepebble'}id={item._id} quantity={item?.addon[2]?.BlackWhitepebbles?.quantity}/>}
+                                </TableCell>
 
-                                {(!item?.addon[3]?.colouredpebbles?.isAdded)?<TableCell>
+                                <TableCell>
                                  <p className="customaddonitem">Coloured Pebbles</p>
                                  <p className="customaddonitem">price:29</p>
                                  <IonCheckbox style={{color:"white"}} checked={item?.addon[3]?.colouredpebbles?.isAdded} onClick={()=>{
                              dispatch(setColouredPebble(item?._id,!item?.addon[3]?.colouredpebbles?.isAdded))
                              }} />
-                                </TableCell>:<CustomAddonAddRemove name={"coloured pebbles"}  dispatch={dispatch}  type={'colouredpebbles'} id={item._id} quantity={item?.addon[3]?.colouredpebbles?.quantity}/>}
+                                </TableCell>
                            </TableRow>
                          :null}
                          </>
@@ -483,10 +456,16 @@ function copyToClipboard(e,i) {
                  </div>
                  <IonFooter>
       <IonToolbar style={{padding: "14px"}}>
+        {
+      (false)?
           <IonButton color="tertiary"
           onClick={()=>ProceedToCheckout()}>
           CHECKOUT
-        </IonButton>
+        </IonButton>:
+        <IonButton color="danger">
+          sorry currently unavailable
+          </IonButton>
+        }
       </IonToolbar>
     </IonFooter>
            </>

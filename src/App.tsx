@@ -59,6 +59,12 @@ const App: React.FC = () => {
             <Route path="/page/ThePetalGlow" exact={true}>
               <Page/>
             </Route>
+            <Route path="/page/ThePetalGlow/PrivacyPolicy" exact={true}>
+              <Page/>
+            </Route>
+            <Route path="/page/ThePetalGlow/TermsandCondition" exact={true}>
+              <Page/>
+            </Route>
             <Route path="/page/searchbar" exact={true}>
               <Page />
             </Route>

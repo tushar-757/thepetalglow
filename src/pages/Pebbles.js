@@ -6,6 +6,7 @@ import {BiRupee} from 'react-icons/bi'
 import {useHistory} from 'react-router-dom'
 import {AiFillHeart,AiOutlineHeart} from 'react-icons/ai'
 import { useState } from 'react';
+import LoadingBox from '../components/LoadingComponent';
 
 export default function Pebbles(){
     const dispatch=useDispatch();
@@ -18,22 +19,31 @@ export default function Pebbles(){
 return(
       (Loading)?
       <>
-     <h1>Loading...</h1>
+      <LoadingBox/>
       </>:
-    <div className="best-selling-cont">
-           <div onClick={()=>History.goBack()} style={{
- position: 'absolute',
- width: '0px',
- top: '-45px',
-  left:" 12px"
-}}>
-          <IonIcon md={arrowBackCircle} style={{fontSize:44,color:"lightgreen",margin:5}}/>
+    <div>
+           <div style={{position:"relative"}}>
+           <div onClick={()=>{
+                 History.goBack()
+                 present({
+                  message: 'Loading...',
+                   duration:1000
+                })
+            }} className="back-btn-css">
+          <IonIcon md={arrowBackCircle} style={{fontSize:44,color:"lightgreen",margin:2}}/>
          </div>
+           <div  className="best-selling-cont">
                 {Data?.map((data,i)=>(
                     <IonCard className="best-selling-cont-item">
                       <IonCardHeader style={{padding:'0px'}}>
                             {console.log(data?.images?.[0])}
-                         <img src={data?.images?.[0]}/>
+                         <img src={data?.images?.[0]} onClick={()=>{
+                        present({
+                              message: 'Loading...',
+                              duration:1000
+                            })
+                          dispatch(GetSelectedPebble(data._id))
+                          History.push("/page/ViewPage")}}/>
                       </IonCardHeader>
                     <div style={{
                           display: 'flex',
@@ -68,10 +78,10 @@ return(
                     <IonButton fill="solid" slot="end" style={{color:"white", width: '126px',
     height: '25px',fontSize:"0.8rem"}}
                        onClick={()=>{
-                        // present({
-                        //       message: 'Loading...',
-                        //       duration:1000
-                        //     })
+                        present({
+                              message: 'Loading...',
+                              duration:1000
+                            })
                           dispatch(GetSelectedPebble(data._id))
                           History.push("/page/ViewPage")}}>View</IonButton>
                     <IonButton fill="solid" slot="end" style={{color:"white", width: '126px',
@@ -88,6 +98,8 @@ return(
                   </IonCard>
                 )
                ) }
+               </div>
+               </div>
            </div>
 )
 }

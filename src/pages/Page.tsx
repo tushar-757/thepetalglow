@@ -28,6 +28,8 @@ import Pebbles from './Pebbles';
 import { RiWhatsappFill } from 'react-icons/ri';
 import BuyAgainViewPage from './BuyAgainViewPage';
 import WishList from './WishList';
+import TermsandCondition from '../components/TermsAndConditions';
+import PrivacyPolicy from '../components/PrivacyPolicy';
 
 const Page:React.FC =(props)=>{
   const History = useHistory();
@@ -122,6 +124,13 @@ useEffect(()=>{
             setSearch(true)}}>
           </IonSearchbar>
       </IonHeader>
+     {(locationstate==='/page/ThePetalGlow')?<marquee className="top-message">
+             As per our same day delivery Policy currently we are offering services only in Faridabad,we are trying our best to reach you.Please do not order if you are residing outside faridabad
+          </marquee>:
+        (locationstate==='/page/Cart')? <marquee className="top-message">
+          shipping is free for orders having cart value greater than 499,use coupon HAPPYPLANT30 for 15% OFF
+       </marquee>:null
+          }
       <IonContent  onClick={()=>setSearch(false)}>
         {(search)?<div className="search-block" >
           {SearchedData?.map((d:any)=>(
@@ -140,6 +149,8 @@ useEffect(()=>{
 
         {
           (locationstate==='/page/ThePetalGlow')?<Home/>:
+          (locationstate==='/page/ThePetalGlow/PrivacyPolicy')?<PrivacyPolicy/>:
+          (locationstate==='/page/ThePetalGlow/TermsandCondition')?<TermsandCondition/>:
           (locationstate==='/page/MapsPage')?<MapsPage/>:
           (locationstate==='/page/ViewPage')?<ViewPage/>:
           (locationstate==='/page/Cart')?<Cart/>:
