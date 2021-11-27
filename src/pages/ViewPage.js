@@ -2,7 +2,7 @@ import { IonButton,IonSlide,IonSlides,IonCard,useIonToast ,useIonLoading,IonList
 import React, { useEffect, useState } from 'react';
 import {arrowBackCircle,location } from "ionicons/icons"
 import { useSelector ,useDispatch} from "react-redux";
-import { Addtocart,setReview } from '../Actions';
+import { Addtocart,ADD_TO_WISHLIST,setReview } from '../Actions';
 import {useHistory} from 'react-router-dom'
 import {BiRupee} from 'react-icons/bi'
 import {AiFillInfoCircle, AiOutlineUser} from 'react-icons/ai'
@@ -103,9 +103,21 @@ export default function ViewPage(){
            alert("something is not right")
        }
     }
+    const AddToWishList=()=>{
+         dispatch(ADD_TO_WISHLIST(Item))
+         present3(
+            {
+                color: 'secondary',
+                duration: 2000,
+                message: `Item added to WishList`
+              })
+    }
     useEffect(()=>{
          dispatch(setReview(Item?.reviews))
-    },[])
+         if(Item?.name===undefined){
+            History.push("/page/ThePetalGlow")
+         }
+      },[])
     return (
         <div style={{position:"relative"}}>
            <div onClick={()=>{
@@ -192,8 +204,8 @@ export default function ViewPage(){
                  <div style={{marginTop:'10px'}}>
                     <h1 style={{fontSize:12}}>Deliver To</h1>
                     <div className="select-location-view"  onClick={()=>History.push("/page/MapsPage")}>
-          <IonIcon slot="start"  md={location} style={{color:'#009688'}}/>
-              <h1 className="h1-home" style={{color:"white",fontSize:"0.8rem"}}>select your location</h1>
+          <IonIcon slot="start"  md={location} style={{color:'blue'}}/>
+              <h1 className="h1-home" style={{color:"black",fontSize:"0.8rem"}}>select your location</h1>
           </div>
                     </div>
                <div>
@@ -220,20 +232,20 @@ export default function ViewPage(){
                     </div>
                     <div>
                        {(toggle)?
-                      <div style={{padding:"10px"}}>
+                      <div style={{padding:"10px",fontSize:"0.8rem"}}>
                        <h1>Product Details:</h1>
                        <p>TYPE:-{Item?.type}</p>
-                       <p dangerouslySetInnerHTML={{__html: Item?.description}}/>
+                       <p style={{fontSize:"0.8rem"}} dangerouslySetInnerHTML={{__html: Item?.description}}/>
                       </div>:(toggle1)?
-                      <div style={{padding:'10px'}}>
-                         <h1>Delievery</h1>
-                         <p>
-                            Same day Delievery Services is offered only in
+                      <div style={{padding:'10px',fontSize:"0.8rem"}}>
+                         <h1>Delivery</h1>
+                         <p style={{fontSize:"0.8rem"}}>
+                            Same day Delivery Services is offered only in
                             Hometown(Faridabad).Make sure you have ordered before 4pm otherwise your order would count in next day delievery
                          </p>
                       </div>
                       :(toggle2)?
-                      <div style={{padding:'10px'}}>
+                      <div style={{padding:'10px',fontSize:"0.8rem"}}>
                          {Item?.care}
                       </div>:<h1>dd</h1>
                        }
@@ -321,7 +333,10 @@ export default function ViewPage(){
                       </IonButton>:<div className="viewpage-outofstock"><p>Out of Stock</p></div>
 
                       }
-                     <IonButton color="light" style={{width:'50%',color:"white",height:"50px"}}>Add To WishList</IonButton>
+                     <IonButton color="light"
+                      style={{width:'50%',color:"white",height:"50px"}}
+                      onClick={()=>AddToWishList()}>
+                         Add To WishList</IonButton>
                   </div>
      </div>
     )

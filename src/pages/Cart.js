@@ -193,10 +193,17 @@ export default function Cart(props){
 
     const ProceedToCheckout=async()=>{
      try{
+       if(User?.lat===0 && User?.lng===0){
+         return  present({
+          color: 'danger',
+              duration: 5000,
+          message: 'Please Set Your Location!!'
+        })
+       }
         if(User.User.username===''){
         History.push('/page/Login')
         }else{
-         if(total!=0 && User?.lat!=null && User?.lng!=null){
+         if(total!=0 && User?.lat!=0 && User?.lng!=0){
            setLoading(true)
            await createOrder()
            setLoading(false)
@@ -418,8 +425,8 @@ function copyToClipboard(e,i) {
                  <div style={{marginTop:'10px',margin:"1rem"}}>
                     <h1 style={{fontSize:12}}>Deliver To</h1>
                     <div className="select-location-view"  onClick={()=>History.push("/page/MapsPage")}>
-          <IonIcon slot="start"  md={location} style={{color:'#009688'}}/>
-              <h1 className="h1-home" style={{color:"white",fontSize:"0.8rem"}}>select your location</h1>
+          <IonIcon slot="start"  md={location} style={{color:'blue'}}/>
+              <h1 className="h1-home" style={{color:"black",fontSize:"0.8rem"}}>select your location</h1>
                     </div>
                  </div>
                  <div className="total-bar">
@@ -457,7 +464,7 @@ function copyToClipboard(e,i) {
                  <IonFooter>
       <IonToolbar style={{padding: "14px"}}>
         {
-      (false)?
+      (true)?
           <IonButton color="tertiary"
           onClick={()=>ProceedToCheckout()}>
           CHECKOUT

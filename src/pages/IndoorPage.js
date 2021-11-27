@@ -7,6 +7,7 @@ import {useHistory} from 'react-router-dom'
 import {AiFillHeart,AiOutlineHeart} from 'react-icons/ai'
 import { useState } from 'react';
 import LoadingBox from '../components/LoadingComponent';
+
 export default function IndoorPage(){
     const dispatch=useDispatch();
     const History = useHistory();
@@ -37,7 +38,7 @@ return(
                    duration:1000
                 })
             }} className="back-btn-css">
-          <IonIcon md={arrowBackCircle} style={{fontSize:44,color:"#eb445a",margin:2}}/>
+          <IonIcon md={arrowBackCircle} style={{fontSize:44,color:"rgb(33, 150, 243)",margin:2}}/>
          </div>
                        <div  className="best-selling-cont">
                 {Data?.map((data,i)=>(
@@ -58,6 +59,7 @@ return(
                           justifyContent: 'center',
                           flexDirection:'column'
                     }}>
+                           <h1 className="best-selling-tag" style={{background:"#2196f3"}}>{data?.type}</h1>
                           <div className="bestselling-head">
                           <div style={{fontSize:"0.95rem",padding:"0px"}}>{(data?.name?.length>12)?data?.name?.substring(0, 12)+"...":data?.name}</div>
                           <div>|</div>
@@ -80,7 +82,7 @@ return(
                           justifyContent: 'center',
                           flexDirection:'column'
                     }}>
-                          <p style={{alignItems:'center',fontWeight:"bold",display:'flex'}}><BiRupee/>{data?.price}</p>
+                          <p style={{alignItems:'center',fontWeight:"bold",display:'flex'}}><BiRupee/><BiRupee/>{data?.price}</p>
                     <IonButton fill="solid" slot="end" style={{color:"white", width: '126px',
     height: '25px',fontSize:"0.8rem"}}
                        onClick={()=>{

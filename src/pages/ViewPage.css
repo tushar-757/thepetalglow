@@ -19,7 +19,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #009688;
+    background-color: #ff9800;
     color: white;
     padding: 10px;
     border-radius: 5px;
@@ -29,15 +29,16 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #9e9e9e45;
+    background-color: #f1f1f1;
 }
 .select-location-view{
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #44eb9b;
+    background-color: #ffffff;
     border-radius: 5px;
     height: 42px;
+    box-shadow: 0px 0px 1px #9acee6;
     font-size: 0.8rem;
 }
 .viewpage-Customization{
@@ -146,11 +147,11 @@
     width: 50%;
 }
 .viewpage-typevalue{
-    width: 83px;
+    width: 110px;
     background: #3f51b5;
     position: absolute;
     top: -11px;
-    left: 75%;
+    left: 70%;
     height: 40px;
     display: flex;
     justify-content: center;

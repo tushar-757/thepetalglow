@@ -88,7 +88,6 @@ const Menu: React.FC = () => {
       History.push("/page/Login")
   }
   const LogoutHandler=()=>{
-    console.log("dsdsds")
     if (user !== null && user_id !== null){
       dispatch(EmptyCart())
       dispatch(EmptyOrders())

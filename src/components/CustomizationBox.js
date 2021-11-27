@@ -1,4 +1,4 @@
-import { IonButton,IonLabel,IonItem,IonChip,IonList,IonListHeader,IonCheckbox,IonModal } from "@ionic/react"
+import { IonButton,IonLabel,IonItem,useIonToast,IonChip,IonList,IonListHeader,IonCheckbox,IonModal } from "@ionic/react"
 import {useState} from 'react'
 import { useSelector } from "react-redux";
 import {EditCustomDescription,RemoveCustomDescription,setEditToFalse} from '../Actions';
@@ -8,7 +8,7 @@ export function CustomziationBox({customarray,setcustomto0,dispatch,customArrayH
       const [checked,setCheckBox]=useState(false)
       const customarray1=useSelector((state)=>state.CartReducer.customdescription)
       const [edit,setEdit]=useState(false)
-
+      const [present, dismiss] = useIonToast();
 
 
       const SubmitHandler=(e,data)=>{
@@ -91,7 +91,9 @@ export function CustomziationBox({customarray,setcustomto0,dispatch,customArrayH
                           </div>
                           <div>
                           <IonButton type="submit" color="secondary">
-                            Add</IonButton>
+                            save</IonButton>
+                          <IonButton type="submit" color="warning">
+                            cancel</IonButton>
                             </div>
                       </form>
                   }
@@ -105,7 +107,14 @@ export function CustomziationBox({customarray,setcustomto0,dispatch,customArrayH
     <div>
       <div>
       </div>
-             <form  onSubmit={(e)=>customArrayHandler(e)}
+             <form  onSubmit={(e)=>{
+               customArrayHandler(e)
+               present(
+                {
+                    color: 'success',
+                    duration: 2000,
+                    message: `customization added successfully`
+                  })}}
              style={{display:"flex",justifyContent:"space-around",flexDirection:"column",margin:'0.2rem'}}>
                <div>
                 i want my

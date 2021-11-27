@@ -9,7 +9,7 @@ export function MapsPage(){
   const [long,setLong]=useState('')
   useEffect(()=>{
      Geolocation.getCurrentPosition().then((resp) => {
-       console.log( resp.coords.latitude, resp.coords.longitude)
+      //  console.log( resp.coords.latitude, resp.coords.longitude)
        setLat(resp.coords.latitude)
        setLong(resp.coords.longitude)
       }).catch((error) => {

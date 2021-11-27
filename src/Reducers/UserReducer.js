@@ -6,8 +6,9 @@ const initalState={
         mobile:'',
         Address:{}
       },
-      lat:28.4089,
-      lng:77.3178
+      lat:0,
+      lng:0,
+      WishListItems:[]
 }
 const UserReducer = (state = initalState, action) => {
     switch (action.type) {
@@ -42,6 +43,19 @@ const UserReducer = (state = initalState, action) => {
           lng:action.payload.lng
           }
         }
+        case "ADD_TO_WISHLIST":
+          const finditem=state.WishListItems.find(item=>action.payload._id===item._id)
+          if(finditem){
+            return {
+              ...state
+            }
+          }
+          const items=[...state.WishListItems,action.payload]
+          localStorage.setItem("wishlistitems",JSON.stringify(items))
+          return {
+            ...state,
+            WishListItems:items
+          }
         default:
             return{
               ...state

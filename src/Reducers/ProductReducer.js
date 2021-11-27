@@ -5,6 +5,7 @@ const initalState={
     Seasonal:[],
     Planters:[],
     Pebbles:[],
+    Succulent:[],
     FilterData:[],
     BestSellingData:[],
     review:[],
@@ -24,6 +25,12 @@ const initalState={
       case "GET_PRODUCT_SUCCESS":
         return { ...state,loading: false, Product: action.payload };
       case "GET_PRODUCT_FAILURE":
+        return {...state, loading: false, error: action.payload };
+      case "GET_SUCCULENT_PRODUCT_REQUEST":
+        return { ...state, loading: true };
+      case "GET_SUCCULENT_PRODUCT_SUCCESS":
+        return { ...state,loading: false, Succulent: action.payload };
+      case "GET_SUCCULENT_PRODUCT_FAILURE":
         return {...state, loading: false, error: action.payload };
       case "GET_USER_PRODUCT":
         const findProductProduct=state.Product.find(item => action.payload === item._id)
@@ -123,6 +130,12 @@ const initalState={
                 return{...state,selectedProduct:{_id:'not exist',description:'not exist'}}
               }
               return {...state,selectedProduct:findpebble};
+            case "GET_SELECTED_SUCCULENT":
+              const findsucculent=state.Succulent.find(item => action.payload === item._id)
+              if(findsucculent===undefined){
+                return{...state,selectedProduct:{_id:'not exist',description:'not exist'}}
+              }
+              return {...state,selectedProduct:findsucculent};
           case "SET_FILTER_DATA":
               return{
                 ...state,FilterData:action.payload

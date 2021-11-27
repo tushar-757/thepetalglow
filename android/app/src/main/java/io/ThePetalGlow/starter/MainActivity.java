@@ -1,4 +1,4 @@
-package io.ionic.starter;
+package io.ThePetalGlow.starter;
 import android.os.Bundle;
 import com.getcapacitor.BridgeActivity;
 import com.ionicframework.capacitor.Checkout;

@@ -37,6 +37,7 @@
     z-index: 102;
     box-shadow: 0px 0px 5px lightblue;
     left: 7px;
+    top: 120px;
 }
 .search-block-item{
     color: rgb(48, 48, 48);
@@ -65,6 +66,7 @@
     color: rgb(70, 138, 240);
     height: 30px;
     display: flex;
+    z-index: 0;
     justify-content: center;
     align-items: center;
 }

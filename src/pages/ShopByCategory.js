@@ -33,7 +33,7 @@ function PlantModal({showPlantModal,setShowPlantModal,setLoading,startLoading}){
                    </div>
                    <div className="model-cont-item" onClick={()=>{
                        startLoading()
-                       History.push("/page/OutdoorPlants")}}>
+                       History.push("/page/SucculentPlants")}}>
                        <h1>Succulent</h1>
                    </div>
                </div>
@@ -59,13 +59,13 @@ function PotModal({showPotModal,setShowPotModal}){
                    <div className="model-cont-item"
                    onClick={()=>{
                     History.push("/page/PlasticPots")}}>
-                       <h1>Plastic</h1>
+                       <h1>Plastic Planters</h1>
                    </div>
                    <div className="model-cont-item">
-                       <h1>Earthen</h1>
+                       <h1>Earthen Planters</h1>
                    </div>
                    <div className="model-cont-item">
-                       <h1>Ceramic</h1>
+                       <h1>Ceramic Planters</h1>
                    </div>
                </div>
              </IonModal>
@@ -76,36 +76,13 @@ function PotModal({showPotModal,setShowPotModal}){
         </div>
     )
 }
-function CompostModal({showCompostModal,setShowCompostModal}){
-    return(
-        <div>
-        <IonModal isOpen={showCompostModal} cssClass='my-custom-class' class="animate__animated animate__pulse" backdropDismiss={false} style={{padding:"15px"}}>
-               <IonButton onClick={() => setShowCompostModal(false)} style={{color:'white'}}>Close </IonButton>
-               <div  className="model-cont">
-                   <div className="model-cont-item">
-                       <h1>Vermi Compost</h1>
-                   </div>
-                   <div className="model-cont-item">
-                       <h1>full Packet Of mUD</h1>
-                   </div>
-                   <div className="model-cont-item">
-                       <h1>Sarso Ki Khali</h1>
-                   </div>
-               </div>
-             </IonModal>
-             <div className="div-shop-by-category"  onClick={() => setShowCompostModal(true)}>
-             <IonIcon md={bag} className="icons-SBC"/>
-             <h1 className="div-shop-by-category-title">Soil & Fertilizers</h1>
-             </div>
-        </div>
-    )
-}
 
 
 export default function ShopByCategory(){
     const [showPlantModal, setShowPlantModal] = useState(false);
     const [showPotModal, setShowPotModal] = useState(false);
     const [showCompostModal, setShowCompostModal] = useState(false);
+    const History = useHistory()
     const Loading=useSelector((state)=>state.NotificationReducer.Loading)
     const dispatch=useDispatch()
     const startLoading=()=>{
@@ -121,7 +98,10 @@ return (
   <div style={{display:"flex",justifyContent:"space-around",position:"relative"}}>
            <PlantModal showPlantModal={showPlantModal} setShowPlantModal={setShowPlantModal} startLoading={startLoading} />
            <PotModal showPotModal={showPotModal} setShowPotModal={setShowPotModal}/>
-           <CompostModal showCompostModal={showCompostModal} setShowCompostModal={setShowCompostModal}/>
+            <div className="div-shop-by-category"   onClick={()=>History.push('/page/SoilandFertilizers')}>
+           <IonIcon md={bag} className="icons-SBC"/>
+              <h1 className="div-shop-by-category-title">Soil & Fertilizers</h1>
+              </div>
        <div className="div-shop-by-category" onClick={() =>
             present({
               cssClass: 'my-css',

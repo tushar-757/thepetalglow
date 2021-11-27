@@ -10,7 +10,7 @@
 }
 .h1-home{
     margin:0;
-    font-size:0.9rem;
+    font-size:14px;
     color:white;
     font-family: 'Salsa'
 }
@@ -75,7 +75,7 @@
     align-items: center;
 }
 .footer-header-image{
-    width: 30%;
+    width: 28%;
     height: 100%;
     display: flex;
     justify-content: center;
@@ -143,10 +143,11 @@
     background: rgb(76, 175, 80);
     color: white;
     height: 450px;
-    margin-top: 42px
+    margin-top: 42px;
+    position:relative
 }
 .footer-newsletter-inner{
-    padding: 20px 50px 50px;
+    padding: 14px 30px 30px;
    display: flex;
     justify-content: center;
     align-items: center;
@@ -156,6 +157,13 @@
 .Home-Player{
     width:90%;
      height:400px
+}
+.home-image{
+    position: absolute;
+    width: 6%;
+    bottom: 6px;
+    left: 16px;
+    z-index: 1px
 }
 @media screen and (max-width: 480px) {
      .h1{
@@ -217,7 +225,7 @@
         width:49%;
     }
     .footer-header-image{
-        width:50%;
+        width:68%;
     }
   }
   @media screen and (max-width: 350px) {

@@ -25,7 +25,7 @@ return(
       </>:
         <div style={{position:"relative"}}>
            <div onClick={()=>History.goBack()} className="back-btn-css">
-          <IonIcon md={arrowBackCircle} style={{fontSize:44,color:"#eb445a",margin:2}}/>
+          <IonIcon md={arrowBackCircle} style={{fontSize:44,color:"rgb(33, 150, 243)",margin:2}}/>
          </div>
          <div>
                        <div  className="best-selling-cont">
@@ -48,6 +48,7 @@ return(
                           justifyContent: 'center',
                           flexDirection:'column'
                     }}>
+                       <h1 className="best-selling-tag" style={{background:"#2196f3"}}>{data?.type}</h1>
                     <div className="bestselling-head">
                           <div style={{fontSize:"0.95rem",padding:"0px"}}>{(data?.name?.length>12)?data?.name?.substring(0, 12)+"...":data?.name}</div>
                           <div>|</div>
@@ -61,7 +62,7 @@ return(
                                 <AiFillHeart style={{fontSize:"24px",color:"#e91e1e"}} onClick={()=>dispatch(removefromLikes(data?._id))}/>}
                                 </div>
                            </div>
-                          <h1 style={{fontSize:12}}>{data?.prize}</h1>
+                          <h1 style={{fontSize:12}}><BiRupee/>{data?.prize}</h1>
                     </div>
                     <IonCardContent style={{padding:"0"}}>
                           <div style={{

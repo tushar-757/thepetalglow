@@ -151,9 +151,14 @@ const ResetHandler=async(e)=>{
         <div>
           </div>
         </form>
-         <IonButton onClick={()=>History.push('/Register')} style={{color:"white"}}>
+         <IonButton onClick={()=>History.push('/Register')} color="danger"style={{color:"white"}}>
             Register
         </IonButton>
+        {/* <div>
+         <IonButton onClick={()=>History.push('/Register')} color="tertiary" style={{color:"white"}}>
+            Checkout as Guest
+        </IonButton>
+        </div> */}
        {(reset)?
          <div>
            <IonButton color="light" style={{color:"blue",background:"transparent"}} onClick={()=>{

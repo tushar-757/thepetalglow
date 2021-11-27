@@ -14,6 +14,7 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import { AiFillCopy } from 'react-icons/ai';
 import TableRow from '@material-ui/core/TableRow';
+import LoadingBox from '../components/LoadingComponent';
 
 export default function Orders(){
   const History = useHistory();
@@ -93,7 +94,7 @@ export default function Orders(){
  }, [Orders]);
     return (
       <>
-       {(Loading)?<>Loading...</>:
+       {(Loading)?<><LoadingBox/></>:
          <div style={{position:'relative'}}>
            <h1 style={{margin:'1rem'}}>{(Orders?.length===0||Orders===undefined)?"No Orders To Show":null}</h1>
           {

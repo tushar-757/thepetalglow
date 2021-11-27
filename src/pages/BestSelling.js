@@ -19,7 +19,7 @@ return(
   <>
   <LoadingBox/>
   </>:
-    <div className="best-selling-cont" style={{marginTop:"50"}}>
+    <div className="best-selling-cont" style={{marginTop:"20px"}}>
                 {data?.map((data,i)=>(
                     <IonCard className="best-selling-cont-item" key={i}>
                       <IonCardHeader style={{padding:'0px'}}>

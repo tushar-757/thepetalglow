@@ -321,18 +321,18 @@ const getSeasonalProductRequest = () => {
   };
   export const getSeasonalProduct = (id) => {
     return {
-      type: "GET_SEASONAL_USER_PRODUCT",
+      type: "GET_SELECTED_SEASONAL",
       payload: id,
     };
   };
 
-const url4 = `${aws}/PlantGiene/IndoorProducts`;
+const url4 = `${aws}/PlantGiene/SeasonalProducts`;
 export const FetchSeasonalProduct=()=>{
     return (dispatch) => {
         dispatch(getSeasonalProductRequest());
         // const Product=await axios.get('https://plantapp57.herokuapp.com/GetProduct',{headers:{Authorization:`Bearer ${useraccesstoken}`}})
         // console.log(Product.data.UserProduct.Product)nm
-         axios.get(url2)
+         axios.get(url4)
             .then((response) => response.data)
             .then((data) => {
                 console.log(data)
@@ -386,6 +386,45 @@ export const FetchPlantersProduct=()=>{
       };
 }
 
+const getSucculentProductRequest = () => {
+  return {
+    type: "GET_SUCCULENT_PRODUCT_REQUEST",
+  };
+};
+
+const getSucculentProductSuccess = (Product) => {
+  return {
+    type: "GET_SUCCULENT_PRODUCT_SUCCESS",
+    payload: Product,
+  };
+};
+
+const getSucculentProductFailure = (error) => {
+  return {
+    type: "GET_SUCCULENT_PRODUCT_FAILURE",
+    payload: error,
+  };
+};
+const url6 = `${aws}/PlantGiene/SucculentProducts`;
+export const FetchSucculentProduct=()=>{
+    return (dispatch) => {
+        dispatch(getSucculentProductRequest());
+        // const Product=await axios.get('https://plantapp57.herokuapp.com/GetProduct',{headers:{Authorization:`Bearer ${useraccesstoken}`}})
+        // console.log(Product.data.UserProduct.Product)nm
+         axios.get(url6)
+            .then((response) => response.data)
+            .then((data) => {
+                console.log(data)
+              const Product = data;
+              dispatch(getSucculentProductSuccess(Product));
+            })
+            .catch((error) => {
+              const errorMessage = error.message;
+              dispatch(getSucculentProductFailure(errorMessage));
+            });
+      };
+}
+
 export const GetSelectedIndoor = (id) => {
   return {
     type: "GET_SELECTED_INDOOR",
@@ -413,6 +452,12 @@ export const GetSelectedPlanter = (id) => {
 export const GetSelectedPebble = (id) => {
   return {
     type: "GET_SELECTED_PEBBLE",
+    payload:id
+  };
+};
+export const GetSelectedSucculent = (id) => {
+  return {
+    type: "GET_SELECTED_SUCCULENT",
     payload:id
   };
 };
@@ -580,6 +625,12 @@ export const setUnLoading=()=>{
 return {
   type:"SET_UN_LOADING"
 }
+}
+export const ADD_TO_WISHLIST=(items)=>{
+  return {
+    type:"ADD_TO_WISHLIST",
+    payload:items
+  }
 }
 // export const AddtoIndoor=(item)=>{
 //   return {

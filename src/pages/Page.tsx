@@ -30,6 +30,10 @@ import BuyAgainViewPage from './BuyAgainViewPage';
 import WishList from './WishList';
 import TermsandCondition from '../components/TermsAndConditions';
 import PrivacyPolicy from '../components/PrivacyPolicy';
+import Marquee from "react-fast-marquee";
+import ShippingPolicy from '../components/ShippingPolicy';
+import SoilandFertilizers from './SoilandFertilizers';
+import Succulent from './Succulent';
 
 const Page:React.FC =(props)=>{
   const History = useHistory();
@@ -124,12 +128,12 @@ useEffect(()=>{
             setSearch(true)}}>
           </IonSearchbar>
       </IonHeader>
-     {(locationstate==='/page/ThePetalGlow')?<marquee className="top-message">
-             As per our same day delivery Policy currently we are offering services only in Faridabad,we are trying our best to reach you.Please do not order if you are residing outside faridabad
-          </marquee>:
-        (locationstate==='/page/Cart')? <marquee className="top-message">
+     {(locationstate==='/page/ThePetalGlow')?<Marquee className="top-message" speed={40} gradient={false}>
+    As per our same day delivery Policy currently we are offering services only in Faridabad,we are trying our best to reach you.Please do not order if you are residing outside faridabad
+          </Marquee>:
+        (locationstate==='/page/Cart')? <Marquee className="top-message" speed={40} gradient={false}>
           shipping is free for orders having cart value greater than 499,use coupon HAPPYPLANT30 for 15% OFF
-       </marquee>:null
+       </Marquee>:null
           }
       <IonContent  onClick={()=>setSearch(false)}>
         {(search)?<div className="search-block" >
@@ -151,6 +155,7 @@ useEffect(()=>{
           (locationstate==='/page/ThePetalGlow')?<Home/>:
           (locationstate==='/page/ThePetalGlow/PrivacyPolicy')?<PrivacyPolicy/>:
           (locationstate==='/page/ThePetalGlow/TermsandCondition')?<TermsandCondition/>:
+          (locationstate==='/page/ThePetalGlow/ShippingPolicy')?<ShippingPolicy/>:
           (locationstate==='/page/MapsPage')?<MapsPage/>:
           (locationstate==='/page/ViewPage')?<ViewPage/>:
           (locationstate==='/page/Cart')?<Cart/>:
@@ -160,8 +165,10 @@ useEffect(()=>{
           (locationstate==='/page/IndoorPlants')?<IndoorPage/>:
           (locationstate==='/page/OutdoorPlants')?<OutdoorPage/>:
           (locationstate==='/page/SeasonalPlants')?<SeasonalPage/>:
+          (locationstate==='/page/SucculentPlants')?<Succulent/>:
           (locationstate==='/page/PlasticPots')?<PlasticPots/>:
           (locationstate==='/page/Pebbles')?<Pebbles/>:
+          (locationstate==='/page/SoilandFertilizers')?<SoilandFertilizers/>:
           (locationstate==='/page/searchbar')?<SearchBar/>:
           (locationstate==='/page/BuyAgainOrder')?<BuyAgainViewPage/>:
           (locationstate==='/page/Orders')?<Orders/>:

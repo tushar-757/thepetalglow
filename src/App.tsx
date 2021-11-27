@@ -1,31 +1,27 @@
+import { FetchIndoorProduct,FetchOutdoorProduct,FetchPlantersProduct, FetchSeasonalProduct,FetchSucculentProduct } from './Actions';
 import { IonApp, IonRouterOutlet, IonSplitPane ,useIonAlert} from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 import { Redirect, Route } from 'react-router-dom';
 import Menu from './components/Menu';
 import Page from './pages/Page';
 import { useDispatch } from "react-redux";
-/* Core CSS required for Ionic components to work properly */
-import '@ionic/react/css/core.css';
+import { useEffect } from 'react';
+import PasswordReset from './pages/PasswordReset';
+import { PushNotificationSchema, PushNotifications, Token, ActionPerformed } from '@capacitor/push-notifications';
 
-/* Basic CSS for apps built with Ionic */
+import '@ionic/react/css/core.css';
 import '@ionic/react/css/normalize.css';
 import '@ionic/react/css/structure.css';
 import '@ionic/react/css/typography.css';
-import { FetchIndoorProduct,FetchOutdoorProduct,FetchPlantersProduct,FetchSeasonalProduct, SETBESTSELLING } from './Actions';
-/* Optional CSS utils that can be commented out */
 import '@ionic/react/css/padding.css';
 import '@ionic/react/css/float-elements.css';
 import '@ionic/react/css/text-alignment.css';
 import '@ionic/react/css/text-transformation.css';
 import '@ionic/react/css/flex-utils.css';
 import '@ionic/react/css/display.css';
-// import { SplashScreen } from '@capacitor/splash-screen';
-/* Theme variables */
 import './theme/variables.css';
 import 'animate.css';
 import "./App.css"
-import { useEffect } from 'react';
-import PasswordReset from './pages/PasswordReset';
 
 const App: React.FC = () => {
   const dispatch=useDispatch()
@@ -36,19 +32,20 @@ const App: React.FC = () => {
   // });
   useEffect(()=>{
     console.log("helloo")
-    present({
-      cssClass: 'my-css',
-      header: 'THEPETALGLOW',
-      message: 'WELCOME TO ThePetalGlow,Use Coupon HAPPYPLANT30 TO GET 30% OFF UPTO 100RS.',
-      buttons: [
-        { text: 'Ok', handler: (d) => console.log('ok pressed') },
-      ],
-      onDidDismiss: (e) => console.log('did dismiss'),
-    })
-    // dispatch(FetchSeasonalProduct())
+    // present({
+    //   cssClass: 'my-css',
+    //   header: 'THEPETALGLOW',
+    //   message: 'WELCOME TO ThePetalGlow,Use Coupon HAPPYPLANT30 TO GET 30% OFF UPTO 100RS.',
+    //   buttons: [
+    //     { text: 'Ok', handler: (d) => console.log('ok pressed') },
+    //   ],
+    //   onDidDismiss: (e) => console.log('did dismiss'),
+    // })
+    dispatch(FetchSeasonalProduct())
     dispatch(FetchIndoorProduct())
     dispatch(FetchOutdoorProduct())
     dispatch(FetchPlantersProduct())
+    dispatch(FetchSucculentProduct())
   },[])
   return (
     <IonApp>
@@ -63,6 +60,9 @@ const App: React.FC = () => {
               <Page/>
             </Route>
             <Route path="/page/ThePetalGlow/TermsandCondition" exact={true}>
+              <Page/>
+            </Route>
+            <Route path="/page/ThePetalGlow/ShippingPolicy" exact={true}>
               <Page/>
             </Route>
             <Route path="/page/searchbar" exact={true}>
@@ -108,6 +108,12 @@ const App: React.FC = () => {
               <Page />
             </Route>
             <Route path="/page/Pebbles" exact={true}>
+              <Page />
+            </Route>
+            <Route path="/page/SoilandFertilizers" exact={true}>
+              <Page />
+            </Route>
+            <Route path="/page/SucculentPlants" exact={true}>
               <Page />
             </Route>
             <Route path="/Register" exact={true}>

@@ -24,7 +24,7 @@ return(
       </>:
       <div style={{position:"relative"}}>
            <div onClick={()=>History.goBack()} className="back-btn-css">
-          <IonIcon md={arrowBackCircle} style={{fontSize:44,color:"lightgreen",margin:5}}/>
+          <IonIcon md={arrowBackCircle} style={{fontSize:44,color:"rgb(33, 150, 243)",margin:5}}/>
          </div>
       <div className="best-selling-cont">
                 {Data?.map((data,i)=>(

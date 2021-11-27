@@ -6,11 +6,14 @@ import {BiRupee} from 'react-icons/bi'
 import {AiFillHeart,AiOutlineHeart} from 'react-icons/ai'
 import { useEffect, useState } from 'react';
 export default function WishList(){
-      const data=useSelector((state)=>state.ProductReducer.BestSellingData)
+      // const data=useSelector((state)=>state.ProductReducer.BestSellingData)
     const dispatch=useDispatch();
     const History = useHistory();
     const [present, dismiss] = useIonLoading();
     const [like,setLike]=useState(false)
+    const data1=localStorage.getItem("wishlistitems")
+    const data=JSON.parse(data1)
+    console.log(data)
 
 return(
     <div className="best-selling-cont">

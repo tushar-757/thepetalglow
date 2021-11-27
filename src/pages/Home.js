@@ -18,6 +18,7 @@ import {FiHelpCircle} from 'react-icons/fi'
 import LoadingBox from '../components/LoadingComponent';
 import { Input } from '@material-ui/core';
 import api from '../Services/urlApi';
+import Logo from '../static/favicon.png'
 
 
 const slideOpts = {
@@ -123,7 +124,7 @@ const Home=() => {
                            </div>
                       Secure Same Day Delievery</div>
                       <div className="policy-divs">
-                        <div style={{marginTop:"0"}}>
+                        <div style={{margin:"1rem"}}>
                           <FiHelpCircle style={{fontSize:"40px"}}/>
                         </div>
                          Lifetime Support</div>
@@ -142,29 +143,37 @@ const Home=() => {
                 </div>
            </IonFooter>
                     <div className="footer-newsletter">
-                         <p style={{marginLeft:"15px",padding:"35px",paddingBottom:"0px"}}>Subscribe to recieve news and coupons</p>
+                         <p style={{margin:"0px",padding:"30px",paddingBottom:"0px"}}>Subscribe to recieve news and coupons</p>
                          <div className="footer-newsletter-inner">
                            <div style={{width:"80%"}}>
-                           <input placeholder="email" style={{background:"white",color:'black',border:'none',
+                           <input placeholder="email" style={{background:"white",color:'black',border:'none',outline:"none",
                         width:"99%", padding: '10px'}} type="text" value={email} onChange={(e)=>setSubscribeEmail(e.target.value)}/>
                            </div>
                            <div style={{width:"40%"}}>
                              <IonButton color="light" onClick={()=>SubscribeEmailHandler()}>Subscribe</IonButton>
                            </div>
                            </div>
-                           <div style={{margin:"2rem",marginTop:"0",marginBottom:"0",paddingBottom:"0",padding:"20px"}}>
-                                Contact us:<br></br>
+                           <div style={{margin:"0px",paddingBottom:"0px",padding:"30px"}}>
+                                <h3 style={{margin:"0",color: 'black'}}>Contact us:</h3>
+                                <div>
                                 email:services@thepetalglow.com<br></br>
                                 Phone:+17278771267 (`whatsapp chat available only`)
+                                </div>
                              </div>
-                             <div style={{margin:"2rem",marginTop:"0px",padding:"20px"}}>
-                                  <h3>Our Policies</h3>
+                             <div style={{margin:"0rem",padding:"30px",paddingTop:"0"}}>
+                                  <h3 style={{margin:"0",color: 'black'}}>Our Policies</h3>
                                   <div style={{display:"flex",flexDirection:"column"}}>
-                                    <a style={{color:"black"}} onClick={()=>History.push("/page/ThePetalGlow/PrivacyPolicy")}>Privacy Policy</a>
-                                    <a style={{color:"black"}}>Shipping and Return Policy</a>
-                                    <a style={{color:"black"}} onClick={()=>History.push("/page/ThePetalGlow/TermsandCondition")}>Terms and conditions</a>
+                                    <a style={{color:"white"}} onClick={()=>History.push("/page/ThePetalGlow/PrivacyPolicy")}>Privacy Policy</a>
+                                    <a style={{color:"white"}} onClick={()=>History.push("/page/ThePetalGlow/ShippingPolicy")}>Shipping and Return Policy</a>
+                                    <a style={{color:"white"}} onClick={()=>History.push("/page/ThePetalGlow/TermsandCondition")}>Terms and conditions</a>
                                     </div>
                              </div>
+                             <div style={{margin:"1rem"}}>
+                                All rights reserved © 2021 | thepetalglow.com
+                             </div>
+                             <div>
+                               <img src={Logo} className="home-image"/>
+                               </div>
                     </div>
            </IonContent>
         </IonPage>
