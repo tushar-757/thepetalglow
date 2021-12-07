@@ -1,6 +1,6 @@
 import axios from "axios";
 const dev="http://localhost:5000"
-const awsserverless="https://actzkesq20.execute-api.ap-south-1.amazonaws.com/dev/"
+const awsserverless="https://actzkesq20.execute-api.ap-south-1.amazonaws.com/dev"
  const aws=awsserverless
 
   export const setAddress=(hno,society,pincode)=>{
@@ -435,8 +435,10 @@ export const SET_NOT_ACTIVE_ORDERS=()=>{
   };
 }
 export const addToLikes=(id)=>{
-  const add='https://us-east-1.aws.webhooks.mongodb-realm.com/api/client/v2.0/app/thepetalglow-nwqbb/service/ThePetalGlow/incoming_webhook/SetProductLike'
-  axios.put(add,{id:id})
+  const add='https://us-east-1.aws.webhooks.mongodb-realm.com/api/client/v2.0/app/thepetalglow-nwqbb/service/ThePetalGlow/incoming_webhook/SetProductLike?secret=-=76*%23$xxctumy76(8)'
+  axios.put(add,{
+    id:id
+  })
   .then((response) => response.data)
   .catch((error) => {
     const errorMessage = error.message;
@@ -448,7 +450,9 @@ export const addToLikes=(id)=>{
 }
 export const removefromLikes=(id)=>{
   const remove='https://us-east-1.aws.webhooks.mongodb-realm.com/api/client/v2.0/app/thepetalglow-nwqbb/service/ThePetalGlow/incoming_webhook/removeItemLike?secret=-=76*%23$xxctumy76(8)'
-  axios.put(remove,{id:id})
+  axios.put(remove,{
+    id:id
+  })
   .then((response) => response.data)
   .catch((error) => {
     const errorMessage = error.message;

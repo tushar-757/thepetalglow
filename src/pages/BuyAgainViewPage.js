@@ -69,10 +69,9 @@ export default function BuyAgainViewPage(){
                     </div>
                     <div>
                         <div>
-                            <p style={{marginLeft:'10px',backgroundColor:"white"}}>Shipping Address</p>
+                            <p style={{marginLeft:'10px',backgroundColor:"white"}}>Shipped to</p>
                         </div>
                         <div className="track-ship-to">
-                        <p>Ship to</p>
                             <p>{address?.hno}</p>
                             <p>{address?.society}</p>
                             <p>{address?.pincode}</p>

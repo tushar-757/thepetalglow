@@ -34,6 +34,18 @@ export const GrandTotal=(total)=>{
         payload:total,
     }
 }
+export const AddDiscount=(total)=>{
+    return{
+        type:"Add_Discount",
+        payload:total,
+    }
+}
+export const removeDiscount=(total)=>{
+    return{
+        type:"remove_Discount",
+        payload:total,
+    }
+}
 export const SetCustomSku=(id,value)=>{
     return {
       type: "SET_CUSTOM_SKU",

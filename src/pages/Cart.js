@@ -107,42 +107,52 @@ export default function Cart(props){
     const currentdate=new Date().toISOString()
     const ordertime = moment(currentdate).format('h:mm a')
     const [checkedt,setCheckBoxt]=useState(false)
+    const user_id=localStorage.getItem('user_id')
+    const useraccesstoken=localStorage.getItem('useraccesstoken')
 
-    const ApplyCoupon=()=>{
+    const ApplyCoupon=async()=>{
       if(total<398){
         return setIsApplied("cart value must be >=399")
       }
-       if(couponvalue==="HAPPYPLANT30"||couponvalue==='PLANTGIENENEW'&&total!=0){
-            setCoupon(100)
-            setIsApplied('Applied Succesfully')
-            present(
-              {
-                  color: 'success',
-                  duration: 2000,
-                  message: `Applied Succesfully`
-                })
-       }else{
+
+      try{
+         const response=await api.post("/user/ApplyCoupon",{
+          headers:{user_id,Authorization:`Bearer ${useraccesstoken}`},
+          coupon:couponvalue
+         })
+         setCoupon(response?.data?.value)
+         setIsApplied('Applied Succesfully')
+         present(
+          {
+              color: 'success',
+              duration: 2000,
+              message: `Applied Succesfully`
+            })
+      }catch(e){
         setCoupon(0)
         setIsApplied('Coupon is Not Valid')
+        console.log(e?.response)
+        console.log(e?.data)
+        console.log(e?.data?.response)
         present(
           {
               color: 'danger',
-              duration: 2000,
-              message: `Coupon is Not Valid`
+              duration: 5000,
+              message: `something went wrong:${(e?.response?.data?.message)?e?.response?.data?.message:e?.response?.data}`
             })
-       }
-    }
-    const notificationHandler=(value)=>{
-      try{
-        LocalNotifications.schedule({
-        id:1,
-        text: value,
-        icon:"https://cdn.pixabay.com/photo/2018/10/30/16/06/water-lily-3784022__480.jpg"
-      });
-    }catch(e){
-        alert(e)
       }
     }
+    // const notificationHandler=(value)=>{
+    //   try{
+    //     LocalNotifications.schedule({
+    //     id:1,
+    //     text: value,
+    //     icon:"https://cdn.pixabay.com/photo/2018/10/30/16/06/water-lily-3784022__480.jpg"
+    //   });
+    // }catch(e){
+    //     alert(e)
+    //   }
+    // }
 
  const createOrder=async()=>{
       try{
@@ -155,8 +165,6 @@ export default function Cart(props){
                 productids.push({id,quantity,addons,price})
         })
         setLoading(true)
-        const user_id=localStorage.getItem('user_id')
-        const useraccesstoken=localStorage.getItem('useraccesstoken')
         const createorder=await api.post('/createOrder',
         {headers:{user_id,Authorization:`Bearer ${useraccesstoken}`},
         total:(grandtotal*100),
@@ -177,7 +185,7 @@ export default function Cart(props){
             })
         localStorage.setItem('razorpayOrderID',createorder?.data?.OrderId)
         localStorage.setItem('ServerorderID',createorder?.data?.id)
-        notificationHandler(`your order with OrderId${createorder?.data?.id} is created succesfully go for payment now`)
+        // notificationHandler(`your order with OrderId${createorder?.data?.id} is created succesfully go for payment now`)
         dispatch(AddtoNotification(createorder.data))
         dispatch(EmptyCart())
         dispatch(FetchSeasonalProduct())
@@ -214,8 +222,7 @@ export default function Cart(props){
         })
        }
        if(customdescription?.length>0){
-         console.log(customdescription?.length)
-       if(!checkedt){
+          if(!checkedt){
             return present({
               color: 'danger',
                   duration: 5000,
@@ -261,25 +268,22 @@ const SubmitLocation=(e)=>{
   setShowModal(false)
 }
 
-useEffect(()=>{
-  if(couponvalue==="HAPPYPLANT30"||couponvalue==='PLANTGIENENEW'&&total!=0){
-          dispatch(GrandTotal(total-coupon))
-          // setIsApplied('Applied Succesfully')
-   }else{
-    dispatch(GrandTotal(total))
-    // setIsApplied('Coupon is Not Valid')
-  }
-},[coupon])
+// useEffect(()=>{
+//   if(total<398){
+//     setCoupon(0)
+//      setIsApplied("cart value must be >=399")
+//   }
+// },[total])
 
 useEffect(()=>{
   if(total<499&&total>0){
      setShippingCharge(49)
-     dispatch(GrandTotal(total+ShippingCharge))
+     dispatch(GrandTotal(total+ShippingCharge-coupon))
   }else{
     setShippingCharge(0)
-    dispatch(GrandTotal(total+ShippingCharge))
+    dispatch(GrandTotal(total+ShippingCharge-coupon))
   }
-},[total,ShippingCharge])
+},[total,ShippingCharge,coupon])
 
 const customArrayHandler=(e)=>{
   e.preventDefault()
@@ -482,8 +486,10 @@ const options = {
         message={'Please wait...'}
       />
                  <div className="coupon-code">
-                 <h1 style={{fontSize:"0.8rem",margin:'auto',fontWeight:300}}>coupon code</h1>
-                 <IonInput style={{backgroundColor:"white"}}
+                   <div>
+                 <h1 className="couponcodeh1">coupon code</h1>
+                     </div>
+                 <IonInput className="couponinput"
                  onIonChange={e =>setCouponValue(e.detail.value)} placeholder="Enter Coupon Code" />
                  <IonButton style={{color:"white",fontSize:'0.8rem'}}
                  onClick={()=>ApplyCoupon()}>Apply Coupon</IonButton>
@@ -527,7 +533,7 @@ const options = {
                  <div className="total-bar">
                      <div>
                          <div className="total-bar-item">
-                         <h1 onClick={()=>notificationHandler()}>Sub Total</h1>
+                         <h1>Sub Total</h1>
                          <h1>{total}</h1>
                          </div>
                      </div>

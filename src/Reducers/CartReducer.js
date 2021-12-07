@@ -129,6 +129,14 @@ const CartReducer = (state = initialState, action) => {
               return {
                 ...state,grandtotal:action.payload
               }
+            case 'Add_Discount':
+              return {
+                ...state,grandtotal:state.grandtotal-action.payload
+              }
+            case 'remove_Discount':
+              return {
+                ...state,grandtotal:state.total
+              }
             case 'SET_CUSTOM_SKU':
               let Item = state.items.find(item => action.payload.id === item._id);
                 Item.customskuvalue=action.payload.value

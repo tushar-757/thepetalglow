@@ -1,4 +1,4 @@
-import { IonPage,IonSlide,IonSlides, IonContent, IonRefresher, IonRefresherContent, IonIcon, IonFooter, IonHeader, IonButton } from '@ionic/react';
+import { IonPage,IonSlide,IonSlides, IonContent,useIonToast,IonRefresher, IonRefresherContent, IonIcon, IonFooter, IonHeader, IonButton } from '@ionic/react';
 import { location,logoFacebook,logoInstagram,logoYoutube,logoLinkedin} from 'ionicons/icons';
 import { useHistory } from 'react-router-dom';
 import Marquee from "react-fast-marquee";
@@ -16,7 +16,6 @@ import {RiSecurePaymentFill} from 'react-icons/ri'
 import {FaTruck} from 'react-icons/fa'
 import {FiHelpCircle} from 'react-icons/fi'
 import LoadingBox from '../components/LoadingComponent';
-import { Input } from '@material-ui/core';
 import api from '../Services/urlApi';
 import Logo from '../static/favicon.png'
 
@@ -46,18 +45,26 @@ const Home=() => {
   const images=useSelector((state)=>state.HomeReducer.images)
   const [user, user_id] = IsLoggedIn();
   const [email,setSubscribeEmail]=useState("")
+  const [present, dismiss] = useIonToast();
   const Loading=useSelector((state)=>state.NotificationReducer.Loading)
   const loading=useSelector((state)=>state.ProductReducer.loading)
+  const user_id1=localStorage.getItem('user_id')
+  const useraccesstoken=localStorage.getItem('useraccesstoken')
+
     useEffect(() => {
       try{
         if (user != null && user_id != null) {
-          // console.log(JSON.parse(JSON.stringify(user)))
            const parserduser=JSON.parse(user)
             dispatch(addUser({id:parserduser.id,username:parserduser.username,
                 mobile:parserduser.mobile,email:parserduser.email,Address:parserduser.Address}))
         }
       }catch(e){
-        console.log(e)
+        present(
+          {
+              color: 'danger',
+              duration: 5000,
+              message: `something went wrong:${e}`
+            })
       }
     },[user,user_id])
 
@@ -68,16 +75,28 @@ const Home=() => {
       dispatch(FetchPlantersProduct())
       dispatch(SETBESTSELLING())
       setTimeout(() => {
-        console.log('Async operation has ended');
         RefresherEventDetail.detail.complete();
       }, 2000);
     }
 
     const SubscribeEmailHandler=async()=>{
       try{
-         const response=await api.post("/subscribeme",{email:email})
+         const response=await api.post("/user/Subscribe",{
+          headers:{user_id1,Authorization:`Bearer ${useraccesstoken}`},
+          email:email})
+         present(
+          {
+              color: 'success',
+              duration: 2000,
+              message: `${response?.data?.message}`
+            })
       }catch(e){
-         alert(e)
+         present(
+          {
+              color: 'danger',
+              duration: 5000,
+              message: `something went wrong:${(e?.response?.data?.message)?e?.response?.data?.message:e?.response?.data}`
+            })
       }
     }
   return (
@@ -85,11 +104,14 @@ const Home=() => {
     <>
        <LoadingBox/>
     </>:
+    <>
     <IonPage>
-           <Marquee className="top-message" speed={50} gradient={false}>
-    As per our same day delivery Policy currently we are offering services only in Faridabad,we are trying our best to reach you.Please do not order if you are residing outside faridabad
-          </Marquee>
       <IonContent>
+    <>
+     <Marquee className="top-message" speed={40} gradient={false}>
+     As per our same day delivery Policy currently we are offering services only in Faridabad,we are trying our best to reach you.Please do not order if you are residing outside faridabad
+  </Marquee>
+  </>
       <IonRefresher slot="fixed" onIonRefresh={doRefresh}>
         <IonRefresherContent>
         </IonRefresherContent>
@@ -103,16 +125,8 @@ const Home=() => {
           </div>
           <ShopByCategory/>
            <ImageBar images={images}/>
-           {/* <div className="white-background">
-             <h1 className="BestSellingTitle">Best Seasonals</h1>
-           </div>
-           <BestSelling/>
            <div className="white-background">
-             <h1 className="BestSellingTitle">Festival Sale</h1>
-           </div>
-           <FestivalSale/> */}
-           <div className="white-background">
-             <h1 className="animate__animated animate__wobble animate_infinite BestSellingTitle">Best Selling Items</h1>
+             <h1 className="BestSellingTitle">Best Selling Items</h1>
            </div>
             <BestSelling/>
            <IonFooter className="white-background">
@@ -186,6 +200,7 @@ const Home=() => {
                     </div>
            </IonContent>
         </IonPage>
+        </>
   );
 };
 

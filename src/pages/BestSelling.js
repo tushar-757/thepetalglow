@@ -40,7 +40,7 @@ return(
                           justifyContent: 'center',
                           flexDirection:'column'
                     }}>
-                    <h1 className="animate__animated animate__pulse animate__infinite animate-faster best-selling-tag">Best Selling</h1>
+                    <h1 className="best-selling-tag">Best Selling</h1>
 
                       <div className="bestselling-head">
                           <div style={{fontSize:"0.95rem",padding:"0px"}}>{(d?.name?.length>12)?d?.name?.substring(0, 12)+"...":d?.name}</div>

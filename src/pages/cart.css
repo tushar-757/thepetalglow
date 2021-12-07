@@ -2,7 +2,7 @@
     padding: 12px;
     background-color: antiquewhite;
     font-size: 0.8rem;
-    height: 120px;
+    height: 140px;
     border-radius: 5px;
     position: relative;
     margin: 14px;
@@ -84,4 +84,13 @@ width: 100%;
 .cart-id-copy-icon{
     position: absolute;
     left: 1px;
+}
+.couponcodeh1{
+    font-size: 14px;
+    margin: 0;
+    margin-bottom: 6px;
+}
+.couponinput{
+    background-color: white;
+    margin: 8px 0px;
 }

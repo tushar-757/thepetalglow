@@ -11,6 +11,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import { AiFillCopy } from 'react-icons/ai';
 import moment from 'moment'
+import LoadingBox from '../components/LoadingComponent';
 
 export default function BuyAgain(){
   const History = useHistory();
@@ -39,7 +40,9 @@ export default function BuyAgain(){
 
     return (
       <>
-       {(Loading)?<>Loading...</>:
+       {(Loading)?<>
+       <LoadingBox/>
+       </>:
          <div style={{position:'relative'}}>
             <h1 style={{margin:'1rem'}}>{(NotActiveOrders?.length===0||NotActiveOrders===undefined)?"No Orders To Show":null}</h1>
           {
@@ -69,7 +72,7 @@ export default function BuyAgain(){
                   }
                 </div>
                 <div style={{margin:"8px 0"}}>Products List</div>
-                <div>
+                <div style={{overflowX:"auto"}}>
                 <Table size="small">
         <TableHead>
           <TableRow>
@@ -109,6 +112,8 @@ export default function BuyAgain(){
                  </>
               )}</TableCell>
             </TableRow>))}
+            <div>Shipping Charge:{data?.shipping}</div>
+            <div>Discount:{data?.discount}</div>
             <div  className="order-box-total">Total:{data?.total}</div>
             </TableBody>
             </Table>
