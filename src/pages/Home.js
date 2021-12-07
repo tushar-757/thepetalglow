@@ -1,7 +1,7 @@
 import { IonPage,IonSlide,IonSlides, IonContent, IonRefresher, IonRefresherContent, IonIcon, IonFooter, IonHeader, IonButton } from '@ionic/react';
 import { location,logoFacebook,logoInstagram,logoYoutube,logoLinkedin} from 'ionicons/icons';
 import { useHistory } from 'react-router-dom';
-import { RefresherEventDetail } from '@ionic/core';
+import Marquee from "react-fast-marquee";
  import { withRouter  } from 'react-router';
  import IsLoggedIn from '../Hooks/isLoggedIn';
 import { useSelector } from 'react-redux';
@@ -47,6 +47,7 @@ const Home=() => {
   const [user, user_id] = IsLoggedIn();
   const [email,setSubscribeEmail]=useState("")
   const Loading=useSelector((state)=>state.NotificationReducer.Loading)
+  const loading=useSelector((state)=>state.ProductReducer.loading)
     useEffect(() => {
       try{
         if (user != null && user_id != null) {
@@ -80,11 +81,14 @@ const Home=() => {
       }
     }
   return (
-    (Loading)?
+    (Loading||loading)?
     <>
        <LoadingBox/>
     </>:
     <IonPage>
+           <Marquee className="top-message" speed={50} gradient={false}>
+    As per our same day delivery Policy currently we are offering services only in Faridabad,we are trying our best to reach you.Please do not order if you are residing outside faridabad
+          </Marquee>
       <IonContent>
       <IonRefresher slot="fixed" onIonRefresh={doRefresh}>
         <IonRefresherContent>
@@ -154,13 +158,18 @@ const Home=() => {
                            </div>
                            </div>
                            <div style={{margin:"0px",paddingBottom:"0px",padding:"30px"}}>
+                                <h3 style={{margin:"0",color: 'black'}}>About us:</h3>
+                                <a style={{color:'white'}} onClick={()=>History.push("/page/ThePetalGlow/AboutUs")}>https://thepetalglow.com/AboutUs</a>
+                             </div>
+                           <div style={{margin:"0px",padding:"30px",paddingTop:0}}>
                                 <h3 style={{margin:"0",color: 'black'}}>Contact us:</h3>
                                 <div>
+                                  757/31,Faridabad,Haryana,121003<br></br>
                                 email:services@thepetalglow.com<br></br>
                                 Phone:+17278771267 (`whatsapp chat available only`)
                                 </div>
                              </div>
-                             <div style={{margin:"0rem",padding:"30px",paddingTop:"0"}}>
+                             <div style={{margin:"0rem",padding:"30px",paddingBottom:"0",paddingTop:"0"}}>
                                   <h3 style={{margin:"0",color: 'black'}}>Our Policies</h3>
                                   <div style={{display:"flex",flexDirection:"column"}}>
                                     <a style={{color:"white"}} onClick={()=>History.push("/page/ThePetalGlow/PrivacyPolicy")}>Privacy Policy</a>

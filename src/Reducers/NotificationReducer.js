@@ -9,13 +9,6 @@ const initialState = {
  export const NotificationReducer = (state = initialState, action) => {
     switch (action.type) {
        case "ADD_NOTIFICATION":
-        // let existed_item = state.Notifications.find(item => action.payload.id === item.id)
-        // if (existed_item) {
-        //   return {
-        //     ...state,
-        //     Notifications: [...state.Notifications],
-        //   }
-        // else {
           return {
             ...state,
             Notifications: [...state.Notifications, action.payload],

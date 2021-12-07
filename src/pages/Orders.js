@@ -2,7 +2,7 @@ import { IonButton,IonChip ,IonLabel,useIonToast} from '@ionic/react';
 import React, { useState,useRef ,useEffect} from 'react';
 import { useSelector ,useDispatch} from "react-redux";
 import { useHistory } from 'react-router';
-import {UserOrders,UserSelectedOrder,FetchIndoorProduct,FetchOutdoorProduct,FetchPlantersProduct,FetchSeasonalProduct,} from '../Actions/index'
+import {UserOrders,UserSelectedOrder,FetchSoilFertilzerProduct,FetchIndoorProduct,FetchOutdoorProduct,FetchPlantersProduct,FetchSeasonalProduct,} from '../Actions/index'
 import './Order.css'
 import api from '../Services/urlApi';
 import moment from 'moment'
@@ -68,7 +68,7 @@ export default function Orders(){
       dispatch(FetchIndoorProduct())
       dispatch(FetchOutdoorProduct())
       dispatch(FetchPlantersProduct())
-
+      dispatch(FetchSoilFertilzerProduct())
     }catch(e){
       present1(
         {
@@ -89,6 +89,14 @@ export default function Orders(){
           message: `copied`
         })
   };
+
+  // function check() {
+  //   var now = moment();
+  //   var hourToCheck = (now.day() !== 0)?17:15;
+  //   // var dateToCheck = ;
+  //   return moment().isAfter(dateToCheck);
+  // }
+
   useEffect(() => {
     textAreaRef.current = textAreaRef.current.slice(0, Orders?.length);
  }, [Orders]);
@@ -164,12 +172,15 @@ export default function Orders(){
                  </>
               )}</TableCell>
             </TableRow>))}
+            <div>Shipping Charge:{data?.shipping}</div>
+            <div>Discount:{data?.discount}</div>
             <div  className="order-box-total">Total:{data?.total}</div>
             </TableBody>
             </Table>
                 </div>
                <div style={{color:"black"}}>CreatedAt  {(data?.createdAt)
                ?moment(data.createdAt).format('MMMM Do YYYY, h:mm:ss a'):data.createdAt}</div>
+               {console.log(moment(data.createdAt).format('h:mma'))}
                <div>
                  <div>{(data?.userRequestedDate)?'your requested date:'+moment(data?.userRequestedDate).format("MMM Do"):null}</div>
                 {(data?.Paymentstatus==="success")?

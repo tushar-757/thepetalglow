@@ -1,4 +1,4 @@
-import { FetchIndoorProduct,FetchOutdoorProduct,FetchPlantersProduct, FetchSeasonalProduct,FetchSucculentProduct } from './Actions';
+import { FetchIndoorProduct,FetchOutdoorProduct,FetchPlantersProduct,FetchSoilFertilzerProduct, FetchSeasonalProduct,FetchSucculentProduct } from './Actions';
 import { IonApp, IonRouterOutlet, IonSplitPane ,useIonAlert} from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 import { Redirect, Route } from 'react-router-dom';
@@ -7,7 +7,6 @@ import Page from './pages/Page';
 import { useDispatch } from "react-redux";
 import { useEffect } from 'react';
 import PasswordReset from './pages/PasswordReset';
-import { PushNotificationSchema, PushNotifications, Token, ActionPerformed } from '@capacitor/push-notifications';
 
 import '@ionic/react/css/core.css';
 import '@ionic/react/css/normalize.css';
@@ -31,7 +30,6 @@ const App: React.FC = () => {
   //   autoHide: true
   // });
   useEffect(()=>{
-    console.log("helloo")
     // present({
     //   cssClass: 'my-css',
     //   header: 'THEPETALGLOW',
@@ -46,6 +44,8 @@ const App: React.FC = () => {
     dispatch(FetchOutdoorProduct())
     dispatch(FetchPlantersProduct())
     dispatch(FetchSucculentProduct())
+    dispatch(FetchSoilFertilzerProduct())
+
   },[])
   return (
     <IonApp>
@@ -63,6 +63,9 @@ const App: React.FC = () => {
               <Page/>
             </Route>
             <Route path="/page/ThePetalGlow/ShippingPolicy" exact={true}>
+              <Page/>
+            </Route>
+            <Route path="/page/ThePetalGlow/AboutUs" exact={true}>
               <Page/>
             </Route>
             <Route path="/page/searchbar" exact={true}>
@@ -105,6 +108,12 @@ const App: React.FC = () => {
               <Page />
             </Route>
             <Route path="/page/PlasticPots" exact={true}>
+              <Page />
+            </Route>
+            <Route path="/page/EarthenPots" exact={true}>
+              <Page />
+            </Route>
+            <Route path="/page/CeramicPots" exact={true}>
               <Page />
             </Route>
             <Route path="/page/Pebbles" exact={true}>

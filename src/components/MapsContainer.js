@@ -19,6 +19,10 @@ function MapContainer({onMarkerDragEnd,map,lat1,long1,windowHasClosed,windowHasO
     // const [isTracking,setIsTracking]=useState(false)
     // let [watch,SetWatch]=useState("")
     // const [LocationCollection,setLocationCollection]=useState([])
+    const FARIDABAD_BOUNDS = {
+      north: 28.25,
+      east:77.18
+    };
     const [lat,setLat]=useState(lat1)
     const [long,setLng]=useState(long1)
 
@@ -79,6 +83,7 @@ function MapContainer({onMarkerDragEnd,map,lat1,long1,windowHasClosed,windowHasO
           lat: 28.4089,
           lng:77.3178
         }}
+
         zoom={15}
        latLngBounds={{north: 83.8, south: -57, west: -180, east: 180}}
         onClick={()=>onMapClicked()}

@@ -72,6 +72,7 @@ return(
                         //     })
                           dispatch(GetSelectedPlanter(data._id))
                           History.push("/page/ViewPage")}}>View</IonButton>
+                        {(data?.quantity>0)?<>
                     <IonButton fill="solid" slot="end" style={{color:"white", width: '126px',
     height: '25px',fontSize:"0.8rem"}}
                        onClick={()=>{
@@ -80,6 +81,7 @@ return(
                               duration: 1000
                             })
                           dispatch(Addtocart(data))}}>Add To Cart</IonButton>
+                           </>:<>Out of Stock</>}
                           </div>
                     </div>
                 </IonCardContent>

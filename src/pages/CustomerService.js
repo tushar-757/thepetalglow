@@ -209,7 +209,7 @@ const CustomerService=() => {
             {
                 color: 'danger',
                 duration: 5000,
-                message: `something went wrong:${e?.response?.data?.message}`
+                message: `something went wrong:${e?.response?.data}`
               })
       }
   }

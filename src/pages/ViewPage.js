@@ -12,7 +12,7 @@ import TPGLOGO from '../static/TPGLOGO.png';
 import ReactStars from 'react-stars'
 import { CustomerRating } from '../components/CustomerRating';
 import api from '../Services/urlApi';
-
+import moment from 'moment';
 
 const slideOpts = {
   initialSlide:0,
@@ -50,6 +50,28 @@ const ImageBar=(data)=>{
         <IonItem button>Congratulation you are all set</IonItem>
       </IonList>)
  }
+
+// function GetItBy(time,currentdate){
+//    return (
+//       <>
+//       {time.includes('am')?
+//       <>
+//        {(time<4||time==12)?
+//         <div style={{marginTop:'10px'}}>
+//         <h1 style={{fontSize:18}}>Get it by Today {moment(currentdate).format("MMM Do")}</h1>
+//          </div>
+//       :
+//       <div style={{marginTop:'10px'}}>
+//       <h1 style={{fontSize:18}}>Get it by Tomorrow { moment(currentdate).add(1,"days").format("MMM Do")}</h1>
+//        </div>
+//             }
+//        </>:<div style={{marginTop:'10px'}}>
+//       <h1 style={{fontSize:18}}>Get it by Tomorrow { moment(currentdate).add(1,"days").format("MMM Do")}</h1>
+//        </div>}
+//        </>
+//    )
+// }
+
 export default function ViewPage(){
    const [presentalert] = useIonAlert();
     const dispatch=useDispatch()
@@ -67,6 +89,10 @@ export default function ViewPage(){
     const [rating,setRating]=useState(5)
     const [present2, dismiss2] = useIonLoading();
     const [present3, dismiss3] = useIonToast();
+   const [time,setTime] = useState('')
+    const currentdate=new Date().toISOString()
+    const ordertime = moment(currentdate).format('h:mm a')
+
    //   const customdata=useSelector((state)=>state.ProductReducer..Customizations)
 
    const ratingChanged = (newRating) => {
@@ -118,6 +144,23 @@ export default function ViewPage(){
             History.push("/page/ThePetalGlow")
          }
       },[])
+      function checkhour(){
+         let hour=""
+         if(ordertime.includes('pm')){
+             for(let i=0;i<ordertime.length;i++){
+                 if(ordertime[i]===':'){
+                     setTime(hour)
+                     return hour
+                 }
+                  hour+=ordertime[i]
+             }
+         }
+         setTime(ordertime)
+         return ordertime
+     }
+     useEffect(()=>{
+      checkhour()
+    },[])
     return (
         <div style={{position:"relative"}}>
            <div onClick={()=>{
@@ -168,39 +211,35 @@ export default function ViewPage(){
                                       <p>{(data?.name?.length>20)?data?.name?.substring(0,20)+"...":data?.name}</p>
                                       <div style={{display:"flex"}}>
                                       <div style={{width:"70%"}}><BiRupee/>{data?.price}</div>
-                                      {(Items.find(item => data?._id === item._id))?
-                                       <h1 style={{color:"black",fontSize:"12px"}}>Added To Cart</h1>:
-                                      <div style={{width:"30%"}} onClick={()=>dispatch(Addtocart(data))}>
+                                      {(data?.quantity>0)?
+                                      (Items.find(item => data?._id === item._id))?
+                                         <h1 style={{color:"black",fontSize:"12px"}}>Added To Cart</h1>:
+                                         <div style={{width:"30%"}} onClick={()=>dispatch(Addtocart(data))}>
                                          <FaCartArrowDown style={{fontSize:"18px"}}/>
-                                         </div>}
+                                         </div>
+                                         :<>Out of Stock</>}
                                       </div>
                                    </div>
                                 )}
                              </div>:<div>nothing to show currently</div>}
-
-
-                             {(Item?.varient)?
-                                 <>
-                                 {(Item?.varient?.s?.price)?
-                                 <>
-                                   <h1>Size Chart</h1>
-                                    <div className="viewpage-size-chart">
-                                         <span className="viewpage-size-chart-span">S</span>
-                                         <span className="viewpage-size-chart-span">M</span>
-                                         <span className="viewpage-size-chart-span">L</span>
-                                    </div>
-                                    <div className="viewpage-size-chart">
-                                         <span>{Item?.varient?.s?.inches}</span>
-                                         <span>{Item?.varient?.m?.inches}</span>
-                                         <span>{Item?.varient?.l?.inches}</span>
-                                   </div>
-                                    <div className="viewpage-size-chart">
-                                         <span>{Item?.varient?.s?.price}</span>
-                                         <span>{Item?.varient?.m?.price}</span>
-                                         <span>{Item?.varient?.l?.price}</span>
-                                   </div>
-                                   </>:null}
-                            </>:null}
+                       {time.includes('am')?
+                        <>
+                        <div style={{marginTop:'10px'}}>
+                          <h1 style={{fontSize:18,color:"green"}}>Get it by Today {moment(currentdate).format("MMM Do")}</h1>
+                        </div>
+                        </>
+                         :
+                         <>
+                        {(time>=4&&time<12)?
+                        <div style={{marginTop:'10px'}}>
+                          <h1 style={{fontSize:18,color:"green"}}>Get it by Tomorrow { moment(currentdate).add(1,"days").format("MMM Do")}</h1>
+                        </div>:
+                        <div style={{marginTop:'10px'}}>
+                        <h1 style={{fontSize:18,color:"green"}}>Get it by Today {moment(currentdate).format("MMM Do")}</h1>
+                      </div>
+                        }
+                        </>
+                     }
                  <div style={{marginTop:'10px'}}>
                     <h1 style={{fontSize:12}}>Deliver To</h1>
                     <div className="select-location-view"  onClick={()=>History.push("/page/MapsPage")}>
@@ -246,7 +285,7 @@ export default function ViewPage(){
                       </div>
                       :(toggle2)?
                       <div style={{padding:'10px',fontSize:"0.8rem"}}>
-                         {Item?.care}
+                         <p dangerouslySetInnerHTML={{__html: Item?.care}} />
                       </div>:<h1>dd</h1>
                        }
                     </div>

@@ -20,16 +20,18 @@ return(
   <LoadingBox/>
   </>:
     <div className="best-selling-cont" style={{marginTop:"20px"}}>
-                {data?.map((data,i)=>(
-                    <IonCard className="best-selling-cont-item" key={i}>
+                {data?.map((d,i)=>(
+                  <IonCard className="best-selling-cont-item" style={{position:"relative"}} key={i}>
+                      <span className="best-selling-cont-festival-msg"
+                      style={{color:data[0]?.color}}>{data[0]?.message}</span>
                       <IonCardHeader style={{padding:'0px'}}>
-                         <img src={data?.images?.[0]}
+                         <img src={d?.images?.[0]}
                           onClick={()=>{
                               present({
                                     message: 'Loading...',
                                     duration:1000
                                   })
-                                dispatch(GETSELECTEDBESTSELLING(data._id))
+                                dispatch(GETSELECTEDBESTSELLING(d._id))
                                 History.push("/page/ViewPage")}}/>
                       </IonCardHeader>
                     <div style={{
@@ -41,19 +43,19 @@ return(
                     <h1 className="animate__animated animate__pulse animate__infinite animate-faster best-selling-tag">Best Selling</h1>
 
                       <div className="bestselling-head">
-                          <div style={{fontSize:"0.95rem",padding:"0px"}}>{(data?.name?.length>12)?data?.name?.substring(0, 12)+"...":data?.name}</div>
+                          <div style={{fontSize:"0.95rem",padding:"0px"}}>{(d?.name?.length>12)?d?.name?.substring(0, 12)+"...":d?.name}</div>
                           <div>|</div>
                              <div  style={{
                                    display: 'flex',
                                    alignItems: 'center'
                              }}>
-                                <span style={{margin:"4px"}}>{data?.likes}</span>
-                                {(!data?.isLiked)?
-                                <AiOutlineHeart style={{fontSize:"24px",color:"#e91e1e"}} onClick={()=>dispatch(addToLikes(data?._id))}/>:
-                                <AiFillHeart style={{fontSize:"24px",color:"#e91e1e"}} onClick={()=>dispatch(removefromLikes(data?._id))}/>}
+                                <span style={{margin:"4px"}}>{d?.likes}</span>
+                                {(!d?.isLiked)?
+                                <AiOutlineHeart style={{fontSize:"24px",color:"#e91e1e"}} onClick={()=>dispatch(addToLikes(d?._id))}/>:
+                                <AiFillHeart style={{fontSize:"24px",color:"#e91e1e"}} onClick={()=>dispatch(removefromLikes(d?._id))}/>}
                                 </div>
                            </div>
-                          <p style={{alignItems:'center',padding:"0px",fontWeight:"bold",display:'flex'}}><BiRupee/>{data?.price}</p>
+                          <p style={{alignItems:'center',padding:"0px",fontWeight:"bold",display:'flex'}}><BiRupee/>{d?.price}</p>
                     </div>
                     <IonCardContent style={{padding:"0"}}>
                     <div style={{
@@ -65,14 +67,14 @@ return(
                     <IonButton fill="solid" slot="end" style={{color:"white", width: '126px',
     height: '25px',fontSize:"0.8rem"}}
                        onClick={()=>{
-                         dispatch(GETSELECTEDBESTSELLING(data._id))
+                         dispatch(GETSELECTEDBESTSELLING(d._id))
                          History.push("/page/ViewPage")
                          present({
                                message: 'Loading...',
                                duration:1000
                              })
                           }}>View</IonButton>
-                           {(data?.quantity>0)?<>
+                           {(d?.quantity>0)?<>
                     <IonButton fill="solid" slot="end" style={{color:"white", width: '126px',
     height: '25px',fontSize:"0.8rem"}}
                        onClick={()=>{
@@ -80,7 +82,7 @@ return(
                               message: 'Loading...',
                               duration: 1000
                             })
-                          dispatch(Addtocart(data))
+                          dispatch(Addtocart(d))
                          }}>Add To Cart</IonButton>
                           </>:<>Out of Stock</>}
                     </div>

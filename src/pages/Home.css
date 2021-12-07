@@ -98,6 +98,14 @@
     align-items: center;
     padding: 2px;
 }
+.best-selling-cont-festival-msg{
+    position: absolute;
+    left: 20%;
+    top: 42%;
+    font-size: 22px;
+    transform: rotate(339deg);
+    z-index: 1;
+}
 .footer-icon{
     font-Size:40px;
 }
@@ -142,7 +150,7 @@
 .footer-newsletter{
     background: rgb(76, 175, 80);
     color: white;
-    height: 450px;
+    height: 535px;
     margin-top: 42px;
     position:relative
 }

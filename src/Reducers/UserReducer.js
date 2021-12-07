@@ -18,15 +18,7 @@ const UserReducer = (state = initalState, action) => {
                 ...state,
                 User: {username,email,mobile,Address}
               }
-         case 'ADD_LOCATION':
-            const {id,hno,society,streetname,pincode}=action.payload;
-            let existed_user1 = state.User.find(User => id === User.id)
-        return {
-          ...state,
-          User:{Address:{
-              hno,society,streetname,pincode
-          }}
-        }
+
          case 'REMOVE_USER':
         return {
           User:{
@@ -56,6 +48,12 @@ const UserReducer = (state = initalState, action) => {
             ...state,
             WishListItems:items
           }
+          case "SET_ADDRESS":
+            const {hno,society,pincode}=action.payload;
+            state.User.Address={hno,society,pincode}
+            return {
+              ...state
+            }
         default:
             return{
               ...state

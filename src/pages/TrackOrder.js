@@ -1,5 +1,5 @@
 import { IonButton, IonInput, IonItem ,IonList,IonListHeader,useIonPopover,IonProgressBar} from "@ionic/react";
-import {  useState } from "react";
+import {  useEffect, useState } from "react";
 import { useDispatch,useSelector } from "react-redux";
 import { BiPackage } from "react-icons/bi";
 import {FaCarSide} from 'react-icons/fa'
@@ -18,6 +18,7 @@ import BuyAgainViewPage from "./BuyAgainViewPage";
 import CreateINvoice from "../components/CreateInvoice";
 import { useHistory } from "react-router";
 
+
 function PopoverList({ onHide }){
     return (
    <IonList>
@@ -33,8 +34,32 @@ export default function TrackOrder(){
     const [present, dismiss] = useIonPopover(PopoverList, { onHide: () => dismiss() });
     const dispatch=useDispatch();
     const [id,setId]=useState('')
+    const [time,setTime]=useState('')
+    const ordertime = moment(userOrder?.createdAt).format('h:mm a')
+
+
+    function checkhour(){
+        let hour=""
+        if(ordertime.includes('pm')){
+            for(let i=0;i<ordertime.length;i++){
+                if(ordertime[i]===':'){
+                    setTime(hour)
+                    return hour
+                }
+                 hour+=ordertime[i]
+            }
+        }
+        setTime(ordertime)
+        return ordertime
+    }
+    useEffect(()=>{
+      checkhour()
+    },[])
+    // checkhour()
+
     const History=useHistory()
 
+    console.log(time)
     return(
     (userOrder.Active===true)?
         <div>
@@ -49,7 +74,7 @@ export default function TrackOrder(){
                     <div className="track-body">
                             <div className="track-body-orderid">
                                 <h1 className="track-body-orderid-h1">OrderId:-{userOrder?.id}</h1></div>
-                        <div style={{padding:"12px",position:"relative",margin:'1rem'}}>
+                        <div style={{padding:"12px",position:"relative",margin:'1rem',width:"90%"}}>
                             <FaJediOrder fontSize={24} className="start-icon"/>
                             <BiPackage fontSize={24} className="packed-icon"/>
                             <FaCarSide fontSize={24} className="depart-icon"/>
@@ -58,25 +83,30 @@ export default function TrackOrder(){
                     (userOrder?.status==="Dispatched")?0.62:null} color="tertiary"
                     style={{position:'relative'}}>
                         </IonProgressBar><br />
+                        <div>
                         <div className="tack-order-dates">
                             <p>OrderPlaced</p>
-                            <p>
-                                {(userOrder?.createdAt)?moment(userOrder?.createdAt).format("MMM Do"):userOrder?.createdAt}
+                            <p style={{fontSize:"0.6rem"}}>
+                                {(userOrder?.createdAt)?moment(userOrder?.createdAt).format("MMM Do hh:mm a"):userOrder?.createdAt}
                             </p>
                         </div>
                         <div className="tack-order-dates1">
                             <p>Packed</p>
                             <p style={{fontSize:"0.6rem"}}>
-                                expectedAt:<br></br> {(userOrder?.createdAt)?moment(userOrder?.createdAt).format("MMM Do"):userOrder?.createdAt}
-                                 (2-3)pm
+                                expectedAt:<br></br>
+                                {time.includes('am')?moment(userOrder?.createdAt).format("MMM Do"):
+                                (time<4||time==12)?moment(userOrder?.createdAt).format("MMM Do"):
+                                moment(userOrder?.createdAt).add(1,"days").format("MMM Do")}
+                                 (2-4)pm
                             </p>
                         </div>
                         <div className="tack-order-dates2">
                             <p>Dispatched</p>
                             <p style={{fontSize:"0.6rem"}}>
                                 expectedAt:<br></br>
-                                {(userOrder?.userRequestedDate)?moment(userOrder?.userRequestedDate).format("MMM Do"):
-                                (userOrder?.createdAt)?moment(userOrder?.createdAt).format("MMM Do"):userOrder?.createdAt}
+                                {time.includes('am')?moment(userOrder?.createdAt).format("MMM Do"):
+                                (time<4||time==12)?moment(userOrder?.createdAt).format("MMM Do"):
+                                moment(userOrder?.createdAt).add(1,"days").format("MMM Do")}
                                  (3-4)pm
                             </p>
                         </div>
@@ -84,10 +114,13 @@ export default function TrackOrder(){
                             <p>Arrived</p>
                             <p style={{fontSize:"0.6rem"}}>
                                 expectedAt:<br></br>
-                                {(userOrder?.userRequestedDate)?moment(userOrder?.userRequestedDate).format("MMM Do"):
-                                (userOrder?.createdAt)?moment(userOrder?.createdAt).format("MMM Do"):userOrder?.createdAt}
+                                {time.includes('am')?moment(userOrder?.createdAt).format("MMM Do"):
+                                (time<4||time==12)?moment(userOrder?.createdAt).format("MMM Do"):
+                                moment(userOrder?.createdAt).add(1,"days").format("MMM Do")}
+                                <br></br>
                                  (4-6)pm
                             </p>
+                        </div>
                         </div>
                         </div>
                         <div className="track-body-box" style={{marginTop:'55px'}}>Description:-{userOrder?.description}</div>
@@ -111,6 +144,8 @@ export default function TrackOrder(){
               <TableCell>{row?.price}</TableCell>
               <TableCell>{row?.quantity}</TableCell>
             </TableRow>))}
+            <div>Shipping Charge:{userOrder?.shipping}</div>
+            <div>Discount:{userOrder?.discount}</div>
             <div  className="order-box-total">Total:{userOrder?.total}</div>
             </TableBody>
             </Table>
@@ -136,9 +171,9 @@ export default function TrackOrder(){
                         </div>
                         <div className="track-ship-to">
                         <p>Ship to</p>
-                            <p>{address?.hno}</p>
-                            <p>{address?.society}</p>
-                            <p>{address?.pincode}</p>
+                            <p>{userOrder?.shippingAddress?.hno}</p>
+                            <p>{userOrder?.shippingAddress?.society}</p>
+                            <p>{userOrder?.shippingAddress?.pincode}</p>
                         </div>
                     </div>
                     <div style={{margin:"7px"}}>

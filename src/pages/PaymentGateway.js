@@ -5,7 +5,8 @@ import api from "../Services/urlApi";
 import { LocalNotifications } from '@ionic-native/local-notifications'
 import './cart.css'
 import { useDispatch,useSelector } from "react-redux";
-import {EmptyCart,AddtoNotification, RemovefromNotification, UserOrders} from '../Actions';
+import {AddtoNotification, RemovefromNotification, UserOrders} from '../Actions';
+import {EmptyCart} from '../Actions/CartActions'
 import { Checkout } from 'capacitor-razorpay';
 import { useState } from "react";
 

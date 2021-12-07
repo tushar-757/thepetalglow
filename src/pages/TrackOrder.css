@@ -81,9 +81,9 @@
 }
 .tack-order-dates{
     position:absolute;
-    left: -7px;
+    left: 0px;
     top: 40px;
-    width: 25%;
+    width: 50%;
 }
 .tack-order-dates p{
   margin: 0;
@@ -103,21 +103,21 @@
 }
 .tack-order-dates1{
     position:absolute;
-    left: 28%;
+    left: 30%;
     top: 40px;
-    width: 25%;
+    width: 50%;
 }
 .tack-order-dates2{
     position:absolute;
-    left: 57%;
+    left: 58%;
     top: 40px;
-    width: 25%;
+    width: 50%;
 }
 .tack-order-dates3{
     position: absolute;
-    left: 88%;
+    left: 91%;
     top: 33px;
-    width: 17%;
+    width: 50%;
 }
 .track-order-custom{
     font-size: 0.8rem;

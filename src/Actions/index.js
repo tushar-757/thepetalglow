@@ -1,34 +1,17 @@
 import axios from "axios";
 const dev="http://localhost:5000"
-// const aws="https://api.thepetalglow.com"
 const awsserverless="https://actzkesq20.execute-api.ap-south-1.amazonaws.com/dev/"
  const aws=awsserverless
-export const GetItem = (id) => {
+
+  export const setAddress=(hno,society,pincode)=>{
     return {
-      type: "GET_ITEM",
-      payload:id
+      type: "SET_ADDRESS",
+      payload:{hno,society,pincode}
     };
-  };
+  }
 export const CurrentLocation=()=>{
     return {
         type:"GET_LOCATION"
-    }
-}
-export const BestSellingItems=()=>{
-    return {
-        type:"BEST_SELLING_ITEMS"
-    }
-}
-export const SeasonalPlants=(id)=>{
-    return {
-        type:"GET_SEASONAL_ITEM",
-        payload:id
-    }
-}
-export const plasticPots=(id)=>{
-    return {
-        type:"GET_POT",
-        payload:id
     }
 }
 
@@ -38,12 +21,7 @@ export const Addtocart=(item)=>{
         payload:item
     }
 }
-export const Removefromcart=(id)=>{
-    return {
-        type:"REMOVE_FROM_CART",
-        payload:id,
-    }
-}
+
 export const AddtoNotification=(item)=>{
     return {
         type:"ADD_NOTIFICATION",
@@ -56,35 +34,15 @@ export const RemovefromNotification=(id)=>{
         payload:id,
     }
 }
-export const setQuantity=(id)=>{
-    return {
-        type:"SET_QUANTITY",
-        payload:id
-    }
-}
-export const unsetQuantity=(id)=>{
-    return {
-        type:"UNSET_QUANTITY",
-        payload:id,
-    }
-}
+
 export const applycoupon=(number)=>{
     return{
         type:"APPLY_COUPON",
         payload:number
     }
 }
-export const EmptyCart=()=>{
-    return{
-        type:"EMPTY_CART"
-    }
-}
-export const GrandTotal=(total)=>{
-    return{
-        type:"SET_GRAND_TOTAL",
-        payload:total,
-    }
-}
+
+
 export const addUser=(registeruser)=>{
     return{
         type:"ADD_USER",
@@ -131,13 +89,10 @@ export const UserOrders=()=>{
     const useraccesstoken=localStorage.getItem('useraccesstoken')
     return (dispatch) => {
         dispatch(getOrdersRequest());
-        // const orders=await axios.get('https://plantapp57.herokuapp.com/GetOrders',{headers:{Authorization:`Bearer ${useraccesstoken}`}})
-        // console.log(orders.data.UserOrders.orders)nm
          axios.get(url,
             {headers:{Authorization:`Bearer ${useraccesstoken}`}})
             .then((response) => response.data)
             .then((data) => {
-                console.log(data)
               const Orders = data.UserOrders.orders;
               dispatch(getOrdersSuccess(Orders));
               dispatch(SET_ACTIVE_ORDERS())
@@ -158,53 +113,6 @@ return {
     payload:id
 }
 }
-const getProductRequest = () => {
-  return {
-    type: "GET_PRODUCT_REQUEST",
-  };
-};
-
-const getProductSuccess = (Product) => {
-  return {
-    type: "GET_PRODUCT_SUCCESS",
-    payload: Product,
-  };
-};
-
-const getProductFailure = (error) => {
-  return {
-    type: "GET_PRODUCT_FAILURE",
-    payload: error,
-  };
-};
-export const getProduct = (id) => {
-  return {
-    type: "GET_USER_PRODUCT",
-    payload: id,
-  };
-};
-
-const url1 = `${aws}/PlantGieneIndoorProducts`;
-export const FetchProduct=()=>{
-  return (dispatch) => {
-      dispatch(getProductRequest());
-      // const Product=await axios.get('https://plantapp57.herokuapp.com/GetProduct',{headers:{Authorization:`Bearer ${useraccesstoken}`}})
-      // console.log(Product.data.UserProduct.Product)nm
-       axios.get(url2)
-          .then((response) => response.data)
-          .then((data) => {
-              console.log(data)
-            const Product = data;
-            dispatch(getProductSuccess(Product));
-          })
-          .catch((error) => {
-            const errorMessage = error.message;
-            dispatch(getProductFailure(errorMessage));
-          });
-    };
-}
-
-
 
 const getIndoorProductRequest = () => {
     return {
@@ -236,12 +144,9 @@ const url2 = `${aws}/PlantGiene/IndoorProducts`;
 export const FetchIndoorProduct=()=>{
     return (dispatch) => {
         dispatch(getIndoorProductRequest());
-        // const Product=await axios.get('https://plantapp57.herokuapp.com/GetProduct',{headers:{Authorization:`Bearer ${useraccesstoken}`}})
-        // console.log(Product.data.UserProduct.Product)nm
          axios.get(url2)
             .then((response) => response.data)
             .then((data) => {
-                console.log(data)
               const Product = data;
               dispatch(getIndoorProductSuccess(Product));
               dispatch(SETBESTSELLING())
@@ -283,12 +188,9 @@ const url3 = `${aws}/PlantGiene/OutdoorProducts`;
 export const FetchOutdoorProduct=()=>{
     return (dispatch) => {
         dispatch(getOutdoorProductRequest());
-        // const Product=await axios.get('https://plantapp57.herokuapp.com/GetProduct',{headers:{Authorization:`Bearer ${useraccesstoken}`}})
-        // console.log(Product.data.UserProduct.Product)nm
          axios.get(url3)
             .then((response) => response.data)
             .then((data) => {
-                console.log(data)
               const Product = data;
               dispatch(getOutdoorProductSuccess(Product));
               dispatch(SETBESTSELLING())
@@ -330,12 +232,9 @@ const url4 = `${aws}/PlantGiene/SeasonalProducts`;
 export const FetchSeasonalProduct=()=>{
     return (dispatch) => {
         dispatch(getSeasonalProductRequest());
-        // const Product=await axios.get('https://plantapp57.herokuapp.com/GetProduct',{headers:{Authorization:`Bearer ${useraccesstoken}`}})
-        // console.log(Product.data.UserProduct.Product)nm
          axios.get(url4)
             .then((response) => response.data)
             .then((data) => {
-                console.log(data)
               const Product = data;
               dispatch(getSeasonalProductSuccess(Product));
             })
@@ -370,12 +269,9 @@ const url5 = `${aws}/PlantGiene/PlanterProducts`;
 export const FetchPlantersProduct=()=>{
     return (dispatch) => {
         dispatch(getPlantersProductRequest());
-        // const Product=await axios.get('https://plantapp57.herokuapp.com/GetProduct',{headers:{Authorization:`Bearer ${useraccesstoken}`}})
-        // console.log(Product.data.UserProduct.Product)nm
          axios.get(url5)
             .then((response) => response.data)
             .then((data) => {
-                console.log(data)
               const Product = data;
               dispatch(getPlantersProductSuccess(Product));
             })
@@ -409,18 +305,50 @@ const url6 = `${aws}/PlantGiene/SucculentProducts`;
 export const FetchSucculentProduct=()=>{
     return (dispatch) => {
         dispatch(getSucculentProductRequest());
-        // const Product=await axios.get('https://plantapp57.herokuapp.com/GetProduct',{headers:{Authorization:`Bearer ${useraccesstoken}`}})
-        // console.log(Product.data.UserProduct.Product)nm
          axios.get(url6)
             .then((response) => response.data)
             .then((data) => {
-                console.log(data)
               const Product = data;
               dispatch(getSucculentProductSuccess(Product));
             })
             .catch((error) => {
               const errorMessage = error.message;
               dispatch(getSucculentProductFailure(errorMessage));
+            });
+      };
+}
+const getSoilFertilzerProductRequest = () => {
+  return {
+    type: "GET_SOIL_FERTILIZER_PRODUCT_REQUEST",
+  };
+};
+
+const getSoilFertilzerProductSuccess = (Product) => {
+  return {
+    type: "GET_SOIL_FERTILIZER_PRODUCT_SUCCESS",
+    payload: Product,
+  };
+};
+
+const getSoilFertilzerProductFailure = (error) => {
+  return {
+    type: "GET_SOIL_FERTILIZER_PRODUCT_FAILURE",
+    payload: error,
+  };
+};
+const url7 = `${aws}/PlantGiene/SoilandFertilizer`;
+export const FetchSoilFertilzerProduct=()=>{
+    return (dispatch) => {
+        dispatch(getSoilFertilzerProductRequest());
+         axios.get(url7)
+            .then((response) => response.data)
+            .then((data) => {
+              const Product = data;
+              dispatch(getSoilFertilzerProductSuccess(Product));
+            })
+            .catch((error) => {
+              const errorMessage = error.message;
+              dispatch(getSoilFertilzerProductFailure(errorMessage));
             });
       };
 }
@@ -458,6 +386,12 @@ export const GetSelectedPebble = (id) => {
 export const GetSelectedSucculent = (id) => {
   return {
     type: "GET_SELECTED_SUCCULENT",
+    payload:id
+  };
+};
+export const GET_SELECTED_FERTILIZER = (id) => {
+  return {
+    type: "GET_SELECTED_FERTILIZER",
     payload:id
   };
 };
@@ -524,67 +458,12 @@ export const removefromLikes=(id)=>{
     payload:id
   };
 }
-export const SetCustomSku=(id,value)=>{
-  return {
-    type: "SET_CUSTOM_SKU",
-    payload:{id,value}
-  };
-}
-export const addAddonItemsToCartItem=(id,type)=>{
-  return {
-    type: "ADD_ADDON_ITEMS_TO_CART",
-    payload:{id,type}
-  };
-}
-export const removeAddonItemsToCartItem=(id,type)=>{
-  return {
-    type: "REMOVE_ADDON_ITEMS_TO_CART",
-    payload:{id,type}
-  };
-}
-export const removeitemfromaddon=(id,type)=>{
-  return {
-    type: "REMOVE_ITEM_FROM_ADDON",
-    payload:{id,type}
-  };
-}
-export const setWhitePebbles=(id,value)=>{
-  return {
-    type:"SET_WHITE_PEBBLE",
-    payload:{id,value}
-  }
-}
-export const setBlackPebbles=(id,value)=>{
-  return {
-    type:"SET_BLACK_PEBBLE",
-    payload:{id,value}
-  }
-}
-export const setBlackWhitePebbles=(id,value)=>{
-  return {
-    type:"SET_BLACK_WHITE_PEBBLE",
-    payload:{id,value}
-  }
-}
-export const setColouredPebble=(id,value)=>{
-  return {
-    type:"SET_COLOURED_PEBBLE",
-    payload:{id,value}
-  }
-}
-export const addtoCustomization=(value)=>{
-  return {
-    type:"ADD_TO_CUSTOMZATION",
-    payload:value
-  }
-}
 export const setReview=(value)=>{
   return {
     type:"SET_REVIEW",
     payload:value
   }
 }
-
 export const setMenuIndex=(value)=>{
   return {
     type:"SET_MENU_INDEX",
@@ -592,30 +471,6 @@ export const setMenuIndex=(value)=>{
   }
 }
 ////customization actions
-export const EditCustomDescription=(value)=>{
-  return {
-    type:"EDIT_CUSTOM_DESCRIPTION",
-    payload:value
-  }
-}
-export const RemoveCustomDescription=(value)=>{
-  return {
-    type:"REMOVE_CUSTOM_DESCRIPTION",
-    payload:value
-  }
-}
-export const setEditToFalse=(value)=>{
-  return {
-    type:"SET_CUSTOM_EDIT_FALSE",
-    payload:value
-  }
-}
-export const EditCustomization=(value,id)=>{
-  return {
-    type:"EDIT_CUSTOMIZATION",
-    payload:{value,id}
-  }
-}
 export const setLoading=()=>{
 return {
   type:"SET_LOADING"
@@ -632,40 +487,3 @@ export const ADD_TO_WISHLIST=(items)=>{
     payload:items
   }
 }
-// export const AddtoIndoor=(item)=>{
-//   return {
-//       type:"ADD_INDOOR",
-//       payload:item
-//   }
-// }
-// export const AddtoOutdoor=(item)=>{
-//   return {
-//       type:"ADD_OUTDOOR",
-//       payload:item
-//   }
-// }
-// export const AddtoSeasonal=(item)=>{
-//   return {
-//       type:"ADD_SEASONAL",
-//       payload:item
-//   }
-// }
-
-// export const GetSelectedIndoor = (id) => {
-//   return {
-//     type: "GET_SELECTED_INDOOR",
-//     payload:id
-//   };
-// };
-// export const GetSelectedOutdoor = (id) => {
-//   return {
-//     type: "GET_SELECTED_OUTOOR",
-//     payload:id
-//   };
-// };
-// export const GetSelectedSeasonal = (id) => {
-//   return {
-//     type: "GET_SELECTED_SEASONAL",
-//     payload:id
-//   };
-// };

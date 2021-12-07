@@ -4,7 +4,8 @@ import { arrowBackCircle } from 'ionicons/icons';
 import { useState } from 'react';
 import { useDispatch,useSelector } from 'react-redux';
 import api from '../Services/urlApi';
-import { addUser,RemoveUser,EmptyOrders,EmptyCart } from '../Actions';
+import { addUser,RemoveUser,EmptyOrders } from '../Actions';
+import {EmptyCart} from '../Actions/CartActions'
 import './Accountpage.css'
 
 

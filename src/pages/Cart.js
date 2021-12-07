@@ -1,12 +1,14 @@
-import { IonButton,IonLabel, IonIcon,IonItem,useIonLoading,useIonToast,IonCheckbox,IonLoading,IonInput,IonFooter,IonToolbar } from "@ionic/react"
-import { addCircle, arrowBackCircle, removeCircle,location } from "ionicons/icons"
-import { Removefromcart, setQuantity,unsetQuantity,GrandTotal
-  , AddtoNotification, SetCustomSku
-,setBlackPebbles,setBlackWhitePebbles,EditCustomization,RemoveUser,setColouredPebble,setWhitePebbles,addtoCustomization, EmptyCart,FetchIndoorProduct,FetchOutdoorProduct,FetchPlantersProduct,FetchSeasonalProduct} from '../Actions';
+import { IonButton,IonLabel,IonModal,IonSelect,IonSelectOption,IonIcon,IonItem,useIonLoading,useIonToast,IonCheckbox,IonLoading,IonInput,IonFooter,IonToolbar } from "@ionic/react"
+import { addCircle, arrowBackCircle, removeCircle,location,createOutline} from "ionicons/icons"
+import { Removefromcart, setQuantity,unsetQuantity,GrandTotal,SetCustomSku
+,setBlackPebbles,setBlackWhitePebbles,EditCustomization,setColouredPebble,setWhitePebbles,addtoCustomization, EmptyCart} from '../Actions/CartActions';
+import {FetchIndoorProduct,FetchOutdoorProduct,setAddress,FetchPlantersProduct,RemoveUser,FetchSeasonalProduct, FetchSoilFertilzerProduct} from '../Actions/index'
+import {AddtoNotification} from '../Actions/index'
 import { useDispatch,useSelector } from "react-redux";
 import { LocalNotifications } from '@ionic-native/local-notifications'
 import {useHistory} from 'react-router-dom'
 import { useEffect, useRef,useState } from "react";
+import Marquee from "react-fast-marquee";
 import './cart.css'
 import api from "../Services/urlApi";
 import Table from '@material-ui/core/Table';
@@ -15,7 +17,7 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import { CustomziationBox } from "../components/CustomizationBox";
-
+import moment from 'moment';
 import { AiFillCopy } from 'react-icons/ai';
 
 
@@ -74,7 +76,7 @@ export default function Cart(props){
     const Items=useSelector((state)=>state.CartReducer.items)
     const total=useSelector((state)=>state.CartReducer.total)
     const grandtotal=useSelector((state)=>state.CartReducer.grandtotal)
-    const customdescription=useSelector((state)=>state.CartReducer.customdescription)
+    const customdescription=useSelector((state)=>state?.CartReducer?.customdescription)
     const User=useSelector((state)=>state.UserReducer)
     const [coupon,setCoupon]=useState(0)
     const [couponvalue,setCouponValue]=useState('')
@@ -96,6 +98,15 @@ export default function Cart(props){
     const [present2, dismiss2] = useIonLoading();
     const textAreaRef = useRef([]);
     const [copySuccess, setCopySuccess] = useState('');
+    const [showModal, setShowModal] = useState(false);
+    const [city,setCity]=useState("Faridabad")
+    const [hno,setHno]=useState(User?.User?.Address?.hno)
+    const [society,setSociety]=useState(User?.User?.Address?.society)
+    const [pincode,setPincode]=useState(User?.User?.Address?.pincode)
+    const [time,setTime] = useState('')
+    const currentdate=new Date().toISOString()
+    const ordertime = moment(currentdate).format('h:mm a')
+    const [checkedt,setCheckBoxt]=useState(false)
 
     const ApplyCoupon=()=>{
       if(total<398){
@@ -134,7 +145,6 @@ export default function Cart(props){
     }
 
  const createOrder=async()=>{
-   console.log(grandtotal,Items)
       try{
           const productids=[]
           Items.map((data)=>{
@@ -150,6 +160,9 @@ export default function Cart(props){
         const createorder=await api.post('/createOrder',
         {headers:{user_id,Authorization:`Bearer ${useraccesstoken}`},
         total:(grandtotal*100),
+        coupon:couponvalue,
+        discount:coupon,
+        shipping:ShippingCharge,
         products:productids,
         shippingAddress:User?.User?.Address,
         lat:User?.lat,
@@ -171,9 +184,9 @@ export default function Cart(props){
         dispatch(FetchIndoorProduct())
         dispatch(FetchOutdoorProduct())
         dispatch(FetchPlantersProduct())
+        dispatch(FetchSoilFertilzerProduct())
         History.push("/page/PaymentGateway")
       }catch(e){
-        console.log(e)
         if(e?.response?.data?.message==="invalid token/you must be an authorize user to access it"){
           dispatch(EmptyCart())
           dispatch(RemoveUser())
@@ -200,6 +213,16 @@ export default function Cart(props){
           message: 'Please Set Your Location!!'
         })
        }
+       if(customdescription?.length>0){
+         console.log(customdescription?.length)
+       if(!checkedt){
+            return present({
+              color: 'danger',
+                  duration: 5000,
+              message: 'please confirm your customization terms and conditions'
+            })
+       }
+      }
         if(User.User.username===''){
         History.push('/page/Login')
         }else{
@@ -207,7 +230,6 @@ export default function Cart(props){
            setLoading(true)
            await createOrder()
            setLoading(false)
-          //  History.push("/page/PaymentGateway")
          }else{
            present({
              cssClass: 'my-css',
@@ -233,6 +255,11 @@ export default function Cart(props){
       })
      }
 }
+const SubmitLocation=(e)=>{
+  e.preventDefault()
+  dispatch(setAddress(hno,society,pincode))
+  setShowModal(false)
+}
 
 useEffect(()=>{
   if(couponvalue==="HAPPYPLANT30"||couponvalue==='PLANTGIENENEW'&&total!=0){
@@ -257,6 +284,7 @@ useEffect(()=>{
 const customArrayHandler=(e)=>{
   e.preventDefault()
   dispatch(addtoCustomization(customarray))
+
 }
 const customArrayEditHandler=(e,id)=>{
   e.preventDefault()
@@ -273,10 +301,7 @@ const setcustomto0=()=>{
   setcustomarray([])
 }
 function copyToClipboard(e,i) {
-  // textAreaRef.current.select();
   navigator.clipboard.writeText(textAreaRef.current[i].value)
-  // This is just personal preference.
-  // I prefer to not show the whole text area selected.
   e.target.focus();
   setCopySuccess('Copied!');
   present(
@@ -286,9 +311,32 @@ function copyToClipboard(e,i) {
         message: `copied`
       })
 };
+function checkhour(){
+  let hour=""
+  if(ordertime.includes('pm')){
+      for(let i=0;i<ordertime.length;i++){
+          if(ordertime[i]===':'){
+              setTime(hour)
+              return hour
+          }
+           hour+=ordertime[i]
+      }
+  }
+  setTime(ordertime)
+  return ordertime
+}
+useEffect(()=>{
+checkhour()
+},[])
+const options = {
+  cssClass: 'my-custom-interface'
+};
     return(
           <>
         <div className="white-background">
+        <Marquee className="top-message" speed={40} gradient={false}>
+          shipping is free for orders having cart value greater than 499,use coupon HAPPYPLANT30 for 15% OFF
+       </Marquee>
         <div onClick={()=>{
            present2({
             message: 'Loading...',
@@ -303,6 +351,24 @@ function copyToClipboard(e,i) {
         </div>
         </div>
             <div style={{overflowX:"auto"}} className="white-background">
+            <IonModal isOpen={showModal} cssClass='my-custom-class' backdropDismiss={false}>
+                    <form onSubmit={(e)=>SubmitLocation(e)}>
+                             <IonInput placeholder="enter hno./flat no. here.." value={hno} onIonChange={(e)=>setHno(e.detail.value)} style={{marginBottom:"5px"}} required/>
+                             <IonInput placeholder="enter Society/Sector here.." value={society} onIonChange={(e)=>setSociety(e.detail.value)} style={{marginBottom:"5px"}} required/>
+                             <IonInput placeholder="enter Pincode no." value={pincode} onIonChange={(e)=>setPincode(e.detail.value)} style={{marginBottom:"5px"}} required/>
+                             <IonSelect interface="popover" interfaceOptions={options}
+                             placeholder="Select City" value={city}
+                             onIonChange={(e)=>setCity(e.detail.value)} required>
+                                      <IonSelectOption value="Faridabad" class="brown-option">Faridabad</IonSelectOption>
+                                      <IonSelectOption value="Gurugram" disabled={true}>Gurugram  coming soon...</IonSelectOption>
+                                      <IonSelectOption value="Delhi" disabled={true}>Delhi coming soon...</IonSelectOption>
+                                      <IonSelectOption value="Noida" disabled={true}>Noida coming soon...</IonSelectOption>
+                                      <IonSelectOption value="Palwal" disabled={true}>Palwal coming soon...</IonSelectOption>
+                             </IonSelect>
+                            <IonButton type="submit" style={{color:"white"}}>Update</IonButton>
+                            <IonButton onClick={()=>setShowModal(false)} style={{color:"white"}}>Close</IonButton>
+                            </form>
+               </IonModal>
             <Table size="small">
         <TableHead>
           <TableRow>
@@ -402,6 +468,8 @@ function copyToClipboard(e,i) {
              setSku2={setSku2}
              customArrayEditHandler={customArrayEditHandler}
              addtoCustomization={addtoCustomization}
+             checked={checkedt}
+             setCheckBox={setCheckBoxt}
              />
           </>
           :null}
@@ -421,13 +489,40 @@ function copyToClipboard(e,i) {
                  onClick={()=>ApplyCoupon()}>Apply Coupon</IonButton>
                  <h1 className={(isApplied==='Applied Succesfully')?"coupon-code-h1":'coupon-code-h2'} >{isApplied}</h1>
                  </div>
-
+                 <div style={{margin:16}}>
+                 {time.includes('am')?
+                        <>
+                        <div style={{marginTop:'10px'}}>
+                          <h1 style={{fontSize:18,color:"green"}}>Get it by Today {moment(currentdate).format("MMM Do")}</h1>
+                        </div>
+                        </>
+                         :
+                         <>
+                        {(time>=4&&time<12)?
+                        <div style={{marginTop:'10px'}}>
+                          <h1 style={{fontSize:18,color:"green"}}>Get it by Tomorrow { moment(currentdate).add(1,"days").format("MMM Do")}</h1>
+                        </div>:
+                        <div style={{marginTop:'10px'}}>
+                        <h1 style={{fontSize:18,color:"green"}}>Get it by Today {moment(currentdate).format("MMM Do")}</h1>
+                      </div>
+                        }
+                        </>
+                     }
+                 </div>
                  <div style={{marginTop:'10px',margin:"1rem"}}>
                     <h1 style={{fontSize:12}}>Deliver To</h1>
                     <div className="select-location-view"  onClick={()=>History.push("/page/MapsPage")}>
           <IonIcon slot="start"  md={location} style={{color:'blue'}}/>
               <h1 className="h1-home" style={{color:"black",fontSize:"0.8rem"}}>select your location</h1>
                     </div>
+                 </div>
+                 <div style={{marginTop:'10px',margin:"1rem",position:"relative"}} className="select-location-view" >
+                   <span>{User?.User?.Address?.hno}</span>,
+                   <span>{User?.User?.Address?.society}</span>,
+                   <span>{User?.User?.Address?.pincode}</span>
+                   <span style={{position:"absolute",left:"80%"}} onClick={()=>setShowModal(true)}>
+                     <IonIcon md={createOutline} />
+                   </span>
                  </div>
                  <div className="total-bar">
                      <div>

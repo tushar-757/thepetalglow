@@ -61,10 +61,14 @@ function PotModal({showPotModal,setShowPotModal}){
                     History.push("/page/PlasticPots")}}>
                        <h1>Plastic Planters</h1>
                    </div>
-                   <div className="model-cont-item">
+                   <div className="model-cont-item"
+                    onClick={()=>{
+                        History.push("/page/EarthenPots")}}>
                        <h1>Earthen Planters</h1>
                    </div>
-                   <div className="model-cont-item">
+                   <div className="model-cont-item"
+                    onClick={()=>{
+                        History.push("/page/CeramicPots")}}>
                        <h1>Ceramic Planters</h1>
                    </div>
                </div>

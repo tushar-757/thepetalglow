@@ -1,7 +1,7 @@
 import { IonCard,IonButton,IonCardContent,useIonLoading,IonIcon, IonCardHeader } from '@ionic/react';
 import {arrowBackCircle } from "ionicons/icons"
 import {  useDispatch,useSelector} from 'react-redux';
-import { Addtocart,GetSelectedPebble,addToLikes,removefromLikes } from '../Actions';
+import { Addtocart,GET_SELECTED_FERTILIZER,addToLikes,removefromLikes } from '../Actions';
 import {BiRupee} from 'react-icons/bi'
 import {useHistory} from 'react-router-dom'
 import {AiFillHeart,AiOutlineHeart} from 'react-icons/ai'
@@ -13,7 +13,7 @@ export default function SoilandFertilizers(){
     const History = useHistory();
     const [present, dismiss] = useIonLoading();
     const Loading=useSelector((state)=>state.ProductReducer.loading)
-    const Data=useSelector((state)=>state.ProductReducer.Pebbles)
+    const Data=useSelector((state)=>state.ProductReducer.Fertilizers)
     const [like,setLike]=useState(false)
 
 return(
@@ -42,7 +42,7 @@ return(
                               message: 'Loading...',
                               duration:1000
                             })
-                          dispatch(GetSelectedPebble(data._id))
+                          dispatch(GET_SELECTED_FERTILIZER(data._id))
                           History.push("/page/ViewPage")}}/>
                       </IonCardHeader>
                     <div style={{
@@ -82,8 +82,9 @@ return(
                               message: 'Loading...',
                               duration:1000
                             })
-                          dispatch(GetSelectedPebble(data._id))
+                          dispatch(GET_SELECTED_FERTILIZER(data._id))
                           History.push("/page/ViewPage")}}>View</IonButton>
+                          {(data?.quantity>0)?<>
                     <IonButton fill="solid" slot="end" style={{color:"white", width: '126px',
     height: '25px',fontSize:"0.8rem"}}
                        onClick={()=>{
@@ -91,7 +92,9 @@ return(
                               message: 'Loading...',
                               duration: 1000
                             })
-                          dispatch(Addtocart(data))}}>Add To Cart</IonButton>
+                          dispatch(Addtocart(data))
+                         }}>Add To Cart</IonButton>
+                          </>:<>Out of Stock</>}
                           </div>
                     </div>
                 </IonCardContent>

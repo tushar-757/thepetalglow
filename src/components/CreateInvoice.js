@@ -11,7 +11,7 @@ export default function CreateINvoice(){
     const props={
         outputType: OutputType.Save,
         returnJsPDFDocObject: true,
-        fileName: "Invoice 2021",
+        fileName: "ThePetalGlow21",
         orientationLandscape: false,
         logo: {
             src: TPGLOGO,
@@ -24,7 +24,7 @@ export default function CreateINvoice(){
         },
         business: {
             name: "ThePetalGlow",
-            address: "Opp. Vipul Plaza,Faridabad,Haryana,121004",
+            address: "757/31,Faridabad,Haryana,121003",
             phone: "(+1) 7278771267",
             email: "services@thepetalglow.com",
             email_1:"thepetalglow@gmail.com",
@@ -52,35 +52,33 @@ export default function CreateINvoice(){
                (item?.addons[1]?.blackpebbles?.isAdded?`+${item?.addons[1]?.blackpebbles?.quantity}addonblack`:'')+
                (item?.addons[2]?.BlackWhitepebbles?.isAdded?`+${item?.addons[2]?.BlackWhitepebbles?.quantity}addonBlack&White`:'')+
                (item?.addons[3]?.colouredpebbles?.isAdded?`+${item?.addons[3]?.colouredpebbles?.quantity}addonColoured`:''),
-                '0602',
-                 item?.price,
+                item?.hsn,
+                 item?.price-((item?.price)*(item?.gst)/100),
                  item?.quantity,
-                 0,
-                 0,
-                 0,
+                 item?.gst/2,
+                 item?.gst/2,
+                 ((item?.price)*(item?.gst)/100),
                  (item?.price)*(item?.quantity)
             ])),
-            invTotalLabel: "Total:",
-            invTotal:`${userOrder?.total}` ,
+            invTotalLabel: `Shipping Charges`,
+            invTotal:`${userOrder?.shipping}` ,
             invCurrency: "INR",
             row1: {
-                col1: 'TAX:',
-                col2: '0',
+                col1: 'Discount',
+                col2: `-${userOrder?.discount}`,
                 col3: 'INR',
                 style: {
-                    fontSize: 10 //optional, default 12
+                    fontSize: 12 //optional, default 12
                 }
             },
             row2: {
-                col1: 'SubTotal:',
+                col1: 'Sub Total(including shipping,disc & taxes):',
                 col2: `${userOrder?.total}`,
                 col3: 'INR',
                 style: {
-                    fontSize: 10 //optional, default 12
+                    fontSize: 12 //optional, default 12
                 }
-            },
-            invDescLabel: "Invoice Note",
-            invDesc: "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary.",
+            }
         },
         footer: {
             text: "The invoice is created on a computer and is valid without the signature and stamp.",

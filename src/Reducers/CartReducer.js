@@ -119,6 +119,7 @@ const CartReducer = (state = initialState, action) => {
           case 'EMPTY_CART':
             return {
               items: [],
+              customdescription:[],
               loading: false,
               error: true,
               total: 0,
@@ -141,21 +142,6 @@ const CartReducer = (state = initialState, action) => {
                     quantity:setItem.addon[0].whitepebbles.quantity=1,
                      price:29,
                     isAdded:action.payload.value}
-                    // setItem.addon[1].blackpebbles={
-                    //   quantity:0,
-                    //   price:29,
-                    //   isAdded:false
-                    // }
-                    // setItem.addon[2].BlackWhitepebbles={
-                    //   quantity:0,
-                    //   price:29,
-                    //   isAdded:false
-                    // }
-                    // setItem.addon[3].colouredpebbles={
-                    //   quantity:0,
-                    //   price:29,
-                    //   isAdded:false
-                    // }
                     if(action.payload.value){
                       setItem.price=setItem.price+29
                       state.total+=(29*setItem.orderquantity)
@@ -174,21 +160,6 @@ const CartReducer = (state = initialState, action) => {
                      price:29,
                      isAdded:action.payload.value
                     }
-                    // setItem1.addon[0].whitepebbles={
-                    //   quantity:0,
-                    //   price:29,
-                    //   isAdded:false
-                    // }
-                    // setItem1.addon[2].BlackWhitepebbles={
-                    //   quantity:0,
-                    //   price:29,
-                    //   isAdded:false
-                    // }
-                    // setItem1.addon[3].colouredpebbles={
-                    //   quantity:0,
-                    //   price:29,
-                    //   isAdded:false
-                    // }
                      if(action.payload.value){
                        setItem1.price=setItem1.price+29
                        state.total+=(29*setItem1.orderquantity)
@@ -207,21 +178,6 @@ const CartReducer = (state = initialState, action) => {
                      price:29,
                      isAdded:action.payload.value
                     }
-                    // setItem2.addon[1].blackpebbles={
-                    //   quantity:0,
-                    //   price:29,
-                    //   isAdded:false
-                    // }
-                    // setItem2.addon[0].whitepebbles={
-                    //   quantity:0,
-                    //   price:29,
-                    //   isAdded:false
-                    // }
-                    // setItem2.addon[3].colouredpebbles={
-                    //   quantity:0,
-                    //   price:29,
-                    //   isAdded:false
-                    // }
                     if(action.payload.value){
                       setItem2.price=setItem2.price+29
                       state.total+=(29*setItem2.orderquantity)
@@ -240,21 +196,6 @@ const CartReducer = (state = initialState, action) => {
                      price:29,
                      isAdded:action.payload.value
                     }
-                    // setItem3.addon[0].whitepebbles={
-                    //   quantity:0,
-                    //   price:29,
-                    //   isAdded:false
-                    // }
-                    // setItem3.addon[1].blackpebbles={
-                    //   quantity:0,
-                    //   price:29,
-                    //   isAdded:false
-                    // }
-                    // setItem3.addon[2].BlackWhitepebbles={
-                    //   quantity:0,
-                    //   price:29,
-                    //   isAdded:false
-                    // }
                      if(action.payload.value){
                        setItem3.price=setItem3.price+29
                        state.total+=(29*setItem3.orderquantity)
@@ -317,64 +258,5 @@ const CartReducer = (state = initialState, action) => {
             }
     }
   };
-  // const quantityById = (state = initalState.ProductId, action) => {
-  //   const { payload,prize } = action
-  //   switch (action.type) {
-  //     case 'SET_QUANTITY':
-  //       return { ...state,
-  //         [payload]: (state[payload] || 0) + 1,price
-  //       }
-  //       case 'UNSET_QUANTITY':
-  //         return { ...state,
-  //           [payload]: (state[payload] || 0) - 1,
-  //           price
-  //         }
-  //      case 'REMOVE_FROM_CART':
-  //        console.log(payload)
-  //        delete state[payload]
-  //        return state;
-  //     default:
-  //       return state
-  //   }
-  // }
-
-
-// export const getQuantity = (state, productId) =>
-// state.ProductId[productId] || 0
-    // }else{
-                //   if(type==='whitepebble'){
-                //     (findItem.addon.whitepebbles={
-                //           quantity:findItem.addon.whitepebbles.quantity=1,
-                //            price:29,
-                //           isAdded:true}
-                //     )
-                //    }
-                //     if(type==='blackpebbles'){
-                //       (findItem.addon.blackpebbles={
-                //         quantity:findItem.addon.blackpebbles.quantity=1,
-                //          price:29,
-                //         isAdded:true}
-                //     )}
-
-                //     if(type==='baclandwhitepebble'){
-                //     (
-                //       findItem.addon.BlackWhitepebbles={
-                //         quantity:findItem.addon.BlackWhitepebbles.quantity=1,
-                //          price:29,
-                //         isAdded:true
-                //       }
-                //     )
-                //     if(type==='colouredpebbles'){
-                //     (
-                //       findItem.addon.colouredpebbles={
-                //         quantity:findItem.addon.colouredpebbles.quantity=1,
-                //          price:29,
-                //         isAdded:true}
-                //     )}
-                //   return {
-                //     ...state, items: [...state.items]
-                //   }
-                // }
-
 
   export {CartReducer};

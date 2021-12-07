@@ -1,11 +1,10 @@
 import { IonButton,IonLabel,IonItem,useIonToast,IonChip,IonList,IonListHeader,IonCheckbox,IonModal } from "@ionic/react"
 import {useState} from 'react'
 import { useSelector } from "react-redux";
-import {EditCustomDescription,RemoveCustomDescription,setEditToFalse} from '../Actions';
+import {EditCustomDescription,RemoveCustomDescription,setEditToFalse} from '../Actions/CartActions';
 
-export function CustomziationBox({customarray,setcustomto0,dispatch,customArrayHandler,customArrayEditHandler,setq1,setq2,setSku1,addtoCustomization,setSku2}){
+export function CustomziationBox({checked,setCheckBox,dispatch,customArrayHandler,customArrayEditHandler,setq1,setq2,setSku1,addtoCustomization,setSku2}){
       const [showModal, setShowModal] = useState(false);
-      const [checked,setCheckBox]=useState(false)
       const customarray1=useSelector((state)=>state.CartReducer.customdescription)
       const [edit,setEdit]=useState(false)
       const [present, dismiss] = useIonToast();
@@ -20,19 +19,15 @@ export function CustomziationBox({customarray,setcustomto0,dispatch,customArrayH
     return(
         <div>
                  <IonModal isOpen={showModal} backdropDismiss={false} style={{height:'500px'}}>
-                 <IonList>
+                 <IonList style={{padding:0}}>
          <IonListHeader>Please read carefully</IonListHeader>
-         {/* <IonItem button>you could request us for plant repot customization
-         by typing your In Cart Item SKU but in case we found some invalid SKU OR
-         no Item in cart related to your SKU then your request won't be fulfill</IonItem> */}
-         {/* <IonItem>Describe your Customization here if any in brief</IonItem> */}
          <IonItem>Terms and Conditions</IonItem>
          <IonItem>Your description must have products/items that you have added in your cart</IonItem>
          <IonItem>We will try our best to follow your description but if it is any kind of invalid request then that won't be fulfill </IonItem>
        </IonList>
        <div style={{display:"flex",margin:"0 12px"}}>
            <div style={{margin:"0 5px"}}>
-              <IonCheckbox style={{color:"white"}} checked={checked} onClick={()=>{setCheckBox(checked)}} />
+              <IonCheckbox style={{color:"white"}} checked={checked} onIonChange={(e)=>setCheckBox(e.detail.checked)} />
            </div>
            <div>
                <span style={{fontSize:"12px"}}>i Confirm</span>

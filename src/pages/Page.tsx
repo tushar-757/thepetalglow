@@ -1,6 +1,5 @@
-import { IonButtons, IonContent,useIonLoading,IonSearchbar,IonHeader, IonMenuButton, IonPage, IonTitle, IonToolbar, IonItem, IonButton, IonIcon, IonList } from '@ionic/react';
+import { IonButtons, IonContent,IonSearchbar,IonHeader, IonMenuButton, IonPage, IonTitle, IonToolbar, IonItem, IonIcon } from '@ionic/react';
 import React,{ useEffect, useState } from 'react';
-import { Route, Router, useParams } from 'react-router';
 import { useHistory ,useLocation} from 'react-router-dom';
 import SearchBar from './SearchBar';
 import './Page.css';
@@ -19,7 +18,7 @@ import TrackOrder from './TrackOrder';
 import IndoorPage from './IndoorPage';
 import OutdoorPage from './OutdoorPage';
 import SeasonalPage from './SeasonalPage';
-import {GetALLProducts, getCurrentProduct, setFilterData,setMenuIndex} from '../Actions';
+import { getCurrentProduct, setFilterData} from '../Actions';
 import BuyAgain from './BuyAgain';
 import CustomerService from './CustomerService';
 import Setting from './Setting';
@@ -30,10 +29,12 @@ import BuyAgainViewPage from './BuyAgainViewPage';
 import WishList from './WishList';
 import TermsandCondition from '../components/TermsAndConditions';
 import PrivacyPolicy from '../components/PrivacyPolicy';
-import Marquee from "react-fast-marquee";
 import ShippingPolicy from '../components/ShippingPolicy';
 import SoilandFertilizers from './SoilandFertilizers';
 import Succulent from './Succulent';
+import AboutUs from '../components/AboutUs';
+import EarthenPots from './EarthenPots';
+import CeramicPots from './CeramicPots';
 
 const Page:React.FC =(props)=>{
   const History = useHistory();
@@ -47,30 +48,9 @@ const Page:React.FC =(props)=>{
   const NotificationLength=useSelector((state:RootStateOrAny)=>state.NotificationReducer.Notifications)
   const SearchedData=useSelector((state:RootStateOrAny)=>state.ProductReducer.FilterData)
   const [search,setSearch]=useState(false)
-  const [TrackIds,setTrackId]=useState('')
-  const [OrderIds,setOrderId]=useState('')
-  const params=useParams()
 
-  // useEffect(()=>{
-  //   if(params){
-  //     setOrderId(params.OrderId)
-  //     setTrackId(params.TrackId)
-  //   }
-  // },[])
 
   useEffect(()=>{
-    if(Location.pathname===`/BuyAgainOrder/${params.OrderId}`){
-      console.log(true)
-      if(params?.OrderId!=undefined){
-        setOrderId(params.OrderId)
-      }
-    }
-    if(Location.pathname.includes("/TrackOrder/")){
-      console.log(true)
-      if(params?.TrackId!=undefined){
-        setTrackId(params.TrackId)
-      }
-    }
     setLocationState(Location.pathname)
     },[Location.pathname])
 
@@ -128,13 +108,6 @@ useEffect(()=>{
             setSearch(true)}}>
           </IonSearchbar>
       </IonHeader>
-     {(locationstate==='/page/ThePetalGlow')?<Marquee className="top-message" speed={40} gradient={false}>
-    As per our same day delivery Policy currently we are offering services only in Faridabad,we are trying our best to reach you.Please do not order if you are residing outside faridabad
-          </Marquee>:
-        (locationstate==='/page/Cart')? <Marquee className="top-message" speed={40} gradient={false}>
-          shipping is free for orders having cart value greater than 499,use coupon HAPPYPLANT30 for 15% OFF
-       </Marquee>:null
-          }
       <IonContent  onClick={()=>setSearch(false)}>
         {(search)?<div className="search-block" >
           {SearchedData?.map((d:any)=>(
@@ -153,9 +126,6 @@ useEffect(()=>{
 
         {
           (locationstate==='/page/ThePetalGlow')?<Home/>:
-          (locationstate==='/page/ThePetalGlow/PrivacyPolicy')?<PrivacyPolicy/>:
-          (locationstate==='/page/ThePetalGlow/TermsandCondition')?<TermsandCondition/>:
-          (locationstate==='/page/ThePetalGlow/ShippingPolicy')?<ShippingPolicy/>:
           (locationstate==='/page/MapsPage')?<MapsPage/>:
           (locationstate==='/page/ViewPage')?<ViewPage/>:
           (locationstate==='/page/Cart')?<Cart/>:
@@ -168,6 +138,8 @@ useEffect(()=>{
           (locationstate==='/page/SucculentPlants')?<Succulent/>:
           (locationstate==='/page/PlasticPots')?<PlasticPots/>:
           (locationstate==='/page/Pebbles')?<Pebbles/>:
+          (locationstate==='/page/EarthenPots')?<EarthenPots/>:
+          (locationstate==='/page/CeramicPots')?<CeramicPots/>:
           (locationstate==='/page/SoilandFertilizers')?<SoilandFertilizers/>:
           (locationstate==='/page/searchbar')?<SearchBar/>:
           (locationstate==='/page/BuyAgainOrder')?<BuyAgainViewPage/>:
@@ -178,9 +150,11 @@ useEffect(()=>{
           (locationstate==='/page/Settings')?<Setting/>:
           (locationstate==='/page/Customer Service')?<CustomerService/>:
           (locationstate===`/page/TrackOrder`)?<TrackOrder/>:
+          (locationstate==='/page/ThePetalGlow/PrivacyPolicy')?<PrivacyPolicy/>:
+          (locationstate==='/page/ThePetalGlow/TermsandCondition')?<TermsandCondition/>:
+          (locationstate==='/page/ThePetalGlow/ShippingPolicy')?<ShippingPolicy/>:
+          (locationstate==='/page/ThePetalGlow/AboutUs')?<AboutUs/>:
           <TrackOrder/>
-          // (locationstate===`/page/BuyAgainOrder/${OrderIds}`)?<BuyAgainViewPage/>:
-          // <>`Sorry you are on a wrong page ${Location.pathname}--- ${OrderIds} ${TrackIds}`</>
         }
         <a className="floating-whatsapp" href="#"
         onClick={()=>window.open('https://wa.me/+17278771267', '_blank')}>

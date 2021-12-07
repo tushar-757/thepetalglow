@@ -82,7 +82,7 @@ return(
                           justifyContent: 'center',
                           flexDirection:'column'
                     }}>
-                          <p style={{alignItems:'center',fontWeight:"bold",display:'flex'}}><BiRupee/><BiRupee/>{data?.price}</p>
+                          <p style={{alignItems:'center',fontWeight:"bold",display:'flex'}}><BiRupee/>{data?.price}</p>
                     <IonButton fill="solid" slot="end" style={{color:"white", width: '126px',
     height: '25px',fontSize:"0.8rem"}}
                        onClick={()=>{

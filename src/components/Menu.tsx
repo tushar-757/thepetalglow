@@ -18,7 +18,8 @@ import './Menu.css';
 import {RootStateOrAny, useDispatch,useSelector} from 'react-redux';
 import IsLoggedIn from '../Hooks/isLoggedIn';
 import {useHistory} from 'react-router-dom'
-import { EmptyCart, EmptyOrders, RemoveUser, UserOrders,setMenuIndex } from '../Actions';
+import {  EmptyOrders, RemoveUser, UserOrders,setMenuIndex } from '../Actions';
+import {EmptyCart} from '../Actions/CartActions'
 import { useState } from 'react';
 
 interface AppPage {

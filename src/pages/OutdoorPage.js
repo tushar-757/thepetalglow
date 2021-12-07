@@ -32,7 +32,6 @@ return(
                 {Data?.map((data,i)=>(
                     <IonCard className="best-selling-cont-item">
                       <IonCardHeader style={{padding:'0px'}}>
-                            {console.log(data?.images?.[0])}
                          <img src={data?.images?.[0]}
                            onClick={()=>{
                               present({
@@ -62,7 +61,6 @@ return(
                                 <AiFillHeart style={{fontSize:"24px",color:"#e91e1e"}} onClick={()=>dispatch(removefromLikes(data?._id))}/>}
                                 </div>
                            </div>
-                          <h1 style={{fontSize:12}}><BiRupee/>{data?.prize}</h1>
                     </div>
                     <IonCardContent style={{padding:"0"}}>
                           <div style={{
