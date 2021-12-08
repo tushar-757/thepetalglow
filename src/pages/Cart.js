@@ -517,14 +517,14 @@ const options = {
                  </div>
                  <div className="select-location-div">
                     <h1 style={{fontSize:12}}>Deliver To</h1>
-                    <div className="select-location-view"  onClick={()=>History.push("/page/MapsPage")}>
+                    <div className="select-location-view-cart"  onClick={()=>History.push("/page/MapsPage")}>
                           <IonIcon slot="start"  md={location} style={{color:'blue'}}/>
                       <h1 className="h1-home location-color">
                       select your location
                       </h1>
                     </div>
                  </div>
-                 <div style={{position:"relative"}} className="select-location-view select-location-div" >
+                 <div style={{position:"relative"}} className="select-location-view-cart select-location-div" >
                    <span>{User?.User?.Address?.hno}</span>,
                    <span>{User?.User?.Address?.society}</span>,
                    <span>{User?.User?.Address?.pincode}</span>

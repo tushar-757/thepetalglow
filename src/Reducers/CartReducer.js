@@ -12,12 +12,8 @@ const CartReducer = (state = initialState, action) => {
        case "ADD_TO_CART":
         let existed_item = state.items.find(item => action.payload._id === item._id)
         if (existed_item) {
-          action.payload.orderquantity += 1
           return {
-            ...state,
-            items: [...state.items],
-            total: state.total + action.payload.price,
-            grandtotal: state.total + action.payload.price
+            ...state
           }
         }
         else {
