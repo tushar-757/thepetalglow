@@ -498,36 +498,38 @@ const options = {
                  <div style={{margin:16}}>
                  {time.includes('am')?
                         <>
-                        <div style={{marginTop:'10px'}}>
-                          <h1 style={{fontSize:18,color:"green"}}>Get it by Today {moment(currentdate).format("MMM Do")}</h1>
+                        <div className="GetBox">
+                          <h1 className="GetItBy">Get it by Today {moment(currentdate).format("MMM Do")}</h1>
                         </div>
                         </>
                          :
                          <>
                         {(time>=4&&time<12)?
-                        <div style={{marginTop:'10px'}}>
-                          <h1 style={{fontSize:18,color:"green"}}>Get it by Tomorrow { moment(currentdate).add(1,"days").format("MMM Do")}</h1>
+                        <div className="GetBox">
+                          <h1 className="GetItBy">Get it by Tomorrow { moment(currentdate).add(1,"days").format("MMM Do")}</h1>
                         </div>:
-                        <div style={{marginTop:'10px'}}>
-                        <h1 style={{fontSize:18,color:"green"}}>Get it by Today {moment(currentdate).format("MMM Do")}</h1>
+                        <div className="GetBox">
+                        <h1  className="GetItBy">Get it by Today {moment(currentdate).format("MMM Do")}</h1>
                       </div>
                         }
                         </>
                      }
                  </div>
-                 <div style={{marginTop:'10px',margin:"1rem"}}>
+                 <div className="select-location-div">
                     <h1 style={{fontSize:12}}>Deliver To</h1>
                     <div className="select-location-view"  onClick={()=>History.push("/page/MapsPage")}>
-          <IonIcon slot="start"  md={location} style={{color:'blue'}}/>
-              <h1 className="h1-home" style={{color:"black",fontSize:"0.8rem"}}>select your location</h1>
+                          <IonIcon slot="start"  md={location} style={{color:'blue'}}/>
+                      <h1 className="h1-home location-color">
+                      select your location
+                      </h1>
                     </div>
                  </div>
-                 <div style={{marginTop:'10px',margin:"1rem",position:"relative"}} className="select-location-view" >
+                 <div style={{position:"relative"}} className="select-location-view select-location-div" >
                    <span>{User?.User?.Address?.hno}</span>,
                    <span>{User?.User?.Address?.society}</span>,
                    <span>{User?.User?.Address?.pincode}</span>
                    <span style={{position:"absolute",left:"80%"}} onClick={()=>setShowModal(true)}>
-                     <IonIcon md={createOutline} />
+                     <IonIcon md={createOutline} style={{fontSize:24}}/>
                    </span>
                  </div>
                  <div className="total-bar">

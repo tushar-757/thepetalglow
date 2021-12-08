@@ -9,18 +9,18 @@ export default function LoadingBox(){
       //   <div></div>
       //   <div></div>
       // </div>
-<div class="loader">
+<div className="loader">
   <h1>
-  <span class="let1">l</span>
-  <span class="let2">o</span>
-  <span class="let3">a</span>
-  <span class="let4">d</span>
-  <span class="let5">i</span>
-  <span class="let6">n</span>
-  <span class="let7">g</span>
-  <span class="let8">.</span>
-  <span class="let9">.</span>
-  <span class="let10">.</span>
+  <span className="let1">l</span>
+  <span className="let2">o</span>
+  <span className="let3">a</span>
+  <span className="let4">d</span>
+  <span className="let5">i</span>
+  <span className="let6">n</span>
+  <span className="let7">g</span>
+  <span className="let8">.</span>
+  <span className="let9">.</span>
+  <span className="let10">.</span>
 </h1>
 </div>
     )

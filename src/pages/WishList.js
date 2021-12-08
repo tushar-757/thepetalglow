@@ -13,7 +13,7 @@ export default function WishList(){
     const [like,setLike]=useState(false)
     const data1=localStorage.getItem("wishlistitems")
     const data=JSON.parse(data1)
-    console.log(data)
+
 
 return(
     <div className="best-selling-cont">

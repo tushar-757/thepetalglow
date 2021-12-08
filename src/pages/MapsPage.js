@@ -4,7 +4,7 @@ import { Geolocation } from '@ionic-native/geolocation'
 import { IonButton } from '@ionic/react';
 
 const AnyReactComponent = ({ text }) => <div>{text}</div>;
-export function MapsPage(){
+export default function MapsPage(){
   const [lat,setLat]=useState('')
   const [long,setLong]=useState('')
   useEffect(()=>{

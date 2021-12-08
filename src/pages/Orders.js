@@ -107,10 +107,11 @@ export default function Orders(){
            <h1 style={{margin:'1rem'}}>{(Orders?.length===0||Orders===undefined)?"No Orders To Show":null}</h1>
           {
             Orders?.map((data,i)=>(
-              <div className="order-box">
+              <div className="order-box" key={i}>
                 <div className="order-box-1stdiv">
                   <div className="order-box-1stdiv-head">OrderId:
-                  <textarea className="order-id" colms={25}  ref={el => textAreaRef.current[i] = el}  readonly>{(data?.id)}</textarea>
+                  <textarea className="order-id" colms={25}  ref={el => textAreaRef.current[i] = el}  readOnly
+                  value={(data?.id)}/>
                   <div className="order-id-copy">
                     <AiFillCopy onClick={(e)=>copyToClipboard(e,i)}  />
              </div>
@@ -150,8 +151,8 @@ export default function Orders(){
               <TableCell>{row?.name}</TableCell>
               <TableCell>{row?.price}</TableCell>
               <TableCell>{row?.quantity}</TableCell>
-              <TableCell>{row?.addons?.map((data)=>
-                 <>{(data?.whitepebbles?.isAdded)?<>
+              <TableCell>{row?.addons?.map((data,i)=>
+                 <div key={i}>{(data?.whitepebbles?.isAdded)?<>
                    <div>whitepebbles</div>
                    <div>Qty. {data?.whitepebbles?.quantity}</div>
                    <div>Price {data?.whitepebbles?.price}</div>
@@ -169,18 +170,17 @@ export default function Orders(){
                    <div>Price {data?.colouredpebbles?.price}</div>
                   </>:null
                    }
-                 </>
+                 </div>
               )}</TableCell>
             </TableRow>))}
+            </TableBody>
+            </Table>
             <div>Shipping Charge:{data?.shipping}</div>
             <div>Discount:{data?.discount}</div>
             <div  className="order-box-total">Total:{data?.total}</div>
-            </TableBody>
-            </Table>
                 </div>
                <div style={{color:"black"}}>CreatedAt  {(data?.createdAt)
                ?moment(data.createdAt).format('MMMM Do YYYY, h:mm:ss a'):data.createdAt}</div>
-               {console.log(moment(data.createdAt).format('h:mma'))}
                <div>
                  <div>{(data?.userRequestedDate)?'your requested date:'+moment(data?.userRequestedDate).format("MMM Do"):null}</div>
                 {(data?.Paymentstatus==="success")?

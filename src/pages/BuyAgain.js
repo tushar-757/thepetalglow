@@ -23,11 +23,7 @@ export default function BuyAgain(){
     const [present1, dismiss] = useIonToast()
 
     function copyToClipboard(e,i) {
-      // textAreaRef.current.select();
-      console.log(textAreaRef.current)
       navigator.clipboard.writeText(textAreaRef.current[i].value)
-      // This is just personal preference.
-      // I prefer to not show the whole text area selected.
       e.target.focus();
       setCopySuccess('Copied!');
       present1(
@@ -47,10 +43,11 @@ export default function BuyAgain(){
             <h1 style={{margin:'1rem'}}>{(NotActiveOrders?.length===0||NotActiveOrders===undefined)?"No Orders To Show":null}</h1>
           {
             NotActiveOrders?.map((data,i)=>(
-              <div className="order-box">
+              <div className="order-box" key={i}>
                 <div className="order-box-1stdiv">
                   <div className="order-box-1stdiv-head">OrderId:
-                  <textarea className="order-id" colms={25}  ref={el => textAreaRef.current[i] = el}  readonly>{(data?.id)}</textarea>
+                  <textarea className="order-id" colms={25}  ref={el => textAreaRef.current[i] = el}  readOnly
+                  value={(data?.id)}/>
                   <div className="order-id-copy">
                     <AiFillCopy onClick={(e)=>copyToClipboard(e,i)}  />
              </div>
@@ -90,8 +87,8 @@ export default function BuyAgain(){
               <TableCell>{row?.name}</TableCell>
               <TableCell>{row?.price}</TableCell>
               <TableCell>{row?.quantity}</TableCell>
-              <TableCell>{row?.addons?.map((data)=>
-                 <>{(data?.whitepebbles?.isAdded)?<>
+              <TableCell>{row?.addons?.map((data,i)=>
+                 <div key={i}>{(data?.whitepebbles?.isAdded)?<>
                    <div>whitepebbles</div>
                    <div>Qty. {data?.whitepebbles?.quantity}</div>
                    <div>Price {data?.whitepebbles?.price}</div>
@@ -109,14 +106,14 @@ export default function BuyAgain(){
                    <div>Price {data?.colouredpebbles?.price}</div>
                   </>:null
                    }
-                 </>
+                 </div>
               )}</TableCell>
             </TableRow>))}
+            </TableBody>
+            </Table>
             <div>Shipping Charge:{data?.shipping}</div>
             <div>Discount:{data?.discount}</div>
             <div  className="order-box-total">Total:{data?.total}</div>
-            </TableBody>
-            </Table>
                 </div>
                <div style={{color:"black"}}>CreatedAt  {(data?.createdAt)
                ?moment(data.createdAt).format('MMMM Do YYYY, h:mm:ss a'):data.createdAt}</div>

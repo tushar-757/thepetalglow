@@ -1,40 +1,42 @@
 import { IonButtons, IonContent,IonSearchbar,IonHeader, IonMenuButton, IonPage, IonTitle, IonToolbar, IonItem, IonIcon } from '@ionic/react';
-import React,{ useEffect, useState } from 'react';
+import React,{ useEffect, useState,Suspense } from 'react';
 import { useHistory ,useLocation} from 'react-router-dom';
-import SearchBar from './SearchBar';
 import './Page.css';
 import { cart, notifications } from 'ionicons/icons';
-import Home from './Home';
-import {MapsPage} from './MapsPage';
-import ViewPage from './ViewPage';
-import Cart from './Cart';
 import { RootStateOrAny, useSelector ,useDispatch} from 'react-redux';
-import Login from './Login';
-import Register from './Register';
-import PaymentGategay from './PaymentGateway';
-import Orders from './Orders';
-import Notifications from './Notifications';
-import TrackOrder from './TrackOrder';
-import IndoorPage from './IndoorPage';
-import OutdoorPage from './OutdoorPage';
-import SeasonalPage from './SeasonalPage';
-import { getCurrentProduct, setFilterData} from '../Actions';
-import BuyAgain from './BuyAgain';
-import CustomerService from './CustomerService';
-import Setting from './Setting';
-import PlasticPots from './PlasticPots';
-import Pebbles from './Pebbles';
 import { RiWhatsappFill } from 'react-icons/ri';
-import BuyAgainViewPage from './BuyAgainViewPage';
-import WishList from './WishList';
-import TermsandCondition from '../components/TermsAndConditions';
-import PrivacyPolicy from '../components/PrivacyPolicy';
-import ShippingPolicy from '../components/ShippingPolicy';
-import SoilandFertilizers from './SoilandFertilizers';
-import Succulent from './Succulent';
-import AboutUs from '../components/AboutUs';
-import EarthenPots from './EarthenPots';
-import CeramicPots from './CeramicPots';
+import { getCurrentProduct, setFilterData} from '../Actions';
+import  Home from './Home';
+import LoadingBox from '../components/LoadingComponent';
+const SearchBar =React.lazy(()=>import('./SearchBar'));
+const MapsPage =React.lazy(()=>import('./MapsPage'));
+const Cart =React.lazy(()=>import('./Cart'));
+const ViewPage =React.lazy(()=>import('./ViewPage'));
+const Login =React.lazy(()=>import('./Login'));
+const Register =React.lazy(()=>import('./Register'));
+const PaymentGategay =React.lazy(()=>import('./PaymentGateway'));
+const Orders =React.lazy(()=>import('./Orders'));
+const Notifications =React.lazy(()=>import('./Notifications'));
+const TrackOrder =React.lazy(()=>import('./TrackOrder'));
+const IndoorPage =React.lazy(()=>import('./IndoorPage'));
+const OutdoorPage =React.lazy(()=>import('./OutdoorPage'));
+const SeasonalPage =React.lazy(()=>import('./SeasonalPage'));
+const BuyAgain =React.lazy(()=>import('./BuyAgain'));
+const CustomerService =React.lazy(()=>import('./CustomerService'));
+const Setting =React.lazy(()=>import('./Setting'));
+const PlasticPots =React.lazy(()=>import('./PlasticPots'));
+const Pebbles =React.lazy(()=>import('./Pebbles'));
+const BuyAgainViewPage =React.lazy(()=>import('./BuyAgainViewPage'));
+const WishList =React.lazy(()=>import('./WishList'));
+const TermsandCondition =React.lazy(()=>import('../components/TermsAndConditions'));
+const PrivacyPolicy =React.lazy(()=>import('../components/PrivacyPolicy'));
+const ShippingPolicy =React.lazy(()=>import('../components/ShippingPolicy'));
+const SoilandFertilizers =React.lazy(()=>import('./SoilandFertilizers'));
+const Succulent =React.lazy(()=>import('./Succulent'));
+const AboutUs =React.lazy(()=>import('../components/AboutUs'));
+const EarthenPots =React.lazy(()=>import('./EarthenPots'));
+const CeramicPots =React.lazy(()=>import('./CeramicPots'));
+// React.lazy(() => import('./OtherComponent'));
 
 const Page:React.FC =(props)=>{
   const History = useHistory();
@@ -71,6 +73,7 @@ const Page:React.FC =(props)=>{
 useEffect(()=>{
   SearchHandler()
 },[searchText])
+
   return (
     <IonPage>
       <IonHeader style={{backgroundColor:"#28b156"}} >
@@ -116,14 +119,13 @@ useEffect(()=>{
                   dispatch(getCurrentProduct(d?._id))
                   setSearch(false)
                   History.push("/page/ViewPage")}} style={{color:"black"}}>
-                    {console.log(d)}
                     <img src={d?.images[0]} style={{width:55}} />
                     {d.name}</IonItem>
                   </>
             ))}
             {(SearchedData.length===0)?"No Results Found":null}
             </div>:null}
-
+            <Suspense fallback={<div><LoadingBox/></div>}>
         {
           (locationstate==='/page/ThePetalGlow')?<Home/>:
           (locationstate==='/page/MapsPage')?<MapsPage/>:
@@ -156,6 +158,7 @@ useEffect(()=>{
           (locationstate==='/page/ThePetalGlow/AboutUs')?<AboutUs/>:
           <TrackOrder/>
         }
+         </Suspense>
         <a className="floating-whatsapp" href="#"
         onClick={()=>window.open('https://wa.me/+17278771267', '_blank')}>
          <RiWhatsappFill style={{fontSize:'48px',color:'white'}}/>
@@ -166,3 +169,5 @@ useEffect(()=>{
 };
 
 export default Page;
+
+

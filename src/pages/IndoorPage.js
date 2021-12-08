@@ -1,28 +1,52 @@
-import { IonCard,IonButton,IonCardContent,IonContent,IonPage,useIonLoading,IonIcon, IonCardHeader } from '@ionic/react';
+import { IonCard,IonButton,IonCardContent,useIonToast,useIonLoading,IonIcon, IonCardHeader } from '@ionic/react';
 import {  useDispatch, useSelector} from 'react-redux';
 import {arrowBackCircle } from "ionicons/icons"
 import { Addtocart,getIndoorProduct ,addToLikes,removefromLikes,setLoading,setUnLoading} from '../Actions';
 import {BiRupee} from 'react-icons/bi'
 import {useHistory} from 'react-router-dom'
 import {AiFillHeart,AiOutlineHeart} from 'react-icons/ai'
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 import LoadingBox from '../components/LoadingComponent';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 export default function IndoorPage(){
     const dispatch=useDispatch();
     const History = useHistory();
-    const Data=useSelector((state)=>state.ProductReducer.Indoor)
+    const data=useSelector((state)=>state.ProductReducer.Indoor)
 //     const Loading=useSelector((state)=>state.ProductReducer.loading)
     const Loading=useSelector((state)=>state.NotificationReducer.Loading)
     const [present, dismiss] = useIonLoading();
-    const [like,setLike]=useState(false)
     const [setback,setBack]=useState(false)
-    const startLoading=()=>{
-      dispatch(setLoading(true))
-      setTimeout(()=>{
-         dispatch(setUnLoading(false))
-      },[2000])
-  }
+    const [Data,setData]=useState([])
+    const [present1, dismiss1] = useIonToast();
+  //   const startLoading=()=>{
+  //     dispatch(setLoading(true))
+  //     setTimeout(()=>{
+  //        dispatch(setUnLoading(false))
+  //     },[1000])
+  // }
+
+
+  useEffect(()=>{
+      if(Array.isArray(data)){
+            setData(data)
+            if(data?.length===0){
+                present1(
+                      {
+                          color: 'danger',
+                          duration: 5000,
+                          message: `something went wrong:check your connection`
+                        })
+            }
+      }else{
+          present1(
+                {
+                    color: 'danger',
+                    duration: 5000,
+                    message: `something went wrong:${data}`
+                  })
+      }
+  },[data])
 return(
       (Loading)?
       <>
@@ -44,8 +68,13 @@ return(
                 {Data?.map((data,i)=>(
                     <IonCard className="best-selling-cont-item">
                       <IonCardHeader style={{padding:'0px'}}>
-                            {console.log(data?.images?.[0])}
-                         <img src={data?.images?.[0]}  onClick={()=>{
+                      <LazyLoadImage
+                            alt={data?.name}
+                            src={data?.images?.[0]}
+                            effect="blur"
+                            height={150}
+                            width="100%"
+                          onClick={()=>{
                         present({
                               message: 'Loading...',
                               duration:1000

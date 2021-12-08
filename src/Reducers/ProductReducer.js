@@ -10,6 +10,11 @@ const initalState={
     FilterData:[],
     BestSellingData:[],
     review:[],
+     fivestar:0,
+     fourstar:0,
+     threestar:0,
+     twostar:0,
+     onestar:0,
     loading: false,
     error: null,
     selectedProduct:{}
@@ -154,12 +159,10 @@ const initalState={
               }
               case "ADD_TO_LIKES":
                 let item=state.BestSellingData.find(item => action.payload === item._id)
-                console.log(JSON.stringify(item)+"outside")
                 if(item===null||item===undefined){
                   item=state.Indoor.find(item => action.payload === item._id)
                   if(item===null||item===undefined){
                     item=state.Outdoor.find(item => action.payload === item._id)
-                    console.log(item+"outdoor")
                     if(item===null||item===undefined){
                       item=state.Seasonal.find(item => action.payload === item._id)
                       if(item===null||item===undefined){
@@ -217,6 +220,31 @@ const initalState={
                   Pebbles:[...state.Pebbles]
                 }
                 case "SET_REVIEW":
+                  const reviews=action?.payload
+                  if(reviews!=undefined){
+                    state.fivestar=0
+                    state.fourstar=0
+                    state.threestar=0
+                    state.twostar=0
+                    state.onestar=0
+                    reviews.map((data)=>{
+                      if(data?.stars===5){
+                         state.fivestar=state.fivestar+1
+                      }
+                      if(data?.stars===4||data?.stars===4.5){
+                        state.fourstar=state.fourstar+1
+                      }
+                      if(data?.stars===3||data?.stars===3.5){
+                        state.threestar=state.threestar+1
+                       }
+                      if(data?.stars===2||data?.stars===2.5){
+                        state.twostar=state.twostar+1
+                      }
+                       if(data?.stars===1||data?.stars===1.5){
+                        state.onestar=state.onestar+1
+                       }
+                     })
+                  }
                   return {
                     ...state,review:action.payload
                   }

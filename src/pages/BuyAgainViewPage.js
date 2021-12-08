@@ -57,14 +57,20 @@ export default function BuyAgainViewPage(){
               <TableCell>{row?.price}</TableCell>
               <TableCell>{row?.quantity}</TableCell>
             </TableRow>))}
-            <div  className="order-box-total">Total:{userOrder?.total}</div>
             </TableBody>
             </Table>
+            <div style={{margin:15}}>
+            <div>Shipping Charge:{userOrder?.shipping}</div>
+            <div>Discount:{userOrder?.discount}</div>
+            <div  className="order-box-total">Total:{userOrder?.total}</div>
+            </div>
             <div>
             </div>
             </div>
-                {userOrder?.customization?.map((data)=>
+                {userOrder?.customization?.map((data,i)=>
+                <div key={i}>
                    <p className="track-order-custom">{data}</p>
+                   </div>
                 )}
                     </div>
                     <div>

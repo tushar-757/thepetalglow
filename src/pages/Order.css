@@ -18,6 +18,7 @@ width: 95%
     font-size: 0.8rem;
 }
 .order-box-total{
+    margin-left:2px;
     color: black;
 }
 .order-pay-btn{

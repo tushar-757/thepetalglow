@@ -1,20 +1,45 @@
-import { IonCard,IonButton,IonCardContent,useIonLoading,IonIcon, IonCardHeader } from '@ionic/react';
+import { IonCard,IonButton,IonCardContent,useIonToast,useIonLoading,IonIcon, IonCardHeader } from '@ionic/react';
 import {arrowBackCircle } from "ionicons/icons"
 import {  useDispatch,useSelector} from 'react-redux';
 import { Addtocart,GET_SELECTED_FERTILIZER,addToLikes,removefromLikes } from '../Actions';
 import {BiRupee} from 'react-icons/bi'
 import {useHistory} from 'react-router-dom'
 import {AiFillHeart,AiOutlineHeart} from 'react-icons/ai'
-import { useState } from 'react';
+import { useState,useEffect} from 'react';
 import LoadingBox from '../components/LoadingComponent';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 export default function SoilandFertilizers(){
     const dispatch=useDispatch();
     const History = useHistory();
     const [present, dismiss] = useIonLoading();
     const Loading=useSelector((state)=>state.ProductReducer.loading)
-    const Data=useSelector((state)=>state.ProductReducer.Fertilizers)
+    const data=useSelector((state)=>state.ProductReducer.Fertilizers)
     const [like,setLike]=useState(false)
+    const [Data,setData]=useState([])
+    const [present1, dismiss1] = useIonToast();
+
+    useEffect(()=>{
+          console.log(data)
+        if(Array.isArray(data)){
+              setData(data)
+              if(data?.length===0){
+                  present1(
+                        {
+                            color: 'danger',
+                            duration: 5000,
+                            message: `something went wrong:check your connection`
+                          })
+              }
+        }else{
+            present1(
+                  {
+                      color: 'danger',
+                      duration: 5000,
+                      message: `something went wrong:${data}`
+                    })
+        }
+    },[data])
 
 return(
       (Loading)?
@@ -34,10 +59,15 @@ return(
          </div>
            <div  className="best-selling-cont">
                 {Data?.map((data,i)=>(
-                    <IonCard className="best-selling-cont-item">
+                    <IonCard className="best-selling-cont-item" key={i}>
                       <IonCardHeader style={{padding:'0px'}}>
-                            {console.log(data?.images?.[0])}
-                         <img src={data?.images?.[0]} onClick={()=>{
+                       <LazyLoadImage
+                            alt={data?.name}
+                            src={data?.images?.[0]}
+                            effect="blur"
+                            height={150}
+                            width="100%"
+                          onClick={()=>{
                         present({
                               message: 'Loading...',
                               duration:1000

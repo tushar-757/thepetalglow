@@ -58,13 +58,10 @@ export default function Login(){
             localStorage.setItem('user',JSON.stringify(user1));
             localStorage.setItem('user_id',id);
             localStorage.setItem('useraccesstoken',token);
-            // alert(response?.data?.message)
             setLoading(false)
             History.goBack();
           }
     }catch(error){
-      console.log(error.message)
-      console.log(error?.response?.data?.message)
       setLoading(false)
       setReset(true)
       if(error.message==='Request failed with status code 429'){

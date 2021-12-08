@@ -18,31 +18,61 @@ import {FiHelpCircle} from 'react-icons/fi'
 import LoadingBox from '../components/LoadingComponent';
 import api from '../Services/urlApi';
 import Logo from '../static/favicon.png'
-
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import Image1 from '../static/image5.jpg'
+import Image2 from '../static/FINALIMAGE2.jpg'
+import Image3 from '../static/kokedama.jpg'
+import Image4 from '../static/luckybamboo.jpg'
 
 const slideOpts = {
   initialSlide: 0,
   speed: 400,
 };
 
-const ImageBar=({images})=>{
+const ImageBar=()=>{
   return(
     <IonSlides pager={true} options={slideOpts}  className="Home-SlideBar">
-      <IonSlide>
-      <iframe  className="Home-Player"  autoplay="autoplay" src="https://www.youtube.com/embed/_EB-qSLTCXQ" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
-        </IonSlide>
-    {images.map((data,i)=>(
-      <IonSlide  style={{backgroundColor:"white"}}>
-         <img src={data} style={{width:"100%"}}className="Home-SlideBar-Img" />
+      {/* <IonSlide>
+      <iframe  className="Home-Player"  autoPlay="autoplay" src="https://www.youtube-nocookie.com/embed/_EB-qSLTCXQ" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
+        </IonSlide> */}
+      <IonSlide  style={{backgroundColor:"white"}} >
+         <img
+           alt={Image1}
+           src={Image1}
+           width='100%'
+           className="Home-SlideBar-Img"
+           />
       </IonSlide>
-    ))}
+      <IonSlide>
+      <img
+           alt={Image2}
+           src={Image2}
+           width='100%'
+           className="Home-SlideBar-Img"
+           />
+      </IonSlide>
+      <IonSlide>
+      <img
+           alt={Image3}
+           src={Image3}
+           width='100%'
+           className="Home-SlideBar-Img"
+           />
+      </IonSlide>
+      <IonSlide>
+      <img
+           alt={Image4}
+           src={Image4}
+           width='100%'
+           className="Home-SlideBar-Img"
+           />
+      </IonSlide>
     </IonSlides>
 
   )}
 const Home=() => {
   const History = useHistory();
   const dispatch=useDispatch()
-  const images=useSelector((state)=>state.HomeReducer.images)
   const [user, user_id] = IsLoggedIn();
   const [email,setSubscribeEmail]=useState("")
   const [present, dismiss] = useIonToast();
@@ -79,7 +109,8 @@ const Home=() => {
       }, 2000);
     }
 
-    const SubscribeEmailHandler=async()=>{
+    const SubscribeEmailHandler=async(e)=>{
+      e.preventDefault();
       try{
          const response=await api.post("/user/Subscribe",{
           headers:{user_id1,Authorization:`Bearer ${useraccesstoken}`},
@@ -100,10 +131,6 @@ const Home=() => {
       }
     }
   return (
-    (Loading||loading)?
-    <>
-       <LoadingBox/>
-    </>:
     <>
     <IonPage>
       <IonContent>
@@ -117,18 +144,21 @@ const Home=() => {
         </IonRefresherContent>
            </IonRefresher>
           <div className="select-location" onClick={()=>History.push("/page/MapsPage")}>
-          <IonIcon slot="start"  md={location} style={{color:'#009688'}}/>
+          <IonIcon slot="start"  md={location} style={{color:'rgb(58, 223, 114)'}}/>
               <h1 className="h1-home" style={{color:"white"}}>select your location</h1>
           </div>
           <div className="select-location">
               <h1 className="h1-home" style={{padding:10}}>Currently Services are only available in  Faridabad</h1>
           </div>
           <ShopByCategory/>
-           <ImageBar images={images}/>
+           <ImageBar/>
            <div className="white-background">
              <h1 className="BestSellingTitle">Best Selling Items</h1>
            </div>
-            <BestSelling/>
+           {(Loading||loading)? <>
+            <LoadingBox/>
+            </>:
+            <BestSelling/>}
            <IonFooter className="white-background">
                   <div className="policy-div">
                       <div className="policy-divs">
@@ -145,7 +175,7 @@ const Home=() => {
                         <div style={{margin:"1rem"}}>
                           <FiHelpCircle style={{fontSize:"40px"}}/>
                         </div>
-                         Lifetime Support</div>
+                         Lifetime<br></br>Support</div>
                   </div>
                <IonHeader className="footer-header-home">
                  <img  className="footer-header-image"src={TPGLOGO}/>
@@ -153,29 +183,37 @@ const Home=() => {
                 <div style={{marginBottom:"2rem"}}>
                   <div className="follow-us-title">Follow Us</div>
                   <div className="footer-icon-block">
-                  <IonIcon slot="start"  md={logoFacebook}  className="footer-icon" style={{color:'cornflowerblue'}}/>
-                  <a href="https://www.instagram.com/thepetalglow/"><IonIcon slot="start"  md={logoInstagram} style={{color:'rgb(58, 223, 114);'}} className="footer-icon"/></a>
-                  <a href="https://www.youtube.com/watch?v=_EB-qSLTCXQ"><IonIcon slot="start"  md={logoYoutube} className="footer-icon" style={{color:'red'}}/></a>
-                  <IonIcon slot="start"  md={logoLinkedin} className="footer-icon" style={{color:'blue'}}/>
+                  <IonIcon slot="start"  md={logoFacebook}  className="footer-icon facebook" />
+                  <a href="https://www.instagram.com/thepetalglow/"><IonIcon slot="start"  md={logoInstagram} className="footer-icon insta"/></a>
+                  <a href="https://www.youtube.com/watch?v=_EB-qSLTCXQ"><IonIcon slot="start"  md={logoYoutube} className="footer-icon youtube" /></a>
+                  <IonIcon slot="start"  md={logoLinkedin} className="footer-icon linkdin"/>
                     </div>
                 </div>
            </IonFooter>
                     <div className="footer-newsletter">
                          <p style={{margin:"0px",padding:"30px",paddingBottom:"0px"}}>Subscribe to recieve news and coupons</p>
                          <div className="footer-newsletter-inner">
-                           <div style={{width:"80%"}}>
-                           <input placeholder="email" style={{background:"white",color:'black',border:'none',outline:"none",
-                        width:"99%", padding: '10px'}} type="text" value={email} onChange={(e)=>setSubscribeEmail(e.target.value)}/>
+                             <form onSubmit={(e)=>SubscribeEmailHandler(e)} style={{display:"flex",width:"100%"}}>
+                           <div className="EmailInput">
+                           <input placeholder="email"
+                            style={{background:"white",color:'black',border:'none',outline:"none",
+                            width:"99%", padding: '10px'}}
+                             type="text"
+                              value={email}
+                              onChange={(e)=>setSubscribeEmail(e.target.value)}
+                              required/>
                            </div>
                            <div style={{width:"40%"}}>
-                             <IonButton color="light" onClick={()=>SubscribeEmailHandler()}>Subscribe</IonButton>
+                             <IonButton color="light"
+                             type="submit">Subscribe</IonButton>
                            </div>
+                            </form>
                            </div>
-                           <div style={{margin:"0px",paddingBottom:"0px",padding:"30px"}}>
+                           <div className="BottomLine">
                                 <h3 style={{margin:"0",color: 'black'}}>About us:</h3>
                                 <a style={{color:'white'}} onClick={()=>History.push("/page/ThePetalGlow/AboutUs")}>https://thepetalglow.com/AboutUs</a>
                              </div>
-                           <div style={{margin:"0px",padding:"30px",paddingTop:0}}>
+                           <div className="BottomLine">
                                 <h3 style={{margin:"0",color: 'black'}}>Contact us:</h3>
                                 <div>
                                   757/31,Faridabad,Haryana,121003<br></br>
@@ -183,7 +221,7 @@ const Home=() => {
                                 Phone:+17278771267 (`whatsapp chat available only`)
                                 </div>
                              </div>
-                             <div style={{margin:"0rem",padding:"30px",paddingBottom:"0",paddingTop:"0"}}>
+                             <div className="BottomLine">
                                   <h3 style={{margin:"0",color: 'black'}}>Our Policies</h3>
                                   <div style={{display:"flex",flexDirection:"column"}}>
                                     <a style={{color:"white"}} onClick={()=>History.push("/page/ThePetalGlow/PrivacyPolicy")}>Privacy Policy</a>
@@ -191,12 +229,14 @@ const Home=() => {
                                     <a style={{color:"white"}} onClick={()=>History.push("/page/ThePetalGlow/TermsandCondition")}>Terms and conditions</a>
                                     </div>
                              </div>
-                             <div style={{margin:"1rem"}}>
+                             <div style={{margin:"1rem",display:'flex'}}>
+                               <div>
                                 All rights reserved © 2021 | thepetalglow.com
+                                </div>
+                               <div className="home-image">
+                                 <img src={Logo}/>
+                                 </div>
                              </div>
-                             <div>
-                               <img src={Logo} className="home-image"/>
-                               </div>
                     </div>
            </IonContent>
         </IonPage>

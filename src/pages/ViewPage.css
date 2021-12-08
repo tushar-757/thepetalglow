@@ -113,7 +113,7 @@
 }
 .review-box-username{
     display: flex;
-    justify-content: end;
+    justify-content: flex-end;
     margin: 0px;
 }
 .review-box-username p{
@@ -158,6 +158,21 @@
     align-items: center;
     color: white;
     border-bottom-left-radius: 10px;
+}
+.AddCartbtnstyle{
+    width:45%;
+    color:white;
+    height:50px;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+.GetItBy1{
+    font-size: 16px;
+    color:green
+}
+.GetBox1{
+    margin-top: 10px;
 }
 @media screen and (max-width: 550px) {
     .view-page-img{

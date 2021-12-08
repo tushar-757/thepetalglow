@@ -6,6 +6,10 @@ import {BiRupee} from 'react-icons/bi'
 import {AiFillHeart,AiOutlineHeart} from 'react-icons/ai'
 import LoadingBox from '../components/LoadingComponent';
 import { useEffect, useState } from 'react';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+
+
+
 export default function BestSelling(){
       const data=useSelector((state)=>state.ProductReducer.BestSellingData)
       const Loading=useSelector((state)=>state.ProductReducer.loading)
@@ -25,11 +29,16 @@ return(
                       <span className="best-selling-cont-festival-msg"
                       style={{color:data[0]?.color}}>{data[0]?.message}</span>
                       <IonCardHeader style={{padding:'0px'}}>
-                         <img src={d?.images?.[0]}
-                          onClick={()=>{
+                         <LazyLoadImage
+                            alt={d?.name}
+                            src={d?.images?.[0]}
+                            effect="blur"
+                            height={150}
+                            width="100%"
+                            onClick={()=>{
                               present({
                                     message: 'Loading...',
-                                    duration:1000
+                                    duration:100
                                   })
                                 dispatch(GETSELECTEDBESTSELLING(d._id))
                                 History.push("/page/ViewPage")}}/>
@@ -80,7 +89,7 @@ return(
                        onClick={()=>{
                         present({
                               message: 'Loading...',
-                              duration: 1000
+                              duration: 200
                             })
                           dispatch(Addtocart(d))
                          }}>Add To Cart</IonButton>

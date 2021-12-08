@@ -1,10 +1,11 @@
-import { IonCard,IonButton,IonCardContent,useIonLoading,IonIcon, IonCardHeader } from '@ionic/react';
+import { IonCard,IonButton,IonCardContent,useIonToast,useIonLoading,IonIcon, IonCardHeader } from '@ionic/react';
 import {  useDispatch,useSelector} from 'react-redux';
 import { Addtocart, getSeasonalProduct } from '../Actions';
 import {useHistory} from 'react-router-dom'
 import LoadingBox from '../components/LoadingComponent';
 import {arrowBackCircle } from "ionicons/icons"
 import {BiRupee} from 'react-icons/bi'
+import {useState,useEffect} from 'react'
 
 export default function SeasonalPage(){
     const dispatch=useDispatch();
@@ -12,6 +13,30 @@ export default function SeasonalPage(){
     const [present, dismiss] = useIonLoading();
     const data=useSelector((state)=>state.ProductReducer.Seasonal)
     const Loading=useSelector((state)=>state.NotificationReducer.Loading)
+
+    const [Data,setData]=useState([])
+    const [present1, dismiss1] = useIonToast();
+
+    useEffect(()=>{
+        if(Array.isArray(data)){
+              setData(data)
+              if(data?.length===0){
+                  present1(
+                        {
+                            color: 'danger',
+                            duration: 5000,
+                            message: `something went wrong:check your connection`
+                          })
+              }
+        }else{
+            present1(
+                  {
+                      color: 'danger',
+                      duration: 5000,
+                      message: `something went wrong:${data}`
+                    })
+        }
+    },[data])
 return(
       (Loading)?
       <>
@@ -28,7 +53,7 @@ return(
           <IonIcon md={arrowBackCircle} style={{fontSize:44,color:"rgb(33, 150, 243)",margin:2}}/>
          </div>
     <div className="best-selling-cont">
-                {data?.map((data,i)=>(
+                {Data?.map((data,i)=>(
                     <IonCard className="best-selling-cont-item">
                       <IonCardHeader style={{padding:'0px'}}>
                             {console.log(data?.images?.[0])}

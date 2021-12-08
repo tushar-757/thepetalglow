@@ -150,7 +150,7 @@
 .footer-newsletter{
     background: rgb(76, 175, 80);
     color: white;
-    height: 535px;
+    height: 500px;
     margin-top: 42px;
     position:relative
 }
@@ -169,9 +169,32 @@
 .home-image{
     position: absolute;
     width: 6%;
-    bottom: 6px;
-    left: 16px;
+    bottom:2px;
+    left: 18px;
     z-index: 1px
+}
+.EmailInput{
+    width: 80%;
+    display: flex;
+   justify-content: center;
+}
+.facebook{
+  color:cornflowerblue
+}
+.insta{
+    color:rgb(58, 223, 114)
+}
+.youtube{
+    color:red
+}
+.linkdin{
+color:blue
+}
+.BottomLine{
+    margin:0px;
+    padding-bottom:8px;
+    padding-top: 10px;
+    padding-left: 30px;
 }
 @media screen and (max-width: 480px) {
      .h1{

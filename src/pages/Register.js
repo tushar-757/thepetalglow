@@ -65,7 +65,6 @@ export default function Register(){
             localStorage.setItem('useraccesstoken',token);
             History.push("/page/ThePetalGlow");
         }catch(e){
-           console.log(e?.response?.data?.message?.message)
             present(
                 {
                     color: 'danger',

@@ -85,9 +85,7 @@ function PotModal({showPotModal,setShowPotModal}){
 export default function ShopByCategory(){
     const [showPlantModal, setShowPlantModal] = useState(false);
     const [showPotModal, setShowPotModal] = useState(false);
-    const [showCompostModal, setShowCompostModal] = useState(false);
     const History = useHistory()
-    const Loading=useSelector((state)=>state.NotificationReducer.Loading)
     const dispatch=useDispatch()
     const startLoading=()=>{
         dispatch(setLoading(true))

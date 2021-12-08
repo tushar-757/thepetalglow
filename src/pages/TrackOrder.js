@@ -59,7 +59,6 @@ export default function TrackOrder(){
 
     const History=useHistory()
 
-    console.log(time)
     return(
     (userOrder.Active===true)?
         <div>
@@ -144,16 +143,20 @@ export default function TrackOrder(){
               <TableCell>{row?.price}</TableCell>
               <TableCell>{row?.quantity}</TableCell>
             </TableRow>))}
+            </TableBody>
+            </Table>
+            <div style={{margin:15}}>
             <div>Shipping Charge:{userOrder?.shipping}</div>
             <div>Discount:{userOrder?.discount}</div>
             <div  className="order-box-total">Total:{userOrder?.total}</div>
-            </TableBody>
-            </Table>
+            </div>
             <div>
             </div>
             </div>
-                {userOrder?.customization?.map((data)=>
+                {userOrder?.customization?.map((data,i)=>
+                   <div key={i}>
                    <p className="track-order-custom">{data}</p>
+                   </div>
                 )}
                         <IonButton color="danger" style={{margin:"10px"}}
                         onClick={()=>History.push("/page/Customer%20Service")}>Change Order Delievery date</IonButton>

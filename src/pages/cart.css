@@ -10,16 +10,16 @@
 .coupon-code-h1{
     font-size: 0.8rem;
     position: absolute;
-    top: 56px;
-    left: 166px;
+    top: 74px;
+    left: 152px;
     z-index: 1;
     color: rgb(33, 150, 17);
 }
 .coupon-code-h2{
     font-size: 0.8rem;
     position: absolute;
-    top: 56px;
-    left: 166px;
+    top: 74px;
+    left: 152px;
     z-index: 1;
     color: red;
 }
@@ -93,4 +93,19 @@ width: 100%;
 .couponinput{
     background-color: white;
     margin: 8px 0px;
+}
+.GetItBy{
+    font-size: 16px;
+    color:green
+}
+.GetBox{
+    margin-top: 10px;
+}
+.select-location-div{
+    margin-top: 10px;
+    margin:1rem
+}
+.location-color{
+    color:black;
+    font-size: 0.8rem;
 }

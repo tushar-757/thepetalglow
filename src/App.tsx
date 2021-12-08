@@ -29,6 +29,7 @@ const App: React.FC = () => {
   //   showDuration: 2000,
   //   autoHide: true
   // });
+
   useEffect(()=>{
     // present({
     //   cssClass: 'my-css',
@@ -45,8 +46,8 @@ const App: React.FC = () => {
     dispatch(FetchPlantersProduct())
     dispatch(FetchSucculentProduct())
     dispatch(FetchSoilFertilzerProduct())
-
   },[])
+
   return (
     <IonApp>
       <IonReactRouter>

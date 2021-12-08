@@ -21,9 +21,9 @@ const slideOpts = {
 const ImageBar=(data)=>{
    return(
       <IonSlides pager={true} options={slideOpts} style={{height:290,zIndex:0}}>
-        {data?.data?.map((img)=>(
-         <IonSlide  style={{backgroundColor:"white"}}>
-     <img src={(img!=null)?img:TPGLOGO} className="view-page-img" />
+        {data?.data?.map((img,i)=>(
+         <IonSlide  style={{backgroundColor:"white"}} key={i}>
+          <img src={(img!=null)?img:TPGLOGO} className="view-page-img" />
     </IonSlide>
 ))}
 </IonSlides>
@@ -51,26 +51,7 @@ const ImageBar=(data)=>{
       </IonList>)
  }
 
-// function GetItBy(time,currentdate){
-//    return (
-//       <>
-//       {time.includes('am')?
-//       <>
-//        {(time<4||time==12)?
-//         <div style={{marginTop:'10px'}}>
-//         <h1 style={{fontSize:18}}>Get it by Today {moment(currentdate).format("MMM Do")}</h1>
-//          </div>
-//       :
-//       <div style={{marginTop:'10px'}}>
-//       <h1 style={{fontSize:18}}>Get it by Tomorrow { moment(currentdate).add(1,"days").format("MMM Do")}</h1>
-//        </div>
-//             }
-//        </>:<div style={{marginTop:'10px'}}>
-//       <h1 style={{fontSize:18}}>Get it by Tomorrow { moment(currentdate).add(1,"days").format("MMM Do")}</h1>
-//        </div>}
-//        </>
-//    )
-// }
+
 
 export default function ViewPage(){
    const [presentalert] = useIonAlert();
@@ -103,14 +84,23 @@ export default function ViewPage(){
        try{
           const item={};
          //  const itemobject=item.toObject()
-          if(Item.type.includes("Indoor")){
+          if(Item.context.includes("Indoor")){
             item.indoorid=Item?._id
           }
-          if(Item.type.includes("Outdoor")){
+          if(Item.context.includes("Outdoor")){
             item.outdoorid=Item?._id
           }
-          if(Item.type.includes("PLASTIC")){
+          if(Item.context.includes("Planter")){
             item.Planterid=Item?._id
+          }
+          if(Item.context.includes("Succulent")){
+            item.succulentid=Item?._id
+          }
+          if(Item.context.includes("Seasonal")){
+            item.seasonalid=Item?._id
+          }
+          if(Item.context.includes("Soil")){
+            item.soilid=Item?._id
           }
           const data=await api.post("/userreview",{headers:{user_id,Authorization:`Bearer ${useraccesstoken}`},
          rating,description,item})
@@ -124,7 +114,6 @@ export default function ViewPage(){
             ],
             onDidDismiss: (e) => console.log('did dismiss'),
           })
-         console.log(data)
        }catch(e){
            alert("something is not right")
        }
@@ -167,7 +156,7 @@ export default function ViewPage(){
               History.goBack()
               present2({
                 message: 'Loading...',
-                 duration:1000
+                 duration:100
               })
            }} className="back-btn-css">
           <IonIcon md={arrowBackCircle} style={{fontSize:44,color:"#2196f3",margin:5}}/>
@@ -205,9 +194,9 @@ export default function ViewPage(){
                              <p>Our Recommended Pot Customization</p>
                            {(Item?.Customizations?.length>0)?
                              <div className="viewpage-Customization">
-                                {Item?.Customizations?.map((data)=>
-                                   <div className="viewpage-customization-box">
-                                      <img src={data?.images[0]} style={{width:"90%",height:"65%"}}/>
+                                {Item?.Customizations?.map((data,i)=>
+                                   <div className="viewpage-customization-box" key={i}>
+                                      <img alt={data?.name} src={data?.images[0]} style={{width:"90%",height:"65%"}}/>
                                       <p>{(data?.name?.length>20)?data?.name?.substring(0,20)+"...":data?.name}</p>
                                       <div style={{display:"flex"}}>
                                       <div style={{width:"70%"}}><BiRupee/>{data?.price}</div>
@@ -224,18 +213,18 @@ export default function ViewPage(){
                              </div>:<div>nothing to show currently</div>}
                        {time.includes('am')?
                         <>
-                        <div style={{marginTop:'10px'}}>
-                          <h1 style={{fontSize:18,color:"green"}}>Get it by Today {moment(currentdate).format("MMM Do")}</h1>
+                        <div  className="GetBox1">
+                          <div className="GetItBy1">Get it by Today {moment(currentdate).format("MMM Do")}</div>
                         </div>
                         </>
                          :
                          <>
                         {(time>=4&&time<12)?
-                        <div style={{marginTop:'10px'}}>
-                          <h1 style={{fontSize:18,color:"green"}}>Get it by Tomorrow { moment(currentdate).add(1,"days").format("MMM Do")}</h1>
+                        <div  className="GetBox1">
+                          <div className="GetItBy1">Get it by Tomorrow { moment(currentdate).add(1,"days").format("MMM Do")}</div>
                         </div>:
-                        <div style={{marginTop:'10px'}}>
-                        <h1 style={{fontSize:18,color:"green"}}>Get it by Today {moment(currentdate).format("MMM Do")}</h1>
+                        <div  className="GetBox1">
+                        <div className="GetItBy1">Get it by Today {moment(currentdate).format("MMM Do")}</div>
                       </div>
                         }
                         </>
@@ -299,8 +288,8 @@ export default function ViewPage(){
                            <div className="viewpage-review-box">
                               {(Item?.reviews?.length>0)?
                               <>
-                             {Item?.reviews?.map((data)=>
-                                   <div className="review-box-cont">
+                             {Item?.reviews?.map((data,i)=>
+                                   <div className="review-box-cont" key={i}>
                                    <div><AiOutlineUser className="review-user"/></div>
                                    <div className="review-box-star">{data?.stars}<FaStar style={{color:"orange"}}/></div>
                                    <div className="review-box-cont-desc">
@@ -367,7 +356,8 @@ export default function ViewPage(){
                                duration: 2000,
                                message: `Item added to cart`
                              })}}
-                            style={{width:'45%',color:"white",height:"50px",display:"flex",justifyContent:"centre",alignItems:"centre"}}>
+                             className="AddCartbtnstyle"
+                            >
                               Add To Cart
                       </IonButton>:<div className="viewpage-outofstock"><p>Out of Stock</p></div>
 

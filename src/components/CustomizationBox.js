@@ -56,7 +56,7 @@ export function CustomziationBox({checked,setCheckBox,dispatch,customArrayHandle
                       return <form onSubmit={(e)=>{
                         SubmitHandler(e,data)
                        }}
-                      style={{display:"flex",justifyContent:"space-around",flexDirection:"column",margin:'0.2rem'}}>
+                      style={{display:"flex",justifyContent:"space-around",flexDirection:"column",margin:'0.2rem'}} key={i}>
                         <div>
                          i want my
                           </div>
@@ -70,7 +70,7 @@ export function CustomziationBox({checked,setCheckBox,dispatch,customArrayHandle
                           </select>
                           </div>
                            <div>
-                               TPG_<input placeholder="your plant sku last 3 digits" maxlength="3" onChange={(e)=>setSku1(e.target.value)} required/>
+                               TPG_<input placeholder="your plant sku last 3 digits" maxLength="3" onChange={(e)=>setSku1(e.target.value)} required/>
                            </div>
                            <div>plant inside</div>
                            <div>
@@ -82,7 +82,7 @@ export function CustomziationBox({checked,setCheckBox,dispatch,customArrayHandle
                           <option>5</option></select>
                            </div>
                           <div>
-                           TPG_<input placeholder="your Pot sku last 3 digits" maxlength="3" onChange={(e)=>setSku2(e.target.value)} required/>pot
+                           TPG_<input placeholder="your Pot sku last 3 digits" maxLength="3" onChange={(e)=>setSku2(e.target.value)} required/>pot
                           </div>
                           <div>
                           <IonButton type="submit" color="secondary">
@@ -124,7 +124,7 @@ export function CustomziationBox({checked,setCheckBox,dispatch,customArrayHandle
                  </select>
                  </div>
                   <div>
-                      TPG_<input placeholder="your plant sku last 3 digits"  maxlength="3" onChange={(e)=>setSku1(e.target.value)} required/>
+                      TPG_<input placeholder="your plant sku last 3 digits"  maxLength="3" onChange={(e)=>setSku1(e.target.value)} required/>
                   </div>
                   <div>plant inside</div>
                   <div>
@@ -136,7 +136,7 @@ export function CustomziationBox({checked,setCheckBox,dispatch,customArrayHandle
                  <option>5</option></select>
                   </div>
                  <div>
-                  TPG_<input placeholder="your Pot sku last 3 digits" maxlength="3" onChange={(e)=>setSku2(e.target.value)} required/>pot
+                  TPG_<input placeholder="your Pot sku last 3 digits" maxLength="3" onChange={(e)=>setSku2(e.target.value)} required/>pot
                  </div>
                  <div>
                  <IonButton type="submit" color="secondary" >
