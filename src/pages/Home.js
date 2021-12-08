@@ -210,11 +210,11 @@ const Home=() => {
                             </form>
                            </div>
                            <div className="BottomLine">
-                                <h3 style={{margin:"0",color: 'black'}}>About us:</h3>
+                                <h3 style={{margin:"0",color: '#4b7aff'}}>About us</h3>
                                 <a style={{color:'white'}} onClick={()=>History.push("/page/ThePetalGlow/AboutUs")}>https://thepetalglow.com/AboutUs</a>
                              </div>
                            <div className="BottomLine">
-                                <h3 style={{margin:"0",color: 'black'}}>Contact us:</h3>
+                                <h3 style={{margin:"0",color: '#03a9f4'}}>Contact us</h3>
                                 <div>
                                   757/31,Faridabad,Haryana,121003<br></br>
                                 email:services@thepetalglow.com<br></br>
@@ -222,7 +222,7 @@ const Home=() => {
                                 </div>
                              </div>
                              <div className="BottomLine">
-                                  <h3 style={{margin:"0",color: 'black'}}>Our Policies</h3>
+                                  <h3 style={{margin:"0",color: '#f44336'}}>Our Policies</h3>
                                   <div style={{display:"flex",flexDirection:"column"}}>
                                     <a style={{color:"white"}} onClick={()=>History.push("/page/ThePetalGlow/PrivacyPolicy")}>Privacy Policy</a>
                                     <a style={{color:"white"}} onClick={()=>History.push("/page/ThePetalGlow/ShippingPolicy")}>Shipping and Return Policy</a>
@@ -231,7 +231,7 @@ const Home=() => {
                              </div>
                              <div style={{margin:"1rem",display:'flex'}}>
                                <div>
-                                All rights reserved © 2021 | thepetalglow.com
+                                All rights reserved <span style={{color:"#ffeb3b"}}>©</span> 2021 | thepetalglow.com
                                 </div>
                                <div className="home-image">
                                  <img src={Logo}/>
