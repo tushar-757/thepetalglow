@@ -8,6 +8,7 @@ import {AiFillHeart,AiOutlineHeart} from 'react-icons/ai'
 import { useState,useEffect } from 'react';
 import LoadingBox from '../components/LoadingComponent';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
+import EmptyBox from '../static/box.png'
 
 export default function OutdoorPage(){
     const dispatch=useDispatch();
@@ -17,22 +18,24 @@ export default function OutdoorPage(){
     const Loading=useSelector((state)=>state.NotificationReducer.Loading)
     const data=useSelector((state)=>state.ProductReducer.Outdoor)
     const [like,setLike]=useState(false)
-
-
+    const [empty,setempty]=useState(false)
     const [Data,setData]=useState([])
     const [present1, dismiss1] = useIonToast();
 
     useEffect(()=>{
         if(Array.isArray(data)){
-              setData(data)
-              if(data?.length===0){
+            if(data?.length===0){
+                  setempty(true)
                   present1(
-                        {
-                            color: 'danger',
-                            duration: 5000,
-                            message: `something went wrong:check your connection`
-                          })
-              }
+                    {
+                      color: 'warning',
+                      duration: 1000,
+                      message: `something went wrong:check your connection`
+                    })
+                  }else{
+                      setData(data)
+                      setempty(false)
+                    }
         }else{
             present1(
                   {
@@ -53,6 +56,11 @@ return(
          </div>
          <div>
                        <div  className="best-selling-cont">
+                       {(empty)?
+                        <div className="emptybox-div">
+                        <img className="emptybox-div-img" src={EmptyBox}/>
+                        </div>
+                        :null}
                 {Data?.map((data,i)=>(
                     <IonCard className="best-selling-cont-item">
                       <IonCardHeader style={{padding:'0px'}}>
@@ -98,8 +106,13 @@ return(
                           justifyContent: 'center',
                           flexDirection:'column'
                     }}>
-                           <p><BiRupee/>{data?.price}</p>
-                           <div style={{display:"contents"}}>
+                           <div className="price-box-view">
+                          <p style={{alignItems:'center',padding:"0px",fontWeight:"bold",display:'flex'}}><BiRupee/>{data?.price}</p>
+                          <p style={{color:"#ff5722",marginLeft:8}}>{(data?.quantity<10&&data?.quantity>0)?
+                          `Hurry up only
+                           ${data?.quantity} left`:null}</p>
+                          </div>
+      <div style={{display:"contents"}}>
                     <IonButton fill="solid" slot="end" style={{color:"white", width: '126px',
     height: '25px',fontSize:"0.8rem"}}
                        onClick={()=>{

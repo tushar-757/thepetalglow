@@ -8,6 +8,7 @@ import {AiFillHeart,AiOutlineHeart} from 'react-icons/ai'
 import { useState,useEffect } from 'react';
 import LoadingBox from '../components/LoadingComponent';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
+import EmptyBox from '../static/box.png'
 
 export default function PlantersPage(){
     const dispatch=useDispatch();
@@ -16,21 +17,24 @@ export default function PlantersPage(){
 
     const Loading=useSelector((state)=>state.ProductReducer.loading)
     const data=useSelector((state)=>state.ProductReducer.Planters)
-
+    const [empty,setempty]=useState(false)
     const [Data,setData]=useState([])
     const [present1, dismiss1] = useIonToast();
 
     useEffect(()=>{
         if(Array.isArray(data)){
-              setData(data)
-              if(data?.length===0){
+            if(data?.length===0){
+                  setempty(true)
                   present1(
-                        {
-                            color: 'danger',
-                            duration: 5000,
-                            message: `something went wrong:check your connection`
-                          })
-              }
+                    {
+                      color: 'warning',
+                      duration: 1000,
+                      message: `something went wrong:check your connection`
+                    })
+                  }else{
+                      setData(data)
+                      setempty(false)
+                    }
         }else{
             present1(
                   {
@@ -50,6 +54,11 @@ return(
           <IonIcon md={arrowBackCircle} style={{fontSize:44,color:"rgb(33, 150, 243)",margin:5}}/>
          </div>
       <div className="best-selling-cont">
+      {(empty)?
+                        <div className="emptybox-div">
+                        <img className="emptybox-div-img" src={EmptyBox}/>
+                        </div>
+                        :null}
                 {Data?.map((data,i)=>(
                     <IonCard className="best-selling-cont-item" key={i}>
                       <IonCardHeader style={{padding:'0px'}}>

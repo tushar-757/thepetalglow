@@ -18,24 +18,24 @@ import {FiHelpCircle} from 'react-icons/fi'
 import LoadingBox from '../components/LoadingComponent';
 import api from '../Services/urlApi';
 import Logo from '../static/favicon.png'
-import { LazyLoadImage } from 'react-lazy-load-image-component';
-import Image1 from '../static/image5.jpg'
-import Image2 from '../static/FINALIMAGE2.jpg'
+import Image1 from '../static/image5.png'
+import Image2 from '../static/FINALIMAGE2.png'
 import Image3 from '../static/kokedama.jpg'
 import Image4 from '../static/luckybamboo.jpg'
 
 const slideOpts = {
   initialSlide: 0,
-  speed: 400,
+  speed: 400
 };
 
 const ImageBar=()=>{
   return(
-    <IonSlides pager={true} options={slideOpts}  className="Home-SlideBar">
+    <IonSlides pager={true} startAutoPlay={true} options={slideOpts}  className="Home-SlideBar">
       {/* <IonSlide>
       <iframe  className="Home-Player"  autoPlay="autoplay" src="https://www.youtube-nocookie.com/embed/_EB-qSLTCXQ" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
         </IonSlide> */}
       <IonSlide  style={{backgroundColor:"white"}} >
+        <span className="image1-tag">Decorate Your Home With Happiness<br></br>in a very affordable price only on thepetalglow<br></br> Get Upto 20% off</span>
          <img
            alt={Image1}
            src={Image1}
@@ -44,6 +44,7 @@ const ImageBar=()=>{
            />
       </IonSlide>
       <IonSlide>
+      <span className="image1-tag">Right from nursery to your home<br></br></span>
       <img
            alt={Image2}
            src={Image2}
@@ -52,6 +53,7 @@ const ImageBar=()=>{
            />
       </IonSlide>
       <IonSlide>
+      <span className="image1-tag">kokedama's Coming soon...</span>
       <img
            alt={Image3}
            src={Image3}
@@ -76,7 +78,6 @@ const Home=() => {
   const [user, user_id] = IsLoggedIn();
   const [email,setSubscribeEmail]=useState("")
   const [present, dismiss] = useIonToast();
-  const Loading=useSelector((state)=>state.NotificationReducer.Loading)
   const loading=useSelector((state)=>state.ProductReducer.loading)
   const user_id1=localStorage.getItem('user_id')
   const useraccesstoken=localStorage.getItem('useraccesstoken')
@@ -155,7 +156,7 @@ const Home=() => {
            <div className="white-background">
              <h1 className="BestSellingTitle">Best Selling Items</h1>
            </div>
-           {(Loading||loading)? <>
+           {(loading)? <>
             <LoadingBox/>
             </>:
             <BestSelling/>}
@@ -215,11 +216,7 @@ const Home=() => {
                              </div>
                            <div className="BottomLine">
                                 <h3 style={{margin:"0",color: '#03a9f4'}}>Contact us</h3>
-                                <div>
-                                  757/31,Faridabad,Haryana,121003<br></br>
-                                email:services@thepetalglow.com<br></br>
-                                Phone:+17278771267 (`whatsapp chat available only`)
-                                </div>
+                                <a style={{color:'white'}} onClick={()=>History.push("/page/ThePetalGlow/ContactUs")}>https://thepetalglow.com/ContactUs</a>
                              </div>
                              <div className="BottomLine">
                                   <h3 style={{margin:"0",color: '#f44336'}}>Our Policies</h3>

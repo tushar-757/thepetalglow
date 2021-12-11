@@ -339,7 +339,7 @@ const options = {
           <>
         <div className="white-background">
         <Marquee className="top-message" speed={40} gradient={false}>
-          shipping is free for orders having cart value greater than 499,use coupon HAPPYPLANT30 for 15% OFF
+          shipping is free for orders having cart value greater than 499,use coupon HAPPYPLANT30 for 20% OFF upto Rs.100
        </Marquee>
         <div onClick={()=>{
            present2({
@@ -519,7 +519,7 @@ const options = {
                     <h1 style={{fontSize:12}}>Deliver To</h1>
                     <div className="select-location-view-cart"  onClick={()=>History.push("/page/MapsPage")}>
                           <IonIcon slot="start"  md={location} style={{color:'blue'}}/>
-                      <h1 className="h1-home location-color">
+                      <h1 className="h1-home location-color" style={{color:"black",fontSize:"0.8rem"}}>
                       select your location
                       </h1>
                     </div>

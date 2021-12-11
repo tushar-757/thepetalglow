@@ -119,11 +119,11 @@ const Menu: React.FC = () => {
               (User.username!="")?
               <IonButton onClick={()=>{
                 LogoutHandler()
-              }} style={{color:"white"}} >logout</IonButton>:
-              <IonButton onClick={()=>{LoginHandler()}} style={{color:"white"}}
+              }} style={{color:"white"}} color="tertiary" >logout</IonButton>:
+              <IonButton onClick={()=>{LoginHandler()}} color="tertiary" style={{color:"white"}}
               >login</IonButton>
             }
-            <IonButton onClick={()=>History.push('/page/TrackOrder')} style={{color:"white"}}>Tack Order</IonButton>
+            <IonButton color="danger" onClick={()=>History.push('/page/TrackOrder')} style={{color:"white"}}>Tack Order</IonButton>
           </div>
           </IonMenuToggle>
           {appPages.map((appPage, index) => {
@@ -141,7 +141,7 @@ const Menu: React.FC = () => {
           })}
         </IonList>
         <IonFooter>
-          <IonButton onClick={()=>ShareHandler()} style={{color:"white"}}>Share</IonButton>
+          <IonButton onClick={()=>ShareHandler()}  style={{color:"white"}}>Share</IonButton>
         </IonFooter>
       </IonContent>
     </IonMenu>

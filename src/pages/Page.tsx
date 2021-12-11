@@ -6,13 +6,14 @@ import { cart, notifications } from 'ionicons/icons';
 import { RootStateOrAny, useSelector ,useDispatch} from 'react-redux';
 import { RiWhatsappFill } from 'react-icons/ri';
 import { getCurrentProduct, setFilterData} from '../Actions';
-import  Home from './Home';
 import LoadingBox from '../components/LoadingComponent';
+import Login from './Login';
+import ContactUs from '../components/ContactUs';
+const Home = React.lazy(()=>import('./Home'));
 const SearchBar =React.lazy(()=>import('./SearchBar'));
 const MapsPage =React.lazy(()=>import('./MapsPage'));
 const Cart =React.lazy(()=>import('./Cart'));
 const ViewPage =React.lazy(()=>import('./ViewPage'));
-const Login =React.lazy(()=>import('./Login'));
 const Register =React.lazy(()=>import('./Register'));
 const PaymentGategay =React.lazy(()=>import('./PaymentGateway'));
 const Orders =React.lazy(()=>import('./Orders'));
@@ -156,6 +157,7 @@ useEffect(()=>{
           (locationstate==='/page/ThePetalGlow/TermsandCondition')?<TermsandCondition/>:
           (locationstate==='/page/ThePetalGlow/ShippingPolicy')?<ShippingPolicy/>:
           (locationstate==='/page/ThePetalGlow/AboutUs')?<AboutUs/>:
+          (locationstate==='/page/ThePetalGlow/ContactUs')?<ContactUs/>:
           <TrackOrder/>
         }
          </Suspense>

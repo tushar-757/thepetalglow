@@ -84,7 +84,7 @@ export default function Register(){
           <IonIcon md={arrowBackCircle} style={{fontSize:44,color:"lightgreen",margin:-5}}/>
             </div>
               <IonChip color="warning" style={{height:"60px"}}>
-          <IonLabel>Dear Customers Please provide us your best info it Would help in providing invoices and Shipping status</IonLabel>
+          <IonLabel>Dear Customers Please provide us your best info it Would help us in providing invoices and Shipping status</IonLabel>
         </IonChip>
             <IonLoading
         cssClass='my-custom-class'
@@ -104,9 +104,12 @@ export default function Register(){
                              value={email1} onIonChange={e =>setEmail(e.detail.value)} placeholder="email" required/>
                              <IonInput type='password' name="password"
                               autocomplete={true}
-                             value={password1} onIonChange={e =>setPassword(e.detail.value)} placeholder="password" required/>
-                             <IonInput type='number' name="mobile"
+                             value={password1}
+                             minlength={8}
+                             onIonChange={e =>setPassword(e.detail.value)} placeholder="password" required/>
+                             <IonInput type='tel' name="mobile"
                               autocomplete={true}
+                              pattern="[6789][0-9]{9}"
                              maxlength={10} minlength={10} value={mobile1} onIonChange={e =>setMobileno(e.detail.value)} placeholder="Mobile NO.*" required/>
                              <h1>Address</h1>
                              <IonInput value={hno1} name="hno"
@@ -117,6 +120,8 @@ export default function Register(){
                              onIonChange={e =>setStreet(e.detail.value)} placeholder="Street/Society" required/>
                              <IonInput value={pincode1} name="pincode"
                               autocomplete={true}
+                              type="text"
+                              pattern="[1-9]{1}[0-9]{2}[0-9]{3}"
                              onIonChange={e =>setPincode(e.detail.value)} placeholder="Pincode" required/>
                              {/* <IonInput value='Faridabad' readonly placeholder="Faridabad"/> */}
                              <IonSelect interface="popover" interfaceOptions={options}
@@ -129,7 +134,6 @@ export default function Register(){
                                       <IonSelectOption value="Palwal" disabled={true}>Palwal coming soon...</IonSelectOption>
                              </IonSelect>
                                  <IonButton type="submit" style={{color:"white"}}>Register</IonButton>
-
                              </form>
      </div>
     )

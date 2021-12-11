@@ -8,6 +8,7 @@ import moment from 'moment'
 import IsLoggedIn from '../Hooks/isLoggedIn';
 import { useEffect } from 'react';
 import { addUser} from "../Actions";
+import EmptyBox from '../static/box.png'
 
 export default function Notifications(){
     const Notify=useSelector((state)=>state.NotificationReducer.Notifications)
@@ -30,7 +31,11 @@ export default function Notifications(){
 
     return(
         <div>
-           <h1 style={{margin:'1rem'}}>{(Notify?.length===0)?"No Notifications To Show":null}</h1>
+           <h1 style={{margin:'1rem'}}>{(Notify?.length===0)?
+            <div className="emptybox-div">
+            <img className="emptybox-div-img" src={EmptyBox}/>
+            </div>
+           :null}</h1>
             {Notify.map((data,i)=>(
                <div style={{position:"relative"}} className="white-background">
                   <div className="notification-block">

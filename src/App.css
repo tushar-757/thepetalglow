@@ -15,6 +15,313 @@
   z-index:1;
    left:0px;
 }
+.emptybox-div{
+  display: flex;
+  justify-content: center;
+  height: 80vh;
+  width: 100%;
+  align-items: center;
+}
+.emptybox-div-img{
+  width: 240px;
+}
+.item-native{
+  --padding:0px;
+}
+.select-location{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #009688;
+  height:42px;
+}
+.h1-home{
+  margin:0;
+  font-size:14px;
+  color:white;
+  font-family: 'Salsa'
+}
+
+.icons-SBC{
+  color: #ffffff;
+  position: absolute;
+  left:11px;
+  top:11px;
+}
+.best-selling-cont{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  position: relative;
+  padding: 0;
+  justify-content: center;
+  margin-top: 4rem;
+  margin-bottom: 40px;
+}
+.best-selling-cont-item{
+  width: 31%;
+  margin: 1px;
+  margin-top: 12px;
+  display: flex;
+  flex-direction: column;
+  height: 450px;
+  background: white;
+}
+.input-wrapper{
+  --flex-direction: column;
+}
+.best-selling-cont-item img{
+  width: 100%;
+  height: 300px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+.best-selling-cont-item h1{
+margin: 0;
+display: flex;
+justify-content: center;
+align-items: center;
+font-family: 'Salsa';
+font-weight: 400;
+}
+.best-selling-tag{
+  color: white;
+  position: absolute;
+  font-size: 10px;
+  left: 0px;
+  height: 25px;
+  top: 0px;
+  background: #ff3939cc;
+  width: 92px;
+}
+.footer-header-home{
+  display: flex;
+  justify-content: center;
+  height: 269px;
+  align-items: center;
+}
+.footer-header-image{
+  width: 28%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.Home-SlideBar{
+  height: 100%;
+  width: 100%;
+}
+/* .swiper-slide img{
+  width: 100%;
+  height: 100%;
+  object-position: center;
+  object-fit: fill;
+} */
+.Home-SlideBar-Img{
+  width: 100%;
+  height: 100%;
+  object-position: center;
+  object-fit: fill;
+}
+.bestselling-head{
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+  align-items: center;
+  padding: 2px;
+}
+.best-selling-cont-festival-msg{
+  position: absolute;
+  left: 20%;
+  top: 42%;
+  font-size: 22px;
+  transform: rotate(339deg);
+  z-index: 1;
+}
+.footer-icon{
+  font-Size:40px;
+}
+.policy-divs{
+  display: flex;
+  width: 33.33%;
+  height: 160px;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: #4d4d4dd9;
+  flex-direction: column;
+}
+.policy-divs div{
+  margin:1rem;
+}
+.policy-div{
+  display: flex;
+  padding: 4px;
+  border: 1px solid #c1c1c1;
+  height: 230px;
+      justify-content: center;
+      align-items: center;
+}
+
+.footer-icon-block{
+  display:flex;
+  justify-content:space-around;
+}
+.follow-us-title{
+  margin:2rem 12px;
+  display:flex;
+  font-size:1.1rem
+}
+.BestSellingTitle{
+  font-Size:"1rem";
+  font-Family:"Salsa";
+  display: flex;
+  justify-content: center;
+  color: #03a9f4;
+}
+.footer-newsletter{
+  background: rgb(35 35 35);
+  color: white;
+  height: 460px;
+  margin-top: 42px;
+  position:relative
+}
+.footer-newsletter-inner{
+  padding: 14px 30px 30px;
+ display: flex;
+  justify-content: center;
+  align-items: center;
+  float: left;
+  width: 100%;
+}
+.Home-Player{
+  width:90%;
+   height:400px
+}
+.home-image{
+  position: absolute;
+  width: 6%;
+  bottom:2px;
+  left: 18px;
+  z-index: 1px
+}
+.EmailInput{
+  width: 80%;
+  display: flex;
+ justify-content: center;
+}
+.facebook{
+color:cornflowerblue
+}
+.insta{
+  color:rgb(58, 223, 114)
+}
+.youtube{
+  color:red
+}
+.linkdin{
+color:blue
+}
+.BottomLine{
+  margin:0px;
+  padding-bottom:8px;
+  padding-top: 10px;
+  padding-left: 30px;
+}
+.image1-tag{
+  transform: rotate(347deg);
+  position: absolute;
+  color: white;
+  font-size: 35px;
+  text-shadow: 0px 0px 9px black;
+  font-family: cursive;
+  top: 103px;
+}
+.select-location-view{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #ffffff;
+    border-radius: 5px;
+    height: 42px;
+    box-shadow: 0px 0px 1px #9acee6;
+    font-size: 0.8rem;
+}
+@media screen and (max-width: 480px) {
+   .h1{
+      font-size: 0.8rem;
+  }
+  .best-selling-cont-item{
+      width: 49%;
+      display: flex;
+      flex-direction: column;
+      height: 392px;
+  }
+  .best-selling-cont-item h1{
+     font-size:0.8rem;
+    }
+    .best-selling-cont-item img{
+      height: 240px;
+  }
+}
+@media screen and (max-width: 701px) {
+  .Home-SlideBar{
+      height: 50%;
+  }
+  .Home-Player{
+      width:95%;
+       height:250px
+  }
+  .image1-tag{
+      font-size: 18px;
+  }
+}
+@media screen and (max-width: 380px) {
+  .h1-home{
+      font-size: 13px;
+  }
+  .div-shop-by-category-title{
+       font-size:10px;
+  }
+}
+@media screen and (max-width: 350px) {
+  .best-selling-cont-item{
+      width: 90%;
+      display: flex;
+      flex-direction: column;
+      height: 392px;
+  }
+}
+@media screen and (max-width: 1160px) {
+  .best-selling-cont-item{
+      width:30%;
+  }
+}
+@media screen and (max-width: 600px) {
+  .best-selling-cont-item{
+      width:49%;
+  }
+  .footer-header-image{
+      width:40%;
+  }
+}
+@media screen and (max-width: 500px) {
+  .best-selling-cont-item{
+      width:49%;
+  }
+  .footer-header-image{
+      width:68%;
+  }
+}
+@media screen and (max-width: 350px) {
+  .best-selling-cont-item{
+      width:90%;
+  }
+  .footer-header-image{
+      width:80%;
+  }
+}
 /* position: fixed;
 top: 116px;
 z-index: 1;

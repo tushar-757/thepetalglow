@@ -8,6 +8,7 @@ import {AiFillHeart,AiOutlineHeart} from 'react-icons/ai'
 import { useState,useEffect } from 'react';
 import LoadingBox from '../components/LoadingComponent';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
+import EmptyBox from '../static/box.png'
 
 export default function IndoorPage(){
     const dispatch=useDispatch();
@@ -19,6 +20,7 @@ export default function IndoorPage(){
     const [setback,setBack]=useState(false)
     const [Data,setData]=useState([])
     const [present1, dismiss1] = useIonToast();
+    const [empty,setempty]=useState(false)
   //   const startLoading=()=>{
   //     dispatch(setLoading(true))
   //     setTimeout(()=>{
@@ -29,14 +31,17 @@ export default function IndoorPage(){
 
   useEffect(()=>{
       if(Array.isArray(data)){
-            setData(data)
-            if(data?.length===0){
-                present1(
-                      {
-                          color: 'danger',
-                          duration: 5000,
-                          message: `something went wrong:check your connection`
-                        })
+        if(data?.length===0){
+          setempty(true)
+          present1(
+            {
+              color: 'warning',
+              duration: 100,
+              message: `something went wrong:check your connection`
+            })
+          }else{
+              setData(data)
+              setempty(false)
             }
       }else{
           present1(
@@ -59,12 +64,17 @@ return(
                  setBack(true)
                  present({
                   message: 'Loading...',
-                   duration:1000
+                   duration:100
                 })
             }} className="back-btn-css">
           <IonIcon md={arrowBackCircle} style={{fontSize:44,color:"rgb(33, 150, 243)",margin:2}}/>
          </div>
                        <div  className="best-selling-cont">
+                       {(empty)?
+                        <div className="emptybox-div">
+                        <img className="emptybox-div-img" src={EmptyBox}/>
+                        </div>
+                        :null}
                 {Data?.map((data,i)=>(
                     <IonCard className="best-selling-cont-item">
                       <IonCardHeader style={{padding:'0px'}}>
@@ -77,7 +87,7 @@ return(
                           onClick={()=>{
                         present({
                               message: 'Loading...',
-                              duration:1000
+                              duration:100
                             })
                           dispatch(getIndoorProduct(data._id))
                           History.push("/page/ViewPage")}}/>
@@ -102,7 +112,12 @@ return(
                                 <AiFillHeart style={{fontSize:"24px",color:"#e91e1e"}} onClick={()=>dispatch(removefromLikes(data?._id))}/>}
                                 </div>
                            </div>
-                          <h1 style={{fontSize:12}}>{data?.prize}</h1>
+                           <div className="price-box-view">
+                          <p style={{alignItems:'center',padding:"0px",fontWeight:"bold",display:'flex'}}><BiRupee/>{data?.price}</p>
+                          <p style={{color:"#ff5722",marginLeft:8}}>{(data?.quantity<10&&data?.quantity>0)?
+                          `Hurry up only
+                           ${data?.quantity} left`:null}</p>
+                          </div>
                     </div>
                     <IonCardContent style={{padding:"0px"}}>
                           <div style={{
@@ -111,13 +126,12 @@ return(
                           justifyContent: 'center',
                           flexDirection:'column'
                     }}>
-                          <p style={{alignItems:'center',fontWeight:"bold",display:'flex'}}><BiRupee/>{data?.price}</p>
                     <IonButton fill="solid" slot="end" style={{color:"white", width: '126px',
     height: '25px',fontSize:"0.8rem"}}
                        onClick={()=>{
                         present({
                               message: 'Loading...',
-                              duration:1000
+                              duration:100
                             })
                           dispatch(getIndoorProduct(data._id))
                           History.push("/page/ViewPage")}}>View</IonButton>
@@ -127,7 +141,7 @@ return(
                        onClick={()=>{
                         present({
                               message: 'Loading...',
-                              duration: 1000
+                              duration: 100
                             })
                           dispatch(Addtocart(data))
                          }}>Add To Cart</IonButton>

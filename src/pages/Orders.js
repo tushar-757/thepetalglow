@@ -15,6 +15,7 @@ import TableHead from '@material-ui/core/TableHead';
 import { AiFillCopy } from 'react-icons/ai';
 import TableRow from '@material-ui/core/TableRow';
 import LoadingBox from '../components/LoadingComponent';
+import EmptyBox from '../static/box.png'
 
 export default function Orders(){
   const History = useHistory();
@@ -104,7 +105,11 @@ export default function Orders(){
       <>
        {(Loading)?<><LoadingBox/></>:
          <div style={{position:'relative'}}>
-           <h1 style={{margin:'1rem'}}>{(Orders?.length===0||Orders===undefined)?"No Orders To Show":null}</h1>
+          {(Orders?.length===0||Orders===undefined)?
+             <div className="emptybox-div">
+              <img className="emptybox-div-img" src={EmptyBox}/>
+              </div>
+          :null}
           {
             Orders?.map((data,i)=>(
               <div className="order-box" key={i}>

@@ -29,7 +29,11 @@ const initalState={
       case "GET_SUCCULENT_PRODUCT_REQUEST":
         return { ...state, loading: true };
       case "GET_SUCCULENT_PRODUCT_SUCCESS":
-        return { ...state,loading: false, Succulent: action.payload };
+        const data3=action.payload;
+        const succulentdata=data3.map((d)=>(
+          {...d,isLiked:false}
+        ))
+        return { ...state,loading: false, Succulent: succulentdata};
       case "GET_SUCCULENT_PRODUCT_FAILURE":
         return {...state, loading: false, error: action.payload };
       case "GET_USER_PRODUCT":
@@ -73,13 +77,32 @@ const initalState={
          case "GET_SEASONAL_PRODUCT_REQUEST":
            return { ...state, loading: true };
          case "GET_SEASONAL_PRODUCT_SUCCESS":
-           return { ...state,loading: false, Seasonal: action.payload };
+          const data4=action.payload;
+          const seasonaldata=data4.map((d)=>(
+            {...d,isLiked:false}
+          ))
+           return { ...state,loading: false, Seasonal: seasonaldata };
          case "GET_SEASONAL_PRODUCT_FAILURE":
            return {...state, loading: false, error: action.payload };
          case "GET_PLANTERS_PRODUCT_REQUEST":
            return { ...state, loading: true };
          case "GET_PLANTERS_PRODUCT_SUCCESS":
-           return { ...state,loading: false, Planters:action.payload.filter((data)=>data.type==="Plastic"),Pebbles:action.payload.filter((data)=>data.type==="Pebble")};
+           const pebbles=action.payload.filter((data)=>data.type==="Pebble");
+           const planters=action.payload.filter((data)=>data.type==="Plastic");
+           const data5=pebbles;
+            const pebblesdata=data5.map((d)=>(
+              {...d,isLiked:false}
+             ))
+           const data6=planters;
+            const plantersdata=data6.map((d)=>(
+              {...d,isLiked:false}
+             ))
+           return {
+             ...state,
+             loading: false,
+             Planters:plantersdata,
+             Pebbles:pebblesdata
+           }
          case "GET_PLANTERS_PRODUCT_FAILURE":
            return {...state, loading: false, error: action.payload };
          case "GET_SOIL_FERTILIZER_PRODUCT_REQUEST":
@@ -171,6 +194,9 @@ const initalState={
                           item=state.Fertilizers.find(item => action.payload === item._id)
                           if(item===null||item===undefined){
                             item=state.Pebbles.find(item => action.payload === item._id)
+                            if(item===null||item===undefined){
+                              item=state.Succulent.find(item => action.payload === item._id)
+                            }
                           }
                         }
                       }
@@ -186,7 +212,9 @@ const initalState={
                   Outdoor:[...state.Outdoor],
                   Planters:[...state.Planters],
                   Fertilizers:[...state.Fertilizers],
-                  Pebbles:[...state.Pebbles]
+                  Pebbles:[...state.Pebbles],
+                  Seasonal:[...state.Seasonal],
+                  Succulent:[...state.Succulent]
                 }
               case "REMOVE_FROM_LIKES":
                 let item1=state.BestSellingData.find(item => action.payload === item._id)
@@ -202,6 +230,9 @@ const initalState={
                         item=state.Fertilizers.find(item => action.payload === item._id)
                         if(item===null||item===undefined){
                           item=state.Pebbles.find(item => action.payload === item._id)
+                          if(item===null||item===undefined){
+                            item=state.Succulent.find(item => action.payload === item._id)
+                          }
                         }
                       }
                      }
@@ -217,7 +248,8 @@ const initalState={
                   Outdoor:[...state.Outdoor],
                   Planters:[...state.Planters],
                   Fertilizers:[...state.Fertilizers],
-                  Pebbles:[...state.Pebbles]
+                  Pebbles:[...state.Pebbles],
+                  Succulent:[...state.Succulent]
                 }
                 case "SET_REVIEW":
                   const reviews=action?.payload

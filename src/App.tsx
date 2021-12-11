@@ -31,15 +31,15 @@ const App: React.FC = () => {
   // });
 
   useEffect(()=>{
-    // present({
-    //   cssClass: 'my-css',
-    //   header: 'THEPETALGLOW',
-    //   message: 'WELCOME TO ThePetalGlow,Use Coupon HAPPYPLANT30 TO GET 30% OFF UPTO 100RS.',
-    //   buttons: [
-    //     { text: 'Ok', handler: (d) => console.log('ok pressed') },
-    //   ],
-    //   onDidDismiss: (e) => console.log('did dismiss'),
-    // })
+    present({
+      cssClass: 'my-css',
+      header: 'THEPETALGLOW',
+      message: 'WELCOME TO ThePetalGlow,if you want a complete company/office setup with discount`s please email us at services@thepetalglow.com we will get back to you in 24 hours',
+      buttons: [
+        { text: 'Ok', handler: (d) => console.log('ok pressed') },
+      ],
+      onDidDismiss: (e) => console.log('did dismiss'),
+    })
     dispatch(FetchSeasonalProduct())
     dispatch(FetchIndoorProduct())
     dispatch(FetchOutdoorProduct())
@@ -67,6 +67,9 @@ const App: React.FC = () => {
               <Page/>
             </Route>
             <Route path="/page/ThePetalGlow/AboutUs" exact={true}>
+              <Page/>
+            </Route>
+            <Route path="/page/ThePetalGlow/ContactUs" exact={true}>
               <Page/>
             </Route>
             <Route path="/page/searchbar" exact={true}>

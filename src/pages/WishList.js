@@ -1,23 +1,52 @@
-import { IonCard,IonButton,IonCardContent,useIonLoading, IonCardHeader } from '@ionic/react';
+import { IonCard,IonButton,IonCardContent,useIonToast,useIonLoading, IonCardHeader } from '@ionic/react';
 import {  useDispatch,useSelector} from 'react-redux';
 import { Addtocart,GETSELECTEDBESTSELLING ,addToLikes,removefromLikes} from '../Actions';
 import {useHistory} from 'react-router-dom'
 import {BiRupee} from 'react-icons/bi'
 import {AiFillHeart,AiOutlineHeart} from 'react-icons/ai'
 import { useEffect, useState } from 'react';
+import EmptyBox from '../static/box.png'
+
+
 export default function WishList(){
-      // const data=useSelector((state)=>state.ProductReducer.BestSellingData)
     const dispatch=useDispatch();
     const History = useHistory();
     const [present, dismiss] = useIonLoading();
-    const [like,setLike]=useState(false)
+    const [Data,setData]=useState([])
+    const [present1, dismiss1] = useIonToast();
     const data1=localStorage.getItem("wishlistitems")
     const data=JSON.parse(data1)
 
+   useEffect(()=>{
+    if(Array.isArray(data)){
+          if(data?.length===0){
+          present1(
+                {
+                    color: 'light',
+                    duration: 2000,
+                    message: `nothing to show`
+                  })
+          }else{
+            setData(data)
 
+          }
+     }else{
+      present1(
+          {
+              color: 'danger',
+              duration: 5000,
+              message: `something went wrong:${data}`
+            })
+         }
+   },[])
 return(
     <div className="best-selling-cont">
-                {data?.map((data,i)=>(
+      {(Data?.length===0)?
+              <div className="emptybox-div">
+              <img className="emptybox-div-img" src={EmptyBox}/>
+              </div>
+              :null}
+                {Data?.map((data,i)=>(
                     <IonCard className="best-selling-cont-item" key={i}>
                       <IonCardHeader style={{padding:'0px'}}>
                          <img src={data?.images?.[0]}

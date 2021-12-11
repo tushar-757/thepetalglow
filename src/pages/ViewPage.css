@@ -31,16 +31,7 @@
     justify-content: center;
     background-color: #f1f1f1;
 }
-.select-location-view{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #ffffff;
-    border-radius: 5px;
-    height: 42px;
-    box-shadow: 0px 0px 1px #9acee6;
-    font-size: 0.8rem;
-}
+
 .viewpage-Customization{
     display: -webkit-inline-box;
     width: 100%;

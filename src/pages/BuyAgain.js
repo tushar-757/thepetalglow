@@ -3,7 +3,6 @@ import React, { useRef,useState} from 'react';
 import { useSelector ,useDispatch} from "react-redux";
 import { useHistory } from 'react-router';
 import {UserSelectedOrder} from '../Actions/index'
-import './Order.css'
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -12,6 +11,8 @@ import TableRow from '@material-ui/core/TableRow';
 import { AiFillCopy } from 'react-icons/ai';
 import moment from 'moment'
 import LoadingBox from '../components/LoadingComponent';
+import EmptyBox from '../static/box.png'
+import './Order.css'
 
 export default function BuyAgain(){
   const History = useHistory();
@@ -40,7 +41,11 @@ export default function BuyAgain(){
        <LoadingBox/>
        </>:
          <div style={{position:'relative'}}>
-            <h1 style={{margin:'1rem'}}>{(NotActiveOrders?.length===0||NotActiveOrders===undefined)?"No Orders To Show":null}</h1>
+           {(NotActiveOrders?.length===0||NotActiveOrders===undefined)?
+              <div className="emptybox-div">
+              <img className="emptybox-div-img" src={EmptyBox}/>
+              </div>
+              :null}
           {
             NotActiveOrders?.map((data,i)=>(
               <div className="order-box" key={i}>

@@ -23,8 +23,8 @@ const ImageBar=(data)=>{
       <IonSlides pager={true} options={slideOpts} style={{height:290,zIndex:0}}>
         {data?.data?.map((img,i)=>(
          <IonSlide  style={{backgroundColor:"white"}} key={i}>
-          <img src={(img!=null)?img:TPGLOGO} className="view-page-img" />
-    </IonSlide>
+            <img src={(img!=null)?img:TPGLOGO} className="view-page-img" />
+         </IonSlide>
 ))}
 </IonSlides>
   )}
@@ -165,7 +165,7 @@ export default function ViewPage(){
             <IonCard style={{marginBottom:'1rem',marginTop:"5rem",padding:"10px"}} className="white-background">
                       <IonCardHeader>
                          <div>
-                            {Item.type}/
+                            {Item.type}
                             </div>
                          <div className="viewpage-typevalue">
                              {Item?.type}
