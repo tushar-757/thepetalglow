@@ -1,13 +1,12 @@
 import { IonPage,IonSlide,IonSlides, IonContent,useIonToast,IonRefresher, IonRefresherContent, IonIcon, IonFooter, IonHeader, IonButton } from '@ionic/react';
 import { location,logoFacebook,logoInstagram,logoYoutube,logoLinkedin} from 'ionicons/icons';
 import { useHistory } from 'react-router-dom';
+import loadable from '@loadable/component';
 import Marquee from "react-fast-marquee";
  import { withRouter  } from 'react-router';
  import IsLoggedIn from '../Hooks/isLoggedIn';
 import { useSelector } from 'react-redux';
 import './Home.css';
-import BestSelling from './BestSelling';
-import ShopByCategory from './ShopByCategory';
 import { useEffect, useState } from 'react';
 import { useDispatch } from "react-redux";
 import { FetchIndoorProduct,FetchOutdoorProduct,FetchPlantersProduct,FetchSeasonalProduct,addUser,SETBESTSELLING} from "../Actions";
@@ -22,6 +21,8 @@ import Image1 from '../static/image5.png'
 import Image2 from '../static/FINALIMAGE2.png'
 import Image3 from '../static/kokedama.jpg'
 import Image4 from '../static/luckybamboo.jpg'
+const BestSelling = loadable(()=>import('./BestSelling'));
+const ShopByCategory = loadable(()=>import('./ShopByCategory'));
 
 const slideOpts = {
   initialSlide: 0,

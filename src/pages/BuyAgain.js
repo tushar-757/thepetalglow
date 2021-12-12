@@ -1,8 +1,8 @@
 import { IonButton,IonChip ,IonLabel,useIonToast} from '@ionic/react';
-import React, { useRef,useState} from 'react';
+import React, { useRef,useEffect,useState} from 'react';
 import { useSelector ,useDispatch} from "react-redux";
 import { useHistory } from 'react-router';
-import {UserSelectedOrder} from '../Actions/index'
+import {UserSelectedOrder,UserOrders} from '../Actions/index'
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -16,12 +16,13 @@ import './Order.css'
 
 export default function BuyAgain(){
   const History = useHistory();
-    const NotActiveOrders=useSelector((state)=>state.OrderReducer.NotActiveOrder)
+    const NotActive=useSelector((state)=>state.OrderReducer.NotActiveOrder)
     const Loading=useSelector((state)=>state.OrderReducer.loading)
     const dispatch=useDispatch()
     const textAreaRef = useRef([]);
     const [copySuccess, setCopySuccess] = useState('');
     const [present1, dismiss] = useIonToast()
+    const [NotActiveOrders,setNotActiveOrders]=useState([]);
 
     function copyToClipboard(e,i) {
       navigator.clipboard.writeText(textAreaRef.current[i].value)
@@ -34,7 +35,14 @@ export default function BuyAgain(){
             message: `copied`
           })
     };
-
+    useEffect(() => {
+      dispatch(UserOrders())
+    },[]);
+    useEffect(()=>{
+      if(NotActive!=undefined&&Array.isArray(NotActive)){
+        setNotActiveOrders(NotActive)
+      }
+    },[NotActive])
     return (
       <>
        {(Loading)?<>

@@ -1,7 +1,13 @@
 ion-menu ion-content {
   --background: var(--ion-item-background, var(--ion-background-color, #fff));
 }
-
+.menu-navbar{
+  height:40px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+}
 ion-menu.md ion-content {
   --padding-start: 8px;
   --padding-end: 8px;

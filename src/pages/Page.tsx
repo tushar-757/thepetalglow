@@ -128,7 +128,6 @@ useEffect(()=>{
             ))}
             {(SearchedData.length===0)?"No Results Found":null}
             </div>:null}
-            <Suspense fallback={<div><LoadingBox/></div>}>
         {
           (locationstate==='/page/ThePetalGlow')?<Home/>:
           (locationstate==='/page/MapsPage')?<MapsPage/>:
@@ -162,7 +161,6 @@ useEffect(()=>{
           (locationstate==='/page/ThePetalGlow/ContactUs')?<ContactUs/>:
           <TrackOrder/>
         }
-         </Suspense>
         <a className="floating-whatsapp" href="#"
         onClick={()=>window.open('https://wa.me/+17278771267', '_blank')}>
          <RiWhatsappFill style={{fontSize:'48px',color:'white'}}/>

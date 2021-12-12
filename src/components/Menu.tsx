@@ -83,7 +83,6 @@ const Menu: React.FC = () => {
   const [user, user_id] = IsLoggedIn();
   const History=useHistory()
   const dispatch=useDispatch()
-  const [zindex,setZindex]=useState(false)
 
   const LoginHandler=()=>{
       History.push("/page/Login")
@@ -133,7 +132,7 @@ const Menu: React.FC = () => {
                 routerDirection="none"
                  lines="none"
                  detail={false}
-                 onClick={(appPage.url==="/page/Orders")?()=>dispatch(UserOrders()):undefined}>
+               >
                   <IonIcon slot="start" ios={appPage.iosIcon} md={appPage.mdIcon} />
                   <IonLabel style={{color:"#686868"}}>{appPage.title}</IonLabel>
                 </IonItem>

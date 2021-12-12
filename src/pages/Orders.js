@@ -32,7 +32,6 @@ export default function Orders(){
     useEffect(() => {
       try{
         if (user != null && user_id != null) {
-          // console.log(JSON.parse(JSON.stringify(user)))
            const parserduser=JSON.parse(user)
             dispatch(addUser({id:parserduser.id,username:parserduser.username,
                 mobile:parserduser.mobile,email:parserduser.email,Address:parserduser.Address}))
@@ -50,8 +49,13 @@ export default function Orders(){
 
 
     useEffect(() => {
-      setOrder(Orders)
+      dispatch(UserOrders())
     },[]);
+    useEffect(()=>{
+      if(Orders!=undefined&&Array.isArray(Orders)){
+        setOrder(Orders)
+      }
+    },[Orders])
 
    const DeleteHandler=async (id)=>{
      try{
