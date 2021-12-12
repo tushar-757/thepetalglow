@@ -2,12 +2,23 @@ import jsPDFInvoiceTemplate ,{OutputType} from "jspdf-invoice-template";
 import { IonButton } from "@ionic/react";
 import { useSelector } from "react-redux";
 import moment from 'moment'
-import { UserOrders } from "../Actions";
 import TPGLOGO from '../static/favicon.png';
+import { useEffect,useState } from "react";
 export default function CreateINvoice(){
     const userOrder=useSelector((state)=>state.OrderReducer.selectedorder)
     const User=useSelector((state)=>state.UserReducer.User)
-    const productsdata=userOrder?.productsdata;
+    // const productsdata=userOrder?.productsdata;
+    const [productsdata,setProductsData]=useState([]);
+
+     useEffect(()=>{
+         if(userOrder?.productsdata!=undefined&&Array.isArray(userOrder?.productsdata)){
+             setProductsData(userOrder?.productsdata)
+         }
+     },[userOrder])
+
+
+
+
     const props={
         outputType: OutputType.Save,
         returnJsPDFDocObject: true,
@@ -93,7 +104,7 @@ export default function CreateINvoice(){
      }
     return (
         <div>
-             <IonButton color="medium" style={{width:'100%'}} onClick={()=>savePdf1()}>
+             <IonButton color="dark" style={{width:'100%'}} onClick={()=>savePdf1()}>
                         Download Invoice
                         </IonButton>
       </div>

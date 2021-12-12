@@ -1,14 +1,8 @@
-import { IonButton, IonInput, IonItem ,IonList,IonListHeader,useIonPopover,IonProgressBar} from "@ionic/react";
+import { IonItem ,IonList,IonListHeader,useIonPopover} from "@ionic/react";
 import {  useState } from "react";
 import { useDispatch,useSelector } from "react-redux";
-import { BiPackage } from "react-icons/bi";
-import {FaCarSide} from 'react-icons/fa'
-import {TiTick} from 'react-icons/ti'
-import {FaJediOrder} from 'react-icons/fa'
 import './TrackOrder.css'
-import {  UserOrders, UserSelectedOrder } from "../Actions";
-import moment from 'moment'
-import {AiFillInfoCircle} from 'react-icons/ai'
+import CreateINvoice from "../components/CreateInvoice";
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -84,9 +78,9 @@ export default function BuyAgainViewPage(){
                         </div>
                     </div>
                     <div style={{margin:"7px"}}>
-                        <IonButton color="dark" style={{width:'100%'}}>
-                        Download Invoice
-                        </IonButton>
+                    <div style={{margin:"7px"}}>
+                    <CreateINvoice/>
+                    </div>
                     </div>
                 </div>
         </div>

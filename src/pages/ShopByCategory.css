@@ -39,7 +39,7 @@
     height: 35px;
     top:25px;
     font-size:12px;
-    font-family: 'Salsa'
+    font-family: Cabin,sans-serif;
 }
 .div-shop-by-category:hover{
     background-color:rgba(63, 70, 63, 0.377);

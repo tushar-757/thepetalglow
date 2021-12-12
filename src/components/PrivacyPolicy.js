@@ -3,38 +3,9 @@ export default function PrivacyPolicy(){
         <div style={{margin:"1rem"}}>
 <p><strong>Effective Date: 21-11-2021</strong></p>
 <h3>Your privacy is important to us</h3>
-{/* <p>ThePetalGlow is located at:</p>
-<address>
-    ThePetalGlow<br></br>
-    Faridabad, Faridabad <br></br>121004 HARYANA , India<br></br>
-
-</address> */}
-
 <p>It is ThePetalGlow's policy to respect your privacy regarding any information we may collect while operating our website. This Privacy Policy applies to <a href="https://thepetalglow.com"> thepetalglow.com</a> (hereinafter, "us", "we", or "thepetalglow.com"). We respect your privacy and are committed to protecting personally identifiable information you may provide us through the Website. We have adopted this privacy policy ("Privacy Policy") to explain what information may be collected on our Website, how we use this information, and under what circumstances we may disclose the information to third parties. This Privacy Policy applies only to information we collect through the Website and does not apply to our collection of information from other sources.</p>
 <p>This Privacy Policy, together with the Terms of service posted on our Website, set forth the general rules and policies governing your use of our Website. Depending on your activities when visiting our Website, you may be required to agree to additional terms of service.</p><h1 class="text-center">Privacy Policy</h1>
-{/* <h2 id="tableofcontents">Contents</h2>
-<p>Click below to jump to any section of this privacy policy</p> */}
-{/* <ol type="1">
-    <li><a href="/page/ThePetalGlow/PrivacyPolicy#websitevisitors"><strong>Website Visitors</strong></a>
-</li>
-    <li><a href="/page/ThePetalGlow/PrivacyPolicy#PII"><strong>Personally-Identifying Information</strong></a>
-</li>
-    <li><a href="/page/ThePetalGlow/PrivacyPolicy#Security"><strong>Security</strong></a>
-</li>
-    <li><a href="/page/ThePetalGlow/PrivacyPolicy#ExternalLinks"><strong>Links To External Sites</strong></a>
-</li>
-    <li><a href="/page/ThePetalGlow/PrivacyPolicy#PIIProtection"><strong>Protection of Certain Personally-Identifying Information</strong></a>
-</li>
-    <li><a href="/page/ThePetalGlow/PrivacyPolicy#Ecommerce"><strong>E-commerce</strong></a>
-</li>
-    <li><a href="/page/ThePetalGlow/PrivacyPolicy#businesstransfers"><strong>Business Transfers</strong></a>
-</li>
-    <li><a href="/page/ThePetalGlow/PrivacyPolicy#Changes"><strong>Privacy Policy Changes</strong></a>
-</li>
-    <li><a href="/page/ThePetalGlow/PrivacyPolicy#Credit"><strong>Contact Information &amp; Credit</strong></a>
-</li>
 
-</ol> */}
 <h2 id="websitevisitors">1. Website Visitors</h2><p>Like most website operators, ThePetalGlow collects non-personally-identifying information of the sort that web browsers and servers typically make available, such as the browser type, language preference, referring site, and the date and time of each visitor request. ThePetalGlow's purpose in collecting non-personally identifying information is to better understand how ThePetalGlow's visitors use its website. From time to time, ThePetalGlow may release non-personally-identifying information in the aggregate, e.g., by publishing a report on trends in the usage of its website.</p>
 <p>ThePetalGlow also collects potentially personally-identifying information like Internet Protocol (IP) addresses for logged in users and for users leaving comments on https://thepetalglow.com blog posts. ThePetalGlow only discloses logged in user and commenter IP addresses under the same circumstances that it uses and discloses personally-identifying information as described below.</p>
 

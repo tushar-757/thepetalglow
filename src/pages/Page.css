@@ -5,12 +5,12 @@
 }
 .hydrated{
     --color:rgb(78, 74, 74);
-    font-family: 'Salsa';
+    font-family: Cabin,sans-serif;
 }
 .h1-page{
     margin:0;
     font-size:40;
-    font-family: 'Salsa'
+    font-family: Cabin,sans-serif;
 }
 .cart-item-length{
     position: absolute;

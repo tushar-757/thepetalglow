@@ -117,10 +117,9 @@ const Menu: React.FC = () => {
           <div className="menuLoginbtn">
             {
               (User.username!="")?
-              <IonButton onClick={()=>{
-                LogoutHandler()
-              }} style={{color:"white"}} color="tertiary" >logout</IonButton>:
-              <IonButton onClick={()=>{LoginHandler()}} color="tertiary" style={{color:"white"}}
+              <IonButton onClick={()=>
+                LogoutHandler()} style={{color:"white"}} color="tertiary" >logout</IonButton>:
+              <IonButton onClick={()=>LoginHandler()} color="tertiary" style={{color:"white"}}
               >login</IonButton>
             }
             <IonButton color="danger" onClick={()=>History.push('/page/TrackOrder')} style={{color:"white"}}>Tack Order</IonButton>
@@ -129,8 +128,10 @@ const Menu: React.FC = () => {
           {appPages.map((appPage, index) => {
             return (
               <IonMenuToggle key={index} autoHide={false}>
-                <IonItem className={location.pathname === appPage.url ? 'selected' : ''} routerLink={appPage.url}
-                routerDirection="none" lines="none"
+                <IonItem className={location.pathname === appPage.url ? 'selected' : ''}
+                routerLink={appPage.url}
+                routerDirection="none"
+                 lines="none"
                  detail={false}
                  onClick={(appPage.url==="/page/Orders")?()=>dispatch(UserOrders()):undefined}>
                   <IonIcon slot="start" ios={appPage.iosIcon} md={appPage.mdIcon} />

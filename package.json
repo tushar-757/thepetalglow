@@ -19,6 +19,7 @@
     "@ionic-native/web-intent": "^5.36.0",
     "@ionic/react": "^5.5.0",
     "@ionic/react-router": "^5.5.0",
+    "@loadable/component": "^5.15.2",
     "@material-ui/core": "^4.12.3",
     "@testing-library/jest-dom": "^5.11.9",
     "@testing-library/react": "^11.2.5",

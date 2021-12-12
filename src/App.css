@@ -39,7 +39,7 @@
   margin:0;
   font-size:14px;
   color:white;
-  font-family: 'Salsa'
+  font-family: Cabin,sans-serif
 }
 
 .icons-SBC{
@@ -82,7 +82,7 @@ margin: 0;
 display: flex;
 justify-content: center;
 align-items: center;
-font-family: 'Salsa';
+font-family: Cabin,sans-serif;
 font-weight: 400;
 }
 .best-selling-tag{
@@ -175,7 +175,7 @@ font-weight: 400;
 }
 .BestSellingTitle{
   font-Size:"1rem";
-  font-Family:"Salsa";
+  font-Family:Cabin,sans-serif;
   display: flex;
   justify-content: center;
   color: #03a9f4;
@@ -235,7 +235,7 @@ color:blue
   color: white;
   font-size: 35px;
   text-shadow: 0px 0px 9px black;
-  font-family: cursive;
+  font-family: Cabin,sans-serif;
   top: 103px;
 }
 .select-location-view{

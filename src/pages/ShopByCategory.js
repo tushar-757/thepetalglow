@@ -96,7 +96,7 @@ export default function ShopByCategory(){
     const [present] = useIonAlert();
 return (
     <div style={{width:"100%",height:150}} className="white-background">
-    <h1 style={{display:"flex",fontFamily:"Salsa",color:"#484848",fontSize:18,margin:0,justifyContent:"center",alignItems:"center",height:50}}>Shop By Category</h1>
+    <h1 style={{display:"flex",fontFamily:"Cabin,sans-serif",color:"#484848",fontSize:18,margin:0,justifyContent:"center",alignItems:"center",height:50}}>Shop By Category</h1>
   <div style={{display:"flex",justifyContent:"space-around",position:"relative"}}>
            <PlantModal showPlantModal={showPlantModal} setShowPlantModal={setShowPlantModal} startLoading={startLoading} />
            <PotModal showPotModal={showPotModal} setShowPotModal={setShowPotModal}/>

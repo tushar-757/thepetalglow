@@ -67,7 +67,7 @@ const data = {
 const styles = {
     // bgColor: 'white',
     titleTextColor: "#343439",
-    rowTitleColor: "blue",
+    rowTitleColor: "#898989",
     // rowContentColor: 'grey',
     // arrowColor: "red",
 };
