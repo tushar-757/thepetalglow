@@ -148,7 +148,7 @@ const AccountPage=(props) => {
     }
     }
   return (
-    <IonPage>
+    <div>
         <IonModal isOpen={showModal} cssClass='my-custom-class' backdropDismiss={false}>
         <IonInput value={username1} onIonChange={(e)=>setUsername(e.target.value)} placeholder="username"/>
         <IonInput value={mobile1} onIonChange={(e)=>setMobile(e.target.value)} placeholder="mobile"/>
@@ -191,7 +191,7 @@ const AccountPage=(props) => {
         <IonButton color="danger" onClick={()=>DeleteHandler()}>Delete Account</IonButton>
         <IonButton onClick={() => setShowModal2(false)} style={{color:"white"}}>Cancel</IonButton>
       </IonModal>
-        <IonContent>
+        <div>
         <IonIcon md={arrowBackCircle} style={{fontSize:44,color:"lightgreen",margin:5}}
             onClick={()=>props.setAccount(true)}/>
             <IonHeader style={{ padding:"25px 0"}} className="white-background">
@@ -201,7 +201,7 @@ const AccountPage=(props) => {
                 <IonButton color="tertiary"style={{margin:"1rem"}}
                 onClick={()=>updateModel1()}>Edit details</IonButton>
                 </IonHeader>
-                <IonContent style={{padding:"20px"}} className="white-background">
+                <div style={{padding:"20px"}} className="white-background">
                     <h1 style={{padding:"20px"}} className="white-background">
                         Saved Address
                    </h1>
@@ -226,9 +226,9 @@ const AccountPage=(props) => {
                       }
                      setShowModal2(true)
                      }}>DELETE ACCOUNT</IonButton>
-                </IonContent>
-           </IonContent>
-        </IonPage>
+                </div>
+           </div>
+        </div>
   );
 };
 

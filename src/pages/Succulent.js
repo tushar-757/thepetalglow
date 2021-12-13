@@ -1,4 +1,4 @@
-import { IonCard,IonButton,IonCardContent,useIonToast,useIonLoading,IonIcon, IonCardHeader } from '@ionic/react';
+import { IonCard,IonPage,IonContent,IonButton,IonCardContent,useIonToast,useIonLoading,IonIcon, IonCardHeader } from '@ionic/react';
 import {  useDispatch,useSelector} from 'react-redux';
 import { Addtocart, GetSelectedSucculent,addToLikes,removefromLikes } from '../Actions';
 import {useHistory} from 'react-router-dom'
@@ -7,6 +7,7 @@ import {arrowBackCircle } from "ionicons/icons"
 import { useEffect, useState } from 'react';
 import {AiFillHeart,AiOutlineHeart} from 'react-icons/ai'
 import EmptyBox from '../static/box.png'
+import Header from '../components/Header';
 
 export default function Succulent(){
     const dispatch=useDispatch();
@@ -42,7 +43,12 @@ export default function Succulent(){
       }
   },[data])
 return(
-      (Loading)?
+  <>
+  <IonPage>
+    <Header/>
+    <IonContent>
+  <>
+      {(Loading)?
       <>
       <LoadingBox/>
       </>:
@@ -129,5 +135,10 @@ return(
                ) }
            </div>
            </div>
+}
+           </>
+           </IonContent>
+           </IonPage>
+           </>
 )
 }

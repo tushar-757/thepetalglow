@@ -1,5 +1,12 @@
+import { IonContent,IonPage } from "@ionic/react"
+import Header from "./Header"
+
 export default function TermsandCondition(){
     return(
+        <>
+        <IonPage>
+          <Header/>
+          <IonContent>
         <div style={{margin:"1rem"}}>
            <h2>Welcome to ThePetalGlow</h2>
 <p>These terms of service outline the rules and regulations for the use of ThePetalGlow's Website.</p>
@@ -174,5 +181,8 @@ export default function TermsandCondition(){
 TO BE BOUND BY ALL OF THE TERMS AND CONDITIONS OF THIS AGREEMENT.
     </p>
         </div>
+        </IonContent>
+        </IonPage>
+        </>
     )
 }

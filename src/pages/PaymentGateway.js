@@ -1,9 +1,10 @@
-import { IonButton,IonIcon, useIonAlert,IonLoading,useIonToast} from "@ionic/react"
+import { IonButton,IonContent,IonPage,IonIcon, useIonAlert,IonLoading,useIonToast} from "@ionic/react"
 import {useHistory} from 'react-router-dom'
 import { arrowBackCircle } from "ionicons/icons";
 import api from "../Services/urlApi";
 import { LocalNotifications } from '@ionic-native/local-notifications'
 import './cart.css'
+import Header from "../components/Header";
 import { useDispatch,useSelector } from "react-redux";
 import {AddtoNotification, RemovefromNotification, UserOrders} from '../Actions';
 import {EmptyCart} from '../Actions/CartActions'
@@ -92,6 +93,11 @@ export default function PaymentGategay(){
         }
       }
     return(
+      <>
+      <IonPage>
+        <Header/>
+        <IonContent>
+      <>
         <div style={{margin:50}}>
               <div onClick={()=>History.goBack()}>
               <IonLoading
@@ -104,6 +110,10 @@ export default function PaymentGategay(){
             </div>
               <IonButton onClick={() => loadCheckout()}>Go for payment</IonButton>
      </div>
+     </>
+     </IonContent>
+     </IonPage>
+     </>
     )
 }
 

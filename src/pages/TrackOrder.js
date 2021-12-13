@@ -1,4 +1,4 @@
-import { IonButton, IonInput, IonItem ,IonList,IonListHeader,useIonPopover,IonProgressBar} from "@ionic/react";
+import { IonButton,IonPage,IonContent, IonInput, IonItem ,IonList,IonListHeader,useIonPopover,IonProgressBar} from "@ionic/react";
 import {  useEffect, useState } from "react";
 import { useDispatch,useSelector } from "react-redux";
 import { BiPackage } from "react-icons/bi";
@@ -14,10 +14,10 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import BuyAgainViewPage from "./BuyAgainViewPage";
 import CreateINvoice from "../components/CreateInvoice";
 import { useHistory } from "react-router";
-
+import Header from '../components/Header';
+import EmptyBox from '../static/box.png'
 
 function PopoverList({ onHide }){
     return (
@@ -60,7 +60,11 @@ export default function TrackOrder(){
     const History=useHistory()
 
     return(
-    (userOrder.Active===true)?
+        <IonPage>
+          <Header/>
+          <IonContent>
+        <>
+    {(userOrder.Active===true)?
         <div>
             <div style={{padding:"10px"}}>
                 <IonInput placeholder="Search By OrderId" onIonChange={e =>setId(e.detail.value)} className="white-background"/>
@@ -93,8 +97,10 @@ export default function TrackOrder(){
                             <p>Packed</p>
                             <p style={{fontSize:"0.6rem"}}>
                                 expectedAt:<br></br>
-                                {time.includes('am')?moment(userOrder?.createdAt).format("MMM Do"):
-                                (time<4||time==12)?moment(userOrder?.createdAt).format("MMM Do"):
+                                {time.includes('am')?
+                                moment(userOrder?.createdAt).format("MMM Do"):
+                                (time<4||time==12)?
+                                moment(userOrder?.createdAt).format("MMM Do"):
                                 moment(userOrder?.createdAt).add(1,"days").format("MMM Do")}
                                  (2-4)pm
                             </p>
@@ -184,6 +190,11 @@ export default function TrackOrder(){
                     </div>
                 </div>
         </div>:
-        <BuyAgainViewPage/>
+       <div className="emptybox-div">
+       <img className="emptybox-div-img" src={EmptyBox}/>
+       </div>}
+        </>
+        </IonContent>
+        </IonPage>
     )
 }

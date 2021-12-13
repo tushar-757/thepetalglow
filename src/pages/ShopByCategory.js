@@ -1,5 +1,5 @@
 import { bag, beaker, gift, home, leaf} from 'ionicons/icons';
-import { IonModal, IonIcon,IonButton,useIonAlert} from '@ionic/react';
+import { IonModal,IonPage,IonContent, IonIcon,IonButton,useIonAlert} from '@ionic/react';
 import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { setLoading,setUnLoading } from '../Actions';
@@ -18,21 +18,25 @@ function PlantModal({showPlantModal,setShowPlantModal,setLoading,startLoading}){
                <div className="model-cont">
                    <div className="model-cont-item" onClick={()=>{
                        startLoading()
+                       setShowPlantModal(false)
                        History.push("/page/SeasonalPlants")}}>
                        <h1>Seasonal</h1>
                    </div>
                    <div className="model-cont-item" onClick={()=>{
                        startLoading()
+                       setShowPlantModal(false)
                        History.push("/page/IndoorPlants")}}>
                        <h1>Indoor</h1>
                    </div>
                    <div className="model-cont-item" onClick={()=>{
                        startLoading()
+                       setShowPlantModal(false)
                        History.push("/page/OutdoorPlants")}}>
                        <h1>Outdoor</h1>
                    </div>
                    <div className="model-cont-item" onClick={()=>{
                        startLoading()
+                       setShowPlantModal(false)
                        History.push("/page/SucculentPlants")}}>
                        <h1>Succulent</h1>
                    </div>
@@ -53,21 +57,25 @@ function PotModal({showPotModal,setShowPotModal}){
                <IonButton color="danger" onClick={() => setShowPotModal(false)} style={{color:'white'}}>Close </IonButton>
                <div  className="model-cont">
                    <div className="model-cont-item" onClick={()=>{
+                        setShowPotModal(false)
                     History.push("/page/Pebbles")}}>
                        <h1>Pebbles</h1>
                    </div>
                    <div className="model-cont-item"
                    onClick={()=>{
+                    setShowPotModal(false)
                     History.push("/page/PlasticPots")}}>
                        <h1>Plastic Planters</h1>
                    </div>
                    <div className="model-cont-item"
                     onClick={()=>{
+                        setShowPotModal(false)
                         History.push("/page/EarthenPots")}}>
                        <h1>Earthen Planters</h1>
                    </div>
                    <div className="model-cont-item"
                     onClick={()=>{
+                        setShowPotModal(false)
                         History.push("/page/CeramicPots")}}>
                        <h1>Ceramic Planters</h1>
                    </div>
@@ -95,6 +103,7 @@ export default function ShopByCategory(){
     }
     const [present] = useIonAlert();
 return (
+    <>
     <div style={{width:"100%",height:150}} className="white-background">
     <h1 style={{display:"flex",fontFamily:"Cabin,sans-serif",color:"#484848",fontSize:18,margin:0,justifyContent:"center",alignItems:"center",height:50}}>Shop By Category</h1>
   <div style={{display:"flex",justifyContent:"space-around",position:"relative"}}>
@@ -133,5 +142,6 @@ return (
        </div>
   </div>
   </div>
+  </>
 )
 }

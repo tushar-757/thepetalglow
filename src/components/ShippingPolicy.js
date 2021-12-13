@@ -1,10 +1,17 @@
 import Faq from "react-faq-component";
+import { IonContent,IonPage } from "@ionic/react"
+import Header from "./Header"
 const data = {
     title: "Shipping and Refund Policiy",
     rows: [
         {
             title: "Same Day delivery Policy?",
             content: <p>As per our same day delivery policy your order should be confirmed before 4pm in order to get eligible for same day delivery otherwise it would count in next day delivery and thepetalglow is not responsible  in case if we are not able to fulfill your same day delivery due to some kind of issue,accident or pandemic.
+            </p>
+        },
+        {
+            title: "Delivery Days?",
+            content: <p>on Saturday,Sunday we don't deliver Orders
             </p>
         },
         {
@@ -49,6 +56,10 @@ const config = {
 };
 export default function ShippingPolicy(){
     return (
+        <>
+        <IonPage>
+          <Header/>
+          <IonContent>
         <div style={{margin:"1rem"}}>
               <Faq
                 data={data}
@@ -56,5 +67,8 @@ export default function ShippingPolicy(){
                 config={config}
             />
         </div>
+        </IonContent>
+        </IonPage>
+        </>
     )
 }

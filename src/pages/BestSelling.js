@@ -58,8 +58,8 @@ return(
                         :null}
                 {Data?.map((d,i)=>(
                   <IonCard className="best-selling-cont-item" style={{position:"relative"}} key={i}>
-                      <span className="best-selling-cont-festival-msg"
-                      style={{color:data[0]?.color}}>{data[0]?.message}</span>
+                      {/* <span className="best-selling-cont-festival-msg"
+                      style={{color:data[0]?.color}}>{data[0]?.message}</span> */}
                       <IonCardHeader style={{padding:'0px'}}>
                          <LazyLoadImage
                             alt={d?.name}

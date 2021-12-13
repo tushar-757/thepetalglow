@@ -1,4 +1,4 @@
-import { IonButton,IonSlide,IonSlides,IonCard,useIonToast ,useIonLoading,IonList,IonListHeader,IonItem,useIonAlert,IonCardHeader,IonCardContent, useIonPopover,IonIcon, IonImg } from '@ionic/react';
+import { IonButton,IonPage,IonContent,IonSlide,IonSlides,IonCard,useIonToast ,useIonLoading,IonList,IonListHeader,IonItem,useIonAlert,IonCardHeader,IonCardContent, useIonPopover,IonIcon, IonImg } from '@ionic/react';
 import React, { useEffect, useState } from 'react';
 import {arrowBackCircle,location } from "ionicons/icons"
 import { useSelector ,useDispatch} from "react-redux";
@@ -13,6 +13,7 @@ import ReactStars from 'react-stars'
 import { CustomerRating } from '../components/CustomerRating';
 import api from '../Services/urlApi';
 import moment from 'moment';
+import Header from '../components/Header';
 
 const slideOpts = {
   initialSlide:0,
@@ -151,6 +152,11 @@ export default function ViewPage(){
       checkhour()
     },[])
     return (
+      <>
+      <IonPage>
+        <Header/>
+        <IonContent>
+      <>
         <div style={{position:"relative"}}>
            <div onClick={()=>{
               History.goBack()
@@ -368,5 +374,9 @@ export default function ViewPage(){
                          Add To WishList</IonButton>
                   </div>
      </div>
+     </>
+     </IonContent>
+     </IonPage>
+     </>
     )
 }

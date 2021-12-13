@@ -1,4 +1,4 @@
-import { IonCard,IonButton,IonCardContent,useIonToast,useIonLoading,IonIcon, IonCardHeader } from '@ionic/react';
+import { IonCard,IonButton,IonPage,IonContent,IonCardContent,useIonToast,useIonLoading,IonIcon, IonCardHeader } from '@ionic/react';
 import {arrowBackCircle } from "ionicons/icons"
 import {  useDispatch,useSelector} from 'react-redux';
 import { Addtocart,GetSelectedPlanter,addToLikes,removefromLikes } from '../Actions';
@@ -9,6 +9,7 @@ import { useState,useEffect } from 'react';
 import LoadingBox from '../components/LoadingComponent';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import EmptyBox from '../static/box.png'
+import Header from '../components/Header';
 
 export default function PlantersPage(){
     const dispatch=useDispatch();
@@ -45,7 +46,12 @@ export default function PlantersPage(){
         }
     },[data])
 return(
-      (Loading)?
+  <>
+  <IonPage>
+    <Header/>
+    <IonContent>
+  <>
+      {(Loading)?
       <>
       <LoadingBox/>
       </>:
@@ -132,6 +138,10 @@ return(
                 )
                ) }
            </div>
-           </div>
+           </div>}
+           </>
+           </IonContent>
+           </IonPage>
+           </>
 )
 }

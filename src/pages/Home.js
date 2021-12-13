@@ -1,4 +1,4 @@
-import { IonPage,IonSlide,IonSlides, IonContent,useIonToast,IonRefresher, IonRefresherContent, IonIcon, IonFooter, IonHeader, IonButton } from '@ionic/react';
+import { IonPage,IonSlide,IonSlides, IonContent,useIonToast,IonRefresher, IonRefresherContent, IonIcon, IonFooter, IonHeader, IonButton, IonItem } from '@ionic/react';
 import { location,logoFacebook,logoInstagram,logoYoutube,logoLinkedin} from 'ionicons/icons';
 import { useHistory } from 'react-router-dom';
 import loadable from '@loadable/component';
@@ -19,24 +19,24 @@ import api from '../Services/urlApi';
 import Logo from '../static/favicon.png'
 import Image1 from '../static/image5.png'
 import Image2 from '../static/FINALIMAGE2.png'
-import Image3 from '../static/kokedama.jpg'
+import Image3 from '../static/kokedama.png'
 import Image4 from '../static/luckybamboo.jpg'
+import Header from '../components/Header';
+import moment from 'moment'
+import { RiWhatsappFill } from 'react-icons/ri';
 const BestSelling = loadable(()=>import('./BestSelling'));
 const ShopByCategory = loadable(()=>import('./ShopByCategory'));
 
 const slideOpts = {
   initialSlide: 0,
-  speed: 400
+  speed: 400,
+  autoplay:true
 };
 
 const ImageBar=()=>{
   return(
     <IonSlides pager={true} startAutoPlay={true} options={slideOpts}  className="Home-SlideBar">
-      {/* <IonSlide>
-      <iframe  className="Home-Player"  autoPlay="autoplay" src="https://www.youtube-nocookie.com/embed/_EB-qSLTCXQ" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
-        </IonSlide> */}
       <IonSlide  style={{backgroundColor:"white"}} >
-        <span className="image1-tag">Decorate Your Home With Happiness<br></br>in a very affordable price only on thepetalglow<br></br> Get Upto 20% off</span>
          <img
            alt={Image1}
            src={Image1}
@@ -45,7 +45,6 @@ const ImageBar=()=>{
            />
       </IonSlide>
       <IonSlide>
-      <span className="image1-tag">Right from nursery to your home<br></br></span>
       <img
            alt={Image2}
            src={Image2}
@@ -54,7 +53,7 @@ const ImageBar=()=>{
            />
       </IonSlide>
       <IonSlide>
-      <span className="image1-tag">kokedama's Coming soon...</span>
+      {/* <span className="image1-tag">kokedama's Coming soon...</span> */}
       <img
            alt={Image3}
            src={Image3}
@@ -135,16 +134,17 @@ const Home=() => {
   return (
     <>
     <IonPage>
+      <Header/>
       <IonContent>
-    <>
-     <Marquee className="top-message" speed={40} gradient={false}>
-     As per our same day delivery Policy currently we are offering services only in Faridabad,we are trying our best to reach you.Please do not order if you are residing outside faridabad
-  </Marquee>
-  </>
+        <IonItem>
+       <Marquee className="top-message" speed={40} gradient={false}>
+        As per our same day delivery Policy currently we are offering services only in Faridabad,we are trying our best to reach you.Please do not order if you are residing outside faridabad
+       </Marquee>
       <IonRefresher slot="fixed" onIonRefresh={doRefresh}>
         <IonRefresherContent>
         </IonRefresherContent>
            </IonRefresher>
+        </IonItem>
           <div className="select-location" onClick={()=>History.push("/page/MapsPage")}>
           <IonIcon slot="start"  md={location} style={{color:'rgb(58, 223, 114)'}}/>
               <h1 className="h1-home" style={{color:"white"}}>select your location</h1>
@@ -200,7 +200,7 @@ const Home=() => {
                            <input placeholder="email"
                             style={{background:"white",color:'black',border:'none',outline:"none",
                             width:"99%", padding: '10px'}}
-                             type="text"
+                             type="email"
                               value={email}
                               onChange={(e)=>setSubscribeEmail(e.target.value)}
                               required/>
@@ -236,10 +236,14 @@ const Home=() => {
                                  </div>
                              </div>
                     </div>
+                    <a className="floating-whatsapp" href="#"
+        onClick={()=>window.open('https://wa.me/+17278771267', '_blank')}>
+         <RiWhatsappFill style={{fontSize:'48px',color:'white'}}/>
+        </a>
            </IonContent>
         </IonPage>
         </>
   );
 };
 
-export default withRouter(Home);
+export default Home;

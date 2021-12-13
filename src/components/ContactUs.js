@@ -1,5 +1,12 @@
+import { IonContent,IonPage } from "@ionic/react"
+import Header from "./Header"
+
 export default function ContactUs(){
     return(
+        <>
+        <IonPage>
+          <Header/>
+          <IonContent>
         <div style={{margin:"1rem"}}>
             <h2>ContactUs</h2>
               <div>
@@ -11,5 +18,8 @@ export default function ContactUs(){
                  Phone:+17278771267 (`whatsapp chat available only`)
               </div>
         </div>
+        </IonContent>
+        </IonPage>
+        </>
     )
 }

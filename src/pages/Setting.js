@@ -1,4 +1,4 @@
-import { IonPage, IonContent,IonLabel, IonModal,IonButton,IonItem, IonList,IonToggle, IonTitle, IonIcon} from '@ionic/react';
+import { IonPage, IonContent,IonLabel,IonModal,IonButton,IonItem, IonList,IonToggle, IonTitle, IonIcon} from '@ionic/react';
  import { withRouter,useHistory  } from 'react-router';
  import { arrowForwardOutline,arrowBackCircle } from 'ionicons/icons';
 import './Home.css';
@@ -8,6 +8,7 @@ import IsLoggedIn from '../Hooks/isLoggedIn';
 import { useEffect } from 'react';
 import { useDispatch } from "react-redux";
 import { addUser,} from "../Actions";
+import Header from '../components/Header';
 
 const Setting=() => {
     const [checked, setChecked] = useState(true);
@@ -32,6 +33,7 @@ const Setting=() => {
 
   return (
     <IonPage>
+      <Header/>
       <IonContent>
          {(Account)?<IonList style={{paddingTop:'14px'}}>
            <div className="white-background">
@@ -48,7 +50,8 @@ const Setting=() => {
                 <IonToggle checked={checked} onIonChange={e => setChecked(e.detail.checked)} />
                </IonItem>
               </IonItem>
-            </IonList>:<Accountpage setAccount={setAccount} />}
+            </IonList>:
+            <Accountpage setAccount={setAccount} />}
            </IonContent>
         </IonPage>
   );

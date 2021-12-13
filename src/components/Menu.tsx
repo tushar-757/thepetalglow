@@ -100,7 +100,7 @@ const Menu: React.FC = () => {
   }
   const ShareHandler=async()=>{
     await Share.share({
-      title: 'THEPETALGLOW Mobile App',
+      title: 'THEPETALGLOW',
       text: 'Really awesome app',
       url: 'https://www.thepetalglow.com/',
       dialogTitle: 'Share with buddies',
@@ -127,9 +127,10 @@ const Menu: React.FC = () => {
           {appPages.map((appPage, index) => {
             return (
               <IonMenuToggle key={index} autoHide={false}>
-                <IonItem className={location.pathname === appPage.url ? 'selected' : ''}
-                routerLink={appPage.url}
-                routerDirection="none"
+                <IonItem
+                 className={location.pathname === appPage.url ? 'selected' : ''}
+                 routerLink={appPage.url}
+                 routerDirection="none"
                  lines="none"
                  detail={false}
                >

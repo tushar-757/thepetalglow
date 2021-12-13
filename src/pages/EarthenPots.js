@@ -1,4 +1,4 @@
-import { IonCard,IonButton,IonCardContent,useIonLoading,IonIcon, IonCardHeader } from '@ionic/react';
+import { IonPage,IonContent,IonCard,IonButton,IonCardContent,useIonLoading,IonIcon, IonCardHeader } from '@ionic/react';
 import {arrowBackCircle } from "ionicons/icons"
 import {  useDispatch,useSelector} from 'react-redux';
 import { Addtocart,GetSelectedPlanter,addToLikes,removefromLikes } from '../Actions';
@@ -6,6 +6,7 @@ import {BiRupee} from 'react-icons/bi'
 import {useHistory} from 'react-router-dom'
 import {AiFillHeart,AiOutlineHeart} from 'react-icons/ai'
 import { useState } from 'react';
+import Header from '../components/Header';
 import LoadingBox from '../components/LoadingComponent';
 
 export default function EarthenPots(){
@@ -18,7 +19,12 @@ export default function EarthenPots(){
     const [like,setLike]=useState(false)
 
 return(
-      (Loading)?
+      <>
+      <IonPage>
+        <Header/>
+        <IonContent>
+      <>
+      {(Loading)?
       <>
       <LoadingBox/>
       </>:
@@ -91,5 +97,10 @@ return(
                Currently Nothing to Show
            </div>
            </div>
+           }
+           </>
+           </IonContent>
+           </IonPage>
+           </>
 )
 }

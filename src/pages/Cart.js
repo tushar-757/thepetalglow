@@ -1,4 +1,4 @@
-import { IonButton,IonLabel,IonModal,IonSelect,IonSelectOption,IonIcon,IonItem,useIonLoading,useIonToast,IonCheckbox,IonLoading,IonInput,IonFooter,IonToolbar } from "@ionic/react"
+import { IonButton,IonLabel,IonPage,IonContent,IonModal,IonSelect,IonSelectOption,IonIcon,IonItem,useIonLoading,useIonToast,IonCheckbox,IonLoading,IonInput,IonFooter,IonToolbar } from "@ionic/react"
 import { addCircle, arrowBackCircle, removeCircle,location,createOutline} from "ionicons/icons"
 import { Removefromcart, setQuantity,unsetQuantity,GrandTotal,SetCustomSku
 ,setBlackPebbles,setBlackWhitePebbles,EditCustomization,setColouredPebble,setWhitePebbles,addtoCustomization, EmptyCart} from '../Actions/CartActions';
@@ -19,6 +19,7 @@ import TableRow from '@material-ui/core/TableRow';
 import { CustomziationBox } from "../components/CustomizationBox";
 import moment from 'moment';
 import { AiFillCopy } from 'react-icons/ai';
+import Header from "../components/Header";
 
 
 const Item=({ index,id,type,textAreaRef,title,sku,copyToClipboard,present,price,image,quantity,orderquantity,dispatch,setValue,skuvalue,customskuvalue })=>{
@@ -131,9 +132,6 @@ export default function Cart(props){
       }catch(e){
         setCoupon(0)
         setIsApplied('Coupon is Not Valid')
-        console.log(e?.response)
-        console.log(e?.data)
-        console.log(e?.data?.response)
         present(
           {
               color: 'danger',
@@ -277,7 +275,7 @@ const SubmitLocation=(e)=>{
 
 useEffect(()=>{
   if(total<499&&total>0){
-     setShippingCharge(49)
+     setShippingCharge(79)
      dispatch(GrandTotal(total+ShippingCharge-coupon))
   }else{
     setShippingCharge(0)
@@ -336,10 +334,13 @@ const options = {
   cssClass: 'my-custom-interface'
 };
     return(
-          <>
+      <>
+      <IonPage>
+        <Header/>
+        <IonContent>
         <div className="white-background">
         <Marquee className="top-message" speed={40} gradient={false}>
-          shipping is free for orders having cart value greater than 499,use coupon HAPPYPLANT30 for 20% OFF upto Rs.100
+          shipping is free for orders having cart value greater than 499,use coupon HAPPYPLANT100 for 20% OFF upto Rs.100
        </Marquee>
         <div onClick={()=>{
            present2({
@@ -564,6 +565,7 @@ const options = {
                          </div>
                      </div>
                  </div>
+                 </IonContent>
                  <IonFooter>
       <IonToolbar style={{padding: "14px"}}>
         {
@@ -578,6 +580,7 @@ const options = {
         }
       </IonToolbar>
     </IonFooter>
+    </IonPage>
            </>
     )
 }

@@ -1,4 +1,4 @@
-import { IonButton, IonIcon } from '@ionic/react';
+import { IonButton, IonIcon,IonPage,IonContent, } from '@ionic/react';
 import { useDispatch, useSelector } from 'react-redux';
 import { closeCircle, removeCircle } from "ionicons/icons"
 import { RemovefromNotification } from '../Actions';
@@ -8,6 +8,7 @@ import moment from 'moment'
 import IsLoggedIn from '../Hooks/isLoggedIn';
 import { useEffect } from 'react';
 import { addUser} from "../Actions";
+import Header from '../components/Header';
 import EmptyBox from '../static/box.png'
 
 export default function Notifications(){
@@ -30,6 +31,9 @@ export default function Notifications(){
     },[user,user_id])
 
     return(
+      <IonPage>
+        <Header/>
+        <IonContent>
         <div>
            <h1 style={{margin:'1rem'}}>{(Notify?.length===0)?
             <div className="emptybox-div">
@@ -53,5 +57,7 @@ export default function Notifications(){
               </div>
             ))}
         </div>
+        </IonContent>
+        </IonPage>
     )
 }

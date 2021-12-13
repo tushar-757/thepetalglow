@@ -1,4 +1,4 @@
-import { IonCard,IonButton,IonCardContent,useIonToast,useIonLoading, IonCardHeader } from '@ionic/react';
+import { IonCard,IonButton,IonPage,IonContent,IonCardContent,useIonToast,useIonLoading, IonCardHeader } from '@ionic/react';
 import {  useDispatch,useSelector} from 'react-redux';
 import { Addtocart,GETSELECTEDBESTSELLING ,addToLikes,removefromLikes} from '../Actions';
 import {useHistory} from 'react-router-dom'
@@ -6,7 +6,7 @@ import {BiRupee} from 'react-icons/bi'
 import {AiFillHeart,AiOutlineHeart} from 'react-icons/ai'
 import { useEffect, useState } from 'react';
 import EmptyBox from '../static/box.png'
-
+import Header from '../components/Header';
 
 export default function WishList(){
     const dispatch=useDispatch();
@@ -40,6 +40,11 @@ export default function WishList(){
          }
    },[])
 return(
+  <>
+  <IonPage>
+    <Header/>
+    <IonContent>
+  <>
     <div className="best-selling-cont">
       {(Data?.length===0)?
               <div className="emptybox-div">
@@ -113,5 +118,9 @@ return(
                 )
                ) }
            </div>
+           </>
+           </IonContent>
+           </IonPage>
+           </>
 )
 }

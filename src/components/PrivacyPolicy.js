@@ -1,5 +1,12 @@
+import { IonContent,IonPage } from "@ionic/react"
+import Header from "./Header"
+
 export default function PrivacyPolicy(){
     return (
+        <>
+        <IonPage>
+          <Header/>
+          <IonContent>
         <div style={{margin:"1rem"}}>
 <p><strong>Effective Date: 21-11-2021</strong></p>
 <h3>Your privacy is important to us</h3>
@@ -27,7 +34,9 @@ ThePetalGlow does not share your email address or other personally identifying i
 <h2 id="Changes">8. Privacy Policy Changes</h2><p>Although most changes are likely to be minor, ThePetalGlow may change its Privacy Policy from time to time, and in ThePetalGlow's sole discretion. ThePetalGlow encourages visitors to frequently check this page for any changes to its Privacy Policy. Your continued use of this site after any change in this Privacy Policy will constitute your acceptance of such change.</p>
 
 <h2 id="Credit">9. Contact Information &amp; Credit</h2><p>This privacy policy was created at <a  href="https://privacyterms.io/privacy-policy-generator/" title="Privacy policy generator" target="_blank">privacyterms.io privacy policy generator</a>. If you have any questions about our Privacy Policy, please contact us via <a href="mailto:services@thepetalglow.com">email</a> or <a href="tel:">phone</a>.</p>
-
         </div>
+        </IonContent>
+        </IonPage>
+        </>
     )
 }

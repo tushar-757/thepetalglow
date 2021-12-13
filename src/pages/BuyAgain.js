@@ -1,4 +1,4 @@
-import { IonButton,IonChip ,IonLabel,useIonToast} from '@ionic/react';
+import { IonButton,IonPage,IonContent,IonChip ,IonLabel,useIonToast} from '@ionic/react';
 import React, { useRef,useEffect,useState} from 'react';
 import { useSelector ,useDispatch} from "react-redux";
 import { useHistory } from 'react-router';
@@ -12,6 +12,7 @@ import { AiFillCopy } from 'react-icons/ai';
 import moment from 'moment'
 import LoadingBox from '../components/LoadingComponent';
 import EmptyBox from '../static/box.png'
+import Header from '../components/Header';
 import './Order.css'
 
 export default function BuyAgain(){
@@ -44,6 +45,10 @@ export default function BuyAgain(){
       }
     },[NotActive])
     return (
+      <>
+      <IonPage>
+        <Header/>
+        <IonContent>
       <>
        {(Loading)?<>
        <LoadingBox/>
@@ -143,6 +148,9 @@ export default function BuyAgain(){
     ))
           }
      </div>}
+     </>
+     </IonContent>
+     </IonPage>
      </>
     )
 }

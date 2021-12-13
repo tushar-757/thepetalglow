@@ -1,12 +1,11 @@
-import { IonCard,IonButton,IonCardContent,useIonLoading,IonIcon, IonCardHeader } from '@ionic/react';
+import { IonContent,IonPage,useIonLoading,IonIcon, IonCardHeader } from '@ionic/react';
 import {arrowBackCircle } from "ionicons/icons"
 import {  useDispatch,useSelector} from 'react-redux';
-import { Addtocart,GetSelectedPlanter,addToLikes,removefromLikes } from '../Actions';
-import {BiRupee} from 'react-icons/bi'
 import {useHistory} from 'react-router-dom'
 import {AiFillHeart,AiOutlineHeart} from 'react-icons/ai'
 import { useState } from 'react';
 import LoadingBox from '../components/LoadingComponent';
+import Header from '../components/Header';
 
 export default function CeramicPots(){
     const dispatch=useDispatch();
@@ -18,7 +17,12 @@ export default function CeramicPots(){
     const [like,setLike]=useState(false)
 
 return(
-      (Loading)?
+      <>
+      <IonPage>
+        <Header/>
+        <IonContent>
+      <>
+      {(Loading)?
       <>
       <LoadingBox/>
       </>:
@@ -90,6 +94,10 @@ return(
                ) } */}
                currently nothing to show
            </div>
-           </div>
+           </div>}
+           </>
+      </IonContent>
+      </IonPage>
+      </>
 )
 }

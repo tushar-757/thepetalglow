@@ -1,4 +1,4 @@
-import { IonItem ,IonList,IonListHeader,useIonPopover} from "@ionic/react";
+import { IonItem,IonContent,IonPage,IonList,IonListHeader,useIonPopover} from "@ionic/react";
 import {  useState } from "react";
 import { useDispatch,useSelector } from "react-redux";
 import './TrackOrder.css'
@@ -8,6 +8,7 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
+import Header from "../components/Header";
 
 function PopoverList({ onHide }){
     return (
@@ -26,6 +27,10 @@ export default function BuyAgainViewPage(){
     const [id,setId]=useState('')
 
     return(
+      <>
+      <IonPage>
+        <Header/>
+        <IonContent>
         <div>
                 <div style={{margin:"0.3rem"}}>
                     <div className="track-body">
@@ -84,5 +89,8 @@ export default function BuyAgainViewPage(){
                     </div>
                 </div>
         </div>
+        </IonContent>
+        </IonPage>
+        </>
     )
 }

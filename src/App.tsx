@@ -3,7 +3,6 @@ import { IonApp, IonRouterOutlet, IonSplitPane ,useIonAlert} from '@ionic/react'
 import { IonReactRouter } from '@ionic/react-router';
 import { Redirect, Route } from 'react-router-dom';
 import Menu from './components/Menu';
-import Page from './pages/Page';
 import { useDispatch } from "react-redux";
 import { useEffect } from 'react';
 import PasswordReset from './pages/PasswordReset';
@@ -21,10 +20,43 @@ import '@ionic/react/css/display.css';
 import './theme/variables.css';
 import 'animate.css';
 import "./App.css"
+import PrivacyPolicy from './components/PrivacyPolicy';
+import TermsandCondition from './components/TermsAndConditions';
+import ShippingPolicy from './components/ShippingPolicy';
+import AboutUs from './components/AboutUs';
+import ContactUs from './components/ContactUs';
+import SearchBar from './pages/SearchBar';
+import ViewPage from './pages/ViewPage';
+import Cart from './pages/Cart';
+import Login from './pages/Login';
+import PaymentGategay from './pages/PaymentGateway';
+import Orders from './pages/Orders';
+import BuyAgain from './pages/BuyAgain';
+import Notifications from './pages/Notifications';
+import WishList from './pages/WishList';
+import MapsPage from './pages/MapsPage';
+import IndoorPage from './pages/IndoorPage';
+import OutdoorPage from './pages/OutdoorPage';
+import SeasonalPage from './pages/SeasonalPage';
+import PlantersPage from './pages/PlasticPots';
+import CeramicPots from './pages/CeramicPots';
+import EarthenPots from './pages/EarthenPots';
+import Pebbles from './pages/Pebbles';
+import SoilandFertilizers from './pages/SoilandFertilizers';
+import Succulent from './pages/Succulent';
+import Register from './pages/Register';
+import CustomerService from './pages/CustomerService';
+import Setting from './pages/Setting';
+import Accountpage from './components/Accountpage';
+import TrackOrder from './pages/TrackOrder';
+import Home from './pages/Home';
+import BuyAgainViewPage from './pages/BuyAgainViewPage';
+import { useLocation } from 'react-router-dom';
 
 const App: React.FC = () => {
   const dispatch=useDispatch()
   const [present] = useIonAlert();
+  // const location=useLocation()
   // SplashScreen.show({
   //   showDuration: 2000,
   //   autoHide: true
@@ -47,7 +79,9 @@ const App: React.FC = () => {
     dispatch(FetchSucculentProduct())
     dispatch(FetchSoilFertilzerProduct())
   },[])
+//  useEffect(()=>{
 
+//  },[location])
   return (
     <IonApp>
       <IonReactRouter>
@@ -55,97 +89,100 @@ const App: React.FC = () => {
           <Menu />
           <IonRouterOutlet id="main">
             <Route path="/page/ThePetalGlow" exact={true}>
-              <Page/>
+              <Home/>
             </Route>
             <Route path="/page/ThePetalGlow/PrivacyPolicy" exact={true}>
-              <Page/>
+              <PrivacyPolicy/>
             </Route>
             <Route path="/page/ThePetalGlow/TermsandCondition" exact={true}>
-              <Page/>
+              <TermsandCondition/>
             </Route>
             <Route path="/page/ThePetalGlow/ShippingPolicy" exact={true}>
-              <Page/>
+              <ShippingPolicy/>
             </Route>
             <Route path="/page/ThePetalGlow/AboutUs" exact={true}>
-              <Page/>
+              <AboutUs/>
             </Route>
             <Route path="/page/ThePetalGlow/ContactUs" exact={true}>
-              <Page/>
+              <ContactUs/>
             </Route>
             <Route path="/page/searchbar" exact={true}>
-              <Page />
+              <SearchBar />
             </Route>
             <Route path="/page/ViewPage" exact={true}>
-              <Page />
+              <ViewPage />
             </Route>
             <Route path="/page/Cart" exact={true}>
-              <Page />
+              <Cart />
             </Route>
             <Route path="/page/Login" exact={true}>
-              <Page />
+              <Login />
             </Route>
             <Route path="/page/PaymentGateway" exact={true}>
-              <Page />
+              <PaymentGategay />
             </Route>
             <Route path="/page/Orders" exact={true}>
-              <Page />
+              <Orders />
             </Route>
             <Route path="/page/BuyAgain" exact={true}>
-              <Page />
+              <BuyAgain />
+            </Route>
+            <Route path="/page/TrackOrder" exact={true}>
+              <TrackOrder />
             </Route>
             <Route path="/page/Notifications" exact={true}>
-              <Page />
+              <Notifications />
             </Route>
             <Route path="/page/MyWishList" exact={true}>
-              <Page />
+              <WishList />
             </Route>
             <Route path="/page/MapsPage" exact={true}>
-              <Page />
+              <MapsPage />
             </Route>
             <Route path="/page/IndoorPlants" exact={true}>
-              <Page />
+              <IndoorPage />
             </Route>
             <Route path="/page/OutdoorPlants" exact={true}>
-              <Page />
+              <OutdoorPage />
             </Route>
             <Route path="/page/SeasonalPlants" exact={true}>
-              <Page />
+              <SeasonalPage />
             </Route>
             <Route path="/page/PlasticPots" exact={true}>
-              <Page />
+              <PlantersPage />
             </Route>
             <Route path="/page/EarthenPots" exact={true}>
-              <Page />
+              <EarthenPots />
             </Route>
             <Route path="/page/CeramicPots" exact={true}>
-              <Page />
+              <CeramicPots />
             </Route>
             <Route path="/page/Pebbles" exact={true}>
-              <Page />
+              <Pebbles />
             </Route>
             <Route path="/page/SoilandFertilizers" exact={true}>
-              <Page />
+              <SoilandFertilizers />
             </Route>
             <Route path="/page/SucculentPlants" exact={true}>
-              <Page />
+              <Succulent />
             </Route>
             <Route path="/Register" exact={true}>
-              <Page />
+              <Register />
+            </Route>
+            {/* <Route path="/page/Account" exact={true}>
+              <Accountpage />
+            </Route> */}
+            <Route path="/page/Settings" exact={true}>
+              <Setting />
             </Route>
             <Route path="/page/Customer Service" exact={true}>
-              <Page />
-            </Route>
-            <Route path="/page/Settings" exact={true}>
-              <Page />
-            </Route>
-            <Route path="/page/Account" exact={true}>
-              <Page />
+              <CustomerService />
             </Route>
             <Route path="/TrackOrder/:TrackId" >
-              <Page />
+              <TrackOrder />
             </Route>
             <Route path="/BuyAgainOrder/:OrderId" >
-              <Page />
+              <BuyAgainViewPage />
             </Route>
             <Route path="/password-reset/:userId/:token" exact={true}>
               <PasswordReset />

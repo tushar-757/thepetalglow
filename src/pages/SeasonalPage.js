@@ -1,4 +1,4 @@
-import { IonCard,IonButton,IonCardContent,useIonToast,useIonLoading,IonIcon, IonCardHeader } from '@ionic/react';
+import { IonCard,IonButton,IonPage,IonContent,IonCardContent,useIonToast,useIonLoading,IonIcon, IonCardHeader } from '@ionic/react';
 import {  useDispatch,useSelector} from 'react-redux';
 import { Addtocart, getSeasonalProduct,addToLikes,removefromLikes } from '../Actions';
 import {useHistory} from 'react-router-dom'
@@ -9,6 +9,7 @@ import {useState,useEffect} from 'react'
 import {AiFillHeart,AiOutlineHeart} from 'react-icons/ai'
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import EmptyBox from '../static/box.png'
+import Header from '../components/Header';
 
 export default function SeasonalPage(){
     const dispatch=useDispatch();
@@ -45,7 +46,12 @@ export default function SeasonalPage(){
         }
     },[data])
 return(
-      (Loading)?
+  <>
+  <IonPage>
+    <Header/>
+    <IonContent>
+  <>
+      {(Loading)?
       <>
       <LoadingBox/>
       </>:
@@ -143,5 +149,10 @@ return(
                ) }
            </div>
            </div>
+}
+           </>
+           </IonContent>
+           </IonPage>
+           </>
 )
 }

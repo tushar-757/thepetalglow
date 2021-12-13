@@ -1,4 +1,4 @@
-import { IonButton ,IonInput,IonLoading,IonSelect,IonLabel,IonSelectOption,useIonToast ,IonChip} from "@ionic/react"
+import { IonButton ,IonPage,IonInput,IonContent,IonLoading,IonSelect,IonLabel,IonSelectOption,useIonToast ,IonChip} from "@ionic/react"
 import {useHistory} from 'react-router-dom'
 import { IonIcon } from "@ionic/react";
 import { useState } from "react";
@@ -8,7 +8,7 @@ import { useSelector,useDispatch } from "react-redux";
 import api from "../Services/urlApi";
 import './cart.css'
 import axios from "axios";
-
+import Header from '../components/Header';
 
 
 export default function Register(){
@@ -78,6 +78,11 @@ export default function Register(){
         cssClass: 'my-custom-interface'
       };
     return(
+        <>
+        <IonPage>
+          <Header/>
+          <IonContent>
+        <>
         <div style={{margin:25}}>
               {/* <IonButton onClick={() => setShowModal(false)}>Close</IonButton> */}
               <div onClick={()=>History.goBack()}>
@@ -136,5 +141,9 @@ export default function Register(){
                                  <IonButton type="submit" style={{color:"white"}}>Register</IonButton>
                              </form>
      </div>
+     </>
+     </IonContent>
+     </IonPage>
+     </>
     )
 }

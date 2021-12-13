@@ -1,8 +1,9 @@
-import { IonCard,IonButton,IonCardContent,useIonToast,useIonLoading,IonIcon, IonCardHeader } from '@ionic/react';
+import { IonCard,IonButton,IonContent, IonPage,IonCardContent,useIonToast,useIonLoading,IonIcon, IonCardHeader } from '@ionic/react';
 import {arrowBackCircle } from "ionicons/icons"
 import {  useDispatch,useSelector} from 'react-redux';
 import { Addtocart,getOutdoorProduct,addToLikes,removefromLikes } from '../Actions';
 import {BiRupee} from 'react-icons/bi'
+import Header from '../components/Header';
 import {useHistory} from 'react-router-dom'
 import {AiFillHeart,AiOutlineHeart} from 'react-icons/ai'
 import { useState,useEffect } from 'react';
@@ -46,7 +47,11 @@ export default function OutdoorPage(){
         }
     },[data])
 return(
-      (Loading)?
+  <>
+  <IonPage>
+    <Header/>
+    <IonContent>
+      {(Loading)?
       <>
       <LoadingBox/>
       </>:
@@ -140,6 +145,9 @@ return(
                ) }
            </div>
            </div>
-           </div>
+           </div>}
+           </IonContent>
+           </IonPage>
+           </>
 )
 }

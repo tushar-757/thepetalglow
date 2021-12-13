@@ -1,5 +1,12 @@
+import { IonContent,IonPage } from "@ionic/react"
+import Header from "./Header"
+
 export default function AboutUs(){
     return(
+        <>
+        <IonPage>
+          <Header/>
+          <IonContent>
         <div style={{margin:"1rem"}}>
             <h2>AboutUs</h2>
             <p>ThePetalGlow is rooted in 2021 from a promise to make cities ‘green and healthy’</p>
@@ -28,5 +35,8 @@ export default function AboutUs(){
               saving your numerous messy trips to various nurseries.
            </p>
         </div>
+        </IonContent>
+        </IonPage>
+        </>
     )
 }

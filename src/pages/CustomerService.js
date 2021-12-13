@@ -8,6 +8,7 @@ import { useEffect } from 'react';
 import { useDispatch,useSelector } from "react-redux";
 import { addUser} from "../Actions";
 import api from '../Services/urlApi';
+import Header from '../components/Header';
 
 const data = {
     title: "FAQ (How it works)",
@@ -66,8 +67,8 @@ const data = {
 
 const styles = {
     // bgColor: 'white',
-    titleTextColor: "#343439",
-    rowTitleColor: "#898989",
+    titleTextColor: "#626262",
+    rowTitleColor: "#0000ff",
     // rowContentColor: 'grey',
     // arrowColor: "red",
 };
@@ -215,6 +216,7 @@ const CustomerService=() => {
   }
   return (
     <IonPage>
+        <Header/>
       <IonContent>
       <IonModal isOpen={showModal1} cssClass='my-custom-class' backdropDismiss={false}>
           <form onSubmit={(e)=>UpdateDateHandler(e)}>
@@ -291,4 +293,4 @@ const CustomerService=() => {
   );
 };
 
-export default withRouter(CustomerService);
+export default CustomerService;

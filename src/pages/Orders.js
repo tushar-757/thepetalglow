@@ -1,4 +1,4 @@
-import { IonButton,IonChip ,IonLabel,useIonToast} from '@ionic/react';
+import { IonButton,IonPage,IonContent,IonChip ,IonLabel,useIonToast} from '@ionic/react';
 import React, { useState,useRef ,useEffect} from 'react';
 import { useSelector ,useDispatch} from "react-redux";
 import { useHistory } from 'react-router';
@@ -6,6 +6,7 @@ import {UserOrders,UserSelectedOrder,FetchSoilFertilzerProduct,FetchIndoorProduc
 import './Order.css'
 import api from '../Services/urlApi';
 import moment from 'moment'
+import Header from '../components/Header';
 import IsLoggedIn from '../Hooks/isLoggedIn';
 import { addUser} from "../Actions";
 import Table from '@material-ui/core/Table';
@@ -107,6 +108,9 @@ export default function Orders(){
  }, [Orders]);
     return (
       <>
+      <IonPage>
+        <Header/>
+        <IonContent>
        {(Loading)?<><LoadingBox/></>:
          <div style={{position:'relative'}}>
           {(Orders?.length===0||Orders===undefined)?
@@ -223,6 +227,8 @@ export default function Orders(){
     ))
           }
      </div>}
+     </IonContent>
+     </IonPage>
      </>
     )
 }

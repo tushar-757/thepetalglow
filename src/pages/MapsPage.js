@@ -1,7 +1,9 @@
+import {IonContent, IonPage} from "@ionic/react"
 import  { useEffect, useState } from 'react';
 import GoogleMap from '../components/MapsContainer';
 import { Geolocation } from '@ionic-native/geolocation'
 import { IonButton } from '@ionic/react';
+import Header from '../components/Header';
 
 const AnyReactComponent = ({ text }) => <div>{text}</div>;
 export default function MapsPage(){
@@ -17,9 +19,16 @@ export default function MapsPage(){
       });
    },[])
     return (
+      <>
+      <IonPage>
+        <Header/>
+        <IonContent>
            <div style={{ height: '50vh', width: '100%' }}>
               <GoogleMap lat1={lat} long1={long}/>
            </div>
+           </IonContent>
+           </IonPage>
+           </>
 )}
 
  // const printCurrentPosition = async () => {

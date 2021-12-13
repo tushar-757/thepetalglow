@@ -1,13 +1,13 @@
-import { IonButton,IonIcon ,IonModal, IonTitle,useIonAlert,IonInput,useIonToast,IonLoading} from "@ionic/react"
+import { IonButton,IonIcon ,IonModal, IonPage,IonContent,useIonAlert,IonInput,useIonToast,IonLoading} from "@ionic/react"
 import {useHistory} from 'react-router-dom'
 import { arrowBackCircle } from "ionicons/icons";
 import { useState,useEffect } from "react";
 import api from "../Services/urlApi";
 import './cart.css'
+import Header from '../components/Header';
 import IsLoggedIn from '../Hooks/isLoggedIn';
 import { useDispatch } from "react-redux";
 import { addUser } from "../Actions";
-
 
 
 export default function Login(){
@@ -107,6 +107,10 @@ const ResetHandler=async(e)=>{
 }
 
     return(
+      <>
+      <IonPage>
+        <Header/>
+        <IonContent>
         <div style={{margin:25}}>
               <div onClick={()=>History.goBack()}>
           <IonIcon md={arrowBackCircle} style={{fontSize:44,color:"lightgreen"}}/>
@@ -164,5 +168,8 @@ const ResetHandler=async(e)=>{
            </div>
          :null}
      </div>
+     </IonContent>
+     </IonPage>
+     </>
     )
 }
