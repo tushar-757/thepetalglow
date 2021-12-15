@@ -390,7 +390,7 @@ const options = {
                 {
                     Items.map((item,i)=>(
                         <>
-                        <Item key={i} index={i} type={item?.type}  textAreaRef={textAreaRef} present={present} id={item._id} sku={item.SKU} skuvalue={skuvalue} setValue={setSkuValue}
+                        <Item key={item?._id} index={i} type={item?.type}  textAreaRef={textAreaRef} present={present} id={item._id} sku={item.SKU} skuvalue={skuvalue} setValue={setSkuValue}
                          customskuvalue={item?.customskuvalue} copyToClipboard={copyToClipboard} type={item.type} title={item.name} price={item.price} image={item.images?.[0]}
                         orderquantity={item?.orderquantity}
                         quantity={item?.quantity}

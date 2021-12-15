@@ -52,7 +52,7 @@ return(
               </div>
               :null}
                 {Data?.map((data,i)=>(
-                    <IonCard className="best-selling-cont-item" key={i}>
+                    <IonCard className="best-selling-cont-item" key={data?._id}>
                       <IonCardHeader style={{padding:'0px'}}>
                          <img src={data?.images?.[0]}
                           onClick={()=>{

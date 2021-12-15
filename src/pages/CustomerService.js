@@ -52,7 +52,7 @@ const data = {
             title: "How do I update my ThePetalGlow account with a new delivery address?",
             content: <p>Follow these simple steps to add a new delivery address:
            <br/> 1.) Log into your ThePetalGlow account
-            <br/>2.) Go to Settings > Account > Change delivery address
+            <br/>2.) Go to Settings {'>'} Account {'>'} Change delivery address
             <br/>3.) Fill in the information for your new address
             <br/>4.) Select 'Save Changes'
             </p>,

@@ -57,7 +57,9 @@ return(
                         </div>
                         :null}
                 {Data?.map((d,i)=>(
-                  <IonCard className="best-selling-cont-item" style={{position:"relative"}} key={i}>
+                  <IonCard className="best-selling-cont-item"
+                    style={{position:"relative"}}
+                    key={d?._id}>
                       {/* <span className="best-selling-cont-festival-msg"
                       style={{color:data[0]?.color}}>{data[0]?.message}</span> */}
                       <IonCardHeader style={{padding:'0px'}}>

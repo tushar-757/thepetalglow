@@ -120,7 +120,7 @@ export default function Orders(){
           :null}
           {
             Orders?.map((data,i)=>(
-              <div className="order-box" key={i}>
+              <div className="order-box" key={data?.id}>
                 <div className="order-box-1stdiv">
                   <div className="order-box-1stdiv-head">OrderId:
                   <textarea className="order-id" colms={25}  ref={el => textAreaRef.current[i] = el}  readOnly

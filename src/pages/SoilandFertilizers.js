@@ -23,7 +23,6 @@ export default function SoilandFertilizers(){
     const [empty,setempty]=useState(false)
 
     useEffect(()=>{
-          console.log(data)
         if(Array.isArray(data)){
             if(data?.length===0){
                   setempty(true)
@@ -75,7 +74,7 @@ return(
                         </div>
                         :null}
                 {Data?.map((data,i)=>(
-                    <IonCard className="best-selling-cont-item" key={i}>
+                    <IonCard className="best-selling-cont-item" key={data?._id}>
                       <IonCardHeader style={{padding:'0px'}}>
                        <LazyLoadImage
                             alt={data?.name}

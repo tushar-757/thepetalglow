@@ -201,7 +201,7 @@ export default function ViewPage(){
                            {(Item?.Customizations?.length>0)?
                              <div className="viewpage-Customization">
                                 {Item?.Customizations?.map((data,i)=>
-                                   <div className="viewpage-customization-box" key={i}>
+                                   <div className="viewpage-customization-box" key={data?._id}>
                                       <img alt={data?.name} src={data?.images[0]} style={{width:"90%",height:"65%"}}/>
                                       <p>{(data?.name?.length>20)?data?.name?.substring(0,20)+"...":data?.name}</p>
                                       <div style={{display:"flex"}}>
@@ -295,7 +295,7 @@ export default function ViewPage(){
                               {(Item?.reviews?.length>0)?
                               <>
                              {Item?.reviews?.map((data,i)=>
-                                   <div className="review-box-cont" key={i}>
+                                   <div className="review-box-cont" key={data?._id}>
                                    <div><AiOutlineUser className="review-user"/></div>
                                    <div className="review-box-star">{data?.stars}<FaStar style={{color:"orange"}}/></div>
                                    <div className="review-box-cont-desc">

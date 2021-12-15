@@ -72,7 +72,7 @@ return(
                         :null}
     <div className="best-selling-cont">
                 {Data?.map((data,i)=>(
-                    <IonCard className="best-selling-cont-item">
+                    <IonCard className="best-selling-cont-item" key={data?._id}>
                     <IonCardHeader style={{padding:'0px'}}>
                     <LazyLoadImage
                           alt={data?.name}
@@ -94,7 +94,7 @@ return(
                         justifyContent: 'center',
                         flexDirection:'column'
                   }}>
-                         <h1 className="best-selling-tag" style={{background:"#2196f3"}}>{data?.season}</h1>
+                         <h1 className="best-selling-tag" style={{background:"#009688"}}>{data?.season}</h1>
                         <div className="bestselling-head">
                         <div style={{fontSize:"0.95rem",padding:"0px"}}>{(data?.name?.length>12)?data?.name?.substring(0, 12)+"...":data?.name}</div>
                         <div>|</div>

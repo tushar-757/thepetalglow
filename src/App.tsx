@@ -47,20 +47,14 @@ import Succulent from './pages/Succulent';
 import Register from './pages/Register';
 import CustomerService from './pages/CustomerService';
 import Setting from './pages/Setting';
-import Accountpage from './components/Accountpage';
 import TrackOrder from './pages/TrackOrder';
 import Home from './pages/Home';
 import BuyAgainViewPage from './pages/BuyAgainViewPage';
-import { useLocation } from 'react-router-dom';
 
 const App: React.FC = () => {
   const dispatch=useDispatch()
   const [present] = useIonAlert();
-  // const location=useLocation()
-  // SplashScreen.show({
-  //   showDuration: 2000,
-  //   autoHide: true
-  // });
+
 
   useEffect(()=>{
     present({

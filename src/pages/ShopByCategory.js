@@ -4,7 +4,6 @@ import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { setLoading,setUnLoading } from '../Actions';
 import { useDispatch, useSelector } from "react-redux";
-import LoadingBox from '../components/LoadingComponent';
 import './ShopByCategory.css';
 
 function PlantModal({showPlantModal,setShowPlantModal,setLoading,startLoading}){

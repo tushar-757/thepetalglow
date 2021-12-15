@@ -27,7 +27,8 @@ const SearchBar: React.FC = (props:searchText) => {
                       duration:1000
                     })
                   dispatch(getCurrentProduct(d._id))
-                  History.push("/page/ViewPage")}}>{d.name}</IonItem>
+                  History.push("/page/ViewPage")}}
+                  key={d?._id}>{d.name}</IonItem>
             ))}
             {(SearchedData.length===0)?"No Results Found":null}
             </IonList>
