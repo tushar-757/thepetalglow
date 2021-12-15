@@ -1,7 +1,7 @@
 import { IonButton, IonIcon,IonPage,IonContent, } from '@ionic/react';
 import { useDispatch, useSelector } from 'react-redux';
 import { closeCircle, removeCircle } from "ionicons/icons"
-import { RemovefromNotification } from '../Actions';
+import { RemovefromNotification,UserOrders } from '../Actions';
 import './Notification.css'
 import { useHistory } from 'react-router';
 import moment from 'moment'
@@ -52,7 +52,11 @@ export default function Notifications(){
                       <div onClick={()=>dispatch(RemovefromNotification(data?.id))} className="remove-notification">
                       <IonIcon md={closeCircle} style={{fontSize:24,color:"#ff00009e"}}/>
                           </div>
-                          <IonButton color="tertiary" onClick={()=>History.push("/page/Orders")}>Got to Your Orders</IonButton>
+                          <IonButton color="tertiary" onClick={()=>
+                            {
+                              dispatch(UserOrders())
+                              History.push("/page/Orders")
+                          }}>Got to Your Orders</IonButton>
                       </div>
               </div>
             ))}

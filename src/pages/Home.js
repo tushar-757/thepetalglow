@@ -1,7 +1,6 @@
 import { IonPage,IonSlide,IonSlides, IonContent,useIonToast,IonRefresher, IonRefresherContent, IonIcon, IonFooter, IonHeader, IonButton, IonItem } from '@ionic/react';
 import { location,logoFacebook,logoInstagram,logoYoutube,logoLinkedin} from 'ionicons/icons';
 import { useHistory } from 'react-router-dom';
-import loadable from '@loadable/component';
 import Marquee from "react-fast-marquee";
  import { withRouter  } from 'react-router';
  import IsLoggedIn from '../Hooks/isLoggedIn';
@@ -17,15 +16,10 @@ import {FiHelpCircle} from 'react-icons/fi'
 import LoadingBox from '../components/LoadingComponent';
 import api from '../Services/urlApi';
 import Logo from '../static/favicon.png'
-import Image1 from '../static/image5.png'
-import Image2 from '../static/FINALIMAGE2.png'
-import Image3 from '../static/kokedama.png'
-import Image4 from '../static/luckybamboo.jpg'
 import Header from '../components/Header';
-import moment from 'moment'
 import { RiWhatsappFill } from 'react-icons/ri';
-const BestSelling = loadable(()=>import('./BestSelling'));
-const ShopByCategory = loadable(()=>import('./ShopByCategory'));
+import BestSelling from'./BestSelling';
+import ShopByCategory from'./ShopByCategory';
 
 const slideOpts = {
   initialSlide: 0,
@@ -38,16 +32,16 @@ const ImageBar=()=>{
     <IonSlides pager={true} startAutoPlay={true} options={slideOpts}  className="Home-SlideBar">
       <IonSlide  style={{backgroundColor:"white"}} >
          <img
-           alt={Image1}
-           src={Image1}
+           alt='Home1'
+           src="https://plant-giene-stack-images.s3.ap-south-1.amazonaws.com/image1.webp"
            width='100%'
            className="Home-SlideBar-Img"
            />
       </IonSlide>
       <IonSlide>
       <img
-           alt={Image2}
-           src={Image2}
+           alt='Home2'
+           src="https://plant-giene-stack-images.s3.ap-south-1.amazonaws.com/image2.webp"
            width='100%'
            className="Home-SlideBar-Img"
            />
@@ -55,16 +49,16 @@ const ImageBar=()=>{
       <IonSlide>
       {/* <span className="image1-tag">kokedama's Coming soon...</span> */}
       <img
-           alt={Image3}
-           src={Image3}
+           alt='Home3'
+           src="https://plant-giene-stack-images.s3.ap-south-1.amazonaws.com/image3.webp"
            width='100%'
            className="Home-SlideBar-Img"
            />
       </IonSlide>
       <IonSlide>
       <img
-           alt={Image4}
-           src={Image4}
+           alt='Home4'
+           src="https://plant-giene-stack-images.s3.ap-south-1.amazonaws.com/image4.webp"
            width='100%'
            className="Home-SlideBar-Img"
            />

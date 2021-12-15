@@ -85,7 +85,7 @@ return(
                           justifyContent: 'center',
                           flexDirection:'column'
                     }}>
-                    <h1 className="best-selling-tag" style={{background:"#ff0047"}}>Succulent</h1>
+                    <h1 className="best-selling-tag" style={{background:"#009688"}}>Succulent</h1>
                     <div className="bestselling-head">
                           <div style={{fontSize:"0.95rem",padding:"0px"}}>{(data?.name?.length>12)?data?.name?.substring(0, 12)+"...":data?.name}</div>
                           <div>|</div>
