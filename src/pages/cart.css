@@ -55,8 +55,8 @@
 .total-bar h1{
     font-size: 0.8rem;
     margin:5;
-    font-weight:200;
-   color: black;
+    font-weight:300;
+    color:black;
 }
 .total-bar-item{
     display: flex;
