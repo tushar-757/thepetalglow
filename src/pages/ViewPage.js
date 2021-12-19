@@ -24,7 +24,7 @@ const ImageBar=(data)=>{
       <IonSlides pager={true} options={slideOpts} style={{height:290,zIndex:0}}>
         {data?.data?.map((img,i)=>(
          <IonSlide  style={{backgroundColor:"white"}} key={i}>
-            <img src={(img!=null)?img:TPGLOGO} className="view-page-img" />
+            <img src={(img!='')?img:TPGLOGO} className="view-page-img" />
          </IonSlide>
 ))}
 </IonSlides>

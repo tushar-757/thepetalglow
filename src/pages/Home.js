@@ -206,15 +206,15 @@ const Home=() => {
                             </form>
                            </div>
                            <div className="BottomLine">
-                                <h3 style={{margin:"0",color: '#4b7aff'}}>About us</h3>
+                                <h3 style={{margin:"0",color: 'white'}}>About us</h3>
                                 <a style={{color:'white'}} onClick={()=>History.push("/page/ThePetalGlow/AboutUs")}>https://thepetalglow.com/AboutUs</a>
                              </div>
                            <div className="BottomLine">
-                                <h3 style={{margin:"0",color: '#03a9f4'}}>Contact us</h3>
+                                <h3 style={{margin:"0",color: 'white'}}>Contact us</h3>
                                 <a style={{color:'white'}} onClick={()=>History.push("/page/ThePetalGlow/ContactUs")}>https://thepetalglow.com/ContactUs</a>
                              </div>
                              <div className="BottomLine">
-                                  <h3 style={{margin:"0",color: '#f44336'}}>Our Policies</h3>
+                                  <h3 style={{margin:"0",color: 'white'}}>Our Policies</h3>
                                   <div style={{display:"flex",flexDirection:"column"}}>
                                     <a style={{color:"white"}} onClick={()=>History.push("/page/ThePetalGlow/PrivacyPolicy")}>Privacy Policy</a>
                                     <a style={{color:"white"}} onClick={()=>History.push("/page/ThePetalGlow/ShippingPolicy")}>Shipping and Return Policy</a>

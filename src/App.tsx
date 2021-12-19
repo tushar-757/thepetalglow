@@ -73,9 +73,7 @@ const App: React.FC = () => {
     dispatch(FetchSucculentProduct())
     dispatch(FetchSoilFertilzerProduct())
   },[])
-//  useEffect(()=>{
 
-//  },[location])
   return (
     <IonApp>
       <IonReactRouter>
@@ -163,9 +161,6 @@ const App: React.FC = () => {
             <Route path="/Register" exact={true}>
               <Register />
             </Route>
-            {/* <Route path="/page/Account" exact={true}>
-              <Accountpage />
-            </Route> */}
             <Route path="/page/Settings" exact={true}>
               <Setting />
             </Route>
