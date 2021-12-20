@@ -13,7 +13,7 @@ function PlantModal({showPlantModal,setShowPlantModal,setLoading,startLoading}){
     return(
         <div>
         <IonModal isOpen={showPlantModal} cssClass='my-custom-class' backdropDismiss={false} class="animate__animated animate__pulse" classname="modal-head"  style={{padding:"15px"}}>
-               <IonButton color="danger" onClick={() => setShowPlantModal(false)} style={{color:'white'}}>Close </IonButton>
+               <IonButton color="success" onClick={() => setShowPlantModal(false)} style={{color:'white'}}>Close </IonButton>
                <div className="model-cont">
                    <div className="model-cont-item" onClick={()=>{
                        startLoading()
@@ -53,7 +53,7 @@ function PotModal({showPotModal,setShowPotModal}){
     return(
         <div>
         <IonModal isOpen={showPotModal} cssClass='my-custom-class' class="animate__animated animate__pulse" backdropDismiss={false} style={{padding:"15px"}}>
-               <IonButton color="danger" onClick={() => setShowPotModal(false)} style={{color:'white'}}>Close </IonButton>
+               <IonButton color="success" onClick={() => setShowPotModal(false)} style={{color:'white'}}>Close </IonButton>
                <div  className="model-cont">
                    <div className="model-cont-item" onClick={()=>{
                         setShowPotModal(false)

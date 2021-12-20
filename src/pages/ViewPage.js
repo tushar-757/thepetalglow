@@ -85,22 +85,22 @@ export default function ViewPage(){
        try{
           const item={};
          //  const itemobject=item.toObject()
-          if(Item.context.includes("Indoor")){
+          if(Item?.context?.includes("Indoor")){
             item.indoorid=Item?._id
           }
-          if(Item.context.includes("Outdoor")){
+          if(Item?.context?.includes("Outdoor")){
             item.outdoorid=Item?._id
           }
-          if(Item.context.includes("Planter")){
+          if(Item?.context?.includes("Planter")){
             item.Planterid=Item?._id
           }
-          if(Item.context.includes("Succulent")){
+          if(Item?.context?.includes("Succulent")){
             item.succulentid=Item?._id
           }
-          if(Item.context.includes("Seasonal")){
+          if(Item?.context.includes("Seasonal")){
             item.seasonalid=Item?._id
           }
-          if(Item.context.includes("Soil")){
+          if(Item?.context.includes("Soil")){
             item.soilid=Item?._id
           }
           const data=await api.post("/userreview",{headers:{user_id,Authorization:`Bearer ${useraccesstoken}`},
@@ -136,8 +136,8 @@ export default function ViewPage(){
       },[])
       function checkhour(){
          let hour=""
-         if(ordertime.includes('pm')){
-             for(let i=0;i<ordertime.length;i++){
+         if(ordertime?.includes('pm')){
+             for(let i=0;i<ordertime?.length;i++){
                  if(ordertime[i]===':'){
                      setTime(hour)
                      return hour
@@ -171,7 +171,7 @@ export default function ViewPage(){
             <IonCard style={{marginBottom:'1rem',marginTop:"5rem",padding:"10px"}} className="white-background">
                       <IonCardHeader>
                          <div>
-                            {Item.type}
+                            {Item?.type}
                             </div>
                          <div className="viewpage-typevalue">
                              {Item?.type}
@@ -225,7 +225,7 @@ export default function ViewPage(){
                         </>
                          :
                          <>
-                        {(time>=4&&time<12)?
+                        {(time>=2&&time<12)?
                         <div  className="GetBox1">
                           <div className="GetItBy1">Get it by Tomorrow { moment(currentdate).add(1,"days").format("MMM Do")}</div>
                         </div>:
@@ -275,7 +275,7 @@ export default function ViewPage(){
                          <h1>Delivery</h1>
                          <p style={{fontSize:"0.8rem"}}>
                             Same day Delivery Services is offered only in
-                            Hometown(Faridabad).Make sure you have ordered before 4pm otherwise your order would count in next day delievery
+                            Hometown(Faridabad).Make sure you have ordered before 2pm otherwise your order would count in next day delievery
                          </p>
                       </div>
                       :(toggle2)?
@@ -344,7 +344,7 @@ export default function ViewPage(){
                    </IonCard>
                    </div>
                   <div className="viewpage-buybox">
-                  {(Items.find(item => Item?._id === item._id))?
+                  {(Items?.find(item => Item?._id === item._id))?
                    <h1 style={{color:"black",
                    display:'flex',
                    width: '50%',

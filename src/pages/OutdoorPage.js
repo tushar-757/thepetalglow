@@ -29,7 +29,7 @@ export default function OutdoorPage(){
                   setempty(true)
                   present1(
                     {
-                      color: 'warning',
+                      color: 'light',
                       duration: 1000,
                       message: `something went wrong:check your connection`
                     })

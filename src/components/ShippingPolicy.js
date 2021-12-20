@@ -6,7 +6,7 @@ const data = {
     rows: [
         {
             title: "Same Day delivery Policy?",
-            content: <p>As per our same day delivery policy your order should be confirmed before 4pm in order to get eligible for same day delivery otherwise it would count in next day delivery and thepetalglow is not responsible  in case if we are not able to fulfill your same day delivery due to some kind of issue,accident or pandemic.
+            content: <p>As per our same day delivery policy your order should be confirmed before 2pm in order to get eligible for same day delivery otherwise it would count in next day delivery and thepetalglow is not responsible  in case if we are not able to fulfill your same day delivery due to some kind of issue,accident or pandemic.
             </p>
         },
         {

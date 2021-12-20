@@ -28,6 +28,7 @@
     color:white
 }
 .search-block{
+    padding: 10px;
         position: fixed;
     width: 96%;
     display: block;

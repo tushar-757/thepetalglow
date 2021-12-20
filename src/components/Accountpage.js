@@ -198,7 +198,7 @@ const AccountPage=(props) => {
                 <IonTitle>{username1}</IonTitle>
                 <IonTitle>+91 {mobile1}</IonTitle>
                 <IonTitle>{email1}</IonTitle>
-                <IonButton color="tertiary"style={{margin:"1rem"}}
+                <IonButton color="success"style={{margin:"1rem"}}
                 onClick={()=>updateModel1()}>Edit details</IonButton>
                 </IonHeader>
                 <div style={{padding:"20px"}} className="white-background">
@@ -211,7 +211,7 @@ const AccountPage=(props) => {
                        <p>{user?.Address?.pincode}</p>
                    </div>
                    <div>
-                       <IonButton color="tertiary" style={{margin:"1rem"}}
+                       <IonButton color="success" style={{margin:"1rem"}}
                         onClick={()=>{
                           if(user.username===''){
                             return History.push('/page/Login')

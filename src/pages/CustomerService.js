@@ -68,7 +68,7 @@ const data = {
 const styles = {
     // bgColor: 'white',
     titleTextColor: "#626262",
-    rowTitleColor: "#0000ff",
+    rowTitleColor: "#4caf50",
     // rowContentColor: 'grey',
     // arrowColor: "red",
 };
@@ -285,7 +285,7 @@ const CustomerService=() => {
                 </div>
             </div>
             <div>
-                <IonButton color="warning" onClick={()=>setShowModal2(true)}>Report A Bug</IonButton>
+                <IonButton color="danger" onClick={()=>setShowModal2(true)}>Report A Bug</IonButton>
             </div>
         </div>
            </IonContent>

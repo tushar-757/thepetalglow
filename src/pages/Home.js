@@ -20,6 +20,7 @@ import Header from '../components/Header';
 import { RiWhatsappFill } from 'react-icons/ri';
 import BestSelling from'./BestSelling';
 import ShopByCategory from'./ShopByCategory';
+import payments from '../static/payments.png'
 
 const slideOpts = {
   initialSlide: 0,
@@ -222,12 +223,15 @@ const Home=() => {
                                     </div>
                              </div>
                              <div style={{margin:"1rem",display:'flex'}}>
-                               <div>
+                               <div style={{position:"relative"}}>
                                 All rights reserved <span style={{color:"#ffeb3b"}}>©</span> 2021 | thepetalglow.com
-                                </div>
                                <div className="home-image">
                                  <img src={Logo}/>
                                  </div>
+                               <div className="home-image1">
+                                <img src={payments}/>
+                                 </div>
+                                </div>
                              </div>
                     </div>
                     <a className="floating-whatsapp" href="#"

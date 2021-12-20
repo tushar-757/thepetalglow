@@ -27,7 +27,7 @@ export default function Pebbles(){
                   setempty(true)
                   present1(
                     {
-                      color: 'warning',
+                      color: 'light',
                       duration: 1000,
                       message: `something went wrong:check your connection`
                     })

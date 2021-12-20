@@ -36,7 +36,7 @@ export default function IndoorPage(){
           setempty(true)
           present1(
             {
-              color: 'warning',
+              color: 'light',
               duration: 100,
               message: `something went wrong:check your connection`
             })
