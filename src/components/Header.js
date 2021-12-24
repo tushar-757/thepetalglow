@@ -33,7 +33,7 @@ useEffect(()=>{
 },[searchText])
     return (
         <>
-        <IonHeader style={{backgroundColor:"#28b156"}} >
+        <IonHeader >
         <IonToolbar className="toolbar-container"  onClick={()=>{
                   setSearch(false)
                  }}>
@@ -58,6 +58,7 @@ useEffect(()=>{
           </IonButtons>
         </IonToolbar>
           <IonSearchbar value={searchText}
+          style={{backgroundColor:"#008000a8"}}
           onIonChange={(e) =>{
           setSearchText(e.detail.value)
           }}
@@ -74,7 +75,8 @@ useEffect(()=>{
              <IonItem onClick={()=>{
                  dispatch(getCurrentProduct(d?._id))
                  setSearch(false)
-                 History.push("/page/ViewPage")}} style={{color:"black"}}>
+                 History.push("/page/ViewPage")}} style={{color:"black"}}
+                 key={d?._id}>
                    <img src={d?.images[0]} style={{width:55}} />
                    {d.name}</IonItem>
                  </>

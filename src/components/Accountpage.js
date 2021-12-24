@@ -192,7 +192,7 @@ const AccountPage=(props) => {
         <IonButton onClick={() => setShowModal2(false)} style={{color:"white"}}>Cancel</IonButton>
       </IonModal>
         <div>
-        <IonIcon md={arrowBackCircle} style={{fontSize:44,color:"lightgreen",margin:5}}
+        <IonIcon md={arrowBackCircle} style={{fontSize:44,color:"#008000a8",margin:5}}
             onClick={()=>props.setAccount(true)}/>
             <IonHeader style={{ padding:"25px 0"}} className="white-background">
                 <IonTitle>{username1}</IonTitle>
@@ -219,7 +219,7 @@ const AccountPage=(props) => {
                           setShowModal1(true)}
                           }>Edit Address</IonButton>
                    </div>
-                   <IonButton color="danger" style={{margin:"1rem"}}
+                   <IonButton color="light" style={{margin:"1rem"}}
                    onClick={()=>{
                     if(user.username===''){
                       return History.push('/page/Login')

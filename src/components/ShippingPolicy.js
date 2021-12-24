@@ -44,7 +44,7 @@ const data = {
 const styles = {
     // bgColor: 'white',
     titleTextColor: "#343439",
-    rowTitleColor: "blue",
+    rowTitleColor: "#008000a8",
     // rowContentColor: 'grey',
     // arrowColor: "red",
 };

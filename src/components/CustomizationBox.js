@@ -95,7 +95,7 @@ export function CustomziationBox({checked,setCheckBox,dispatch,customArrayHandle
                 })}
               </div>
               </>:null}
-        <IonChip color="secondary" className="example-chip">
+        <IonChip color="success" className="example-chip">
       <IonLabel>for example:-
        i want my 1 TPG_004 plant inside 1 TPG_083 pot</IonLabel>
     </IonChip>
@@ -139,7 +139,7 @@ export function CustomziationBox({checked,setCheckBox,dispatch,customArrayHandle
                   TPG_<input placeholder="your Pot sku last 3 digits" maxLength="3" onChange={(e)=>setSku2(e.target.value)} required/>pot
                  </div>
                  <div>
-                 <IonButton type="submit" color="secondary" >
+                 <IonButton type="submit" color="success" >
                    Add</IonButton>
                    </div>
              </form>

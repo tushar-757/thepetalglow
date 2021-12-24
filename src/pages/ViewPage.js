@@ -14,21 +14,13 @@ import { CustomerRating } from '../components/CustomerRating';
 import api from '../Services/urlApi';
 import moment from 'moment';
 import Header from '../components/Header';
+import { Carousel } from 'react-responsive-carousel';
 
 const slideOpts = {
   initialSlide:0,
   speed:200,
 };
-const ImageBar=(data)=>{
-   return(
-      <IonSlides pager={true} options={slideOpts} style={{height:290,zIndex:0}}>
-        {data?.data?.map((img,i)=>(
-         <IonSlide  style={{backgroundColor:"white"}} key={i}>
-            <img src={(img!='')?img:TPGLOGO} className="view-page-img" />
-         </IonSlide>
-))}
-</IonSlides>
-  )}
+
   function PopoverList({ onHide }){
     return (
    <IonList>
@@ -74,6 +66,7 @@ export default function ViewPage(){
    const [time,setTime] = useState('')
     const currentdate=new Date().toISOString()
     const ordertime = moment(currentdate).format('h:mm a')
+    const [images,setImages]=useState([])
 
    //   const customdata=useSelector((state)=>state.ProductReducer..Customizations)
 
@@ -151,6 +144,12 @@ export default function ViewPage(){
      useEffect(()=>{
       checkhour()
     },[])
+
+    useEffect(()=>{
+        setImages(Item?.images)
+    },[Item])
+
+
     return (
       <>
       <IonPage>
@@ -165,7 +164,7 @@ export default function ViewPage(){
                  duration:100
               })
            }} className="back-btn-css">
-          <IonIcon md={arrowBackCircle} style={{fontSize:44,color:"#2196f3",margin:5}}/>
+          <IonIcon md={arrowBackCircle} style={{fontSize:44,color:"#008000a8",margin:5}}/>
          </div>
          <div className="animate__animated animate__slideInUp">
             <IonCard style={{marginBottom:'1rem',marginTop:"5rem",padding:"10px"}} className="white-background">
@@ -177,7 +176,17 @@ export default function ViewPage(){
                              {Item?.type}
                             </div>
                       <h1 style={{marginTop:0,fontSize:"1.5rem",fontFamily:"fantasy"}}>{Item?.name}</h1>
-                      <ImageBar data={Item?.images} />
+                      <IonSlides pager={true} options={slideOpts} style={{height:290,zIndex:0}}>
+                             <IonSlide  style={{backgroundColor:"white"}} >
+                                        <img src={(images?.[0])?images[0]:TPGLOGO} className="view-page-img" />
+                             </IonSlide>
+                             <IonSlide  style={{backgroundColor:"white"}} >
+                                        <img src={(images?.[1])?images[1]:TPGLOGO}className="view-page-img" />
+                             </IonSlide>
+                             <IonSlide  style={{backgroundColor:"white"}} >
+                                        <img src={(images?.[2])?images[2]:TPGLOGO} className="view-page-img" />
+                             </IonSlide>
+                           </IonSlides>
                       </IonCardHeader>
                     <div>
                     </div>
@@ -338,7 +347,7 @@ export default function ViewPage(){
                                  value={description}
                                  onChange={(e)=>setDescription(e.target.value)}
                                placeholder="write your review..." required/></div>
-                           <IonButton color="secondary" type="submit">Submit</IonButton>
+                           <IonButton color="success" type="submit">Submit</IonButton>
                            </form>
                         </IonCardHeader>
                    </IonCard>
@@ -353,7 +362,7 @@ export default function ViewPage(){
                    fontSize: '0.8rem'}}>Added To Cart</h1>:
 
                      (Item?.quantity>0)?<IonButton
-                     color="tertiary"
+                     color="success"
                      onClick={()=>{
                         dispatch(Addtocart(Item))
                         present3(

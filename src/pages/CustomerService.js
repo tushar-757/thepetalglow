@@ -232,7 +232,7 @@ const CustomerService=() => {
       </IonModal>
       <IonModal isOpen={showModal2} cssClass='my-custom-class' backdropDismiss={false}>
              <form onSubmit={(e)=>submitBugHandler(e)}>
-                <IonInput placeholder="registerd email" value={email1} onIonChange={(e)=>setEmail1(e.target.value)} style={{marginBottom:"5px"}} required/>
+                <IonInput placeholder="registerd email" type="email" value={email1} onIonChange={(e)=>setEmail1(e.target.value)} style={{marginBottom:"5px"}} required/>
                         <IonInput placeholder="Mobile no." type="number" value={mobile1} onIonChange={(e)=>setMobile1(e.target.value)} style={{marginBottom:"15px"}} required/>
                         <textarea placeholder="write your message here..."
                         style={{    border: 'none',
@@ -285,7 +285,7 @@ const CustomerService=() => {
                 </div>
             </div>
             <div>
-                <IonButton color="danger" onClick={()=>setShowModal2(true)}>Report A Bug</IonButton>
+                <IonButton color="light" onClick={()=>setShowModal2(true)}>Report A Bug</IonButton>
             </div>
         </div>
            </IonContent>

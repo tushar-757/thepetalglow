@@ -1,6 +1,6 @@
 .coupon-code{
     padding: 12px;
-    background-color: antiquewhite;
+    background-color: #00800042;
     font-size: 0.8rem;
     height: 140px;
     border-radius: 5px;
@@ -88,6 +88,7 @@ width: 100%;
 .couponcodeh1{
     font-size: 14px;
     margin: 0;
+    color: white;
     margin-bottom: 6px;
 }
 .couponinput{

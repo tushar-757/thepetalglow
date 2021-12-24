@@ -1,4 +1,4 @@
-import { IonPage,IonSlide,IonSlides, IonContent,useIonToast,IonRefresher, IonRefresherContent, IonIcon, IonFooter, IonHeader, IonButton, IonItem } from '@ionic/react';
+import { IonPage,IonSlide,IonList,IonListHeader,IonSlides,IonModal, IonContent,useIonToast,IonRefresher, IonRefresherContent, IonIcon, IonFooter, IonHeader, IonButton, IonItem } from '@ionic/react';
 import { location,logoFacebook,logoInstagram,logoYoutube,logoLinkedin} from 'ionicons/icons';
 import { useHistory } from 'react-router-dom';
 import Marquee from "react-fast-marquee";
@@ -10,6 +10,13 @@ import { useEffect, useState } from 'react';
 import { useDispatch } from "react-redux";
 import { FetchIndoorProduct,FetchOutdoorProduct,FetchPlantersProduct,FetchSeasonalProduct,addUser,SETBESTSELLING} from "../Actions";
 import TPGLOGO from '../static/TPGLOGO.png';
+import Image1 from '../static/mix3infibre.jpg';
+import Image2 from '../static/mix2infibre.jpg';
+import Image3 from '../static/mixinfibre.jpg';
+import Image4 from '../static/fibre5.jpeg';
+import Image5 from '../static/fibre7.jpeg';
+import Image6 from '../static/fibre8.jpeg';
+import qrcodewhatsapp from '../static/whatsappqr.jpg'
 import {RiSecurePaymentFill} from 'react-icons/ri'
 import {FaTruck} from 'react-icons/fa'
 import {FiHelpCircle} from 'react-icons/fi'
@@ -21,16 +28,28 @@ import { RiWhatsappFill } from 'react-icons/ri';
 import BestSelling from'./BestSelling';
 import ShopByCategory from'./ShopByCategory';
 import payments from '../static/payments.png'
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+import { Carousel } from 'react-responsive-carousel';
+import GoogleMap from '../components/MapsContainer';
+import {AiFillInfoCircle, AiOutlineUser} from 'react-icons/ai'
+import axios from 'axios';
+
 
 const slideOpts = {
   initialSlide: 0,
   speed: 400,
-  autoplay:true
+  // autoplay:true
 };
-
+function PopoverList({ onHide }){
+  return (
+ <IonList>
+   <IonListHeader>Terms&Conditions applied</IonListHeader>
+   <IonItem button>dates may vary but we will try our best to come  on time</IonItem>
+ </IonList>
+)}
 const ImageBar=()=>{
   return(
-    <IonSlides pager={true} startAutoPlay={true} options={slideOpts}  className="Home-SlideBar">
+    <IonSlides pager={true} options={slideOpts}  className="Home-SlideBar">
       <IonSlide  style={{backgroundColor:"white"}} >
          <img
            alt='Home1'
@@ -76,6 +95,8 @@ const Home=() => {
   const loading=useSelector((state)=>state.ProductReducer.loading)
   const user_id1=localStorage.getItem('user_id')
   const useraccesstoken=localStorage.getItem('useraccesstoken')
+  const [showModal, setShowModal] = useState(false);
+  const User=useSelector((state)=>state.UserReducer)
 
     useEffect(() => {
       try{
@@ -126,11 +147,28 @@ const Home=() => {
             })
       }
     }
+
   return (
     <>
     <IonPage>
       <Header/>
       <IonContent>
+      <IonModal isOpen={showModal} cssClass='my-custom-class' style={{overflowY:"scroll"}} backdropDismiss={false}>
+          {/* <form onSubmit={(e)=>BookHandler(e)}> */}
+            <IonItem>
+              <p>
+                Please send us your email,phone and location we will get back to you in 24 hours
+                </p>
+            </IonItem>
+                <IonItem>
+                <a href="https://wa.me/message/JUSRENBGPF4ZN1">https://wa.me/message/JUSRENBGPF4ZN1</a>
+                </IonItem>
+                             <div style={{display:'flex',justifyContent:"center"}}>
+                               <img src={qrcodewhatsapp} style={{height:'160px',width:'178px'}}/>
+                             </div>
+                            <IonButton onClick={()=>setShowModal(false)} style={{color:"white"}}>Close</IonButton>
+                            {/* </form> */}
+      </IonModal>
         <IonItem>
        <Marquee className="top-message" speed={40} gradient={false}>
         As per our same day delivery Policy currently we are offering services only in Faridabad,we are trying our best to reach you.Please do not order if you are residing outside faridabad
@@ -141,8 +179,8 @@ const Home=() => {
            </IonRefresher>
         </IonItem>
           <div className="select-location" onClick={()=>History.push("/page/MapsPage")}>
-          <IonIcon slot="start"  md={location} style={{color:'rgb(58, 223, 114)'}}/>
-              <h1 className="h1-home" style={{color:"white"}}>select your location</h1>
+          <IonIcon slot="start"  md={location} style={{color:'white'}}/>
+              <h1 className="h1-home">select your location</h1>
           </div>
           <div className="select-location">
               <h1 className="h1-home" style={{padding:10}}>Currently Services are only available in  Faridabad</h1>
@@ -150,7 +188,35 @@ const Home=() => {
           <ShopByCategory/>
            <ImageBar/>
            <div className="white-background">
-             <h1 className="BestSellingTitle">Best Selling Items</h1>
+             <h1 className="BestSellingTitle" style={{fontSize:'15px',margin:'2rem'}}>Complete Office/Restaurant/Company/Mall Setup</h1>
+           </div>
+             <div>
+              <Carousel>
+             <div className='setup1'>
+               <img src={Image1}/>
+               </div>
+             <div className='setup1'>
+               <img src={Image2}/>
+               </div>
+             <div className='setup1'>
+               <img src={Image3}/>
+               </div>
+             <div className='setup1'>
+               <img src={Image4}/>
+               </div>
+             <div className='setup1'>
+               <img src={Image5}/>
+               </div>
+             <div className='setup1'>
+               <img src={Image6}/>
+               </div>
+           </Carousel>
+           </div>
+           <div style={{display:"flex",justifyContent:'center'}}>
+                <IonButton color="success"  onClick={()=>setShowModal(true)}>Book A visit</IonButton>
+             </div>
+           <div className="white-background">
+             <h1 className="BestSellingTitle" style={{fontSize:'18px',margin:'2rem'}}>Best Selling Items</h1>
            </div>
            {(loading)? <>
             <LoadingBox/>

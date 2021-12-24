@@ -1,10 +1,11 @@
 import { Map, GoogleApiWrapper, Marker, InfoWindow } from "google-maps-react";
 import React, { Component, useState } from "react";
-import { IonButton } from "@ionic/react";
+import { IonButton,useIonToast } from "@ionic/react";
 import { setLatLng } from "../Actions";
 import {useSelector,useDispatch } from "react-redux";
 import { Geolocation } from '@capacitor/geolocation';
 import { useHistory } from "react-router";
+import LoadingBox from "./LoadingComponent";
 // ...
 
 const containerStyle = {
@@ -25,6 +26,7 @@ function MapContainer({onMarkerDragEnd,map,lat1,long1,windowHasClosed,windowHasO
     };
     const [lat,setLat]=useState(lat1)
     const [long,setLng]=useState(long1)
+    const [present1, dismiss] = useIonToast();
 
     const History=useHistory()
       const [state,setState]=useState(
@@ -70,7 +72,13 @@ function MapContainer({onMarkerDragEnd,map,lat1,long1,windowHasClosed,windowHasO
   };
   const setLocationHandler=()=>{
       dispatch(setLatLng(state.markers[0].position.lat,state.markers[0].position.lng))
-      History.goBack()
+      // History.goBack()
+      present1(
+        {
+            color: 'success',
+            duration: 2000,
+            message: `Location is set successfully`
+          })
   }
 
 
@@ -120,12 +128,13 @@ function MapContainer({onMarkerDragEnd,map,lat1,long1,windowHasClosed,windowHasO
     );
 }
 
-const LoadingContainer = (props) => <div>Fancy loading container!</div>;
+const LoadingContainer = (props) => <LoadingBox/>;
 
 const GoogleMap = GoogleApiWrapper({
-    apiKey: (process.env.REACT_APP_BASIC_API_KEY),
+apiKey: (process.env.REACT_APP_BASIC_API_KEY),
   LoadingContainer: LoadingContainer,
 })(MapContainer);
+
 
 export default GoogleMap;
 //  const printCurrentPosition = async () => {

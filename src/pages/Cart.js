@@ -349,7 +349,7 @@ const options = {
           })
           History.goBack()
           }}>
-          <IonIcon md={arrowBackCircle} style={{fontSize:44,color:"#eb445a",margin:5}}/>
+          <IonIcon md={arrowBackCircle} style={{fontSize:44,color:"#008000a8",margin:5}}/>
         </div>
         <div>
          <h1 style={{fontSize:20,padding:'0 18px'}}>SubTotal:{total}</h1>
@@ -519,7 +519,7 @@ const options = {
                  <div className="select-location-div">
                     <h1 style={{fontSize:12}}>Deliver To</h1>
                     <div className="select-location-view-cart"  onClick={()=>History.push("/page/MapsPage")}>
-                          <IonIcon slot="start"  md={location} style={{color:'blue'}}/>
+                          <IonIcon slot="start"  md={location} style={{color:'#008000a8'}}/>
                       <h1 className="h1-home location-color" style={{color:"black",fontSize:"0.8rem"}}>
                       select your location
                       </h1>
@@ -570,7 +570,7 @@ const options = {
       <IonToolbar style={{padding: "14px"}}>
         {
       (true)?
-          <IonButton color="tertiary"
+          <IonButton color="success"
           onClick={()=>ProceedToCheckout()}>
           CHECKOUT
         </IonButton>:

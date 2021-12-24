@@ -63,7 +63,7 @@ return(
                    duration:1000
                 })
             }} className="back-btn-css">
-          <IonIcon md={arrowBackCircle} style={{fontSize:44,color:"rgb(33, 150, 243)",margin:2}}/>
+          <IonIcon md={arrowBackCircle} style={{fontSize:44,color:"#008000a8",margin:2}}/>
          </div>
            <div  className="best-selling-cont">
            {(empty)?

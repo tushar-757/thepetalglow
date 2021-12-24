@@ -117,11 +117,11 @@ const Menu: React.FC = () => {
             {
               (User.username!="")?
               <IonButton onClick={()=>
-                LogoutHandler()} style={{color:"white"}} color="tertiary" >logout</IonButton>:
-              <IonButton onClick={()=>LoginHandler()} color="tertiary" style={{color:"white"}}
+                LogoutHandler()} style={{color:"white"}} color="success" >logout</IonButton>:
+              <IonButton onClick={()=>LoginHandler()} color="success" style={{color:"white"}}
               >login</IonButton>
             }
-            <IonButton color="danger" onClick={()=>History.push('/page/TrackOrder')} style={{color:"white"}}>Tack Order</IonButton>
+            <IonButton color="success" onClick={()=>History.push('/page/TrackOrder')} style={{color:"white"}}>Tack Order</IonButton>
           </div>
           </IonMenuToggle>
           {appPages.map((appPage, index) => {

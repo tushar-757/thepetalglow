@@ -113,7 +113,7 @@ const ResetHandler=async(e)=>{
         <IonContent>
         <div style={{margin:25}}>
               <div onClick={()=>History.goBack()}>
-          <IonIcon md={arrowBackCircle} style={{fontSize:44,color:"lightgreen"}}/>
+          <IonIcon md={arrowBackCircle} style={{fontSize:44,color:"#008000a8"}}/>
             </div>
             <IonModal isOpen={showModal} cssClass='my-custom-class'  backdropDismiss={false}>
               {/* <IonInput value={newpassword} type="password" onIonChange={(e)=>setNewPassword(e.target.value)} placeholder="New password"/>
@@ -152,7 +152,7 @@ const ResetHandler=async(e)=>{
         <div>
           </div>
         </form>
-         <IonButton onClick={()=>History.push('/Register')} color="danger"style={{color:"white"}}>
+         <IonButton onClick={()=>History.push('/Register')} color="light"style={{color:"white"}}>
             Register
         </IonButton>
         {/* <div>

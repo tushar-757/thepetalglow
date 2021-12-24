@@ -32,7 +32,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #009688;
+  background-color: #008000a8;
   height:42px;
 }
 .h1-home{
@@ -58,6 +58,8 @@
   justify-content: center;
   margin-top: 4rem;
   margin-bottom: 40px;
+  background: #7fffd42e;
+
 }
 .best-selling-cont-item{
   width: 31%;
@@ -92,7 +94,7 @@ font-weight: 400;
   left: 0px;
   height: 25px;
   top: 0px;
-  background: #009688;
+  background: #008000a8;
   width: 92px;
 }
 .footer-header-home{
@@ -174,14 +176,14 @@ font-weight: 400;
   font-size:1.1rem
 }
 .BestSellingTitle{
-  font-Size:"1rem";
-  font-Family:Cabin,sans-serif;
+  font-size:18px;
+  font-family:Cabin,sans-serif;
   display: flex;
   justify-content: center;
-  color: #03a9f4;
+  color: black;
 }
 .footer-newsletter{
-  background: #009688;
+  background: #008000a8;
   color: white;
   height: 535px;
   margin-top: 42px;
@@ -255,6 +257,7 @@ color:blue
     box-shadow: 0px 0px 1px #9acee6;
     font-size: 0.8rem;
 }
+
 @media screen and (max-width: 480px) {
    .h1{
       font-size: 0.8rem;

@@ -1,6 +1,6 @@
 
 .toolbar-container{
-    --background: #28b156;
+    --background: #008000a8;
     align-items: flex-end;
 }
 .hydrated{
@@ -49,7 +49,7 @@
 }
 .floating-whatsapp{
     height: 65px;
-        background: black;
+        background: #008000a8;
         border-radius: 50%;
         width: 65px;
         z-index: 105;
@@ -64,7 +64,7 @@
 .top-message{
     background: #ffffff;
     /* background: black; */
-    color: rgb(70, 138, 240);
+    color: #008000a8;
     height: 30px;
     display: flex;
     z-index: 0;

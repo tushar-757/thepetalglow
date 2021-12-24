@@ -108,7 +108,7 @@ export default function PaymentGategay(){
       />
           <IonIcon md={arrowBackCircle} style={{fontSize:44,color:"lightgreen",margin:5}}/>
             </div>
-              <IonButton onClick={() => loadCheckout()}>Go for payment</IonButton>
+              <IonButton color="success" onClick={() => loadCheckout()}>Go for payment</IonButton>
      </div>
      </>
      </IonContent>

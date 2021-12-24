@@ -86,7 +86,7 @@ export default function Register(){
         <div style={{margin:25}}>
               {/* <IonButton onClick={() => setShowModal(false)}>Close</IonButton> */}
               <div onClick={()=>History.goBack()}>
-          <IonIcon md={arrowBackCircle} style={{fontSize:44,color:"lightgreen",margin:-5}}/>
+          <IonIcon md={arrowBackCircle} style={{fontSize:44,color:"#008000a8",margin:-5}}/>
             </div>
               <IonChip color="warning" style={{height:"60px"}}>
           <IonLabel>Dear Customers Please provide us your best info it Would help us in providing invoices and Shipping status</IonLabel>
@@ -112,7 +112,9 @@ export default function Register(){
                              value={password1}
                              minlength={8}
                              onIonChange={e =>setPassword(e.detail.value)} placeholder="password" required/>
-                             <IonInput type='tel' name="mobile"
+                             <IonInput
+                             type='tel'
+                             name="mobile"
                               autocomplete={true}
                               pattern="[6789][0-9]{9}"
                              maxlength={10} minlength={10} value={mobile1} onIonChange={e =>setMobileno(e.detail.value)} placeholder="Mobile NO.*" required/>

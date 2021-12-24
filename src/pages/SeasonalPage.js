@@ -63,7 +63,7 @@ return(
                        duration:1000
                   })
             }} className="back-btn-css">
-          <IonIcon md={arrowBackCircle} style={{fontSize:44,color:"rgb(33, 150, 243)",margin:2}}/>
+          <IonIcon md={arrowBackCircle} style={{fontSize:44,color:"#008000a8",margin:2}}/>
          </div>
                   {(empty)?
                         <div className="emptybox-div">
@@ -94,7 +94,7 @@ return(
                         justifyContent: 'center',
                         flexDirection:'column'
                   }}>
-                         <h1 className="best-selling-tag" style={{background:"#009688"}}>{data?.season}</h1>
+                         <h1 className="best-selling-tag" style={{background:"#008000a8"}}>{data?.season}</h1>
                         <div className="bestselling-head">
                         <div style={{fontSize:"0.95rem",padding:"0px"}}>{(data?.name?.length>12)?data?.name?.substring(0, 12)+"...":data?.name}</div>
                         <div>|</div>

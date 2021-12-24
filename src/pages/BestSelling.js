@@ -121,7 +121,7 @@ return(
                         //        message: 'Loading...',
                         //        duration:100
                         //      })
-                          }}>View</IonButton>
+                          }}>View Details</IonButton>
                            {(d?.quantity>0)?<>
                     <IonButton fill="solid" slot="end" style={{color:"white", width: '126px',
     height: '25px',fontSize:"0.8rem"}}
