@@ -83,7 +83,7 @@ export default function TrackOrder(){
                             <FaCarSide fontSize={24} className="depart-icon"/>
                             <TiTick fontSize={24} className="arrive-icon"/>
                     <IonProgressBar value={(userOrder?.status==="created")?0.1:(userOrder?.status==="packed")?0.3:
-                    (userOrder?.status==="Dispatched")?0.62:null} color="tertiary"
+                    (userOrder?.status==="Dispatched")?0.62:null} color="success"
                     style={{position:'relative'}}>
                         </IonProgressBar><br />
                         <div>
@@ -164,7 +164,7 @@ export default function TrackOrder(){
                    <p className="track-order-custom">{data}</p>
                    </div>
                 )}
-                        <IonButton color="danger" style={{margin:"10px"}}
+                        <IonButton color="success" style={{margin:"10px"}}
                         onClick={()=>History.push("/page/Customer%20Service")}>Change Order Delievery date</IonButton>
                         <AiFillInfoCircle style={{color:"grey"}}
                              fontSize={24}

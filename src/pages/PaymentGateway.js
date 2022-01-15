@@ -63,7 +63,8 @@ export default function PaymentGategay(){
           },
           razorpay_order_id,
           razorpay_payment_id,
-          razorpay_signature
+          razorpay_signature,
+          paymentmethod:"online"
         })
          localStorage.removeItem('razorpayOrderID')
          localStorage.removeItem('ServerorderID')
@@ -92,6 +93,43 @@ export default function PaymentGategay(){
           History.push('/page/ThePetalGlow')
         }
       }
+
+      const cashondelivery= async ()=>{
+        try{
+          setLoading(true)
+          const confirmorder=await api.put("/OrderConfirmation",
+          {
+            headers:{
+              order_id:ServerorderID,
+              Authorization:`Bearer ${useraccesstoken}`
+            },
+            paymentmethod:"cod"
+          })
+           dispatch(EmptyCart())
+           notificationHandler(`your order with OrderId${confirmorder?.data?.id} is confirmed succesfully.`)
+           dispatch(RemovefromNotification(confirmorder?.data?.id))
+           dispatch(AddtoNotification(confirmorder.data))
+           dispatch(UserOrders())
+           History.push('/page/Orders')
+           setLoading(false)
+           present1(
+            {
+                color: 'success',
+                duration: 2000,
+                message: `Order Placed`
+              })
+        }catch(e){
+          dispatch(EmptyCart())
+          setLoading(false)
+          present1(
+            {
+                color: 'danger',
+                duration: 5000,
+                message: `something went wrong:${e?.response?.data?.message}`
+              })
+          History.push('/page/ThePetalGlow')
+        }
+      }
     return(
       <>
       <IonPage>
@@ -109,6 +147,7 @@ export default function PaymentGategay(){
           <IonIcon md={arrowBackCircle} style={{fontSize:44,color:"lightgreen",margin:5}}/>
             </div>
               <IonButton color="success" onClick={() => loadCheckout()}>Go for payment</IonButton>
+              <IonButton color="success" onClick={() => cashondelivery()}>CASH ON DELIVERY</IonButton>
      </div>
      </>
      </IonContent>

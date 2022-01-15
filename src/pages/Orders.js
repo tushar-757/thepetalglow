@@ -195,7 +195,9 @@ export default function Orders(){
                <div style={{color:"black"}}>CreatedAt  {(data?.createdAt)
                ?moment(data.createdAt).format('MMMM Do YYYY, h:mm:ss a'):data.createdAt}</div>
                <div>
-                 <div>{(data?.userRequestedDate)?'your requested date:'+moment(data?.userRequestedDate).format("MMM Do"):null}</div>
+                 <div>
+                   {(data?.userRequestedDate)?'your requested date:'+moment(data?.userRequestedDate).format("MMM Do"):null}
+                   </div>
                 {(data?.Paymentstatus==="success")?
                 <>
                  <p style={{color:'cadetblue'}}>Order Placed Successfully</p>
@@ -207,7 +209,7 @@ export default function Orders(){
                   <h2 className="order-code">{data?.code}</h2>
                  </div>
                 </>:
-                (data?.Paymentstatus==="pending")?
+                (data?.Paymentstatus==="pending"&&data?.PaymentMethod==='online')?
                 <>
                   <IonButton className="order-pay-btn"
                 onClick={()=>{
@@ -216,12 +218,24 @@ export default function Orders(){
                   History.push('/page/PaymentGateway')
                   }}>Pay</IonButton>
                   <IonButton className="order-pay-btn" color='danger'
-                onClick={()=>History.push('/page/PaymentGateway')} onClick={()=>DeleteHandler(data?.id)}>delete Order</IonButton></>:
+                onClick={()=>History.push('/page/PaymentGateway')} onClick={()=>DeleteHandler(data?.id)}>delete Order</IonButton></>
+                :(data?.Paymentstatus==='pending'&&data?.PaymentMethod==='cod')?
                 <>
-                <p style={{color:'crimson'}}>Order is not placed</p>
-                <IonButton className="order-pay-btn" onClick={()=>History.push('/page/PaymentGateway')}>Retry Payment</IonButton>
-                <IonButton className="order-pay-btn" color='danger' onClick={()=>DeleteHandler(data?.id)}>Delete Order</IonButton>
-                </>}
+                <p style={{color:'success'}}>Order is placed succesfully</p>
+                <p style={{color:'success'}}>paymentmethod:COD</p>
+                <IonButton className="order-pay-btn"
+                onClick={()=>{
+                  dispatch(UserSelectedOrder(data?.id))
+                  History.push(`/TrackOrder/${data?.id}`)}}>Track Order</IonButton>
+                </>:                <>
+                  <IonButton className="order-pay-btn"
+                onClick={()=>{
+                 localStorage.setItem('ServerorderID',data?.id)
+                  localStorage.setItem('razorpayOrderID',data?.OrderId)
+                  History.push('/page/PaymentGateway')
+                  }}>Pay</IonButton>
+                  <IonButton className="order-pay-btn" color='danger'
+                onClick={()=>History.push('/page/PaymentGateway')} onClick={()=>DeleteHandler(data?.id)}>delete Order</IonButton></>}
                 </div>
               </div>
     ))

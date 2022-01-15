@@ -72,7 +72,7 @@ function MapContainer({onMarkerDragEnd,map,lat1,long1,windowHasClosed,windowHasO
   };
   const setLocationHandler=()=>{
       dispatch(setLatLng(state.markers[0].position.lat,state.markers[0].position.lng))
-      // History.goBack()
+      History.goBack()
       present1(
         {
             color: 'success',

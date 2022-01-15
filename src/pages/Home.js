@@ -186,7 +186,7 @@ const Home=() => {
               <h1 className="h1-home" style={{padding:10}}>Currently Services are only available in  Faridabad</h1>
           </div>
           <ShopByCategory/>
-           <ImageBar/>
+           {/* <ImageBar/> */}
            <div className="white-background">
              <h1 className="BestSellingTitle" style={{fontSize:'15px',margin:'2rem'}}>Complete Office/Restaurant/Company/Mall Setup</h1>
            </div>
@@ -211,10 +211,35 @@ const Home=() => {
                <img src={Image6}/>
                </div>
            </Carousel>
-           </div>
            <div style={{display:"flex",justifyContent:'center'}}>
                 <IonButton color="success"  onClick={()=>setShowModal(true)}>Book A visit</IonButton>
              </div>
+           </div>
+           {/* <section>
+           <div className="white-background">
+             <h1 className="BestSellingTitle" style={{fontSize:'15px',margin:'2rem'}}>New Arrivals!!</h1>
+           </div>
+             <ul>
+             <li className='setup1'>
+               <img src={Image1}/>
+               </li>
+             <li className='setup1'>
+               <img src={Image2}/>
+               </li>
+             <li className='setup1'>
+               <img src={Image3}/>
+               </li>
+             <li className='setup1'>
+               <img src={Image4}/>
+               </li>
+             <li className='setup1'>
+               <img src={Image5}/>
+               </li>
+             <li className='setup1'>
+               <img src={Image6}/>
+               </li>
+           </ul>
+           </section> */}
            <div className="white-background">
              <h1 className="BestSellingTitle" style={{fontSize:'18px',margin:'2rem'}}>Best Selling Items</h1>
            </div>
